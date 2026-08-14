@@ -1839,9 +1839,14 @@ async function glavna(): Promise<void> {
       `preskočenih ${preskoceniFi.length}`);
     await upsertUBatchevima(supabase, "financials", zaUpisFinansije, "maticni_broj,godina");
 
-    if (FORCE) {
-      const obrisano = await obrisiIstorijuZaPresek(supabase, datumPreseka);
-      if (obrisano > 0) console.log(`  istorija: obrisano ${obrisano} starih redova za ovaj presek`);
+    // Uvek, ne samo uz --force. Red u snapshots se upisuje tek na kraju, pa
+    // ingest prekinut u pola upisa istorije ostavlja deo redova bez ikakvog
+    // traga. Sledeće pokretanje bi ih onda udvojilo. Brisanje je ograničeno na
+    // tekući datum_preseka, dakle na tačno one redove koje upravo pišemo; pri
+    // prvom uspešnom prolazu obriše nula redova.
+    const obrisano = await obrisiIstorijuZaPresek(supabase, datumPreseka);
+    if (obrisano > 0) {
+      console.log(`  istorija: obrisano ${obrisano} redova iz ranijeg pokušaja za ovaj presek`);
     }
 
     await insertUBatchevima(supabase, "financials_history", zaIstoriju);
