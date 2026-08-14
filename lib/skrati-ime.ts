@@ -115,7 +115,7 @@ komanditno javno agencija delatnost delatnosti proizvoda proizvodima robe roba r
 pruzanje pružanje posredovanje zastupanje izgradnja izgradnju odrzavanje održavanje
 projektovanje izvodjenje izvođenje radova radovi montaza montaža remont
 distribucija distribuciju prerada preradu otkup otkupu skladistenje skladištenje
-prevoz prevoza transport transporta spedicija špedicija ugostiteljstvo turizam
+prevoz prevoza transport transporta spedicija špedicija spediciju špediciju ugostiteljstvo turizam
 konsalting savetovanje edukacija edukaciju edukacije obuka reciklaza reciklaža
 hrane hrana pica pića materijalom opremom vrsta vrste ostalih ostalo
 nespecijalizovana specijalizovana ostala drugi ostali
@@ -125,6 +125,7 @@ odecom odećom obucom obućom tekstilom prehrambenim
 doo ad kd od zz jp ograniceno ograničeno odgovornoscu odgovornošću
 inzenjering inženjering marketing gradjevinarstvo građevinarstvo poslovne poslovno
 export-import eksport-import uvoz-izvoz izvoz-uvoz import-export omladinska
+export import eksport
 studentsko-omladinska omladinsko zadrugarstvo racunovodstvo računovodstvo
 knjigovodstvo knjigovodstvene projektovanja instalacije instalacija servisiranje
 `
@@ -368,8 +369,10 @@ export function skratiIme(ime: string, opstina = "", maxDuzina = MAX): SkracenoI
       // Ortačka društva: "... MAKSIMOVIĆ JOVANA I ORTAKA FINMAX ... OD LOZNICA".
       // Lična imena ortaka jesu javan podatak, ali ne idu u title i H1.
       .replace(/\s+\S+(?:\s+\S+)?\s+i\s+(ortaci|ortaka|ortak|drugi|dr\.?|ostali)\b/gi, " ")
-      // Prazne zagrade i zaostala interpunkcija iz izvora: "... DOO BEOGRAD ()".
-      .replace(/\(\s*\)/g, " ")
+      // Zagrada u APR imenu je gotovo uvek blizi naziv opstine:
+      // "... DOO BEOGRAD (NOVI BEOGRAD)". Grad ionako dolazi iz baze, pa
+      // zagrade samo prave lazne kolizije tipa "Beograd (Novi Beograd) Beograd".
+      .replace(/\([^)]*\)/g, " ")
       .replace(/\s{2,}/g, " ")
       .replace(/^[\s,.\-–]+|[\s,.\-–]+$/g, ""),
   );
@@ -452,7 +455,28 @@ export function skratiIme(ime: string, opstina = "", maxDuzina = MAX): SkracenoI
       const bezGrada = opstina
         ? iza.replace(new RegExp("\\b" + escapeRe(opstina) + "\\b", "gi"), "")
         : iza;
-      kandidat = jezgroSKraja(bezGrada.replace(/^[\s,.\-]+|[\s,.\-]+$/g, "")) || jezgroSKraja(ispred, 8);
+      const ocisceno = bezGrada.replace(/^[\s,.\-]+|[\s,.\-]+$/g, "");
+
+      // Kad forma stoji na pocetku imena, naziv je odmah IZA nje, a ne na kraju:
+      // "DRUSTVO SA OGRANICENOM ODGOVORNOSCU KAPA PROJEKT ZA PROJEKTOVANJE... NIS".
+      // Citanje otpozadi je tu hvatalo grad ili opis, pa su desetine firmi
+      // dobijale isto ime.
+      const spreda: string[] = [];
+      for (const rec of naReci(ocisceno).filter((r) => /[\p{L}\p{N}]/u.test(r))) {
+        const b = ogoli(rec);
+        if (TVRDE.has(b)) break;
+        if (MEKE.has(b)) {
+          if (!spreda.length) continue;
+          break;
+        }
+        spreda.push(rec);
+        if (spreda.length >= 4) break;
+      }
+
+      kandidat =
+        (spreda.length ? spreda.join(" ") : "") ||
+        jezgroSKraja(ocisceno) ||
+        jezgroSKraja(ispred, 8);
       zastavica = "posle-forme";
     }
     jezgro = kandidat;
