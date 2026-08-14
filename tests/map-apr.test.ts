@@ -138,16 +138,16 @@ describe("mapirajFinansije", () => {
     ).toThrow(/Kapital/);
   });
 
-  it("baca gresku kad novcano polje nedostaje", () => {
-    const { PoslovnaImovina, ...bezPolja } = SIROV_FI;
-    expect(() => mapirajFinansije("1", bezPolja as unknown as SirovFi)).toThrow(
-      /PoslovnaImovina/,
-    );
+  it("baca grešku kad novčano polje nedostaje", () => {
+    const bezPolja: Partial<SirovFi> = { ...SIROV_FI };
+    delete bezPolja.PoslovnaImovina;
+    expect(() => mapirajFinansije("1", bezPolja as SirovFi)).toThrow(/PoslovnaImovina/);
   });
 
-  it("baca gresku kad GodinaFi nedostaje", () => {
-    const { GodinaFi, ...bezGodine } = SIROV_FI;
-    expect(() => mapirajFinansije("1", bezGodine as unknown as SirovFi)).toThrow(/GodinaFi/);
+  it("baca grešku kad GodinaFi nedostaje", () => {
+    const bezGodine: Partial<SirovFi> = { ...SIROV_FI };
+    delete bezGodine.GodinaFi;
+    expect(() => mapirajFinansije("1", bezGodine as SirovFi)).toThrow(/GodinaFi/);
   });
 
   it("baca gresku kad GodinaFi nije ceo broj", () => {
