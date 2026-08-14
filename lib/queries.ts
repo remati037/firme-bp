@@ -105,6 +105,22 @@ export type Presek = {
   broj_fi: number | null;
 };
 
+/** Red za CompanyCard: isti oblik u listama kategorija i u "sličnim firmama". */
+export type KarticaFirme = {
+  slug: string;
+  maticni_broj: string;
+  ime: string;
+  imeKratko: string | null;
+  opstina: string | null;
+  status: string | null;
+  status_aktivan: boolean | null;
+  ukupni_prihodi: number | null;
+  zaposleni: number | null;
+  godina: number | null;
+  /** Rang u grupi koja se lista; null za firme bez izveštaja. */
+  rang?: number | null;
+};
+
 /** Firma sa ugnežđenim poslednjim finansijskim izveštajem (PostgREST embed). */
 export type FinansijeSaFirmom = Finansije & { companies: Firma | null };
 

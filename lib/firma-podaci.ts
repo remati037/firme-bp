@@ -30,6 +30,7 @@ import {
   type AiSazetak,
   type Finansije,
   type Firma,
+  type KarticaFirme,
   type NaceKod,
   type Opstina,
   type RangFirme,
@@ -40,18 +41,8 @@ import {
 /** Firma iz baze, prošireno kolonom iz migracije 003. */
 export type FirmaRed = Firma & { poslovno_ime_kratko?: string | null };
 
-export type SlicnaFirma = {
-  slug: string;
-  maticni_broj: string;
-  ime: string;
-  imeKratko: string | null;
-  opstina: string | null;
-  status: string | null;
-  status_aktivan: boolean | null;
-  ukupni_prihodi: number | null;
-  zaposleni: number | null;
-  godina: number | null;
-};
+/** Slična firma je isti oblik kao red u kategorijskoj listi. */
+export type SlicnaFirma = KarticaFirme;
 
 /**
  * Rang firme po prihodu. Vrednosti dolaze direktno iz `mv_company_ranks`;

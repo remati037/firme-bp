@@ -2,7 +2,7 @@ import Link from "next/link";
 
 import { formatBroj, formatRSDKompaktno, NEMA_PODATAKA } from "@/lib/format";
 import { imeOpstine, kratkoIme } from "@/lib/prikaz";
-import type { SlicnaFirma } from "@/lib/firma-podaci";
+import type { KarticaFirme } from "@/lib/queries";
 
 import { CompanyBadge } from "./company-badge";
 
@@ -14,7 +14,7 @@ import { CompanyBadge } from "./company-badge";
  * Brojevi su u kompaktnom zapisu ("238,4 mrd RSD"); pune vrednosti idu samo
  * u tabele.
  */
-export function CompanyCard({ firma }: { firma: SlicnaFirma }) {
+export function CompanyCard({ firma }: { firma: KarticaFirme }) {
   const ime = kratkoIme({
     poslovno_ime: firma.ime,
     poslovno_ime_kratko: firma.imeKratko,

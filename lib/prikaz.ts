@@ -40,10 +40,14 @@ export function skratiUKodu(ime: string, maxDuzina = 45): string {
   return rez.replace(/[\s,.\-–]+$/, "");
 }
 
-/** "NOVI SAD" → "Novi Sad". */
+/** "NOVI SAD" → "Novi Sad", "PALILULA (BEOGRAD)" → "Palilula (Beograd)". */
 export function imeOpstine(opstina: string | null | undefined): string {
   const ocisceno = opstina?.trim();
-  return ocisceno ? titleCase(ocisceno) : "";
+  if (!ocisceno) return "";
+
+  // titleCase diže slovo posle razmaka i crtice, ali ne i posle zagrade,
+  // a APR gradske opštine piše baš tako: "PALILULA (BEOGRAD)".
+  return titleCase(ocisceno).replace(/\(([a-zčćšžđ])/g, (_, slovo: string) => `(${slovo.toUpperCase()}`);
 }
 
 /** "4690 — Trgovina na veliko", ili samo šifra ako naziv nedostaje. */
