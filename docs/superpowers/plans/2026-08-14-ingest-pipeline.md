@@ -19,7 +19,10 @@ mreže i baze.
 
 ## Globalna ograničenja
 
-- Šema baze je **zaključana**. Nijedan zadatak ne dodaje kolonu, tabelu ni migraciju.
+- Šema baze je **zaključana**. Nijedan zadatak ne dodaje kolonu, tabelu ni indeks.
+  (Naknadno, uz izričito odobrenje, dodata je migracija `002_refresh_timeout.sql`.
+  Ona ne dira nijednu tabelu — samo podiže `statement_timeout` za funkciju
+  `refresh_all_stats()`, koja je inače padala na 8 s ograničenju role `authenticator`.)
 - Novčane vrednosti se čuvaju **u hiljadama dinara**, tačno kako stižu. Množenje sa
   1000 je posao UI sloja i ovde se ne radi.
 - Jezik svega vidljivog i svih poruka: **srpski, latinica**.
