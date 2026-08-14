@@ -79,6 +79,35 @@ describe("slugify", () => {
     expect(slugify("!!!", "12345678")).toBe("12345678");
   });
 
+  it("skraćenicu sa tačkama sažima u jednu reč", () => {
+    // Bez ovoga brend nestaje iz adrese: s-m-a-r-t umesto smart.
+    expect(slugify("S.M.A.R.T. Control Engineering DOO Novi Sad", "12345678")).toBe(
+      "smart-control-engineering-doo-novi-sad-12345678",
+    );
+    expect(slugify("Banja Luka D.O.O. Hardware DOO Novi Sad", "12345678")).toBe(
+      "banja-luka-doo-hardware-doo-novi-sad-12345678",
+    );
+    expect(slugify("NIS a.d. Novi Sad", "12345678")).toBe("nis-ad-novi-sad-12345678");
+  });
+
+  it("skraćenici sme da nedostaje poslednja tačka", () => {
+    expect(slugify("M.A.S.K.I.D-Invest DOO Bor", "12345678")).toBe(
+      "maskid-invest-doo-bor-12345678",
+    );
+  });
+
+  it("ne lepi reč koja sledi odmah posle skraćenice", () => {
+    // Prljav izvor: "B.S.Lj.filipović" bez razmaka. Prezime mora ostati reč.
+    expect(slugify("Predmeta B.S.Lj.filipović-Nov DOO Niš", "12345678")).toBe(
+      "predmeta-bslj-filipovic-nov-doo-nis-12345678",
+    );
+  });
+
+  it("jedan segment nije skraćenica, pa se ne sažima", () => {
+    expect(slugify("St. Nikola DOO Beograd", "12345678")).toBe("st-nikola-doo-beograd-12345678");
+    expect(slugify("Nelt Co. DOO Beograd", "12345678")).toBe("nelt-co-doo-beograd-12345678");
+  });
+
   it("transliterise cirilicna imena umesto da ih obrise", () => {
     expect(slugify("ЉУБА ПРОМЕТ", "17246771")).toBe("ljuba-promet-17246771");
   });
