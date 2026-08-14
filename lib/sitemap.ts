@@ -82,10 +82,11 @@ async function sve<T>(
 }
 
 async function staticne(): Promise<Unos[]> {
-  // Samo rute koje stvarno postoje. `/o-podacima` još nije napravljen, pa se
-  // ne upisuje — URL u sitemapu koji vraća 404 je gori od izostavljenog.
+  // Samo rute koje stvarno postoje. URL u sitemapu koji vraća 404 je gori od
+  // izostavljenog.
   return [
     "/",
+    "/o-podacima",
     "/delatnost",
     "/grad",
     "/najvece",
