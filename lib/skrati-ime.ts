@@ -64,7 +64,7 @@ const STATUS =
 // ============================================================================
 
 const FORME: [RegExp, string][] = [
-  [/dru[šs]tv[oa]\s+sa\s+ograni[čc]enom\s+odgovorno[šs][ćc]u/gi, "DOO"],
+  [/dru[šs]tv[oa]\s+s\s*a?\s+ograni[čc]enom\s+odgovorno[šs][ćc]u/gi, "DOO"],
   [/\bd\s*\.?\s*o\s*\.?\s*o\s*\.?(?=\s|,|$)/gi, "DOO"],
   [/\bdoo\b/gi, "DOO"],
   [/\bd0{2}\b/gi, "DOO"], // tipfeler D00 u izvoru
@@ -111,6 +111,7 @@ nespecijalizovana specijalizovana ostala drugi ostali
 stambenih nestambenih zgrada zgrade objekata objekti instalacija
 sistema sistemi opreme uredjaja uređaja materijala industrija industrije
 odecom odećom obucom obućom tekstilom prehrambenim
+doo ad kd od zz jp ograniceno ograničeno odgovornoscu odgovornošću
 `
     .trim()
     .split(/\s+/),
