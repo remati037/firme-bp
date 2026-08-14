@@ -110,6 +110,54 @@ describe("mapirajFinansije", () => {
     expect(prazan.ukupni_prihodi).toBe(0);
     expect(prazan.kapital).toBe(0);
   });
+
+  it("nula u svakom novcanom polju ne baca gresku", () => {
+    expect(() =>
+      mapirajFinansije("1", {
+        ...SIROV_FI,
+        PoslovnaImovina: 0,
+        Kapital: 0,
+        Gubitak: 0,
+        UkupniPrihodi: 0,
+        NetoDobitak: 0,
+        NetoGubitak: 0,
+        ProsecanBrojZaposlenih: 0,
+      }),
+    ).not.toThrow();
+  });
+
+  it("baca gresku kad je novcano polje null", () => {
+    expect(() =>
+      mapirajFinansije("1", { ...SIROV_FI, UkupniPrihodi: null as unknown as number }),
+    ).toThrow(/UkupniPrihodi/);
+  });
+
+  it("baca gresku kad je novcano polje string", () => {
+    expect(() =>
+      mapirajFinansije("1", { ...SIROV_FI, Kapital: "27920" as unknown as number }),
+    ).toThrow(/Kapital/);
+  });
+
+  it("baca gresku kad novcano polje nedostaje", () => {
+    const { PoslovnaImovina, ...bezPolja } = SIROV_FI;
+    expect(() => mapirajFinansije("1", bezPolja as unknown as SirovFi)).toThrow(
+      /PoslovnaImovina/,
+    );
+  });
+
+  it("baca gresku kad GodinaFi nedostaje", () => {
+    const { GodinaFi, ...bezGodine } = SIROV_FI;
+    expect(() => mapirajFinansije("1", bezGodine as unknown as SirovFi)).toThrow(/GodinaFi/);
+  });
+
+  it("baca gresku kad GodinaFi nije ceo broj", () => {
+    expect(() => mapirajFinansije("1", { ...SIROV_FI, GodinaFi: 2025.5 })).toThrow(/GodinaFi/);
+  });
+
+  it("baca gresku kad je GodinaFi van uverljivog opsega", () => {
+    expect(() => mapirajFinansije("1", { ...SIROV_FI, GodinaFi: 1899 })).toThrow(/GodinaFi/);
+    expect(() => mapirajFinansije("1", { ...SIROV_FI, GodinaFi: 3000 })).toThrow(/GodinaFi/);
+  });
 });
 
 describe("detekcija izmena", () => {

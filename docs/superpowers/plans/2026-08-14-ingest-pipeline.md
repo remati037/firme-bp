@@ -1180,8 +1180,38 @@ function tekstIliNull(vrednost: unknown): string | null {
   return ocisceno === "" ? null : ocisceno;
 }
 
-function broj(vrednost: unknown): number {
-  return typeof vrednost === "number" && Number.isFinite(vrednost) ? vrednost : 0;
+/**
+ * Novčano polje. Nula je ovde stvaran signal (firma nije predala izveštaj, UI
+ * je prikazuje kao "Nema podataka"), pa se ne sme tiho zameniti nulom kad je
+ * ulaz null, string ili nedostaje. Takav ulaz baca grešku umesto da izmisli
+ * vrednost; poziv iz Zadatka 8 hvata grešku po redu i broji je kao preskočenu.
+ */
+function broj(poljeIme: string, vrednost: unknown): number {
+  if (typeof vrednost === "number" && Number.isFinite(vrednost)) return vrednost;
+  throw new Error(
+    `APR mapiranje: polje "${poljeIme}" nije ispravan broj, primljeno: ${JSON.stringify(vrednost)}`,
+  );
+}
+
+// GodinaFi je deo primarnog ključa u financials (maticni_broj, godina). Ako bi
+// neispravna vrednost tiho postala 0, dva različita izveštajna perioda iste
+// firme bi se mapirala na isti ključ i upsert bi tiho prepisao jedan red drugim.
+const MIN_GODINA_FI = 2000;
+const MAX_GODINA_FI = new Date().getFullYear() + 1;
+
+/** GodinaFi mora biti ceo broj u uverljivom opsegu; nikad se ne izmišlja zamenska godina. */
+function godinaFi(vrednost: unknown): number {
+  if (
+    typeof vrednost === "number" &&
+    Number.isInteger(vrednost) &&
+    vrednost >= MIN_GODINA_FI &&
+    vrednost <= MAX_GODINA_FI
+  ) {
+    return vrednost;
+  }
+  throw new Error(
+    `APR mapiranje: polje "GodinaFi" nije ispravna izveštajna godina, primljeno: ${JSON.stringify(vrednost)}`,
+  );
 }
 
 export function mapirajFirmu(
@@ -1189,6 +1219,8 @@ export function mapirajFirmu(
   sirovo: SirovaFirma,
   postojeciSlug: string | null,
 ): RedFirme {
+  // Nedostajuće ime postaje "", pa slugify(ime, mb) vraća samo matični broj -
+  // namerno, ne previd; slug i dalje mora da bude jedinstven i definisan.
   const ime = String(sirovo.PoslovnoIme ?? "").trim();
   const opstinaCir = tekstIliNull(sirovo.NazivOpstine);
   const status = tekstIliNull(sirovo.NazivStatus);
@@ -1210,18 +1242,21 @@ export function mapirajFirmu(
   };
 }
 
-/** Vrednosti se prenose nepromenjene, u hiljadama dinara. */
+/**
+ * Vrednosti se prenose nepromenjene, u hiljadama dinara. Baca grešku umesto da
+ * tiho izmisli 0 za neispravan ili nedostajući ulaz - videti broj() i godinaFi().
+ */
 export function mapirajFinansije(maticniBroj: string, sirovo: SirovFi): RedFinansija {
   return {
     maticni_broj: maticniBroj,
-    godina: broj(sirovo.GodinaFi),
-    poslovna_imovina: broj(sirovo.PoslovnaImovina),
-    kapital: broj(sirovo.Kapital),
-    gubitak: broj(sirovo.Gubitak),
-    ukupni_prihodi: broj(sirovo.UkupniPrihodi),
-    neto_dobitak: broj(sirovo.NetoDobitak),
-    neto_gubitak: broj(sirovo.NetoGubitak),
-    prosecan_broj_zaposlenih: broj(sirovo.ProsecanBrojZaposlenih),
+    godina: godinaFi(sirovo.GodinaFi),
+    poslovna_imovina: broj("PoslovnaImovina", sirovo.PoslovnaImovina),
+    kapital: broj("Kapital", sirovo.Kapital),
+    gubitak: broj("Gubitak", sirovo.Gubitak),
+    ukupni_prihodi: broj("UkupniPrihodi", sirovo.UkupniPrihodi),
+    neto_dobitak: broj("NetoDobitak", sirovo.NetoDobitak),
+    neto_gubitak: broj("NetoGubitak", sirovo.NetoGubitak),
+    prosecan_broj_zaposlenih: broj("ProsecanBrojZaposlenih", sirovo.ProsecanBrojZaposlenih),
   };
 }
 
