@@ -21,7 +21,9 @@ Ovo NIJE SaaS, nema pretplate, nema naplate u v1.
 
 ## Tehnički stek, ne menjaj bez dogovora
 
-- Next.js 15, App Router, TypeScript, strict mode
+- Next.js 16, App Router, TypeScript, strict mode
+  (plan je pisan za Next 15; podignuto na 16 dogovorom 14.08.2026, jer su
+  3 high severity ranjivosti u postcss i sharp ispravljene tek u Next 16)
 - Tailwind CSS + shadcn/ui
 - Supabase (Postgres) preko `@supabase/supabase-js`
 - Vercel hosting, ISR
