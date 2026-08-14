@@ -1437,16 +1437,18 @@ async function ucitajSve<T>(
   supabase: SupabaseClient,
   tabela: string,
   kolone: string,
-  poredak: string,
+  poredak: string[],
 ): Promise<T[]> {
   const sve: T[] = [];
 
   for (let od = 0; ; od += STRANA) {
-    const { data, error } = await supabase
-      .from(tabela)
-      .select(kolone)
-      .order(poredak, { ascending: true })
-      .range(od, od + STRANA - 1);
+    // Poredak mora da pokrije ceo primarni ključ. Ako dve vrste dele vrednost
+    // po kojoj se sortira, njihov međusobni redosled nije definisan i stranica
+    // može da preskoči ili udvoji red.
+    let upit = supabase.from(tabela).select(kolone);
+    for (const kolona of poredak) upit = upit.order(kolona, { ascending: true });
+
+    const { data, error } = await upit.range(od, od + STRANA - 1);
 
     if (error) throw new Error(`Čitanje ${tabela}: ${error.message}`);
     if (!data || data.length === 0) break;
@@ -1465,7 +1467,7 @@ export async function ucitajPostojeceFirme(
     supabase,
     "companies",
     "maticni_broj, slug, poslovno_ime, poslovno_ime_norm, sifra_opstine, opstina, status, status_aktivan, datum_osnivanja, pravna_forma, sifra_delatnosti",
-    "maticni_broj",
+    ["maticni_broj"],
   );
 
   return new Map(redovi.map((red) => [red.maticni_broj, red]));
@@ -1478,13 +1480,13 @@ export async function ucitajPostojeceFinansije(
     supabase,
     "financials",
     "maticni_broj, godina, poslovna_imovina, kapital, gubitak, ukupni_prihodi, neto_dobitak, neto_gubitak, prosecan_broj_zaposlenih",
-    "maticni_broj",
+    ["maticni_broj", "godina"],
   );
 
   return new Map(redovi.map((red) => [`${red.maticni_broj}:${red.godina}`, red]));
 }
 
-export async function upsertUBatchevima<T>(
+export async function upsertUBatchevima<T extends Record<string, unknown>>(
   supabase: SupabaseClient,
   tabela: string,
   redovi: T[],
@@ -1492,7 +1494,9 @@ export async function upsertUBatchevima<T>(
 ): Promise<void> {
   for (let i = 0; i < redovi.length; i += BATCH) {
     const deo = redovi.slice(i, i + BATCH);
-    const { error } = await supabase.from(tabela).upsert(deo, { onConflict });
+    // Kasting je neophodan: bez poznatog tipa baze (Database generic), postgrest-js
+    // ne ume da izvede tip kolone za proizvoljnu tabelu prosleđenu kao string.
+    const { error } = await supabase.from(tabela).upsert(deo as Record<string, unknown>[], { onConflict });
 
     if (error) {
       throw new Error(
@@ -1510,14 +1514,15 @@ export async function upsertUBatchevima<T>(
  * Čist insert, bez on conflict. Za financials_history, koja je append only i čiji je
  * ključ bigserial: redovi se šalju bez id-a, pa upsert ovde ne bi imao smisla.
  */
-export async function insertUBatchevima<T>(
+export async function insertUBatchevima<T extends Record<string, unknown>>(
   supabase: SupabaseClient,
   tabela: string,
   redovi: T[],
 ): Promise<void> {
   for (let i = 0; i < redovi.length; i += BATCH) {
     const deo = redovi.slice(i, i + BATCH);
-    const { error } = await supabase.from(tabela).insert(deo);
+    // Isti razlog za kasting kao u upsertUBatchevima.
+    const { error } = await supabase.from(tabela).insert(deo as Record<string, unknown>[]);
 
     if (error) {
       throw new Error(
