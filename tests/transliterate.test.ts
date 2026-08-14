@@ -31,4 +31,14 @@ describe("cirilicaULatinicu", () => {
   it("podnosi prazan ulaz", () => {
     expect(cirilicaULatinicu("")).toBe("");
   });
+
+  it("digrafe pise velikim na kraju velikih reči", () => {
+    // Bug fix: digrafi na kraju svega-velikih reči moraju biti u svim velikim slovima,
+    // jer prethodno slovo je takođe veliko, a sledeće je kraj ili interpunkcija.
+    // Primer: ЖАБАЉ (opština Žabalja) je završavala kao žabalj umesto ŽABALJ.
+    expect(cirilicaULatinicu("ЖАБАЉ")).toBe("ŽABALJ");
+    expect(cirilicaULatinicu("КРУПАЊ")).toBe("KRUPANJ");
+    expect(cirilicaULatinicu("РАЖАЊ")).toBe("RAŽANJ");
+    expect(cirilicaULatinicu("СЕЧАЊ")).toBe("SEČANJ");
+  });
 });

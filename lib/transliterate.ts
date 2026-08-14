@@ -36,8 +36,13 @@ export function cirilicaULatinicu(tekst: string): string {
     const digraf = DIGRAFI[znak];
 
     if (digraf) {
-      // ЉУБОВИЈА -> LJUBOVIJA, ali Љубовија -> Ljubovija
-      rezultat += jeVelikoCirilicno(tekst[i + 1]) ? digraf[0] : digraf[1];
+      // Digrafi se pišu velikim ako je prethodno ILI sledeće slovo veliko ćirilično.
+      // ЉУБОВИЈА -> LJUBOVIJA, Љубовија -> Ljubovija, ЖАБАЉ -> ŽABALJ
+      const prethodno = i > 0 ? tekst[i - 1] : undefined;
+      const sledeće = tekst[i + 1];
+      const koristVeliki =
+        jeVelikoCirilicno(prethodno) || jeVelikoCirilicno(sledeće);
+      rezultat += koristVeliki ? digraf[0] : digraf[1];
       continue;
     }
 
