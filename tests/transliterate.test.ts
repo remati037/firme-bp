@@ -7,20 +7,30 @@ describe("cirilicaULatinicu", () => {
     expect(cirilicaULatinicu("Београд")).toBe("Beograd");
   });
 
-  it("prevodi sva srpska specificna slova", () => {
+  it("prevodi sva srpska specifična slova", () => {
     expect(cirilicaULatinicu("ђжћчш")).toBe("đžćčš");
     expect(cirilicaULatinicu("ЂЖЋЧШ")).toBe("ĐŽĆČŠ");
   });
 
-  it("digrafe pise velikim slovima kad je cela rec velikim", () => {
+  it("digrafe piše velikim slovima kad je cela reč velikim", () => {
     expect(cirilicaULatinicu("ЉУБОВИЈА")).toBe("LJUBOVIJA");
     expect(cirilicaULatinicu("ЊЕГОШ")).toBe("NJEGOŠ");
     expect(cirilicaULatinicu("ЏАМИЈА")).toBe("DŽAMIJA");
   });
 
-  it("digrafe pise sa malim drugim slovom kad sledi malo slovo", () => {
+  it("digrafe piše sa malim drugim slovom kad sledi malo slovo", () => {
     expect(cirilicaULatinicu("Љубовија")).toBe("Ljubovija");
     expect(cirilicaULatinicu("Његош")).toBe("Njegoš");
+  });
+
+  it("digrafe na kraju velike reči piše velikim", () => {
+    // Četiri stvarne opštine iz APR seta. Gledanje samo sledećeg znaka
+    // dalo bi ŽABALj, jer posle Љ stoji kraj stringa, a ne veliko slovo.
+    expect(cirilicaULatinicu("ЖАБАЉ")).toBe("ŽABALJ");
+    expect(cirilicaULatinicu("КРУПАЊ")).toBe("KRUPANJ");
+    expect(cirilicaULatinicu("РАЖАЊ")).toBe("RAŽANJ");
+    expect(cirilicaULatinicu("СЕЧАЊ")).toBe("SEČANJ");
+    expect(cirilicaULatinicu("ДОО КОДЕКС ЖАБАЉ")).toBe("DOO KODEKS ŽABALJ");
   });
 
   it("ostavlja latinicu, cifre i interpunkciju netaknute", () => {
@@ -32,13 +42,4 @@ describe("cirilicaULatinicu", () => {
     expect(cirilicaULatinicu("")).toBe("");
   });
 
-  it("digrafe pise velikim na kraju velikih reči", () => {
-    // Bug fix: digrafi na kraju svega-velikih reči moraju biti u svim velikim slovima,
-    // jer prethodno slovo je takođe veliko, a sledeće je kraj ili interpunkcija.
-    // Primer: ЖАБАЉ (opština Žabalja) je završavala kao žabalj umesto ŽABALJ.
-    expect(cirilicaULatinicu("ЖАБАЉ")).toBe("ŽABALJ");
-    expect(cirilicaULatinicu("КРУПАЊ")).toBe("KRUPANJ");
-    expect(cirilicaULatinicu("РАЖАЊ")).toBe("RAŽANJ");
-    expect(cirilicaULatinicu("СЕЧАЊ")).toBe("SEČANJ");
-  });
 });

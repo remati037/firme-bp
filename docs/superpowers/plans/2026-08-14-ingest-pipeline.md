@@ -89,12 +89,12 @@ describe("cirilicaULatinicu", () => {
     expect(cirilicaULatinicu("Београд")).toBe("Beograd");
   });
 
-  it("prevodi sva srpska specificna slova", () => {
+  it("prevodi sva srpska specifična slova", () => {
     expect(cirilicaULatinicu("ђжћчш")).toBe("đžćčš");
     expect(cirilicaULatinicu("ЂЖЋЧШ")).toBe("ĐŽĆČŠ");
   });
 
-  it("digrafe pise velikim slovima kad je cela rec velikim", () => {
+  it("digrafe piše velikim slovima kad je cela reč velikim", () => {
     expect(cirilicaULatinicu("ЉУБОВИЈА")).toBe("LJUBOVIJA");
     expect(cirilicaULatinicu("ЊЕГОШ")).toBe("NJEGOŠ");
     expect(cirilicaULatinicu("ЏАМИЈА")).toBe("DŽAMIJA");
@@ -199,7 +199,7 @@ export function cirilicaULatinicu(tekst: string): string {
 npx vitest run tests/transliterate.test.ts
 ```
 
-Očekivano: PASS, 6 testova.
+Očekivano: PASS, 7 testova.
 
 - [ ] **Korak 8: Commit**
 
