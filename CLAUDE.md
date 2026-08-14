@@ -17,6 +17,11 @@ Ovo NIJE SaaS, nema pretplate, nema naplate u v1.
 
 **Jezik proizvoda: srpski, latinica.** Sav UI tekst, sav AI izlaz, svi meta tagovi na srpskom.
 
+**Obavezno uz ovaj fajl: [`SEO.md`](SEO.md).** Tehnička SEO specifikacija, sve u njoj je
+obavezno. Gde se razilazi sa ovim fajlom, **SEO.md je noviji i ima prednost** — takva
+mesta su niže označena. Pročitaj oba pre svake sesije koja dira rute, meta tagove,
+interno linkovanje ili šemu.
+
 ---
 
 ## Tehnički stek, ne menjaj bez dogovora
