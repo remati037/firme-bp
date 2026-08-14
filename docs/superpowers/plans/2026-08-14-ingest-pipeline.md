@@ -1721,7 +1721,17 @@ async function glavna(): Promise<void> {
 
       poznatiMb.add(mb);
       const staro = postojeceFirme.get(mb) ?? null;
-      const novo = mapirajFirmu(mb, sirovo, staro?.slug ?? null);
+
+      // mapirajFirmu baca na neispravan podatak umesto da ga tiho pretvori u
+      // nulu. Red se preskače i broji, a prag od 1% niže prekida ingest ako
+      // takvih bude mnogo.
+      let novo: RedFirme;
+      try {
+        novo = mapirajFirmu(mb, sirovo, staro?.slug ?? null);
+      } catch (greska) {
+        preskoceneFirme.push(`${mb}: ${greska instanceof Error ? greska.message : greska}`);
+        continue;
+      }
 
       if (!staro) {
         novihFirmi++;
@@ -1772,7 +1782,17 @@ async function glavna(): Promise<void> {
         continue;
       }
 
-      const red = mapirajFinansije(mb, sirovo);
+      // Isto kao kod firmi: neispravan broj ili godina bacaju, red se preskače.
+      // Godina je deo primarnog ključa, pa tiha nula ovde znači da bi dva
+      // izveštaja iste firme pregazila jedan drugi.
+      let red: RedFinansija;
+      try {
+        red = mapirajFinansije(mb, sirovo);
+      } catch (greska) {
+        preskoceniFi.push(`${mb}: ${greska instanceof Error ? greska.message : greska}`);
+        continue;
+      }
+
       zaIstoriju.push({ ...red, datum_preseka: datumPreseka });
 
       // Siročići nemaju firmu u companies, pa bi pukli na stranom ključu.
