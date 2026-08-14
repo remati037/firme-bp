@@ -501,7 +501,8 @@ import https from "node:https";
 import tls from "node:tls";
 import path from "node:path";
 import { createWriteStream, readFileSync } from "node:fs";
-import type { IncomingMessage } from "node:http";
+// ClientRequest se uvozi iz node:http; https ga ne izvozi kao tip.
+import type { ClientRequest, IncomingMessage } from "node:http";
 
 const OSNOVA = "https://openapi.apr.gov.rs/api/opendata";
 const TIMEOUT_MS = 120_000;
@@ -564,7 +565,7 @@ async function saPonavljanjem<T>(opis: string, posao: () => Promise<T>): Promise
   );
 }
 
-function zahtev(url: string, naOdgovor: (r: IncomingMessage) => void): https.ClientRequest {
+function zahtev(url: string, naOdgovor: (r: IncomingMessage) => void): ClientRequest {
   const req = https.get(url, { agent }, naOdgovor);
   req.setTimeout(TIMEOUT_MS, () => req.destroy(new Error(`timeout posle ${TIMEOUT_MS} ms`)));
   return req;
@@ -654,15 +655,19 @@ export function preuzmiUFajl(url: string, odrediste: string): Promise<number> {
 Provera ide kroz privremeni fajl u korenu repoa, jer relativni uvoz mora da se
 razrešava iz korena. Fajl se briše odmah posle.
 
+Ekstenzija je `.mts`, ne `.ts`: `package.json` nema `"type": "module"`, pa `tsx`
+tretira `.ts` kao CommonJS i top-level `await` puca. Isto važi za svaku
+privremenu skriptu u ovom planu.
+
 ```bash
-cat > provera-tls.ts <<'TS'
+cat > provera-tls.mts <<'TS'
 import { APR_ENDPOINTI, procitajDatumPreseka } from "./scripts/lib/apr-client";
 
 for (const endpoint of APR_ENDPOINTI) {
   console.log(endpoint.kljuc, await procitajDatumPreseka(endpoint.url));
 }
 TS
-npx tsx provera-tls.ts; rm provera-tls.ts
+npx tsx provera-tls.mts; rm provera-tls.mts
 ```
 
 Očekivano: tri reda sa datumom oblika `2026-07-31`, gotovo za par sekundi.
@@ -731,7 +736,7 @@ Očekivano: `cetvorocifrenih sifara: 615`.
 
 ```bash
 cd "$(git rev-parse --show-toplevel)"
-cat > gen-nace.ts <<'TS'
+cat > gen-nace.mts <<'TS'
 import { readFileSync, writeFileSync } from "node:fs";
 import { cirilicaULatinicu } from "./lib/transliterate";
 
@@ -747,7 +752,7 @@ const izlaz = redovi.map((r) => ({
 writeFileSync("scripts/data/nace-2010.json", `${JSON.stringify(izlaz, null, 2)}\n`);
 console.log("upisano", izlaz.length, "sifara, primer:", izlaz.find((r) => r.sifra === "4532"));
 TS
-npx tsx gen-nace.ts; rm gen-nace.ts
+npx tsx gen-nace.mts; rm gen-nace.mts
 ```
 
 Očekivano:
@@ -761,7 +766,7 @@ Opštine ne postoje kao zaseban izvor, pa se izvode iz `companies` seta jednom i
 komituju, da seed ostane offline i determinističan.
 
 ```bash
-cat > gen-opstine.ts <<'TS'
+cat > gen-opstine.mts <<'TS'
 import { readFileSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import path from "node:path";
@@ -793,7 +798,7 @@ const izlaz = [...mapa.entries()]
 writeFileSync("scripts/data/opstine.json", `${JSON.stringify(izlaz, null, 2)}\n`);
 console.log("upisano", izlaz.length, "opstina, primer:", izlaz[0]);
 TS
-npx tsx gen-opstine.ts; rm gen-opstine.ts
+npx tsx gen-opstine.mts; rm gen-opstine.mts
 ```
 
 Očekivano: `upisano 192 opstina`.
@@ -1281,7 +1286,7 @@ export async function arhiviraj(
 - [ ] **Korak 2: Proveri nad živim Storage-om**
 
 ```bash
-cat > provera-storage.ts <<'TS'
+cat > provera-storage.mts <<'TS'
 import { writeFileSync } from "node:fs";
 import { getSupabaseServerClient } from "./lib/supabase";
 import { arhiviraj, BUCKET, osigurajBucket } from "./scripts/lib/archive";
@@ -1299,7 +1304,7 @@ console.log("u bucketu:", data?.map((f) => f.name));
 await sb.storage.from(BUCKET).remove(["proba/proba.json.gz"]);
 console.log("probni fajl obrisan");
 TS
-npx tsx provera-storage.ts; rm provera-storage.ts
+npx tsx provera-storage.mts; rm provera-storage.mts
 ```
 
 Očekivano: ispis broja bajtova, pa `u bucketu: [ 'proba.json.gz' ]`, pa potvrda brisanja.
@@ -1453,7 +1458,7 @@ export async function obrisiIstorijuZaPresek(
 - [ ] **Korak 2: Proveri straničenje nad živom bazom**
 
 ```bash
-cat > provera-stranica.ts <<'TS'
+cat > provera-stranica.mts <<'TS'
 import { getSupabaseServerClient } from "./lib/supabase";
 import { ucitajPostojeceFirme } from "./scripts/lib/upsert";
 
@@ -1461,7 +1466,7 @@ process.loadEnvFile(".env.local");
 const mapa = await ucitajPostojeceFirme(getSupabaseServerClient());
 console.log("procitano firmi:", mapa.size);
 TS
-npx tsx provera-stranica.ts; rm provera-stranica.ts
+npx tsx provera-stranica.mts; rm provera-stranica.mts
 ```
 
 Očekivano: `procitano firmi: 0` (baza je još prazna). Posle Zadatka 8 ista komanda
