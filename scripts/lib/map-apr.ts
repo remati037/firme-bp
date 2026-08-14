@@ -130,7 +130,14 @@ export function mapirajFirmu(
     // Slug se zamrzava pri prvom upisu: 133k indeksiranih URL-ova ne sme da se menja.
     slug: postojeciSlug ?? slugify(kratko || ime, maticniBroj),
     poslovno_ime: ime, // original, i kad je ćirilicom
-    poslovno_ime_norm: normalizeIme(ime),
+    // Pretraga ide nad jednom indeksiranom kolonom, pa u nju ulaze OBA imena.
+    // Registrovano ime NIS-a je opisno i nigde ne sadrži "NIS", pa upit "nis"
+    // nije nalazio najpoznatiju firmu u zemlji. Isto važi za svih 99 ručnih
+    // imena. Tokeni se ne ponavljaju, jer je skraćeno ime obično izvedeno iz
+    // punog pa bi se većina reči duplirala.
+    poslovno_ime_norm: [...new Set(normalizeIme(`${ime} ${kratko}`).split(" "))]
+      .filter(Boolean)
+      .join(" "),
     poslovno_ime_kratko: kratko,
     sifra_opstine: tekstIliNull(sirovo.SifraOpstine),
     opstina,

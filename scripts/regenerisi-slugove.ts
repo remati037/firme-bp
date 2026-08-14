@@ -2,7 +2,7 @@ import { existsSync, readFileSync } from "node:fs";
 import path from "node:path";
 
 import { getSupabaseServerClient } from "../lib/supabase";
-import { slugify } from "../lib/normalize";
+import { normalizeIme, slugify } from "../lib/normalize";
 import { primeniOverride, skratiIme } from "../lib/skrati-ime";
 import { upsertUBatchevima } from "./lib/upsert";
 
@@ -91,16 +91,21 @@ async function glavna(): Promise<void> {
     // Prazno skraćeno ime nikad ne sme da uđe u slug.
     const slug = slugify(kratko || red.poslovno_ime, red.maticni_broj);
 
+    // Ista formula kao u mapirajFirmu: pretraga mora da nadje i skraćeno ime.
+    const norm = [...new Set(normalizeIme(`${red.poslovno_ime} ${kratko}`).split(" "))]
+      .filter(Boolean)
+      .join(" ");
+
     const vecUzeo = slugovi.get(slug);
     if (vecUzeo) kolizije.push(`${slug}: ${vecUzeo} i ${red.maticni_broj}`);
     slugovi.set(slug, red.maticni_broj);
 
     if (slug !== red.slug) promenjenSlug++;
-    if (slug !== red.slug || kratko !== red.poslovno_ime_kratko) {
+    if (slug !== red.slug || kratko !== red.poslovno_ime_kratko || norm !== red.poslovno_ime_norm) {
       zaUpis.push({
         maticni_broj: red.maticni_broj,
         poslovno_ime: red.poslovno_ime,
-        poslovno_ime_norm: red.poslovno_ime_norm,
+        poslovno_ime_norm: norm,
         poslovno_ime_kratko: kratko,
         slug,
         updated_at: sada,
