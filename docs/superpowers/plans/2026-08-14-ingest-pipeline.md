@@ -648,6 +648,11 @@ export function preuzmiUFajl(url: string, odrediste: string): Promise<number> {
       // kasnija obrada ne sme da nasledi.
       const naGresku = (greska: Error) => {
         zavrsi(() => {
+          // I zahtev mora da se prekine, ne samo stream. Ako padne pisanje pre
+          // nego što odgovor stigne, https.get i dalje radi, a veza bi visila
+          // do isteka od 120 s. Uz ponavljanje na 1 s i 4 s to bi značilo tri
+          // otvorene veze prema APR-u u isto vreme. destroy() je idempotentan.
+          req.destroy();
           izlaz.destroy();
           unlink(odrediste).catch(() => {
             // Best effort: neuspeh brisanja ne sme da sakrije originalnu grešku.
