@@ -76,6 +76,13 @@ jobs:
       - name: Testovi
         run: npm test
 
+      # SEO.md 2.3: nula orphan stranica. Nova firma moze da stigne sa sifrom
+      # delatnosti koja jos nema svoju stranicu, i tada je nedostupna nijednim
+      # internim linkom. Sa 133k stranica interno linkovanje je jedina poluga
+      # koja realno pomera indeksiranje, pa ovo mora da pukne glasno.
+      - name: Orphan provera
+        run: npx tsx scripts/proveri-orphan.ts
+
       # Statičke stranice se regenerišu samo ako je stvarno stigao nov presek.
       - name: Vercel deploy hook
         if: steps.ingest.outputs.nov_presek == 'da'
