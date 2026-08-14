@@ -1724,9 +1724,18 @@ async function glavna(): Promise<void> {
     await proveriOdstupanje(supabase, datumPreseka, unosiFirmi.length);
 
     const postojeceFirme = await ucitajPostojeceFirme(supabase);
-    // updated_at nije deo RedFirme jer ne učestvuje u poređenju; dodaje se samo
-    // izmenjenim redovima, da kolona ne laže da je red diran svakog meseca.
-    const zaUpisFirme: (RedFirme & { updated_at?: string })[] = [];
+
+    // updated_at se stavlja na SVAKI red u ovom nizu, i nov i izmenjen. Niz i
+    // sadrži samo nove i izmenjene, pa kolona i dalje ne laže da je red diran
+    // svakog meseca.
+    //
+    // Mora na sve: postgrest-js racuna "columns" kao uniju kljuceva celog niza
+    // i podrazumevano salje missing kao NULL. Da nov red nema updated_at, a
+    // izmenjen ga ima, batch koji sadrzi oba upisao bi NULL u kolonu koja je
+    // not null, i ceo ingest bi pukao. To se ne vidi pri prvom punjenju, jer su
+    // tada svi redovi novi, nego tek na drugom stvarnom preseku.
+    const sada = new Date().toISOString();
+    const zaUpisFirme: (RedFirme & { updated_at: string })[] = [];
     const poznatiMb = new Set<string>();
     const preskoceneFirme: string[] = [];
     let novihFirmi = 0;
@@ -1738,7 +1747,6 @@ async function glavna(): Promise<void> {
         continue;
       }
 
-      poznatiMb.add(mb);
       const staro = postojeceFirme.get(mb) ?? null;
 
       // mapirajFirmu baca na neispravan podatak umesto da ga tiho pretvori u
@@ -1752,11 +1760,16 @@ async function glavna(): Promise<void> {
         continue;
       }
 
+      // Tek posle uspešnog mapiranja. Preskočena firma ne sme da važi za
+      // poznatu, jer bi njen finansijski red onda prošao kao ne-siroče i pukao
+      // na stranom ključu.
+      poznatiMb.add(mb);
+
       if (!staro) {
         novihFirmi++;
-        zaUpisFirme.push(novo);
+        zaUpisFirme.push({ ...novo, updated_at: sada });
       } else if (firmaIzmenjena(novo, staro)) {
-        zaUpisFirme.push({ ...novo, updated_at: new Date().toISOString() });
+        zaUpisFirme.push({ ...novo, updated_at: sada });
       }
     }
 
