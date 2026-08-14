@@ -373,6 +373,12 @@ export function skratiIme(ime: string, opstina = "", maxDuzina = MAX): SkracenoI
       // "... DOO BEOGRAD (NOVI BEOGRAD)". Grad ionako dolazi iz baze, pa
       // zagrade samo prave lazne kolizije tipa "Beograd (Novi Beograd) Beograd".
       .replace(/\([^)]*\)/g, " ")
+      // APR piše pravnu formu i kao "D O O" i kao "d.o.o." i kao "DOO".
+      // Svodi se na DOO ODMAH, pre skiniPonavljanja: ono briše uzastopno
+      // ponovljenu reč, pa bi od "D O O" napravilo "D O" (dva susedna "O"),
+      // forma više ne bi bila prepoznatljiva i ostatak bi iscurio u ime.
+      // Tako je nastalo 67 imena tipa "Ekser D O Beograd" i "D O Beograd".
+      .replace(/\bd[\s.]*o[\s.]*o\b\.?/gi, "DOO")
       .replace(/\s{2,}/g, " ")
       .replace(/^[\s,.\-–]+|[\s,.\-–]+$/g, ""),
   );
@@ -543,7 +549,18 @@ export function skratiIme(ime: string, opstina = "", maxDuzina = MAX): SkracenoI
     ? [forma, titleCase(jezgro), grad]
     : [titleCase(jezgro), forma, grad];
 
-  let kratko = delovi.filter(Boolean).join(" ").replace(/\s{2,}/g, " ").trim();
+  // Dedup i NA IZLAZU, ne samo na ulazu. Kad jezgro već sadrži formu ili grad
+  // ("MONTAŽA d.o.o. Beograd"), sastavljanje ih dopisuje još jednom i ispadne
+  // "Montaža DOO Beograd DOO Beograd".
+  let kratko = skiniPonavljanja(
+    delovi
+      .filter(Boolean)
+      .join(" ")
+      // Zarez u prikaznom imenu ne nosi ništa, a ostaje iz izvora: "Promet DOO, Beograd".
+      .replace(/\s*,\s*/g, " ")
+      .replace(/\s{2,}/g, " ")
+      .trim(),
+  );
 
   if (kratko.length > maxDuzina) {
     const visak = kratko.length - maxDuzina;
