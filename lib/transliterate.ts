@@ -14,7 +14,7 @@ const MAPA: Record<string, string> = {
   с: "s", т: "t", ћ: "ć", у: "u", ф: "f", х: "h", ц: "c", ч: "č", ш: "š",
 };
 
-/** Digrafi se pišu velikim ili mešovito, zavisno od slova koje sledi. */
+/** Digrafi se pišu velikim ili mešovito, zavisno od susednih slova. */
 const DIGRAFI: Record<string, [string, string]> = {
   Љ: ["LJ", "Lj"], Њ: ["NJ", "Nj"], Џ: ["DŽ", "Dž"],
   љ: ["lj", "lj"], њ: ["nj", "nj"], џ: ["dž", "dž"],
@@ -39,10 +39,9 @@ export function cirilicaULatinicu(tekst: string): string {
       // Digrafi se pišu velikim ako je prethodno ILI sledeće slovo veliko ćirilično.
       // ЉУБОВИЈА -> LJUBOVIJA, Љубовија -> Ljubovija, ЖАБАЉ -> ŽABALJ
       const prethodno = i > 0 ? tekst[i - 1] : undefined;
-      const sledeće = tekst[i + 1];
-      const koristVeliki =
-        jeVelikoCirilicno(prethodno) || jeVelikoCirilicno(sledeće);
-      rezultat += koristVeliki ? digraf[0] : digraf[1];
+      const sledece = tekst[i + 1];
+      const veliki = jeVelikoCirilicno(prethodno) || jeVelikoCirilicno(sledece);
+      rezultat += veliki ? digraf[0] : digraf[1];
       continue;
     }
 

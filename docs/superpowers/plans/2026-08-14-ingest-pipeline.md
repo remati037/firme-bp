@@ -100,9 +100,19 @@ describe("cirilicaULatinicu", () => {
     expect(cirilicaULatinicu("ЏАМИЈА")).toBe("DŽAMIJA");
   });
 
-  it("digrafe pise sa malim drugim slovom kad sledi malo slovo", () => {
+  it("digrafe piše sa malim drugim slovom kad sledi malo slovo", () => {
     expect(cirilicaULatinicu("Љубовија")).toBe("Ljubovija");
     expect(cirilicaULatinicu("Његош")).toBe("Njegoš");
+  });
+
+  it("digrafe na kraju velike reči piše velikim", () => {
+    // Četiri stvarne opštine iz APR seta. Gledanje samo sledećeg znaka
+    // dalo bi ŽABALj, jer posle Љ stoji kraj stringa, a ne veliko slovo.
+    expect(cirilicaULatinicu("ЖАБАЉ")).toBe("ŽABALJ");
+    expect(cirilicaULatinicu("КРУПАЊ")).toBe("KRUPANJ");
+    expect(cirilicaULatinicu("РАЖАЊ")).toBe("RAŽANJ");
+    expect(cirilicaULatinicu("СЕЧАЊ")).toBe("SEČANJ");
+    expect(cirilicaULatinicu("ДОО КОДЕКС ЖАБАЉ")).toBe("DOO KODEKS ŽABALJ");
   });
 
   it("ostavlja latinicu, cifre i interpunkciju netaknute", () => {
@@ -143,7 +153,7 @@ const MAPA: Record<string, string> = {
   с: "s", т: "t", ћ: "ć", у: "u", ф: "f", х: "h", ц: "c", ч: "č", ш: "š",
 };
 
-/** Digrafi se pišu velikim ili mešovito, zavisno od slova koje sledi. */
+/** Digrafi se pišu velikim ili mešovito, zavisno od susednih slova. */
 const DIGRAFI: Record<string, [string, string]> = {
   Љ: ["LJ", "Lj"], Њ: ["NJ", "Nj"], Џ: ["DŽ", "Dž"],
   љ: ["lj", "lj"], њ: ["nj", "nj"], џ: ["dž", "dž"],
@@ -165,8 +175,14 @@ export function cirilicaULatinicu(tekst: string): string {
     const digraf = DIGRAFI[znak];
 
     if (digraf) {
-      // ЉУБОВИЈА -> LJUBOVIJA, ali Љубовија -> Ljubovija
-      rezultat += jeVelikoCirilicno(tekst[i + 1]) ? digraf[0] : digraf[1];
+      // Veliki oblik ako je prethodno ILI sledeće slovo veliko ćirilično.
+      // ЉУБОВИЈА -> LJUBOVIJA, Љубовија -> Ljubovija, ЖАБАЉ -> ŽABALJ.
+      // Gledanje samo unapred bi dalo ŽABALj, a Žabalj, Krupanj, Ražanj i
+      // Sečanj su stvarne opštine u setu, uz još 72 poslovna imena.
+      const prethodno = i > 0 ? tekst[i - 1] : undefined;
+      const sledece = tekst[i + 1];
+      const veliki = jeVelikoCirilicno(prethodno) || jeVelikoCirilicno(sledece);
+      rezultat += veliki ? digraf[0] : digraf[1];
       continue;
     }
 
