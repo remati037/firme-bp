@@ -107,7 +107,12 @@ financials                                  -- poslednje stanje
   prosecan_broj_zaposlenih int
   primary key (maticni_broj, godina)
 
-financials_history                          -- svaki mesečni presek, nikad se ne briše
+financials_history                          -- svaki mesečni presek, arhiva se ne briše
+                                            -- jedini izuzetak: ingest briše redove za
+                                            -- datum_preseka koji upravo upisuje, jer se
+                                            -- red u snapshots piše poslednji, pa bi prekid
+                                            -- u pola upisa doveo do udvajanja. Nikad ne
+                                            -- diraj preseke koji nisu tekući.
   id                  bigserial primary key
   maticni_broj        text
   datum_preseka       date
@@ -158,7 +163,8 @@ Materijalizovani view-ovi (osvežavaju se posle svakog ingesta):
    Formatiranje: `Intl.NumberFormat('sr-RS')`, bez decimala, sa oznakom RSD.
 5. **Nula vrednosti** znače da firma nije predala izveštaj ili je neaktivna. Ne prikazuj ih kao "0 RSD",
    prikaži "Nema podataka".
-6. **Upsert, nikad delete pa insert.** Istorija se čuva.
+6. **Upsert, nikad delete pa insert.** Istorija se čuva. Jedini dozvoljen delete je nad
+   `financials_history`, i to samo za `datum_preseka` koji se upravo upisuje (vidi šemu).
 
 ---
 
