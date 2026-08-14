@@ -1,36 +1,68 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# firme.biznisprice.com
 
-## Getting Started
+Besplatna provera srpskih firmi iz APR open data seta. Next.js 16 (App Router),
+Supabase (Postgres), Vercel.
 
-First, run the development server:
+Kontekst i pravila su u [`CLAUDE.md`](CLAUDE.md), tehnička SEO specifikacija u
+[`SEO.md`](SEO.md). SEO.md ima prednost gde se dokumenti razilaze.
+
+## Lokalno pokretanje
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Vrednosti env varijabli idu u `.env.local` (nije u gitu). Spisak je ispod.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run build       # produkcijski build
+npm run lint        # eslint
+npm test            # vitest, uključuje testove nad pravom bazom
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Env varijable
 
-## Learn More
+| Varijabla | Gde treba | Čemu služi |
+|---|---|---|
+| `NEXT_PUBLIC_SUPABASE_URL` | Vercel + lokalno + CI | adresa Supabase projekta |
+| `SUPABASE_SECRET_KEY` | Vercel + lokalno + CI | serverski upiti; fallback je `SUPABASE_SERVICE_ROLE_KEY` |
+| `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` | Vercel + lokalno | javni ključ; fallback je `NEXT_PUBLIC_SUPABASE_ANON_KEY` |
+| `NEXT_PUBLIC_SITE_URL` | Vercel | canonical i `og:url`, bez završne kose crte |
+| `NEXT_PUBLIC_DATUM_PRESEKA` | opciono | fallback ako baza ne odgovori; presek se inače čita iz `snapshots` |
+| `ANTHROPIC_API_KEY` | samo skripte | generisanje AI sažetaka |
+| `NBS_USERNAME`, `NBS_PASSWORD` | samo skripte | mapiranje matičnog broja na PIB |
 
-To learn more about Next.js, take a look at the following resources:
+Zašto serverski ključ uopšte treba: materijalizovani view-ovi i tabela
+`snapshots` nisu izloženi `anon` ulozi (migracija 001), a stranica firme čita
+baš njih. Taj ključ zaobilazi RLS i sme da piše — **nikad ne sme dobiti
+`NEXT_PUBLIC_` prefiks** i ne sme se uvoziti u klijentsku komponentu.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Preporuka je novi Supabase tajni ključ (`sb_secret_...`, Project Settings →
+API Keys), a ne legacy `service_role`: povlači se i rotira pojedinačno, pa se
+pristup može oduzeti bez diranja ingest pipeline-a.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Deploy
 
-## Deploy on Vercel
+Vercel prati granu iz gita. Posle svake izmene env varijabli treba novi deploy —
+postojeći build ne pokupi promenu.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Region funkcija je zakucan u [`vercel.json`](vercel.json) na `fra1` (Frankfurt),
+isto gde je i Supabase projekat (eu-central-1). Bez toga funkcije idu u podrazumevani
+region, a stranica firme radi više upita po renderu, pa p95 TTFB probije prag od
+500 ms iz SEO.md §6.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Build prolazi i bez ijedne env varijable (futer padne na konstantu, stranice firmi
+se prave na zahtev), pa zelen build ne znači da baza radi — proveri jednu stranicu
+firme.
+
+## Podaci
+
+```bash
+npm run ingest                                   # mesečni APR presek
+npm run seed                                     # šifarnici delatnosti i opština
+npx tsx scripts/primeni-override-imena.ts        # ručni izuzeci za skraćeno ime
+```
+
+Migracije su u `supabase/migrations/`. Šema je zaključana — nove kolone i tabele
+samo uz odobrenje vlasnika projekta.
