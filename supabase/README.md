@@ -61,4 +61,12 @@ select refresh_all_stats();        -- prolazi i nad praznom bazom
 
 - SELECT za `anon` je dozvoljen na svim tabelama **osim `snapshots`**.
 - INSERT, UPDATE i DELETE ide isključivo preko `service_role` (ključ nikad ne ide u browser).
-- Materijalizovani view-ovi nemaju RLS, sadrže samo agregate javnih podataka.
+- Materijalizovani view-ovi nemaju RLS, pa se ne izlažu Data API-ju (Supabase linter 0016).
+  Čita ih server preko `service_role` ključa, browser nikad ne ide direktno na njih.
+
+## Stanje
+
+Migracija 001 primenjena 14.08.2026. na projekat `ypovucckebvxbianbvam`.
+Provereno: 7 tabela, 3 materijalizovana view-a, 20 indeksa, 13 politika,
+`refresh_all_stats()` prolazi, `anon` ne vidi `snapshots` i ne može da piše,
+Supabase security advisor bez ijedne primedbe.

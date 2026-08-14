@@ -362,8 +362,13 @@ grant all on public.ai_summaries       to service_role;
 grant all on public.snapshots          to service_role;
 grant usage, select on sequence public.financials_history_id_seq to service_role;
 
--- Materijalizovani view-ovi nemaju RLS. Sadrze samo agregate javnih podataka,
--- pa se citanje dozvoljava, ali upis nikome osim vlasniku.
-grant select on public.mv_delatnost_stats to anon, authenticated, service_role;
-grant select on public.mv_opstina_stats   to anon, authenticated, service_role;
-grant select on public.mv_company_ranks   to anon, authenticated, service_role;
+-- Materijalizovani view-ovi nemaju RLS, pa se ne izlazu Data API-ju
+-- (Supabase linter 0016). Cita ih server preko service_role kljuca,
+-- browser nikad ne ide direktno na njih.
+revoke all on public.mv_delatnost_stats from anon, authenticated;
+revoke all on public.mv_opstina_stats   from anon, authenticated;
+revoke all on public.mv_company_ranks   from anon, authenticated;
+
+grant select on public.mv_delatnost_stats to service_role;
+grant select on public.mv_opstina_stats   to service_role;
+grant select on public.mv_company_ranks   to service_role;
