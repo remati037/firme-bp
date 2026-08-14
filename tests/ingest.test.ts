@@ -64,6 +64,8 @@ describe("ingest, stanje baze", () => {
     const imena = await svaKolona<string>("companies", "poslovno_ime_norm", "maticni_broj");
     const losa = imena.filter((ime) => !/^[a-z0-9 ]*$/.test(ime ?? ""));
 
+    // Bez ove tvrdnje test prolazi i nad praznim skupom, dakle ne bi mogao da padne.
+    expect(imena.length).toBeGreaterThan(100_000);
     expect(losa.slice(0, 10)).toEqual([]);
   });
 
@@ -76,18 +78,24 @@ describe("ingest, stanje baze", () => {
     const izSifarnika = new Set(await svaKolona<string>("nace_codes", "sifra", "sifra"));
     const nedostaju = [...izFirmi].filter((s) => !izSifarnika.has(s));
 
+    // Obe strane se pinuju. Da se pinuje samo šifarnik, prazan skup šifara iz
+    // companies dao bi praznu razliku i test bi prošao ne proverivši ništa.
+    expect(izFirmi.size).toBeGreaterThan(500);
     expect(izSifarnika.size).toBeGreaterThan(600);
     expect(nedostaju).toEqual([]);
   });
 
   it("financials ima manje redova od financials_history, zbog sirocica", async () => {
-    const { count: fin } = await supabase
+    const { count: fin, error: greskaFin } = await supabase
       .from("financials")
       .select("*", { count: "exact", head: true });
-    const { count: ist } = await supabase
+    const { count: ist, error: greskaIst } = await supabase
       .from("financials_history")
       .select("*", { count: "exact", head: true });
 
+    // Bez ovoga bi greška upita ispala kao zbunjujuće "0 nije vece od 100000".
+    expect(greskaFin).toBeNull();
+    expect(greskaIst).toBeNull();
     expect(fin ?? 0).toBeGreaterThan(100_000);
     expect(ist ?? 0).toBeGreaterThan(fin ?? 0);
   });
