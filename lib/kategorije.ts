@@ -189,6 +189,14 @@ export async function ucitajNajvece(
     .map((red, i): KarticaFirme | null => {
       const firma = red.companies;
       if (!firma) return null;
+
+      const vrednost =
+        metrika === "prihod"
+          ? red.ukupni_prihodi
+          : metrika === "dobit"
+            ? (red.neto_dobitak ?? 0) - (red.neto_gubitak ?? 0)
+            : red.prosecan_broj_zaposlenih;
+
       return {
         slug: firma.slug,
         maticni_broj: firma.maticni_broj,
@@ -201,6 +209,8 @@ export async function ucitajNajvece(
         zaposleni: red.prosecan_broj_zaposlenih,
         godina: red.godina,
         rang: i + 1,
+        vrednost,
+        vrstaVrednosti: metrika === "zaposleni" ? "broj" : "novac",
       };
     })
     .filter((r): r is KarticaFirme => r !== null);

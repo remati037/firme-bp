@@ -119,6 +119,12 @@ export type KarticaFirme = {
   godina: number | null;
   /** Rang u grupi koja se lista; null za firme bez izveštaja. */
   rang?: number | null;
+  /**
+   * Vrednost metrike po kojoj je lista rangirana, kad to nije prihod.
+   * Bez ovoga bi lista "po neto dobitku" prikazivala prihod pored imena.
+   */
+  vrednost?: number | null;
+  vrstaVrednosti?: "novac" | "broj";
 };
 
 /** Firma sa ugnežđenim poslednjim finansijskim izveštajem (PostgREST embed). */

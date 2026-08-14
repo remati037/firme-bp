@@ -38,7 +38,9 @@ export function CompanyCard({ firma }: { firma: KarticaFirme }) {
         </div>
         <div className="shrink-0 text-right">
           <div className="text-[15.5px] font-bold tabular-nums">
-            {formatRSDKompaktno(firma.ukupni_prihodi)}
+            {firma.vrednost !== undefined && firma.vrstaVrednosti === "broj"
+              ? formatBroj(firma.vrednost)
+              : formatRSDKompaktno(firma.vrednost ?? firma.ukupni_prihodi)}
           </div>
         </div>
       </div>

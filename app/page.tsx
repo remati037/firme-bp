@@ -1,10 +1,16 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
+import { CompanyBadge } from "@/components/company/company-badge";
 import { SearchBox } from "@/components/search/search-box";
 import { Card } from "@/components/ui/card";
-import { formatBroj, formatDatum } from "@/lib/format";
-import { apsolutniUrl, BREND, BROJ_FIRMI, DATUM_PRESEKA } from "@/lib/site";
+import { formatBroj, formatDatum, formatRSDKompaktno } from "@/lib/format";
+import { ucitajPocetnu, type Kategorija } from "@/lib/pocetna";
+import { imeOpstine, kratkoIme } from "@/lib/prikaz";
+import type { KarticaFirme } from "@/lib/queries";
+import { apsolutniUrl, BREND } from "@/lib/site";
+
+export const revalidate = 2592000;
 
 const NASLOV = `Proveri firmu pre nego što posluješ s njom | ${BREND}`;
 const OPIS =
@@ -24,19 +30,14 @@ export const metadata: Metadata = {
   },
 };
 
-/** Filteri iz prototipa. Postaju aktivni uz pretragu (Faza C). */
-const FILTERI = ["Samo aktivne", "Sa izveštajem", "Po opštini"];
+export default async function Pocetna() {
+  const podaci = await ucitajPocetnu();
 
-const TOP_LISTE = [
-  { naslov: "Po prihodu", href: "/najvece/prihod" },
-  { naslov: "Po broju zaposlenih", href: "/najvece/zaposleni" },
-  { naslov: "Po neto dobitku", href: "/najvece/dobit" },
-];
+  const predlozi = podaci.topPrihod.slice(0, 3).map((f) => ({
+    slug: f.slug,
+    ime: kratkoIme({ poslovno_ime: f.ime, poslovno_ime_kratko: f.imeKratko, opstina: f.opstina }),
+  }));
 
-/** Deterministične širine, da placeholder ne izgleda kao nasumičan šum. */
-const SIRINE_REDOVA = ["86%", "72%", "78%", "64%", "70%"];
-
-export default function Pocetna() {
   return (
     <main className="mx-auto w-full max-w-[1120px] px-6">
       {/* ===== HERO ===== */}
@@ -51,26 +52,15 @@ export default function Pocetna() {
         </p>
 
         <div className="mx-auto mt-8 max-w-[640px] text-left">
-          <SearchBox napomena="Pretraga se uključuje sa prvim uvozom podataka." />
-        </div>
-
-        <div className="mt-4 flex flex-wrap justify-center gap-2">
-          {FILTERI.map((filter) => (
-            <span
-              key={filter}
-              className="inline-flex items-center rounded-full border border-border bg-card px-[13px] py-1.5 text-[13px] text-muted-foreground select-none"
-            >
-              {filter}
-            </span>
-          ))}
+          <SearchBox predlozi={predlozi} />
         </div>
 
         <p className="mt-7 flex flex-wrap items-center justify-center gap-2 text-[13.5px] text-muted-foreground">
           <b className="font-semibold text-foreground tabular-nums">
-            {formatBroj(BROJ_FIRMI)} firmi
+            {formatBroj(podaci.brojFirmi)} firmi
           </b>
           <span className="text-border-strong">·</span>
-          <span>presek {formatDatum(DATUM_PRESEKA)}</span>
+          <span>presek {formatDatum(podaci.datumPreseka)}</span>
           <span className="text-border-strong">·</span>
           <span>izvor: APR</span>
           <span className="text-border-strong">·</span>
@@ -82,40 +72,20 @@ export default function Pocetna() {
       <section className="pt-2 pb-10">
         <SekcijaZaglavlje naslov="Najveće firme u Srbiji" href="/najvece" link="Sve liste →" />
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {TOP_LISTE.map((lista) => (
-            <Card key={lista.href}>
-              <h3 className="mb-3 text-[13px] font-bold tracking-[0.03em] text-muted-foreground uppercase">
-                {lista.naslov}
-              </h3>
-              <ol className="space-y-2.5" aria-hidden>
-                {SIRINE_REDOVA.map((sirina, i) => (
-                  <li key={sirina} className="flex items-center gap-4">
-                    <span className="min-w-[26px] text-right text-[15px] font-extrabold text-border-strong tabular-nums">
-                      {i + 1}
-                    </span>
-                    <span
-                      className="block h-3 rounded-full bg-muted"
-                      style={{ width: sirina }}
-                    />
-                  </li>
-                ))}
-              </ol>
-              <p className="mt-3.5 border-t border-border pt-3 text-xs text-muted-foreground">
-                Uskoro — lista se pravi iz APR preseka.
-              </p>
-            </Card>
-          ))}
+          <TopLista naslov="Po prihodu" firme={podaci.topPrihod} />
+          <TopLista naslov="Po broju zaposlenih" firme={podaci.topZaposleni} />
+          <TopLista naslov="Po neto dobitku" firme={podaci.topDobit} />
         </div>
       </section>
 
       {/* ===== KATEGORIJE ===== */}
       <section className="py-10">
         <SekcijaZaglavlje naslov="Delatnosti" href="/delatnost" link="Sve delatnosti →" />
-        <PlaceholderMreza broj={8} />
+        <MrezaKategorija stavke={podaci.delatnosti} />
 
         <div className="mt-9">
           <SekcijaZaglavlje naslov="Opštine" href="/grad" link="Sve opštine →" />
-          <PlaceholderMreza broj={8} />
+          <MrezaKategorija stavke={podaci.opstine} formatirajNaziv />
         </div>
       </section>
 
@@ -145,6 +115,55 @@ export default function Pocetna() {
   );
 }
 
+function TopLista({ naslov, firme }: { naslov: string; firme: KarticaFirme[] }) {
+  return (
+    <Card>
+      <h3 className="mb-3 text-[13px] font-bold tracking-[0.03em] text-muted-foreground uppercase">
+        {naslov}
+      </h3>
+      <ol className="list-none space-y-2.5">
+        {firme.map((firma, i) => (
+          <li key={firma.maticni_broj} className="flex items-start gap-3">
+            <span
+              className="min-w-[18px] text-right text-[15px] font-extrabold text-border-strong tabular-nums"
+              aria-hidden
+            >
+              {i + 1}
+            </span>
+            <span className="min-w-0 flex-1">
+              <Link
+                href={`/firma/${firma.slug}`}
+                className="block truncate text-[14.5px] font-semibold text-foreground no-underline hover:text-primary"
+              >
+                {kratkoIme({
+                  poslovno_ime: firma.ime,
+                  poslovno_ime_kratko: firma.imeKratko,
+                  opstina: firma.opstina,
+                })}
+              </Link>
+              <span className="mt-0.5 flex items-center gap-2 text-[12px] text-muted-foreground">
+                <span className="truncate">{imeOpstine(firma.opstina)}</span>
+                {firma.status_aktivan ? null : (
+                  <CompanyBadge
+                    status={firma.status}
+                    statusAktivan={firma.status_aktivan}
+                    className="px-2 py-0 text-[11px]"
+                  />
+                )}
+              </span>
+            </span>
+            <span className="shrink-0 text-right text-[13.5px] font-bold tabular-nums">
+              {firma.vrstaVrednosti === "broj"
+                ? formatBroj(firma.vrednost)
+                : formatRSDKompaktno(firma.vrednost ?? firma.ukupni_prihodi)}
+            </span>
+          </li>
+        ))}
+      </ol>
+    </Card>
+  );
+}
+
 function SekcijaZaglavlje({
   naslov,
   href,
@@ -167,22 +186,35 @@ function SekcijaZaglavlje({
   );
 }
 
-/** Struktura mreže kategorija bez podataka — puni se u Fazi C. */
-function PlaceholderMreza({ broj }: { broj: number }) {
+function MrezaKategorija({
+  stavke,
+  formatirajNaziv = false,
+}: {
+  stavke: Kategorija[];
+  formatirajNaziv?: boolean;
+}) {
   return (
-    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4" aria-hidden>
-      {Array.from({ length: broj }, (_, i) => (
-        <div
-          key={i}
-          className="flex items-center justify-between gap-2.5 rounded-ui border border-border bg-card px-4 py-[13px]"
-        >
-          <span className="flex flex-col gap-2">
-            <span className="block h-3 w-[132px] rounded-full bg-muted" />
-            <span className="block h-2.5 w-[64px] rounded-full bg-muted" />
-          </span>
-          <span className="font-bold text-border-strong">→</span>
-        </div>
+    <ul className="grid list-none gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      {stavke.map((stavka) => (
+        <li key={stavka.putanja}>
+          <Link
+            href={stavka.putanja}
+            className="flex h-full items-center justify-between gap-2.5 rounded-ui border border-border bg-card px-4 py-[13px] no-underline transition duration-150 hover:-translate-y-px hover:border-accent-ring hover:bg-accent-soft"
+          >
+            <span className="min-w-0">
+              <span className="block truncate text-sm font-semibold text-foreground">
+                {formatirajNaziv ? imeOpstine(stavka.naziv) : stavka.naziv}
+              </span>
+              <span className="mt-0.5 block text-[12.5px] text-muted-foreground tabular-nums">
+                {formatBroj(stavka.brojFirmi, { nulaJePodatak: true })} firmi
+              </span>
+            </span>
+            <span className="font-bold text-accent-strong" aria-hidden>
+              →
+            </span>
+          </Link>
+        </li>
       ))}
-    </div>
+    </ul>
   );
 }
