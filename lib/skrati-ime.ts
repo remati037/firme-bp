@@ -64,7 +64,16 @@ const STATUS =
 // ============================================================================
 
 const FORME: [RegExp, string][] = [
-  [/dru[šs]tv[oa]\s+s\s*a?\s+ograni[čc]enom\s+odgovorno[šs][ćc]u/gi, "DOO"],
+  // Tolerantno, jer sam APR izvor sadrzi tipfelere: DRUSTO, DUSTVO, DRUSVO,
+  // DPUSTVO, OGRANICEBOM, OGRNICENOM, OGARNICENOM, ORGANICENOM...
+  [
+    /d[rp]?u[šs]?[tv]{1,2}[oa]m?\s+s\s*a?\s+og[ar]{1,4}ni[čcć]{1,2}[e]?[nb]om\s+odgovorno[šs][ćc]u/gi,
+    "DOO",
+  ],
+  [/\bdoo\s*za\b/gi, "DOO"],
+  [/\bdooza\b/gi, "DOO"],
+  [/\bsa\s+potpunom\s+odgovorno[šs][ćc]u/gi, "OD"],
+  [/\bs\s*a?\s*\.?\s*p\s*\.?\s*o\s*\.?(?=\s|,|$)/gi, "OD"],
   [/\bd\s*\.?\s*o\s*\.?\s*o\s*\.?(?=\s|,|$)/gi, "DOO"],
   [/\bdoo\b/gi, "DOO"],
   [/\bd0{2}\b/gi, "DOO"], // tipfeler D00 u izvoru
@@ -73,6 +82,8 @@ const FORME: [RegExp, string][] = [
   [/komanditn[oa]\s+dru[šs]tv[oa]/gi, "KD"],
   [/\bk\s*\.?\s*d\s*\.?(?=\s|,|$)/gi, "KD"],
   [/orta[čc]k[oa]\s+dru[šs]tv[oa]/gi, "OD"],
+  // Samo na kraju ili pred zarezom, da se ne pobrka sa predlogom "od".
+  [/\bod(?=\s*,|\s*$)/gi, "OD"],
   [/zemljoradni[čc]k[ae]\s+zadrug[ae]/gi, "ZZ"],
   [/\bzadrug[ae]\b/gi, "ZZ"],
   [/javno\s+preduze[ćc]e/gi, "JP"],
@@ -112,6 +123,10 @@ stambenih nestambenih zgrada zgrade objekata objekti instalacija
 sistema sistemi opreme uredjaja uređaja materijala industrija industrije
 odecom odećom obucom obućom tekstilom prehrambenim
 doo ad kd od zz jp ograniceno ograničeno odgovornoscu odgovornošću
+inzenjering inženjering marketing gradjevinarstvo građevinarstvo poslovne poslovno
+export-import eksport-import uvoz-izvoz izvoz-uvoz import-export omladinska
+studentsko-omladinska omladinsko zadrugarstvo racunovodstvo računovodstvo
+knjigovodstvo knjigovodstvene projektovanja instalacije instalacija servisiranje
 `
     .trim()
     .split(/\s+/),
@@ -134,17 +149,38 @@ function samoOpisne(reci: string[]): boolean {
  * Uzima poslednji niz distinktivnih reči, prolazeći kroz meke stop reči.
  * "PREDUZEĆE ZA PROIZVODNJU I USLUGE JAGODINA-KOMERC" -> "JAGODINA-KOMERC"
  */
+const jeBroj = (rec: string) => /^\d{3,4}$/.test(ogoli(rec));
+
+/**
+ * Opisna reč do broja NIJE opis nego deo naziva: "RADOVIĆ TRANSPORT 2023",
+ * "MAK 037 UGOSTITELJSTVO", "KUME PROMET 2020". Bez ovoga desetine firmi sa
+ * istim prezimenom ostanu bez razlikovnog dela i slugovi im se sudare.
+ */
+function zasticene(reci: string[]): Set<number> {
+  const skup = new Set<number>();
+  reci.forEach((rec, i) => {
+    if (!jeBroj(rec)) return;
+    if (i > 0) skup.add(i - 1);
+    if (i + 1 < reci.length) skup.add(i + 1);
+    skup.add(i);
+  });
+  return skup;
+}
+
 function jezgroSKraja(tekst: string, maxReci = 4): string {
-  const reci = naReci(tekst);
+  // Token bez ijednog slova ili cifre nije naziv. Nastaje kad se iz "BEOGRAD
+  // (VRAČAR)" ukloni ime opstine, pa ostane gola zagrada.
+  const reci = naReci(tekst).filter((r) => /[\p{L}\p{N}]/u.test(r));
+  const cuvane = zasticene(reci);
   const izlaz: string[] = [];
 
   for (let i = reci.length - 1; i >= 0; i--) {
     const b = ogoli(reci[i]);
-    if (TVRDE.has(b)) {
+    if (TVRDE.has(b) && !cuvane.has(i)) {
       if (izlaz.length) break;
       continue;
     }
-    if (MEKE.has(b)) {
+    if (MEKE.has(b) && !cuvane.has(i)) {
       if (izlaz.length) izlaz.push(reci[i]);
       continue;
     }
@@ -248,6 +284,39 @@ function odrediGrad(opstina: string): string {
 // 7. Glavna funkcija
 // ============================================================================
 
+/**
+ * Javna preduzeća i zadruge: naziv stoji IZA forme, pa se čita spreda.
+ * Redosled je bitan, duži oblici idu prvi.
+ *
+ * Kod njih algoritam koji čita otpozadi nalazi samo opisne reči, pa je
+ * "JKP GRADSKO SAOBRAĆAJNO PREDUZEĆE BEOGRAD" i "JKP POGREBNE USLUGE BEOGRAD"
+ * davao isto ime. Dve stranice sa istim H1 su duplicate content.
+ */
+const FORME_SPREDA: [RegExp, string][] = [
+  [/^javno\s+komunalno[\s-]+stambeno\s+preduze[ćc]e/i, "JKSP"],
+  [/^javno\s+komunalno\s+stambeno\s+preduze[ćc]e/i, "JKSP"],
+  [/^komunalno[\s-]+stambeno\s+preduze[ćc]e/i, "JKSP"],
+  [/^javno\s+gradsko\s+saobra[ćc]ajno\s+preduze[ćc]e/i, "JGSP"],
+  [/^javno\s+komunalno\s+preduze[ćc]e/i, "JKP"],
+  [/^javno\s+stambeno\s+preduze[ćc]e/i, "JSP"],
+  [/^javno\s+autotransportno\s+preduze[ćc]e/i, "JAP"],
+  [/^javno\s+urbanisti[čc]ko\s+preduze[ćc]e/i, "JUP"],
+  [/^javno\s+preduze[ćc]e/i, "JP"],
+  [/^stambena\s+zadruga/i, "ZZ"],
+  [/^studentska\s+zadruga/i, "ZZ"],
+  [/^omladinska\s+zadruga/i, "ZZ"],
+  [/^op[šs]ta\s+zemljoradni[čc]ka\s+zadruga/i, "ZZ"],
+  [/^zemljoradni[čc]ka\s+zadruga/i, "ZZ"],
+  [/^u[čc]eni[čc]ka\s+zadruga/i, "ZZ"],
+  [/^zadruga/i, "ZZ"],
+];
+
+/** Reči koje se u nazivu javnog preduzeća ili zadruge nikad ne ispisuju. */
+const SUVISNE_U_NAZIVU = new Set([
+  "zadruga", "zadruge", "preduzece", "preduzeće", "javno", "komunalno", "stambeno",
+  "stambena", "studentska", "omladinska", "studentsko-omladinska",
+]);
+
 export type Zastavica = "" | "posle-forme" | "bez-forme" | "FALLBACK";
 
 export type SkracenoIme = {
@@ -262,13 +331,98 @@ function escapeRe(s: string): string {
   return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
+/** Seče na granicu reči. */
+function seciNaRec(tekst: string, max: number): string {
+  if (tekst.length <= max) return tekst;
+  const kratko = tekst.slice(0, max);
+  const razmak = kratko.lastIndexOf(" ");
+  return (razmak > max * 0.5 ? kratko.slice(0, razmak) : kratko).replace(/[\s,.\-&"]+$/, "");
+}
+
+/** Uklanja uzastopno ponovljene reči: "GAAM DOO UB DOO UB" -> "GAAM DOO UB". */
+function skiniPonavljanja(tekst: string): string {
+  const reci = tekst.split(" ").filter(Boolean);
+  const izlaz: string[] = [];
+  for (const rec of reci) {
+    if (izlaz.length && ogoli(izlaz[izlaz.length - 1]) === ogoli(rec)) continue;
+    izlaz.push(rec);
+  }
+  // I ponovljeni parovi: "DOO BEOGRAD DOO BEOGRAD".
+  for (let n = 2; n <= 3; n++) {
+    for (let i = 0; i + 2 * n <= izlaz.length; i++) {
+      const a = izlaz.slice(i, i + n).map(ogoli).join(" ");
+      const b = izlaz.slice(i + n, i + 2 * n).map(ogoli).join(" ");
+      if (a === b) {
+        izlaz.splice(i + n, n);
+        i--;
+      }
+    }
+  }
+  return izlaz.join(" ");
+}
+
 export function skratiIme(ime: string, opstina = "", maxDuzina = MAX): SkracenoIme {
-  const sirovo = normalizujPismo(String(ime ?? ""))
-    .replace(STATUS, "")
-    .replace(/\s{2,}/g, " ")
-    .replace(/^[\s,.\-–]+|[\s,.\-–]+$/g, "");
+  const sirovo = skiniPonavljanja(
+    normalizujPismo(String(ime ?? ""))
+      .replace(STATUS, "")
+      // Ortačka društva: "... MAKSIMOVIĆ JOVANA I ORTAKA FINMAX ... OD LOZNICA".
+      // Lična imena ortaka jesu javan podatak, ali ne idu u title i H1.
+      .replace(/\s+\S+(?:\s+\S+)?\s+i\s+(ortaci|ortaka|ortak|drugi|dr\.?|ostali)\b/gi, " ")
+      // Prazne zagrade i zaostala interpunkcija iz izvora: "... DOO BEOGRAD ()".
+      .replace(/\(\s*\)/g, " ")
+      .replace(/\s{2,}/g, " ")
+      .replace(/^[\s,.\-–]+|[\s,.\-–]+$/g, ""),
+  );
 
   if (!sirovo) return { kratko: "", zastavica: "FALLBACK" };
+
+  // Javna preduzeća i zadruge: naziv stoji iza forme, čita se spreda.
+  for (const [obrazac, oznaka] of FORME_SPREDA) {
+    const m = sirovo.match(obrazac);
+    if (!m) continue;
+
+    const grad = opstina ? odrediGrad(opstina) : "";
+    const ostatak = sirovo
+      .slice(m[0].length)
+      .replace(/^[\s,.\-]+/, "")
+      .split(/[(,]/)[0];
+
+    const jezgroReci: string[] = [];
+    for (const rec of naReci(ostatak)) {
+      const b = ogoli(rec);
+      if (SUVISNE_U_NAZIVU.has(b)) continue;
+      // Grad zatvara naziv: "JKP VODOVOD I KANALIZACIJA ZRENJANIN".
+      if (grad && b === grad.toLowerCase()) break;
+      if (b === ogoli(opstina)) break;
+      jezgroReci.push(rec);
+      if (jezgroReci.length >= 4) break;
+    }
+    while (jezgroReci.length && MEKE.has(ogoli(jezgroReci[jezgroReci.length - 1]))) jezgroReci.pop();
+
+    // Recenicna kapitalizacija, ne Title Case: "Vodovod i kanalizacija",
+    // "Pogrebne usluge". To je ispravan srpski pravopis za opisne nazive.
+    const naziv = jezgroReci
+      .map((rec, i) => {
+        const golo = rec.replace(/[^\wČĆŠŽĐčćšžđ]/g, "");
+        const jeAkronim =
+          golo === golo.toUpperCase() &&
+          (AKRONIMI.has(golo) || (golo.length <= 4 && !/[AEIOU]/.test(golo)));
+        if (jeAkronim) return rec;
+        return i === 0 ? titleCase(rec) : rec.toLowerCase();
+      })
+      .join(" ");
+    // "JKP RAŠKA RAŠKA": firma se zaista zove po gradu, ne ponavljaj ga.
+    const kratko = skiniPonavljanja(
+      [oznaka, naziv && naziv.toLowerCase() !== grad.toLowerCase() ? naziv : "", grad]
+        .filter(Boolean)
+        .join(" "),
+    );
+
+    return {
+      kratko: kratko.length > maxDuzina ? seciNaRec(kratko, maxDuzina) : kratko,
+      zastavica: jezgroReci.length ? "" : "FALLBACK",
+    };
+  }
 
   // Sidro je POSLEDNJE pojavljivanje bilo koje pravne forme.
   let sidro: { od: number; do: number; oznaka: string } | null = null;

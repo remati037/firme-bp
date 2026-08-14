@@ -45,3 +45,4 @@ next-env.d.ts
 # privremeni uzorci, ne komituju se
 uzorak-imena.md
 fallback-lista.md
+kolizije.md
