@@ -1856,6 +1856,15 @@ async function glavna(): Promise<void> {
     console.log(`  istorija: upisano ${zaIstoriju.length} redova`);
 
     // --- Korak 6: zatvaranje ---------------------------------------------
+    // Refresh ide PRE upisa u snapshots. Red u snapshots znači "presek u
+    // potpunosti obrađen", a osvežena statistika je deo toga. Obrnut redosled
+    // znači da pad refresha ostavlja presek označen kao gotov, pa svako
+    // sledeće pokretanje kratko spaja na "presek već obrađen" i view-ovi
+    // ostaju zastareli dok neko to ručno ne primeti.
+    console.log("\nOsvežavanje statistike...");
+    const { error: greskaRefresha } = await supabase.rpc("refresh_all_stats");
+    if (greskaRefresha) throw new Error(`refresh_all_stats: ${greskaRefresha.message}`);
+
     const { error: greskaUpisa } = await supabase.from("snapshots").upsert(
       {
         datum_preseka: datumPreseka,
@@ -1867,10 +1876,6 @@ async function glavna(): Promise<void> {
     );
 
     if (greskaUpisa) throw new Error(`Upis u snapshots: ${greskaUpisa.message}`);
-
-    console.log("\nOsvežavanje statistike...");
-    const { error: greskaRefresha } = await supabase.rpc("refresh_all_stats");
-    if (greskaRefresha) throw new Error(`refresh_all_stats: ${greskaRefresha.message}`);
 
     console.log(`\nGotovo za ${trajanje(pocetak)}.`);
   } finally {
