@@ -37,7 +37,7 @@ mreže i baze.
 
 **Fajlovi:**
 - Izmeni: `package.json`
-- Kreiraj: `vitest.config.ts`
+- Kreiraj: `vitest.config.mts`
 - Kreiraj: `lib/transliterate.ts`
 - Test: `tests/transliterate.test.ts`
 
@@ -60,7 +60,7 @@ U `"scripts"` blok dodaj tri stavke:
     "seed": "tsx scripts/seed-sifarnici.ts"
 ```
 
-- [ ] **Korak 3: Napravi vitest.config.ts**
+- [ ] **Korak 3: Napravi vitest.config.mts**
 
 ```ts
 import { defineConfig } from "vitest/config";
@@ -188,7 +188,7 @@ Očekivano: PASS, 6 testova.
 - [ ] **Korak 8: Commit**
 
 ```bash
-git add package.json package-lock.json vitest.config.ts lib/transliterate.ts tests/transliterate.test.ts
+git add package.json package-lock.json vitest.config.mts lib/transliterate.ts tests/transliterate.test.ts
 git commit -m "Dodaj vitest i tsx, transliteraciju cirilice u latinicu"
 ```
 
