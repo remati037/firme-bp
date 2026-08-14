@@ -1,0 +1,97 @@
+/**
+ * Signali na stranici firme — računaju se u kodu, nikad ih ne piše AI.
+ *
+ * Pravila su iz CLAUDE.md (sekcija "Signali"). Svaki signal je samostalna
+ * rečenica sa brojem, da ima smisla i izvučen iz konteksta (SEO.md §7).
+ *
+ * Signal NIJE bonitetna ocena. Formulacije su činjenične ("kapital je
+ * negativan"), bez preporuke da li poslovati sa firmom.
+ */
+
+import { formatBroj, formatRSD } from "./format";
+import type { Finansije, Firma } from "./queries";
+import { starostUGodinama } from "./format";
+
+export type TezinaSignala = "crit" | "warn" | "ok";
+
+export type Signal = {
+  tezina: TezinaSignala;
+  naslov: string;
+  tekst: string;
+};
+
+export function izracunajSignale(
+  firma: Firma,
+  fi: Finansije | null | undefined,
+  datumPreseka: string,
+): Signal[] {
+  const signali: Signal[] = [];
+  const godina = fi?.godina;
+
+  // 1. Negativan kapital
+  if (fi && fi.kapital !== null && fi.kapital < 0) {
+    signali.push({
+      tezina: "crit",
+      naslov: "Negativan kapital",
+      tekst: `U poslednjem izveštaju (${godina}) kapital je ${formatRSD(fi.kapital)}.`,
+    });
+  }
+
+  // 2. Gubitak veći od kapitala
+  const netoGubitak = fi?.neto_gubitak ?? 0;
+  if (fi && netoGubitak > 0 && fi.kapital !== null && fi.kapital > 0 && netoGubitak > fi.kapital) {
+    signali.push({
+      tezina: "warn",
+      naslov: "Gubitak veći od kapitala",
+      tekst: `Neto gubitak u ${godina}. iznosi ${formatRSD(netoGubitak)}, uz kapital od ${formatRSD(fi.kapital)}.`,
+    });
+  }
+
+  // 3. Nula prihoda uz prijavljene zaposlene
+  const zaposleni = fi?.prosecan_broj_zaposlenih ?? 0;
+  if (fi && (fi.ukupni_prihodi ?? 0) === 0 && zaposleni > 0) {
+    signali.push({
+      tezina: "warn",
+      naslov: "Nula prihoda uz prijavljene zaposlene",
+      tekst: `Za ${godina}. firma je prijavila ${formatBroj(zaposleni)} zaposlenih, a ukupan prihod je nula.`,
+    });
+  }
+
+  // 4. Status nije aktivan
+  const status = (firma.status ?? "").toLowerCase();
+  if (firma.status_aktivan === false || status.includes("stečaj") || status.includes("likvidacij")) {
+    const uStecaju = status.includes("stečaj") || status.includes("stecaj");
+    signali.push({
+      tezina: uStecaju ? "crit" : "warn",
+      naslov: `Status: ${firma.status ?? "nije aktivan"}`,
+      tekst: `Prema APR presek podataka firma nije u statusu „Aktivan".`,
+    });
+  }
+
+  // 5. Mlađa od 12 meseci, mereno na datum preseka, ne na današnji dan
+  const starost = starostUGodinama(firma.datum_osnivanja, datumPreseka);
+  if (starost === 0) {
+    signali.push({
+      tezina: "warn",
+      naslov: "Firma je mlađa od godinu dana",
+      tekst: `Registrovana je manje od 12 meseci pre preseka podataka, pa istorija poslovanja još ne postoji.`,
+    });
+  }
+
+  return signali;
+}
+
+/**
+ * Poruka kad signala nema. Prikazuje se kao zelena linija (odobreni prototip),
+ * da sekcija nikad ne ostane prazan prostor.
+ */
+export function porukaBezSignala(fi: Finansije | null | undefined): Signal {
+  const imaPrihod = (fi?.ukupni_prihodi ?? 0) > 0;
+  return {
+    tezina: "ok",
+    naslov: "Bez upozoravajućih signala",
+    tekst: imaPrihod
+      ? "Firma je aktivna, kapital nije negativan i prihodi su prijavljeni."
+      : "Firma je aktivna i nema upozoravajućih podataka u poslednjem preseku.",
+  };
+}

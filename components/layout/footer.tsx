@@ -1,7 +1,8 @@
 import Link from "next/link";
 
 import { formatDatum } from "@/lib/format";
-import { DATUM_PRESEKA, DISCLAIMER } from "@/lib/site";
+import { ucitajDatumPreseka } from "@/lib/presek";
+import { DISCLAIMER } from "@/lib/site";
 
 /**
  * Futer sa obaveznim izvorom podataka.
@@ -30,7 +31,9 @@ const SEKCIJE = [
   },
 ];
 
-export function Footer({ datumPreseka = DATUM_PRESEKA }: { datumPreseka?: string }) {
+export async function Footer() {
+  const datumPreseka = await ucitajDatumPreseka();
+
   return (
     <footer className="mt-14 border-t border-border py-9 pb-12">
       <div className="mx-auto w-full max-w-[1120px] px-6">
@@ -83,7 +86,7 @@ export function Footer({ datumPreseka = DATUM_PRESEKA }: { datumPreseka?: string
  * Obavezni blok o izvoru. Izdvojen je da bi mogao da stoji i samostalno,
  * npr. na stranici firme ispod sekcije "Signali".
  */
-export function SourceFooter({ datumPreseka = DATUM_PRESEKA }: { datumPreseka?: string }) {
+export function SourceFooter({ datumPreseka }: { datumPreseka: string }) {
   return (
     <div className="mt-7 border-t border-border pt-5 text-[12.5px] leading-[1.7] text-muted-foreground">
       {/* Rečenica ide kao jedan tekstualni čvor, da je crawler ne čita isečenu. */}

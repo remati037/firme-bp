@@ -28,6 +28,8 @@ export type Firma = {
   maticni_broj: string;
   slug: string;
   poslovno_ime: string;
+  /** Skraćeno ime iz migracije 003; može biti null za redove pre regeneracije. */
+  poslovno_ime_kratko?: string | null;
   sifra_opstine: string | null;
   opstina: string | null;
   status: string | null;
@@ -118,7 +120,7 @@ export const KOLONE_FINANSIJE =
 
 /** Kraći skup za kartice i liste — manje bajtova po redu na 133k stranica. */
 export const KOLONE_FIRMA_KARTICA =
-  "maticni_broj,slug,poslovno_ime,opstina,sifra_delatnosti,status,status_aktivan";
+  "maticni_broj,slug,poslovno_ime,poslovno_ime_kratko,opstina,sifra_delatnosti,status,status_aktivan";
 
 // =============================================================================
 // Firma
