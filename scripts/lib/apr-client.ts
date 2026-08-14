@@ -2,6 +2,7 @@ import https from "node:https";
 import tls from "node:tls";
 import path from "node:path";
 import { createWriteStream, readFileSync } from "node:fs";
+import { unlink } from "node:fs/promises";
 import type { ClientRequest, IncomingMessage } from "node:http";
 
 const OSNOVA = "https://openapi.apr.gov.rs/api/opendata";
@@ -87,6 +88,10 @@ export function procitajDatumPreseka(url: string): Promise<string> {
         }
       };
 
+      // Postavlja se neposredno pre našeg req.destroy(), da error handler zna
+      // da je ECONNRESET koji sledi naša namerna posledica, a ne greška veze.
+      let namernoPrekinuto = false;
+
       const req = zahtev(url, (odgovor) => {
         if (odgovor.statusCode !== 200) {
           odgovor.destroy();
@@ -100,9 +105,11 @@ export function procitajDatumPreseka(url: string): Promise<string> {
           const nadjeno = bafer.match(/"DatumPreseka"\s*:\s*"(\d{4}-\d{2}-\d{2})"/);
 
           if (nadjeno) {
+            namernoPrekinuto = true;
             req.destroy();
             zavrsi(() => resolve(nadjeno[1]));
           } else if (bafer.length > 4096) {
+            namernoPrekinuto = true;
             req.destroy();
             zavrsi(() => reject(new Error("DatumPreseka nije u prva 4 KB odgovora")));
           }
@@ -111,9 +118,13 @@ export function procitajDatumPreseka(url: string): Promise<string> {
         odgovor.on("end", () => zavrsi(() => reject(new Error("odgovor gotov bez DatumPreseka"))));
       });
 
-      // ECONNRESET je očekivana posledica našeg destroy(), ne greška.
+      // ECONNRESET se guta samo ako je posledica našeg namernog destroy() posle
+      // pronalaska datuma. Svaki drugi ECONNRESET (npr. pravi prekid veze pre
+      // nego što je datum pronađen) mora da odbaci promise, inače ponavljanje
+      // u saPonavljanjem nikad ne dobija priliku da radi i promise visi zauvek.
       req.on("error", (greska: NodeJS.ErrnoException) => {
-        if (greska.code !== "ECONNRESET") zavrsi(() => reject(greska));
+        if (namernoPrekinuto && greska.code === "ECONNRESET") return;
+        zavrsi(() => reject(greska));
       });
     });
   });
@@ -123,14 +134,41 @@ export function procitajDatumPreseka(url: string): Promise<string> {
 export function preuzmiUFajl(url: string, odrediste: string): Promise<number> {
   return saPonavljanjem(`preuzimanje ${url}`, () => {
     return new Promise<number>((resolve, reject) => {
+      let zavrseno = false;
+      const zavrsi = (fn: () => void) => {
+        if (!zavrseno) {
+          zavrseno = true;
+          fn();
+        }
+      };
+
+      // Piše se u fajl koji možda ima nepotpun sadržaj ako preuzimanje ne
+      // uspe do kraja (mreža, timeout, pravi ECONNRESET). Takav fajl mora da
+      // se ukloni pre odbacivanja promisa, jer je 32-57 MB nevažeći JSON koji
+      // kasnija obrada ne sme da nasledi.
+      const naGresku = (greska: Error) => {
+        zavrsi(() => {
+          izlaz.destroy();
+          unlink(odrediste).catch(() => {
+            // Best effort: neuspeh brisanja ne sme da sakrije originalnu grešku.
+          });
+          reject(greska);
+        });
+      };
+
+      // Stream za pisanje se pravi sinhrono, pre nego što je zahtev uopšte
+      // poslat, pa error handler mora da postoji odmah - ako se prikači tek
+      // u odgovoru na HTTP, greška poput ENOENT (nepostojeći direktorijum)
+      // stigne pre nego što ijedan listener postoji i postaje neuhvaćen izuzetak.
       const izlaz = createWriteStream(odrediste);
+      izlaz.on("error", naGresku);
+
       let bajtova = 0;
 
       const req = zahtev(url, (odgovor) => {
         if (odgovor.statusCode !== 200) {
           odgovor.destroy();
-          izlaz.destroy();
-          reject(new Error(`HTTP ${odgovor.statusCode}`));
+          naGresku(new Error(`HTTP ${odgovor.statusCode}`));
           return;
         }
 
@@ -139,12 +177,11 @@ export function preuzmiUFajl(url: string, odrediste: string): Promise<number> {
         });
         odgovor.pipe(izlaz);
 
-        izlaz.on("finish", () => resolve(bajtova));
-        izlaz.on("error", reject);
-        odgovor.on("error", reject);
+        izlaz.on("finish", () => zavrsi(() => resolve(bajtova)));
+        odgovor.on("error", naGresku);
       });
 
-      req.on("error", reject);
+      req.on("error", naGresku);
     });
   });
 }
