@@ -41,3 +41,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# privremeni uzorci, ne komituju se
+uzorak-imena.md
