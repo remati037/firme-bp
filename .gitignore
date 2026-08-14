@@ -23,6 +23,8 @@
 # misc
 .DS_Store
 *.pem
+# intermediate sertifikat za APR, mora u repo (vidi scripts/certs/README.md)
+!scripts/certs/*.pem
 
 # debug
 npm-debug.log*
