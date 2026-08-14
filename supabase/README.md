@@ -70,3 +70,23 @@ Migracija 001 primenjena 14.08.2026. na projekat `ypovucckebvxbianbvam`.
 Provereno: 7 tabela, 3 materijalizovana view-a, 20 indeksa, 13 politika,
 `refresh_all_stats()` prolazi, `anon` ne vidi `snapshots` i ne može da piše,
 Supabase security advisor bez ijedne primedbe.
+
+Uz `001_initial_schema.sql` sada postoji i `002_refresh_timeout.sql`: podiže
+`statement_timeout` na 15 minuta samo za funkciju `refresh_all_stats()`, jer se
+PostgREST povezuje kao rola `authenticator`, koja ima ograničenje od 8 sekundi.
+Dok je baza bila prazna RPC je prolazio, ali nad stvarnim podacima osvežavanje
+`mv_company_ranks` traje duže od 8s pa je poziv preko RPC-a počeo da pada.
+Migracija ne dira tabele, kolone ni indekse.
+
+Ingest pipeline pokrenut 14.08.2026. nad presekom 2026-07-31.
+companies 133.634, financials 116.847, financials_history 123.360,
+nace_codes 615, municipalities 192. Sirovi preseci su u Storage bucketu
+`snapshots` pod `2026-07-31/`. Bucket je privatan.
+
+Integracioni testovi (`tests/ingest.test.ts`) potvrđuju nad živom bazom: 0
+duplikata slugova na 133.634 reda, 0 šifri delatnosti u `companies` koje
+nedostaju u `nace_codes`, 0 vrednosti `poslovno_ime_norm` sa velikim slovom ili
+interpunkcijom. `financials` ima manje redova od `financials_history`
+(116.847 prema 123.360) jer 6.513 finansijskih zapisa nema odgovarajuću firmu
+u `companies` pa se upisuju samo u istoriju. `snapshots` ima tačno jedan red,
+za presek 2026-07-31, sa `broj_firmi` 133.634 i `broj_fi` 123.360.
