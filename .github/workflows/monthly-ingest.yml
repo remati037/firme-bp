@@ -1,0 +1,102 @@
+name: Mesečni ingest
+
+# APR objavljuje nov presek početkom meseca. Peti dan u 03:00 UTC je dovoljno
+# kasno da presek bude objavljen, a dovoljno rano da imamo ceo mesec za reakciju.
+on:
+  schedule:
+    - cron: "0 3 5 * *"
+  workflow_dispatch:
+
+# Dva ingesta u isto vreme bi se otimala oko istog preseka. Tekući se pušta da
+# završi, jer prekid u pola upisa istorije traži ponovni prolaz.
+concurrency:
+  group: ingest
+  cancel-in-progress: false
+
+jobs:
+  ingest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    env:
+      NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+      SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+      NBS_USERNAME: ${{ secrets.NBS_USERNAME }}
+      NBS_PASSWORD: ${{ secrets.NBS_PASSWORD }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # Node 20 je van podrške od aprila 2026. process.loadEnvFile, koji skripte
+      # koriste, traži bar 20.12.
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      - name: Instaliraj zavisnosti
+        run: npm ci
+
+      - name: Proveri da su tajne postavljene
+        run: |
+          if [ -z "$NEXT_PUBLIC_SUPABASE_URL" ] || [ -z "$SUPABASE_SERVICE_ROLE_KEY" ]; then
+            echo "Nedostaje NEXT_PUBLIC_SUPABASE_URL ili SUPABASE_SERVICE_ROLE_KEY."
+            echo "Postavi ih u Settings > Secrets and variables > Actions."
+            exit 1
+          fi
+
+      # Ingest sam prekida ako broj firmi odstupa preko 5% od prethodnog preseka
+      # ili ako je preskočeno preko 1% redova. Izlaz se čuva da bi se posle
+      # razlikovalo "obradjen nov presek" od "presek već obrađen".
+      - name: Ingest
+        id: ingest
+        run: |
+          set -o pipefail
+          npm run ingest 2>&1 | tee ingest.log
+          if grep -q "presek već obrađen" ingest.log; then
+            echo "nov_presek=ne" >> "$GITHUB_OUTPUT"
+          else
+            echo "nov_presek=da" >> "$GITHUB_OUTPUT"
+          fi
+
+      # Sesija 4. Korak se preskače dok skripta ne postoji i dok NBS pristupni
+      # podaci nisu postavljeni, da workflow ne bude crven zbog nečega što
+      # još nije napravljeno.
+      - name: PIB iz NBS
+        if: steps.ingest.outputs.nov_presek == 'da'
+        run: |
+          if [ ! -f scripts/enrich-pib.ts ]; then
+            echo "scripts/enrich-pib.ts još ne postoji, preskačem."
+          elif [ -z "$NBS_USERNAME" ] || [ -z "$NBS_PASSWORD" ]; then
+            echo "NBS pristupni podaci nisu postavljeni, preskačem."
+          else
+            npx tsx scripts/enrich-pib.ts
+          fi
+
+      - name: Testovi
+        run: npm test
+
+      # Statičke stranice se regenerišu samo ako je stvarno stigao nov presek.
+      - name: Vercel deploy hook
+        if: steps.ingest.outputs.nov_presek == 'da'
+        run: |
+          if [ -z "${{ secrets.VERCEL_DEPLOY_HOOK }}" ]; then
+            echo "VERCEL_DEPLOY_HOOK nije postavljen, preskačem regeneraciju."
+            exit 0
+          fi
+          curl --fail --silent --show-error -X POST "${{ secrets.VERCEL_DEPLOY_HOOK }}"
+          echo "Deploy hook pozvan."
+
+      - name: Izveštaj
+        if: always()
+        run: |
+          {
+            echo "## Mesečni ingest"
+            echo
+            if [ "${{ steps.ingest.outputs.nov_presek }}" = "ne" ]; then
+              echo "Presek je već bio obrađen, ništa nije upisano. To je uspeh, ne greška."
+            fi
+            echo '```'
+            tail -n 30 ingest.log 2>/dev/null || echo "Nema izlaza, ingest nije ni startovao."
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
