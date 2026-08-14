@@ -25,7 +25,10 @@ mreže i baze.
 - Jezik svega vidljivog i svih poruka: **srpski, latinica**.
 - `rejectUnauthorized: false` se **ne sme** pojaviti nigde.
 - **Upsert, nikad delete pa insert.** Jedini dozvoljen `delete` je nad
-  `financials_history` za tekući `datum_preseka` uz `--force`.
+  `financials_history`, i to samo za `datum_preseka` koji se upravo upisuje.
+  Radi se pri svakom ingestu, ne samo uz `--force`: red u `snapshots` se piše
+  tek na kraju, pa bi prekid u pola upisa istorije doveo do udvajanja pri
+  sledećem pokretanju.
 - Slug se **zamrzava** pri prvom upisu i kasniji ingest ga ne menja.
 - `poslovno_ime` za prikaz ostaje **originalno**, uključujući ćirilicu.
 - Skripte se pokreću iz korena repoa; putanje do fajlova se grade iz `process.cwd()`.
