@@ -1,0 +1,3077 @@
+[
+  {
+    "sifra": "0111",
+    "naziv": "Gajenje žita (osim pirinča), leguminoza i uljarica",
+    "sektor": "A"
+  },
+  {
+    "sifra": "0112",
+    "naziv": "Gajenje pirinča",
+    "sektor": "A"
+  },
+  {
+    "sifra": "0113",
+    "naziv": "Gajenje povrća, bostana, korenastih i krtolastih biljaka",
+    "sektor": "A"
+  },
+  {
+    "sifra": "0114",
+    "naziv": "Gajenje šećerne trske",
+    "sektor": "A"
+  },
+  {
+    "sifra": "0115",
+    "naziv": "Gajenje duvana",
+    "sektor": "A"
+  },
+  {
+    "sifra": "0116",
+    "naziv": "Gajenje biljaka za proizvodnju vlakana",
+    "sektor": "A"
+  },
+  {
+    "sifra": "0119",
+    "naziv": "Gajenje ostalih jednogodišnjih i dvogodišnjih biljaka",
+    "sektor": "A"
+  },
+  {
+    "sifra": "0121",
+    "naziv": "Gajenje grožđa",
+    "sektor": "A"
+  },
+  {
+    "sifra": "0122",
+    "naziv": "Gajenje tropskog i suptropskog voća",
+    "sektor": "A"
+  },
+  {
+    "sifra": "0123",
+    "naziv": "Gajenje agruma",
+    "sektor": "A"
+  },
+  {
+    "sifra": "0124",
+    "naziv": "Gajenje jabučastog i koštičavog voća",
+    "sektor": "A"
+  },
+  {
+    "sifra": "0125",
+    "naziv": "Gajenje ostalog drvenastog, žbunastog i jezgrastog voća",
+    "sektor": "A"
+  },
+  {
+    "sifra": "0126",
+    "naziv": "Gajenje uljnih plodova",
+    "sektor": "A"
+  },
+  {
+    "sifra": "0127",
+    "naziv": "Gajenje biljaka za pripremanje napitaka",
+    "sektor": "A"
+  },
+  {
+    "sifra": "0128",
+    "naziv": "Gajenje začinskog, aromatičnog i lekovitog bilja",
+    "sektor": "A"
+  },
+  {
+    "sifra": "0129",
+    "naziv": "Gajenje ostalih višegodišnjih biljaka",
+    "sektor": "A"
+  },
+  {
+    "sifra": "0130",
+    "naziv": "Gajenje sadnog materijala",
+    "sektor": "A"
+  },
+  {
+    "sifra": "0141",
+    "naziv": "Uzgoj muznih krava",
+    "sektor": "A"
+  },
+  {
+    "sifra": "0142",
+    "naziv": "Uzgoj drugih goveda i bivola",
+    "sektor": "A"
+  },
+  {
+    "sifra": "0143",
+    "naziv": "Uzgoj konja i drugih kopitara",
+    "sektor": "A"
+  },
+  {
+    "sifra": "0144",
+    "naziv": "Uzgoj kamila i lama",
+    "sektor": "A"
+  },
+  {
+    "sifra": "0145",
+    "naziv": "Uzgoj ovaca i koza",
+    "sektor": "A"
+  },
+  {
+    "sifra": "0146",
+    "naziv": "Uzgoj svinja",
+    "sektor": "A"
+  },
+  {
+    "sifra": "0147",
+    "naziv": "Uzgoj živine",
+    "sektor": "A"
+  },
+  {
+    "sifra": "0149",
+    "naziv": "Uzgoj ostalih životinja",
+    "sektor": "A"
+  },
+  {
+    "sifra": "0150",
+    "naziv": "Mešovita poljoprivredna proizvodnja",
+    "sektor": "A"
+  },
+  {
+    "sifra": "0161",
+    "naziv": "Uslužne delatnosti u gajenju useva i zasada",
+    "sektor": "A"
+  },
+  {
+    "sifra": "0162",
+    "naziv": "Pomoćne delatnosti u uzgoju životinja",
+    "sektor": "A"
+  },
+  {
+    "sifra": "0163",
+    "naziv": "Aktivnosti posle žetve",
+    "sektor": "A"
+  },
+  {
+    "sifra": "0164",
+    "naziv": "Dorada semena",
+    "sektor": "A"
+  },
+  {
+    "sifra": "0170",
+    "naziv": "Lov, traperstvo i odgovarajuće uslužne delatnosti",
+    "sektor": "A"
+  },
+  {
+    "sifra": "0210",
+    "naziv": "Gajenje šuma i ostale šumarske delatnosti",
+    "sektor": "A"
+  },
+  {
+    "sifra": "0220",
+    "naziv": "Seča drveća",
+    "sektor": "A"
+  },
+  {
+    "sifra": "0230",
+    "naziv": "Sakupljanje šumskih plodova",
+    "sektor": "A"
+  },
+  {
+    "sifra": "0240",
+    "naziv": "Uslužne delatnosti u vezi sa šumarstvom",
+    "sektor": "A"
+  },
+  {
+    "sifra": "0311",
+    "naziv": "Morski ribolov",
+    "sektor": "A"
+  },
+  {
+    "sifra": "0312",
+    "naziv": "Slatkovodni ribolov",
+    "sektor": "A"
+  },
+  {
+    "sifra": "0321",
+    "naziv": "Morske akvakulture",
+    "sektor": "A"
+  },
+  {
+    "sifra": "0322",
+    "naziv": "Slatkovodne akvakulture",
+    "sektor": "A"
+  },
+  {
+    "sifra": "0510",
+    "naziv": "Eksploatacija kamenog uglja i antracita",
+    "sektor": "B"
+  },
+  {
+    "sifra": "0520",
+    "naziv": "Eksploatacija lignita i mrkog uglja",
+    "sektor": "B"
+  },
+  {
+    "sifra": "0610",
+    "naziv": "Eksploatacija sirove nafte",
+    "sektor": "B"
+  },
+  {
+    "sifra": "0620",
+    "naziv": "Eksploatacija prirodnog gasa",
+    "sektor": "B"
+  },
+  {
+    "sifra": "0710",
+    "naziv": "Eksploatacija ruda gvožđa",
+    "sektor": "B"
+  },
+  {
+    "sifra": "0721",
+    "naziv": "Eksploatacija ruda urana i torijuma",
+    "sektor": "B"
+  },
+  {
+    "sifra": "0729",
+    "naziv": "Eksploatacija ruda ostalih crnih, obojenih, plemenitih i drugih metala",
+    "sektor": "B"
+  },
+  {
+    "sifra": "0811",
+    "naziv": "Eksploatacija građevinskog i ukrasnog kamena, krečnjaka, gipsa, krede",
+    "sektor": "B"
+  },
+  {
+    "sifra": "0812",
+    "naziv": "Eksploatacija šljunka, peska, gline i kaolina",
+    "sektor": "B"
+  },
+  {
+    "sifra": "0891",
+    "naziv": "Eksploatacija minerala, proizvodnja mineralnih đubriva i hemikalija",
+    "sektor": "B"
+  },
+  {
+    "sifra": "0892",
+    "naziv": "Eksploatacija treseta",
+    "sektor": "B"
+  },
+  {
+    "sifra": "0893",
+    "naziv": "Eksploatacija natrijum-hlorida",
+    "sektor": "B"
+  },
+  {
+    "sifra": "0899",
+    "naziv": "Eksploatacija ostalih nemetaličnih ruda i minerala",
+    "sektor": "B"
+  },
+  {
+    "sifra": "0910",
+    "naziv": "Uslužne delatnosti u vezi sa istraživanjem i eksploatacijom nafte i gasa",
+    "sektor": "B"
+  },
+  {
+    "sifra": "0990",
+    "naziv": "Uslužne delatnosti u vezi sa istraživanjem i eksploatacijom ostalih ruda",
+    "sektor": "B"
+  },
+  {
+    "sifra": "1011",
+    "naziv": "Prerada i konzervisanje mesa",
+    "sektor": "C"
+  },
+  {
+    "sifra": "1012",
+    "naziv": "Prerada i konzervisanje živinskog mesa",
+    "sektor": "C"
+  },
+  {
+    "sifra": "1013",
+    "naziv": "Proizvodnja mesnih prerađevina",
+    "sektor": "C"
+  },
+  {
+    "sifra": "1020",
+    "naziv": "Prerada i konzervisanje ribe, ljuskara i mekušaca",
+    "sektor": "C"
+  },
+  {
+    "sifra": "1031",
+    "naziv": "Prerada i konzervisanje krompira",
+    "sektor": "C"
+  },
+  {
+    "sifra": "1032",
+    "naziv": "Proizvodnja sokova od voća i povrća",
+    "sektor": "C"
+  },
+  {
+    "sifra": "1039",
+    "naziv": "Ostala prerada i konzervisanje voća i povrća",
+    "sektor": "C"
+  },
+  {
+    "sifra": "1041",
+    "naziv": "Proizvodnja ulja i masti",
+    "sektor": "C"
+  },
+  {
+    "sifra": "1042",
+    "naziv": "Proizvodnja margarina i sličnih jestivih masti",
+    "sektor": "C"
+  },
+  {
+    "sifra": "1051",
+    "naziv": "Prerada mleka i proizvodnja sireva",
+    "sektor": "C"
+  },
+  {
+    "sifra": "1052",
+    "naziv": "Proizvodnja sladoleda",
+    "sektor": "C"
+  },
+  {
+    "sifra": "1061",
+    "naziv": "Proizvodnja mlinskih proizvoda",
+    "sektor": "C"
+  },
+  {
+    "sifra": "1062",
+    "naziv": "Proizvodnja skroba i skrobnih proizvoda",
+    "sektor": "C"
+  },
+  {
+    "sifra": "1071",
+    "naziv": "Proizvodnja hleba, svežeg peciva i kolača",
+    "sektor": "C"
+  },
+  {
+    "sifra": "1072",
+    "naziv": "Proizvodnja dvopeka, keksa, trajnog peciva i kolača",
+    "sektor": "C"
+  },
+  {
+    "sifra": "1073",
+    "naziv": "Proizvodnja makarona, rezanaca i sličnih proizvoda od brašna",
+    "sektor": "C"
+  },
+  {
+    "sifra": "1081",
+    "naziv": "Proizvodnja šećera",
+    "sektor": "C"
+  },
+  {
+    "sifra": "1082",
+    "naziv": "Proizvodnja kakaoa, čokolade i konditorskih proizvoda",
+    "sektor": "C"
+  },
+  {
+    "sifra": "1083",
+    "naziv": "Prerada čaja i kafe",
+    "sektor": "C"
+  },
+  {
+    "sifra": "1084",
+    "naziv": "Proizvodnja začina i drugih dodataka hrani",
+    "sektor": "C"
+  },
+  {
+    "sifra": "1085",
+    "naziv": "Proizvodnja gotovih jela",
+    "sektor": "C"
+  },
+  {
+    "sifra": "1086",
+    "naziv": "Proizvodnja homogenizovanih hranljivih preparata i dijetetske hrane",
+    "sektor": "C"
+  },
+  {
+    "sifra": "1089",
+    "naziv": "Proizvodnja ostalih prehrambenih proizvoda",
+    "sektor": "C"
+  },
+  {
+    "sifra": "1091",
+    "naziv": "Proizvodnja gotove hrane za domaće životinje",
+    "sektor": "C"
+  },
+  {
+    "sifra": "1092",
+    "naziv": "Proizvodnja gotove hrane za kućne ljubimce",
+    "sektor": "C"
+  },
+  {
+    "sifra": "1101",
+    "naziv": "Destilacija, prečišćavanje i mešanje pića",
+    "sektor": "C"
+  },
+  {
+    "sifra": "1102",
+    "naziv": "Proizvodnja vina od grožđa",
+    "sektor": "C"
+  },
+  {
+    "sifra": "1103",
+    "naziv": "Proizvodnja pića i ostalih voćnih vina",
+    "sektor": "C"
+  },
+  {
+    "sifra": "1104",
+    "naziv": "Proizvodnja ostalih nedestilovanih fermentisanih pića",
+    "sektor": "C"
+  },
+  {
+    "sifra": "1105",
+    "naziv": "Proizvodnja piva",
+    "sektor": "C"
+  },
+  {
+    "sifra": "1106",
+    "naziv": "Proizvodnja slada",
+    "sektor": "C"
+  },
+  {
+    "sifra": "1107",
+    "naziv": "Proizvodnja osvežavajućih pića, mineralne vode i ostale flaširane vode",
+    "sektor": "C"
+  },
+  {
+    "sifra": "1200",
+    "naziv": "Proizvodnja duvanskih proizvoda",
+    "sektor": "C"
+  },
+  {
+    "sifra": "1310",
+    "naziv": "Priprema i predenje tekstilnih vlakana",
+    "sektor": "C"
+  },
+  {
+    "sifra": "1320",
+    "naziv": "Proizvodnja tkanina",
+    "sektor": "C"
+  },
+  {
+    "sifra": "1330",
+    "naziv": "Dovršavanje tekstila",
+    "sektor": "C"
+  },
+  {
+    "sifra": "1391",
+    "naziv": "Proizvodnja pletenih i kukičanih materijala",
+    "sektor": "C"
+  },
+  {
+    "sifra": "1392",
+    "naziv": "Proizvodnja gotovih tekstilnih proizvoda, osim odeće",
+    "sektor": "C"
+  },
+  {
+    "sifra": "1393",
+    "naziv": "Proizvodnja tepiha i prekrivača za pod",
+    "sektor": "C"
+  },
+  {
+    "sifra": "1394",
+    "naziv": "Proizvodnja užadi, kanapa, pletenica i mreža",
+    "sektor": "C"
+  },
+  {
+    "sifra": "1395",
+    "naziv": "Proizvodnja netkanog tekstila i predmeta od njega, osim odeće",
+    "sektor": "C"
+  },
+  {
+    "sifra": "1396",
+    "naziv": "Proizvodnja ostalog tehničkog i industrijskog tekstila",
+    "sektor": "C"
+  },
+  {
+    "sifra": "1399",
+    "naziv": "Proizvodnja ostalih tekstilnih predmeta",
+    "sektor": "C"
+  },
+  {
+    "sifra": "1411",
+    "naziv": "Proizvodnja kožne odeće",
+    "sektor": "C"
+  },
+  {
+    "sifra": "1412",
+    "naziv": "Proizvodnja radne odeće",
+    "sektor": "C"
+  },
+  {
+    "sifra": "1413",
+    "naziv": "Proizvodnja ostale odeće",
+    "sektor": "C"
+  },
+  {
+    "sifra": "1414",
+    "naziv": "Proizvodnja rublja",
+    "sektor": "C"
+  },
+  {
+    "sifra": "1419",
+    "naziv": "Proizvodnja ostalih odevnih predmeta i pribora",
+    "sektor": "C"
+  },
+  {
+    "sifra": "1420",
+    "naziv": "Proizvodnja proizvoda od krzna",
+    "sektor": "C"
+  },
+  {
+    "sifra": "1431",
+    "naziv": "Proizvodnja pletenih i kukičanih čarapa",
+    "sektor": "C"
+  },
+  {
+    "sifra": "1439",
+    "naziv": "Proizvodnja ostale pletene i kukičane odeće",
+    "sektor": "C"
+  },
+  {
+    "sifra": "1511",
+    "naziv": "Štavljenje i dorada kože; dorada i bojenje krzna",
+    "sektor": "C"
+  },
+  {
+    "sifra": "1512",
+    "naziv": "Proizvodnja putnih i ručnih torbi i sl., saračkih proizvoda i kaiševa",
+    "sektor": "C"
+  },
+  {
+    "sifra": "1520",
+    "naziv": "Proizvodnja obuće",
+    "sektor": "C"
+  },
+  {
+    "sifra": "1610",
+    "naziv": "Rezanje i obrada drveta",
+    "sektor": "C"
+  },
+  {
+    "sifra": "1621",
+    "naziv": "Proizvodnja furnira i ploča od drveta",
+    "sektor": "C"
+  },
+  {
+    "sifra": "1622",
+    "naziv": "Proizvodnja parketa",
+    "sektor": "C"
+  },
+  {
+    "sifra": "1623",
+    "naziv": "Proizvodnja ostale građevinske stolarije i elemenata",
+    "sektor": "C"
+  },
+  {
+    "sifra": "1624",
+    "naziv": "Proizvodnja drvne ambalaže",
+    "sektor": "C"
+  },
+  {
+    "sifra": "1629",
+    "naziv": "Proizvodnja ostalih proizvoda od drveta, plute, slame i pruća",
+    "sektor": "C"
+  },
+  {
+    "sifra": "1711",
+    "naziv": "Proizvodnja vlakana celuloze",
+    "sektor": "C"
+  },
+  {
+    "sifra": "1712",
+    "naziv": "Proizvodnja papira i kartona",
+    "sektor": "C"
+  },
+  {
+    "sifra": "1721",
+    "naziv": "Proizvodnja talasastog papira i kartona i ambalaže od papira i kartona",
+    "sektor": "C"
+  },
+  {
+    "sifra": "1722",
+    "naziv": "Proizvodnja predmeta od papira za ličnu upotrebu i upotrebu u domaćinstvu",
+    "sektor": "C"
+  },
+  {
+    "sifra": "1723",
+    "naziv": "Proizvodnja kancelarijskih predmeta od papira",
+    "sektor": "C"
+  },
+  {
+    "sifra": "1724",
+    "naziv": "Proizvodnja tapeta",
+    "sektor": "C"
+  },
+  {
+    "sifra": "1729",
+    "naziv": "Proizvodnja ostalih proizvoda od papira i kartona",
+    "sektor": "C"
+  },
+  {
+    "sifra": "1811",
+    "naziv": "Štampanje novina",
+    "sektor": "C"
+  },
+  {
+    "sifra": "1812",
+    "naziv": "Ostalo štampanje",
+    "sektor": "C"
+  },
+  {
+    "sifra": "1813",
+    "naziv": "Usluge pripreme za štampu",
+    "sektor": "C"
+  },
+  {
+    "sifra": "1814",
+    "naziv": "Knjigovezačke i srodne usluge",
+    "sektor": "C"
+  },
+  {
+    "sifra": "1820",
+    "naziv": "Umnožavanje snimljenih zapisa",
+    "sektor": "C"
+  },
+  {
+    "sifra": "1910",
+    "naziv": "Proizvodnja produkata koksovanja",
+    "sektor": "C"
+  },
+  {
+    "sifra": "1920",
+    "naziv": "Proizvodnja derivata nafte",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2011",
+    "naziv": "Proizvodnja industrijskih gasova",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2012",
+    "naziv": "Proizvodnja sredstava za pripremanje boja i pigmenata",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2013",
+    "naziv": "Proizvodnja ostalih osnovnih neorganskih hemikalija",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2014",
+    "naziv": "Proizvodnja ostalih osnovnih organskih hemikalija",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2015",
+    "naziv": "Proizvodnja veštačkih đubriva i azotnih jedinjenja",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2016",
+    "naziv": "Proizvodnja plastičnih masa u primarnim oblicima",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2017",
+    "naziv": "Proizvodnja sintetičkog kaučuka u primarnim oblicima",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2020",
+    "naziv": "Proizvodnja pesticida i hemikalija za poljoprivredu",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2030",
+    "naziv": "Proizvodnja boja, lakova i sličnih premaza, grafičkih boja i kitova",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2041",
+    "naziv": "Proizvodnja deterdženata, sapuna sredstava za čišćenje i poliranje",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2042",
+    "naziv": "Proizvodnja parfema i toaletnih preparata",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2051",
+    "naziv": "Proizvodnja eksploziva",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2052",
+    "naziv": "Proizvodnja sredstava za lepljenje",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2053",
+    "naziv": "Proizvodnja eteričnih ulja",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2059",
+    "naziv": "Proizvodnja ostalih hemijskih proizvoda",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2060",
+    "naziv": "Proizvodnja veštačkih vlakana",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2110",
+    "naziv": "Proizvodnja osnovnih farmaceutskih proizvoda",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2120",
+    "naziv": "Proizvodnja farmaceutskih preparata",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2211",
+    "naziv": "Proizvodnja guma za vozila, protektiranje guma za vozila",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2219",
+    "naziv": "Proizvodnja ostalih proizvoda od gume",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2221",
+    "naziv": "Proizvodnja ploča, listova, cevi i profila od plastike",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2222",
+    "naziv": "Proizvodnja ambalaže od plastike",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2223",
+    "naziv": "Proizvodnja predmeta od plastike za građevinarstvo",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2229",
+    "naziv": "Proizvodnja ostalih proizvoda od plastike",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2311",
+    "naziv": "Proizvodnja ravnog stakla",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2312",
+    "naziv": "Oblikovanje i obrada ravnog stakla",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2313",
+    "naziv": "Proizvodnja šupljeg stakla",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2314",
+    "naziv": "Proizvodnja staklenih vlakana",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2319",
+    "naziv": "Proizvodnja i obrada ostalog stakla, uključujući tehničke staklene proizvode",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2320",
+    "naziv": "Proizvodnja vatrostalnih proizvoda",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2331",
+    "naziv": "Proizvodnja keramičkih pločica i ploča",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2332",
+    "naziv": "Proizvodnja opeke, crepa i građevinskih proizvoda od pečene gline",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2341",
+    "naziv": "Proizvodnja keramičkih predmeta za domaćinstvo i ukrasnih predmeta",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2342",
+    "naziv": "Proizvodnja sanitarnih keramičkih proizvoda",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2343",
+    "naziv": "Proizvodnja izolatora i izolacionog pribora od keramike",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2344",
+    "naziv": "Proizvodnja ostalih tehničkih proizvoda od keramike",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2349",
+    "naziv": "Proizvodnja ostalih keramičkih proizvoda",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2351",
+    "naziv": "Proizvodnja cementa",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2352",
+    "naziv": "Proizvodnja kreča i gipsa",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2361",
+    "naziv": "Proizvodnja proizvoda od betona namenjenih za građevinarstvo",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2362",
+    "naziv": "Proizvodnja proizvoda od gipsa namenjenih za građevinarstvo",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2363",
+    "naziv": "Proizvodnja svežeg betona",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2364",
+    "naziv": "Proizvodnja maltera",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2365",
+    "naziv": "Proizvodnja proizvoda od cementa s vlaknima",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2369",
+    "naziv": "Proizvodnja ostalih proizvoda od betona, gipsa i cementa",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2370",
+    "naziv": "Sečenje, oblikovanje i obrada kamena",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2391",
+    "naziv": "Proizvodnja brusnih proizvoda",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2399",
+    "naziv": "Proizvodnja ostalih proizvoda od nemetalnih minerala",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2410",
+    "naziv": "Proizvodnja sirovog gvožđa, čelika i ferolegura",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2420",
+    "naziv": "Proizvodnja čeličnih cevi, šupljih profila i fitinga",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2431",
+    "naziv": "Hladno valjanje šipki",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2432",
+    "naziv": "Hladno valjanje pljosnatih proizvoda",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2433",
+    "naziv": "Hladno oblikovanje profila",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2434",
+    "naziv": "Hladno vučenje žice",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2441",
+    "naziv": "Proizvodnja plemenitih metala",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2442",
+    "naziv": "Proizvodnja aluminijuma",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2443",
+    "naziv": "Proizvodnja olova, cinka i kalaja",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2444",
+    "naziv": "Proizvodnja bakra",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2445",
+    "naziv": "Proizvodnja ostalih obojenih metala",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2446",
+    "naziv": "Proizvodnja nuklearnog goriva",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2451",
+    "naziv": "Livenje gvožđa",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2452",
+    "naziv": "Livenje čelika",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2453",
+    "naziv": "Livenje lakih metala",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2454",
+    "naziv": "Livenje ostalih obojenih metala",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2511",
+    "naziv": "Proizvodnja metalnih konstrukcija i delova konstrukcija",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2512",
+    "naziv": "Proizvodnja metalnih vrata i prozora",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2521",
+    "naziv": "Proizvodnja kotlova i radijatora za centralno grejanje",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2529",
+    "naziv": "Proizvodnja ostalih metalnih cisterni, rezervoara i kontejnera",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2530",
+    "naziv": "Proizvodnja parnih kotlova, osim kotlova za centralno grejanje",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2540",
+    "naziv": "Proizvodnja oružja i municije",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2550",
+    "naziv": "Kovanje, presovanje, štancovanje i valjanje metala; metalurgija praha",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2561",
+    "naziv": "Obrada i prevlačenje metala",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2562",
+    "naziv": "Mašinska obrada metala",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2571",
+    "naziv": "Proizvodnja sečiva",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2572",
+    "naziv": "Proizvodnja brava i okova",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2573",
+    "naziv": "Proizvodnja alata",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2591",
+    "naziv": "Proizvodnja čeličnih buradi i slične ambalaže",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2592",
+    "naziv": "Proizvodnja ambalaže od lakih metala",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2593",
+    "naziv": "Proizvodnja žičanih proizvoda, lanaca i opruga",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2594",
+    "naziv": "Proizvodnja veznih elemenata i vijčanih mašinskih proizvoda",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2599",
+    "naziv": "Proizvodnja ostalih metalnih proizvoda",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2611",
+    "naziv": "Proizvodnja elektronskih elemenata",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2612",
+    "naziv": "Proizvodnja štampanih elektronskih ploča",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2620",
+    "naziv": "Proizvodnja računara i periferne opreme",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2630",
+    "naziv": "Proizvodnja komunikacione opreme",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2640",
+    "naziv": "Proizvodnja elektronskih uređaja za široku potrošnju",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2651",
+    "naziv": "Proizvodnja mernih, istraživačkih i navigacionih instrumenata i aparata",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2652",
+    "naziv": "Proizvodnja satova",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2660",
+    "naziv": "Proizvodnja opreme za zračenje, elektromedicinske i elektroterapeutske opreme",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2670",
+    "naziv": "Proizvodnja optičkih instrumenata i fotografske opreme",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2680",
+    "naziv": "Proizvodnja magnetnih i optičkih nosilaca zapisa",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2711",
+    "naziv": "Proizvodnja elektromotora, generatora i transformatora",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2712",
+    "naziv": "Proizvodnja opreme za distribuciju električne energije i opreme za upravljanje električnom energijom",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2720",
+    "naziv": "Proizvodnja baterija i akumulatora",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2731",
+    "naziv": "Proizvodnja kablova od optičkih vlakana",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2732",
+    "naziv": "Proizvodnja ostalih elektronskih i električnih provodnika i kablova",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2733",
+    "naziv": "Proizvodnja opreme za povezivanje žica i kablova",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2740",
+    "naziv": "Proizvodnja opreme za osvetljenje",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2751",
+    "naziv": "Proizvodnja električnih aparata za domaćinstvo",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2752",
+    "naziv": "Proizvodnja neelektričnih aparata za domaćinstvo",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2790",
+    "naziv": "Proizvodnja ostale električne opreme",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2811",
+    "naziv": "Proizvodnja motora i turbina, osim za letelice i motorna vozila",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2812",
+    "naziv": "Proizvodnja hidrauličnih pogonskih uređaja",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2813",
+    "naziv": "Proizvodnja ostalih pumpi i kompresora",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2814",
+    "naziv": "Proizvodnja ostalih slavina i ventila",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2815",
+    "naziv": "Proizvodnja ležajeva, zupčanika i zupčastih pogonskih elemenata",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2821",
+    "naziv": "Proizvodnja industrijskih peći i gorionika",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2822",
+    "naziv": "Proizvodnja opreme za podizanje i prenošenje",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2823",
+    "naziv": "Proizvodnja kancelarijskih mašina i opreme, osim računara i računarske opreme",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2824",
+    "naziv": "Proizvodnja ručnih pogonskih aparata sa mehanizmima",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2825",
+    "naziv": "Proizvodnja rashladne i ventilacione opreme, osim za domaćinstvo",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2829",
+    "naziv": "Proizvodnja ostalih mašina i aparata opšte namene",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2830",
+    "naziv": "Proizvodnja mašina za poljoprivredu i šumarstvo",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2841",
+    "naziv": "Proizvodnja mašina za obradu metala",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2849",
+    "naziv": "Proizvodnja ostalih alatnih mašina",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2891",
+    "naziv": "Proizvodnja mašina za metalurgiju",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2892",
+    "naziv": "Proizvodnja mašina za rudnike, kamenolome i građevinarstvo",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2893",
+    "naziv": "Proizvodnja mašina za industriju hrane, pića i duvana",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2894",
+    "naziv": "Proizvodnja mašina za industriju tekstila, odeće i kože",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2895",
+    "naziv": "Proizvodnja mašina za industriju papira i kartona",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2896",
+    "naziv": "Proizvodnja mašina za izradu plastike i gume",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2899",
+    "naziv": "Proizvodnja mašina za ostale specijalne namene",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2910",
+    "naziv": "Proizvodnja motornih vozila",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2920",
+    "naziv": "Proizvodnja karoserija za motorna vozila, prikolice i poluprikolice",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2931",
+    "naziv": "Proizvodnja električne i elektronske opreme za motorna vozila",
+    "sektor": "C"
+  },
+  {
+    "sifra": "2932",
+    "naziv": "Proizvodnja ostalih delova i dodatne opreme za motorna vozila",
+    "sektor": "C"
+  },
+  {
+    "sifra": "3011",
+    "naziv": "Izgradnja brodova i plovnih objekata",
+    "sektor": "C"
+  },
+  {
+    "sifra": "3012",
+    "naziv": "Izrada čamaca za sport i razonodu",
+    "sektor": "C"
+  },
+  {
+    "sifra": "3020",
+    "naziv": "Proizvodnja lokomotiva i šinskih vozila",
+    "sektor": "C"
+  },
+  {
+    "sifra": "3030",
+    "naziv": "Proizvodnja vazdušnih i svemirskih letelica i odgovarajuće opreme",
+    "sektor": "C"
+  },
+  {
+    "sifra": "3040",
+    "naziv": "Proizvodnja borbenih vojnih vozila",
+    "sektor": "C"
+  },
+  {
+    "sifra": "3091",
+    "naziv": "Proizvodnja motocikala",
+    "sektor": "C"
+  },
+  {
+    "sifra": "3092",
+    "naziv": "Proizvodnja bicikala i invalidskih kolica",
+    "sektor": "C"
+  },
+  {
+    "sifra": "3099",
+    "naziv": "Proizvodnja ostale transportne opreme",
+    "sektor": "C"
+  },
+  {
+    "sifra": "3101",
+    "naziv": "Proizvodnja nameštaja za poslovne i prodajne prostore",
+    "sektor": "C"
+  },
+  {
+    "sifra": "3102",
+    "naziv": "Proizvodnja kuhinjskog nameštaja",
+    "sektor": "C"
+  },
+  {
+    "sifra": "3103",
+    "naziv": "Proizvodnja madraca",
+    "sektor": "C"
+  },
+  {
+    "sifra": "3109",
+    "naziv": "Proizvodnja ostalog nameštaja",
+    "sektor": "C"
+  },
+  {
+    "sifra": "3211",
+    "naziv": "Kovanje novca",
+    "sektor": "C"
+  },
+  {
+    "sifra": "3212",
+    "naziv": "Proizvodnja nakita i srodnih predmeta",
+    "sektor": "C"
+  },
+  {
+    "sifra": "3213",
+    "naziv": "Proizvodnja imitacije nakita i srodnih proizvoda",
+    "sektor": "C"
+  },
+  {
+    "sifra": "3220",
+    "naziv": "Proizvodnja muzičkih instrumenata",
+    "sektor": "C"
+  },
+  {
+    "sifra": "3230",
+    "naziv": "Proizvodnja sportske opreme",
+    "sektor": "C"
+  },
+  {
+    "sifra": "3240",
+    "naziv": "Proizvodnja igara i igračaka",
+    "sektor": "C"
+  },
+  {
+    "sifra": "3250",
+    "naziv": "Proizvodnja medicinskih i stomatoloških instrumenata i materijala",
+    "sektor": "C"
+  },
+  {
+    "sifra": "3291",
+    "naziv": "Proizvodnja metli i četki",
+    "sektor": "C"
+  },
+  {
+    "sifra": "3299",
+    "naziv": "Proizvodnja ostalih predmeta",
+    "sektor": "C"
+  },
+  {
+    "sifra": "3311",
+    "naziv": "Popravka metalnih proizvoda",
+    "sektor": "C"
+  },
+  {
+    "sifra": "3312",
+    "naziv": "Popravka mašina",
+    "sektor": "C"
+  },
+  {
+    "sifra": "3313",
+    "naziv": "Popravka elektronske i optičke opreme",
+    "sektor": "C"
+  },
+  {
+    "sifra": "3314",
+    "naziv": "Popravka električne opreme",
+    "sektor": "C"
+  },
+  {
+    "sifra": "3315",
+    "naziv": "Popravka i održavanje brodova i čamaca",
+    "sektor": "C"
+  },
+  {
+    "sifra": "3316",
+    "naziv": "Popravka i održavanje letelica i svemirskih letelica",
+    "sektor": "C"
+  },
+  {
+    "sifra": "3317",
+    "naziv": "Popravka i održavanje druge transportne opreme",
+    "sektor": "C"
+  },
+  {
+    "sifra": "3319",
+    "naziv": "Popravka ostale opreme",
+    "sektor": "C"
+  },
+  {
+    "sifra": "3320",
+    "naziv": "Montaža industrijskih mašina i opreme",
+    "sektor": "C"
+  },
+  {
+    "sifra": "3511",
+    "naziv": "Proizvodnja električne energije",
+    "sektor": "D"
+  },
+  {
+    "sifra": "3512",
+    "naziv": "Prenos električne energije",
+    "sektor": "D"
+  },
+  {
+    "sifra": "3513",
+    "naziv": "Distribucija električne energije",
+    "sektor": "D"
+  },
+  {
+    "sifra": "3514",
+    "naziv": "Trgovina električnom energijom",
+    "sektor": "D"
+  },
+  {
+    "sifra": "3521",
+    "naziv": "Proizvodnja gasa",
+    "sektor": "D"
+  },
+  {
+    "sifra": "3522",
+    "naziv": "Distribucija gasovitih goriva gasovodom",
+    "sektor": "D"
+  },
+  {
+    "sifra": "3523",
+    "naziv": "Trgovina gasovitim gorivima preko gasovodne mreže",
+    "sektor": "D"
+  },
+  {
+    "sifra": "3530",
+    "naziv": "Snabdevanje parom i klimatizacija",
+    "sektor": "D"
+  },
+  {
+    "sifra": "3600",
+    "naziv": "Skupljanje, prečišćavanje i distribucija vode",
+    "sektor": "E"
+  },
+  {
+    "sifra": "3700",
+    "naziv": "Uklanjanje otpadnih voda",
+    "sektor": "E"
+  },
+  {
+    "sifra": "3811",
+    "naziv": "Skupljanje otpada koji nije opasan",
+    "sektor": "E"
+  },
+  {
+    "sifra": "3812",
+    "naziv": "Skupljanje opasnog otpada",
+    "sektor": "E"
+  },
+  {
+    "sifra": "3821",
+    "naziv": "Tretman i odlaganje otpada koji nije opasan",
+    "sektor": "E"
+  },
+  {
+    "sifra": "3822",
+    "naziv": "Tretman i odlaganje opasnog otpada",
+    "sektor": "E"
+  },
+  {
+    "sifra": "3831",
+    "naziv": "Demontaža olupina",
+    "sektor": "E"
+  },
+  {
+    "sifra": "3832",
+    "naziv": "Ponovna upotreba razvrstanih materijala",
+    "sektor": "E"
+  },
+  {
+    "sifra": "3900",
+    "naziv": "Sanacija, rekultivacija i druge usluge u oblasti upravljanja otpadom",
+    "sektor": "E"
+  },
+  {
+    "sifra": "4110",
+    "naziv": "Razrada građevinskih projekata",
+    "sektor": "F"
+  },
+  {
+    "sifra": "4120",
+    "naziv": "Izgradnja stambenih i nestambenih zgrada",
+    "sektor": "F"
+  },
+  {
+    "sifra": "4211",
+    "naziv": "Izgradnja puteva i autoputeva",
+    "sektor": "F"
+  },
+  {
+    "sifra": "4212",
+    "naziv": "Izgradnja železničkih pruga i podzemnih železnica",
+    "sektor": "F"
+  },
+  {
+    "sifra": "4213",
+    "naziv": "Izgradnja mostova i tunela",
+    "sektor": "F"
+  },
+  {
+    "sifra": "4221",
+    "naziv": "Izgradnja cevovoda",
+    "sektor": "F"
+  },
+  {
+    "sifra": "4222",
+    "naziv": "Izgradnja električnih i telekomunikacionih vodova",
+    "sektor": "F"
+  },
+  {
+    "sifra": "4291",
+    "naziv": "Izgradnja hidrotehničkih objekata",
+    "sektor": "F"
+  },
+  {
+    "sifra": "4299",
+    "naziv": "Izgradnja ostalih nepomenutih građevina",
+    "sektor": "F"
+  },
+  {
+    "sifra": "4311",
+    "naziv": "Rušenje objekata",
+    "sektor": "F"
+  },
+  {
+    "sifra": "4312",
+    "naziv": "Pripremna gradilišta",
+    "sektor": "F"
+  },
+  {
+    "sifra": "4313",
+    "naziv": "Ispitivanje terena bušenjem i sondiranjem",
+    "sektor": "F"
+  },
+  {
+    "sifra": "4321",
+    "naziv": "Postavljanje električnih instalacija",
+    "sektor": "F"
+  },
+  {
+    "sifra": "4322",
+    "naziv": "Postavljanje vodovodnih, kanalizacionih, grejnih i klimatizacionih sistema",
+    "sektor": "F"
+  },
+  {
+    "sifra": "4329",
+    "naziv": "Ostali instalacioni radovi u građevinarstvu",
+    "sektor": "F"
+  },
+  {
+    "sifra": "4331",
+    "naziv": "Malterisanje",
+    "sektor": "F"
+  },
+  {
+    "sifra": "4332",
+    "naziv": "Ugradnja stolarije",
+    "sektor": "F"
+  },
+  {
+    "sifra": "4333",
+    "naziv": "Postavljanje podnih i zidnih obloga",
+    "sektor": "F"
+  },
+  {
+    "sifra": "4334",
+    "naziv": "Bojenje i zastakljivanje",
+    "sektor": "F"
+  },
+  {
+    "sifra": "4339",
+    "naziv": "Ostali završni radovi",
+    "sektor": "F"
+  },
+  {
+    "sifra": "4391",
+    "naziv": "Krovni radovi",
+    "sektor": "F"
+  },
+  {
+    "sifra": "4399",
+    "naziv": "Ostali nepomenuti specifični građevinski radovi",
+    "sektor": "F"
+  },
+  {
+    "sifra": "4511",
+    "naziv": "Trgovina automobilima i lakim motornim vozilima",
+    "sektor": "G"
+  },
+  {
+    "sifra": "4519",
+    "naziv": "Trgovina ostalim motornim vozilima",
+    "sektor": "G"
+  },
+  {
+    "sifra": "4520",
+    "naziv": "Održavanje i popravka motornih vozila",
+    "sektor": "G"
+  },
+  {
+    "sifra": "4531",
+    "naziv": "Trgovina na veliko delovima i opremom za motorna vozila",
+    "sektor": "G"
+  },
+  {
+    "sifra": "4532",
+    "naziv": "Trgovina na malo delovima i opremom za motorna vozila",
+    "sektor": "G"
+  },
+  {
+    "sifra": "4540",
+    "naziv": "Trgovina motociklima, delovima i priborom, održavanje i popravka motocikala",
+    "sektor": "G"
+  },
+  {
+    "sifra": "4611",
+    "naziv": "Posredovanje u prodaji poljoprivrednih sirovina, životinja, tekstilnih sirovina i poluproizvoda",
+    "sektor": "G"
+  },
+  {
+    "sifra": "4612",
+    "naziv": "Posredovanje u prodaji goriva, ruda, metala i industrijskih hemikalija",
+    "sektor": "G"
+  },
+  {
+    "sifra": "4613",
+    "naziv": "Posredovanje u prodaji drvne građe i građevinskog materijala",
+    "sektor": "G"
+  },
+  {
+    "sifra": "4614",
+    "naziv": "Posredovanje u prodaji mašina, industrijske opreme, brodova i aviona",
+    "sektor": "G"
+  },
+  {
+    "sifra": "4615",
+    "naziv": "Posredovanje u prodaji nameštaja, predmeta za domaćinstvo i metalne robe",
+    "sektor": "G"
+  },
+  {
+    "sifra": "4616",
+    "naziv": "Posredovanje u prodaji tekstila, odeće, krzna, obuće i predmeta od kože",
+    "sektor": "G"
+  },
+  {
+    "sifra": "4617",
+    "naziv": "Posredovanje u prodaji hrane, pića i duvana",
+    "sektor": "G"
+  },
+  {
+    "sifra": "4618",
+    "naziv": "Specijalizovano posredovanje u prodaji posebnih proizvoda",
+    "sektor": "G"
+  },
+  {
+    "sifra": "4619",
+    "naziv": "Posredovanje u prodaji raznovrsnih proizvoda",
+    "sektor": "G"
+  },
+  {
+    "sifra": "4621",
+    "naziv": "Trgovina na veliko žitom, sirovim duvanom, semenjem i hranom za životinje",
+    "sektor": "G"
+  },
+  {
+    "sifra": "4622",
+    "naziv": "Trgovina na veliko cvećem i sadnicama",
+    "sektor": "G"
+  },
+  {
+    "sifra": "4623",
+    "naziv": "Trgovina na veliko životinjama",
+    "sektor": "G"
+  },
+  {
+    "sifra": "4624",
+    "naziv": "Trgovina na veliko sirovom, nedovršenom i dovršenom kožom",
+    "sektor": "G"
+  },
+  {
+    "sifra": "4631",
+    "naziv": "Trgovina na veliko voćem i povrćem",
+    "sektor": "G"
+  },
+  {
+    "sifra": "4632",
+    "naziv": "Trgovina na veliko mesom i proizvodima od mesa",
+    "sektor": "G"
+  },
+  {
+    "sifra": "4633",
+    "naziv": "Trgovina na veliko mlečnim proizvodima, jajima i jestivim uljima i mastima",
+    "sektor": "G"
+  },
+  {
+    "sifra": "4634",
+    "naziv": "Trgovina na veliko pićima",
+    "sektor": "G"
+  },
+  {
+    "sifra": "4635",
+    "naziv": "Trgovina na veliko duvanskim proizvodima",
+    "sektor": "G"
+  },
+  {
+    "sifra": "4636",
+    "naziv": "Trgovina na veliko šećerom, čokoladom i slatkišima",
+    "sektor": "G"
+  },
+  {
+    "sifra": "4637",
+    "naziv": "Trgovina na veliko kafom, čajevima, kakaom i začinima",
+    "sektor": "G"
+  },
+  {
+    "sifra": "4638",
+    "naziv": "Trgovina na veliko ostalom hranom, uključujući ribu, ljuskare i mekušce",
+    "sektor": "G"
+  },
+  {
+    "sifra": "4639",
+    "naziv": "Nespecijalizovana trgovina na veliko hranom, pićima i duvanom",
+    "sektor": "G"
+  },
+  {
+    "sifra": "4641",
+    "naziv": "Trgovina na veliko tekstilom",
+    "sektor": "G"
+  },
+  {
+    "sifra": "4642",
+    "naziv": "Trgovina na veliko odećom i obućom",
+    "sektor": "G"
+  },
+  {
+    "sifra": "4643",
+    "naziv": "Trgovina na veliko električnim aparatima za domaćinstvo",
+    "sektor": "G"
+  },
+  {
+    "sifra": "4644",
+    "naziv": "Trgovina na veliko porculanom, staklenom robom i sredstvima za čišćenje",
+    "sektor": "G"
+  },
+  {
+    "sifra": "4645",
+    "naziv": "Trgovina na veliko parfimerijskim i kozmetičkim proizvodima",
+    "sektor": "G"
+  },
+  {
+    "sifra": "4646",
+    "naziv": "Trgovina na veliko farmaceutskim proizvodima",
+    "sektor": "G"
+  },
+  {
+    "sifra": "4647",
+    "naziv": "Trgovina na veliko nameštajem, tepisima i opremom za osvetljenje",
+    "sektor": "G"
+  },
+  {
+    "sifra": "4648",
+    "naziv": "Trgovina na veliko satovima i nakitom",
+    "sektor": "G"
+  },
+  {
+    "sifra": "4649",
+    "naziv": "Trgovina na veliko ostalim proizvodima za domaćinstvo",
+    "sektor": "G"
+  },
+  {
+    "sifra": "4651",
+    "naziv": "Trgovina na veliko računarima, računarskom opremom i softverima",
+    "sektor": "G"
+  },
+  {
+    "sifra": "4652",
+    "naziv": "Trgovina na veliko elektronskim i telekomunikacionim delovima i opremom",
+    "sektor": "G"
+  },
+  {
+    "sifra": "4661",
+    "naziv": "Trgovina na veliko poljoprivrednim mašinama, opremom i priborom",
+    "sektor": "G"
+  },
+  {
+    "sifra": "4662",
+    "naziv": "Trgovina na veliko alatnim mašinama",
+    "sektor": "G"
+  },
+  {
+    "sifra": "4663",
+    "naziv": "Trgovina na veliko rudarskim i građevinskim mašinama",
+    "sektor": "G"
+  },
+  {
+    "sifra": "4664",
+    "naziv": "Trgovina na veliko mašinama za tekstilnu industriju i mašinama za šivenje i pletenje",
+    "sektor": "G"
+  },
+  {
+    "sifra": "4665",
+    "naziv": "Trgovina na veliko kancelarijskim nameštajem",
+    "sektor": "G"
+  },
+  {
+    "sifra": "4666",
+    "naziv": "Trgovina na veliko ostalim kancelarijskim mašinama i opremom",
+    "sektor": "G"
+  },
+  {
+    "sifra": "4669",
+    "naziv": "Trgovina na veliko ostalim mašinama i opremom",
+    "sektor": "G"
+  },
+  {
+    "sifra": "4671",
+    "naziv": "Trgovina na veliko čvrstim, tečnim i gasovitim gorivima i sličnim proizvodima",
+    "sektor": "G"
+  },
+  {
+    "sifra": "4672",
+    "naziv": "Trgovina na veliko metalima i metalnim rudama",
+    "sektor": "G"
+  },
+  {
+    "sifra": "4673",
+    "naziv": "Trgovina na veliko drvetom, građevinskim materijalom i sanitarnom opremom",
+    "sektor": "G"
+  },
+  {
+    "sifra": "4674",
+    "naziv": "Trgovina na veliko metalnom robom, instalacionim materijalima, opremom i priborom za grejanje",
+    "sektor": "G"
+  },
+  {
+    "sifra": "4675",
+    "naziv": "Trgovina na veliko hemijskim proizvodima",
+    "sektor": "G"
+  },
+  {
+    "sifra": "4676",
+    "naziv": "Trgovina na veliko ostalim poluproizvodima",
+    "sektor": "G"
+  },
+  {
+    "sifra": "4677",
+    "naziv": "Trgovina na veliko otpacima i ostacima",
+    "sektor": "G"
+  },
+  {
+    "sifra": "4690",
+    "naziv": "Nespecijalizovana trgovina na veliko",
+    "sektor": "G"
+  },
+  {
+    "sifra": "4711",
+    "naziv": "Trgovina na malo u nespecijalizovanim prodavnicama, pretežno hranom, pićima i duvanom",
+    "sektor": "G"
+  },
+  {
+    "sifra": "4719",
+    "naziv": "Ostala trgovina na malo u nespecijalizovanim prodavnicama",
+    "sektor": "G"
+  },
+  {
+    "sifra": "4721",
+    "naziv": "Trgovina na malo voćem i povrćem u specijalizovanim prodavnicama",
+    "sektor": "G"
+  },
+  {
+    "sifra": "4722",
+    "naziv": "Trgovina na malo mesom i proizvodima od mesa u specijalizovanim prodavnicama",
+    "sektor": "G"
+  },
+  {
+    "sifra": "4723",
+    "naziv": "Trgovina na malo ribom, ljuskarima i mekušcima u specijalizovanim prodavnicama",
+    "sektor": "G"
+  },
+  {
+    "sifra": "4724",
+    "naziv": "Trgovina na malo hlebom, testeninom, kolačima i slatkišima u specijalizovanim prodavnicama",
+    "sektor": "G"
+  },
+  {
+    "sifra": "4725",
+    "naziv": "Trgovina na malo pićima u specijalizovanim prodavnicama",
+    "sektor": "G"
+  },
+  {
+    "sifra": "4726",
+    "naziv": "Trgovina na malo proizvodima od duvana u specijalizovanim prodavnicama",
+    "sektor": "G"
+  },
+  {
+    "sifra": "4729",
+    "naziv": "Ostala trgovina na malo hranom u specijalizovanim prodavnicama",
+    "sektor": "G"
+  },
+  {
+    "sifra": "4730",
+    "naziv": "Trgovina na malo motornim gorivima u specijalizovanim prodavnicama",
+    "sektor": "G"
+  },
+  {
+    "sifra": "4741",
+    "naziv": "Trgovina na malo računarima, perifernim jedinicama i softverom u specijalizovanim prodavnicama",
+    "sektor": "G"
+  },
+  {
+    "sifra": "4742",
+    "naziv": "Trgovina na malo telekomunikacionom opremom u specijalizovanim prodavnicama",
+    "sektor": "G"
+  },
+  {
+    "sifra": "4743",
+    "naziv": "Trgovina na malo audio i video opremom u specijalizovanim prodavnicama",
+    "sektor": "G"
+  },
+  {
+    "sifra": "4751",
+    "naziv": "Trgovina na malo tekstilom u specijalizovanim prodavnicama",
+    "sektor": "G"
+  },
+  {
+    "sifra": "4752",
+    "naziv": "Trgovina na malo metalnom robom, bojama i staklom u specijalizovanim prodavnicama",
+    "sektor": "G"
+  },
+  {
+    "sifra": "4753",
+    "naziv": "Trgovina na malo tepisima, zidnim i podnim oblogama u specijalizovanim prodavnicama",
+    "sektor": "G"
+  },
+  {
+    "sifra": "4754",
+    "naziv": "Trgovina na malo električnim aparatima za domaćinstvo u specijalizovanim prodavnicama",
+    "sektor": "G"
+  },
+  {
+    "sifra": "4759",
+    "naziv": "Trgovina na malo nameštajem, opremom za osvetljenje i ostalim predmetima za domaćinstvo u specijalizovanim prodavnicama",
+    "sektor": "G"
+  },
+  {
+    "sifra": "4761",
+    "naziv": "Trgovina na malo knjigama u specijalizovanim prodavnicama",
+    "sektor": "G"
+  },
+  {
+    "sifra": "4762",
+    "naziv": "Trgovina na malo novinama i kancelarijskim materijalom u specijalizovanim prodavnicama",
+    "sektor": "G"
+  },
+  {
+    "sifra": "4763",
+    "naziv": "Trgovina na malo muzičkim i video zapisima u specijalizovanim prodavnicama",
+    "sektor": "G"
+  },
+  {
+    "sifra": "4764",
+    "naziv": "Trgovina na malo sportskom opremom u specijalizovanim prodavnicama",
+    "sektor": "G"
+  },
+  {
+    "sifra": "4765",
+    "naziv": "Trgovina na malo igrama i igračkama u specijalizovanim prodavnicama",
+    "sektor": "G"
+  },
+  {
+    "sifra": "4771",
+    "naziv": "Trgovina na malo odećom u specijalizovanim prodavnicama",
+    "sektor": "G"
+  },
+  {
+    "sifra": "4772",
+    "naziv": "Trgovina na malo obućom i predmetima od kože u specijalizovanim prodavnicama",
+    "sektor": "G"
+  },
+  {
+    "sifra": "4773",
+    "naziv": "Trgovina na malo farmaceutskim proizvodima u specijalizovanim prodavnicama – apotekama",
+    "sektor": "G"
+  },
+  {
+    "sifra": "4774",
+    "naziv": "Trgovina na malo medicinskim i ortopedskim pomagalima u specijalizovanim prodavnicama",
+    "sektor": "G"
+  },
+  {
+    "sifra": "4775",
+    "naziv": "Trgovina na malo kozmetičkim i toaletnim proizvodima u specijalizovanim prodavnicama",
+    "sektor": "G"
+  },
+  {
+    "sifra": "4776",
+    "naziv": "Trgovina na malo cvećem, sadnicama, semenjem, đubrivima, kućnim ljubimcima i hranom za kućne ljubimce u specijalizovanim prodavnicama",
+    "sektor": "G"
+  },
+  {
+    "sifra": "4777",
+    "naziv": "Trgovina na malo satovima i nakitom u specijalizovanim prodavnicama",
+    "sektor": "G"
+  },
+  {
+    "sifra": "4778",
+    "naziv": "Ostala trgovina na malo novim proizvodima u specijalizovanim prodavnicama",
+    "sektor": "G"
+  },
+  {
+    "sifra": "4779",
+    "naziv": "Trgovina na malo polovnom robom u prodavnicama",
+    "sektor": "G"
+  },
+  {
+    "sifra": "4781",
+    "naziv": "Trgovina na malo hranom, pićima i duvanskim proizvodima na tezgama i pijacama",
+    "sektor": "G"
+  },
+  {
+    "sifra": "4782",
+    "naziv": "Trgovina na malo tekstilom, odećom i obućom na tezgama i pijacama",
+    "sektor": "G"
+  },
+  {
+    "sifra": "4789",
+    "naziv": "Trgovina na malo ostalom robom na tezgama i pijacama",
+    "sektor": "G"
+  },
+  {
+    "sifra": "4791",
+    "naziv": "Trgovina na malo posredstvom pošte ili preko interneta",
+    "sektor": "G"
+  },
+  {
+    "sifra": "4799",
+    "naziv": "Ostala trgovina na malo izvan prodavnica, tezgi i pijaca",
+    "sektor": "G"
+  },
+  {
+    "sifra": "4910",
+    "naziv": "Železnički prevoz putnika, daljinski i regionalni",
+    "sektor": "H"
+  },
+  {
+    "sifra": "4920",
+    "naziv": "Železnički prevoz tereta",
+    "sektor": "H"
+  },
+  {
+    "sifra": "4931",
+    "naziv": "Gradski i prigradski kopneni prevoz putnika",
+    "sektor": "H"
+  },
+  {
+    "sifra": "4932",
+    "naziv": "Taksi prevoz",
+    "sektor": "H"
+  },
+  {
+    "sifra": "4939",
+    "naziv": "Ostali prevoz putnika u kopnenom saobraćaju",
+    "sektor": "H"
+  },
+  {
+    "sifra": "4941",
+    "naziv": "Drumski prevoz tereta",
+    "sektor": "H"
+  },
+  {
+    "sifra": "4942",
+    "naziv": "Usluge preseljenja",
+    "sektor": "H"
+  },
+  {
+    "sifra": "4950",
+    "naziv": "Cevovodni transport",
+    "sektor": "H"
+  },
+  {
+    "sifra": "5010",
+    "naziv": "Pomorski i priobalni prevoz putnika",
+    "sektor": "H"
+  },
+  {
+    "sifra": "5020",
+    "naziv": "Pomorski i priobalni prevoz tereta",
+    "sektor": "H"
+  },
+  {
+    "sifra": "5030",
+    "naziv": "Prevoz putnika unutrašnjim plovnim putevima",
+    "sektor": "H"
+  },
+  {
+    "sifra": "5040",
+    "naziv": "Prevoz tereta unutrašnjim plovnim putevima",
+    "sektor": "H"
+  },
+  {
+    "sifra": "5110",
+    "naziv": "Vazdušni prevoz putnika",
+    "sektor": "H"
+  },
+  {
+    "sifra": "5121",
+    "naziv": "Vazdušni prevoz tereta",
+    "sektor": "H"
+  },
+  {
+    "sifra": "5122",
+    "naziv": "Vasionski saobraćaj",
+    "sektor": "H"
+  },
+  {
+    "sifra": "5210",
+    "naziv": "Skladištenje",
+    "sektor": "H"
+  },
+  {
+    "sifra": "5221",
+    "naziv": "Uslužne delatnosti u kopnenom saobraćaju",
+    "sektor": "H"
+  },
+  {
+    "sifra": "5222",
+    "naziv": "Uslužne delatnosti u vodenom saobraćaju",
+    "sektor": "H"
+  },
+  {
+    "sifra": "5223",
+    "naziv": "Uslužne delatnosti u vazdušnom saobraćaju",
+    "sektor": "H"
+  },
+  {
+    "sifra": "5224",
+    "naziv": "Manipulacija teretom",
+    "sektor": "H"
+  },
+  {
+    "sifra": "5229",
+    "naziv": "Ostale prateće delatnosti u saobraćaju",
+    "sektor": "H"
+  },
+  {
+    "sifra": "5310",
+    "naziv": "Poštanske aktivnosti javnog servisa",
+    "sektor": "H"
+  },
+  {
+    "sifra": "5320",
+    "naziv": "Poštanske aktivnosti komercijalnog servisa",
+    "sektor": "H"
+  },
+  {
+    "sifra": "5510",
+    "naziv": "Hoteli i sličan smeštaj",
+    "sektor": "I"
+  },
+  {
+    "sifra": "5520",
+    "naziv": "Odmarališta i slični objekti za kraći boravak",
+    "sektor": "I"
+  },
+  {
+    "sifra": "5530",
+    "naziv": "Delatnost kampova, auto-kampova i kampova za turističke prikolice",
+    "sektor": "I"
+  },
+  {
+    "sifra": "5590",
+    "naziv": "Ostali smeštaj",
+    "sektor": "I"
+  },
+  {
+    "sifra": "5610",
+    "naziv": "Delatnosti restorana i pokretnih ugostiteljskih objekta",
+    "sektor": "I"
+  },
+  {
+    "sifra": "5621",
+    "naziv": "Ketering",
+    "sektor": "I"
+  },
+  {
+    "sifra": "5629",
+    "naziv": "Ostale usluge pripremanja i posluživanja hrane",
+    "sektor": "I"
+  },
+  {
+    "sifra": "5630",
+    "naziv": "Usluge pripremanja i posluživanja pića",
+    "sektor": "I"
+  },
+  {
+    "sifra": "5811",
+    "naziv": "Izdavanje knjiga",
+    "sektor": "J"
+  },
+  {
+    "sifra": "5812",
+    "naziv": "Izdavanje imenika i adresara",
+    "sektor": "J"
+  },
+  {
+    "sifra": "5813",
+    "naziv": "Izdavanje novina",
+    "sektor": "J"
+  },
+  {
+    "sifra": "5814",
+    "naziv": "Izdavanje časopisa i periodičnih izdanja",
+    "sektor": "J"
+  },
+  {
+    "sifra": "5819",
+    "naziv": "Ostala izdavačka delatnost",
+    "sektor": "J"
+  },
+  {
+    "sifra": "5821",
+    "naziv": "Izdavanje računarskih igara",
+    "sektor": "J"
+  },
+  {
+    "sifra": "5829",
+    "naziv": "Izdavanje ostalih softvera",
+    "sektor": "J"
+  },
+  {
+    "sifra": "5911",
+    "naziv": "Proizvodnja kinematografskih dela, audio-vizuelnih proizvoda i televizijskog programa",
+    "sektor": "J"
+  },
+  {
+    "sifra": "5912",
+    "naziv": "Delatnosti koje slede nakon faze snimanja u proizvodnji kinematografskih dela i televizijskog programa",
+    "sektor": "J"
+  },
+  {
+    "sifra": "5913",
+    "naziv": "Distribucija kinematografskih dela, audio-vizuelnih dela i televizijskog programa",
+    "sektor": "J"
+  },
+  {
+    "sifra": "5914",
+    "naziv": "Delatnost prikazivanja kinematografskih dela",
+    "sektor": "J"
+  },
+  {
+    "sifra": "5920",
+    "naziv": "Snimanje i izdavanje zvučnih zapisa i muzike",
+    "sektor": "J"
+  },
+  {
+    "sifra": "6010",
+    "naziv": "Emitovanje radio-programa",
+    "sektor": "J"
+  },
+  {
+    "sifra": "6020",
+    "naziv": "Proizvodnja i emitovanje televizijskog programa",
+    "sektor": "J"
+  },
+  {
+    "sifra": "6110",
+    "naziv": "Kablovske telekomunikacije",
+    "sektor": "J"
+  },
+  {
+    "sifra": "6120",
+    "naziv": "Bežične telekomunikacije",
+    "sektor": "J"
+  },
+  {
+    "sifra": "6130",
+    "naziv": "Satelitske telekomunikacije",
+    "sektor": "J"
+  },
+  {
+    "sifra": "6190",
+    "naziv": "Ostale telekomunikacione delatnosti",
+    "sektor": "J"
+  },
+  {
+    "sifra": "6201",
+    "naziv": "Računarsko programiranje",
+    "sektor": "J"
+  },
+  {
+    "sifra": "6202",
+    "naziv": "Konsultantske delatnosti u oblasti informacione tehnologije",
+    "sektor": "J"
+  },
+  {
+    "sifra": "6203",
+    "naziv": "Upravljanje računarskom opremom",
+    "sektor": "J"
+  },
+  {
+    "sifra": "6209",
+    "naziv": "Ostale usluge informacione tehnologije",
+    "sektor": "J"
+  },
+  {
+    "sifra": "6311",
+    "naziv": "Obrada podataka, hosting i sl.",
+    "sektor": "J"
+  },
+  {
+    "sifra": "6312",
+    "naziv": "Veb portali",
+    "sektor": "J"
+  },
+  {
+    "sifra": "6391",
+    "naziv": "Delatnosti novinskih agencija",
+    "sektor": "J"
+  },
+  {
+    "sifra": "6399",
+    "naziv": "Informacione uslužne delatnosti na drugom mestu nepomenute",
+    "sektor": "J"
+  },
+  {
+    "sifra": "6411",
+    "naziv": "Centralna banka",
+    "sektor": "K"
+  },
+  {
+    "sifra": "6419",
+    "naziv": "Ostalo monetarno posredovanje",
+    "sektor": "K"
+  },
+  {
+    "sifra": "6420",
+    "naziv": "Delatnost holding kompanija",
+    "sektor": "K"
+  },
+  {
+    "sifra": "6430",
+    "naziv": "Poverenički fondovi (trastovi), investicioni fondovi i slični finansijski entiteti",
+    "sektor": "K"
+  },
+  {
+    "sifra": "6491",
+    "naziv": "Finansijski lizing",
+    "sektor": "K"
+  },
+  {
+    "sifra": "6492",
+    "naziv": "Ostale usluge kreditiranja",
+    "sektor": "K"
+  },
+  {
+    "sifra": "6499",
+    "naziv": "Ostale nepomenute finansijske usluge, osim osiguranja i penzijskih fondova",
+    "sektor": "K"
+  },
+  {
+    "sifra": "6511",
+    "naziv": "Životno osiguranje",
+    "sektor": "K"
+  },
+  {
+    "sifra": "6512",
+    "naziv": "Neživotno osiguranje",
+    "sektor": "K"
+  },
+  {
+    "sifra": "6520",
+    "naziv": "Reosiguranje",
+    "sektor": "K"
+  },
+  {
+    "sifra": "6530",
+    "naziv": "Penzijski fondovi",
+    "sektor": "K"
+  },
+  {
+    "sifra": "6611",
+    "naziv": "Finansijske i robne berze",
+    "sektor": "K"
+  },
+  {
+    "sifra": "6612",
+    "naziv": "Brokerski poslovi s hartijama od vrednosti i berzanskom robom",
+    "sektor": "K"
+  },
+  {
+    "sifra": "6619",
+    "naziv": "Ostale pomoćne delatnosti u pružanju finansijskih usluga, osim osiguranja i penzijskih fondova",
+    "sektor": "K"
+  },
+  {
+    "sifra": "6621",
+    "naziv": "Obrada odštetnih zahteva i procenjivanje rizika i šteta",
+    "sektor": "K"
+  },
+  {
+    "sifra": "6622",
+    "naziv": "Delatnost zastupnika i posrednika u osiguranju",
+    "sektor": "K"
+  },
+  {
+    "sifra": "6629",
+    "naziv": "Ostale pomoćne delatnosti u osiguranju i penzijskim fondovima",
+    "sektor": "K"
+  },
+  {
+    "sifra": "6630",
+    "naziv": "Upravljanje fondovima",
+    "sektor": "K"
+  },
+  {
+    "sifra": "6810",
+    "naziv": "Kupovina i prodaja vlastitih nekretnina",
+    "sektor": "L"
+  },
+  {
+    "sifra": "6820",
+    "naziv": "Iznajmljivanje vlastitih ili iznajmljenih nekretnina i upravljanje njima",
+    "sektor": "L"
+  },
+  {
+    "sifra": "6831",
+    "naziv": "Delatnost agencija za nekretnine",
+    "sektor": "L"
+  },
+  {
+    "sifra": "6832",
+    "naziv": "Upravljanje nekretninama za naknadu",
+    "sektor": "L"
+  },
+  {
+    "sifra": "6910",
+    "naziv": "Pravni poslovi",
+    "sektor": "M"
+  },
+  {
+    "sifra": "6920",
+    "naziv": "Računovodstveni, knjigovodstveni i revizorski poslovi; poresko savetovanje",
+    "sektor": "M"
+  },
+  {
+    "sifra": "7010",
+    "naziv": "Upravljanje ekonomskim subjektom",
+    "sektor": "M"
+  },
+  {
+    "sifra": "7021",
+    "naziv": "Delatnost komunikacija i odnosa s javnošću",
+    "sektor": "M"
+  },
+  {
+    "sifra": "7022",
+    "naziv": "Konsultantske aktivnosti u vezi s poslovanjem i ostalim upravljanjem",
+    "sektor": "M"
+  },
+  {
+    "sifra": "7111",
+    "naziv": "Arhitektonska delatnost",
+    "sektor": "M"
+  },
+  {
+    "sifra": "7112",
+    "naziv": "Inženjerske delatnosti i tehničko savetovanje",
+    "sektor": "M"
+  },
+  {
+    "sifra": "7120",
+    "naziv": "Tehničko ispitivanje i analize",
+    "sektor": "M"
+  },
+  {
+    "sifra": "7211",
+    "naziv": "Istraživanje i eksperimentalni razvoj u biotehnologiji",
+    "sektor": "M"
+  },
+  {
+    "sifra": "7219",
+    "naziv": "Istraživanje i razvoj u ostalim prirodnim i tehničko-tehnološkim naukama",
+    "sektor": "M"
+  },
+  {
+    "sifra": "7220",
+    "naziv": "Istraživanje i razvoj u društvenim i humanističkim naukama",
+    "sektor": "M"
+  },
+  {
+    "sifra": "7311",
+    "naziv": "Delatnost reklamnih agencija",
+    "sektor": "M"
+  },
+  {
+    "sifra": "7312",
+    "naziv": "Medijsko predstavljanje",
+    "sektor": "M"
+  },
+  {
+    "sifra": "7320",
+    "naziv": "Istraživanje tržišta i ispitivanje javnog mnjenja",
+    "sektor": "M"
+  },
+  {
+    "sifra": "7410",
+    "naziv": "Specijalizovane dizajnerske delatnosti",
+    "sektor": "M"
+  },
+  {
+    "sifra": "7420",
+    "naziv": "Fotografske usluge",
+    "sektor": "M"
+  },
+  {
+    "sifra": "7430",
+    "naziv": "Prevođenje i usluge tumača",
+    "sektor": "M"
+  },
+  {
+    "sifra": "7490",
+    "naziv": "Ostale stručne, naučne i tehničke delatnosti",
+    "sektor": "M"
+  },
+  {
+    "sifra": "7500",
+    "naziv": "Veterinarska delatnost",
+    "sektor": "M"
+  },
+  {
+    "sifra": "7711",
+    "naziv": "Iznajmljivanje i lizing automobila i lakih motornih vozila",
+    "sektor": "N"
+  },
+  {
+    "sifra": "7712",
+    "naziv": "Iznajmljivanje i lizing kamiona",
+    "sektor": "N"
+  },
+  {
+    "sifra": "7721",
+    "naziv": "Iznajmljivanje i lizing opreme za rekreaciju i sport",
+    "sektor": "N"
+  },
+  {
+    "sifra": "7722",
+    "naziv": "Iznajmljivanje video-kaseta i kompakt-diskova",
+    "sektor": "N"
+  },
+  {
+    "sifra": "7729",
+    "naziv": "Iznajmljivanje i lizing ostalih predmeta za ličnu upotrebu i upotrebu u domaćinstvu",
+    "sektor": "N"
+  },
+  {
+    "sifra": "7731",
+    "naziv": "Iznajmljivanje i lizing poljoprivrednih mašina i opreme",
+    "sektor": "N"
+  },
+  {
+    "sifra": "7732",
+    "naziv": "Iznajmljivanje i lizing mašina i opreme za građevinarstvo",
+    "sektor": "N"
+  },
+  {
+    "sifra": "7733",
+    "naziv": "Iznajmljivanje i lizing kancelarijskih mašina i kancelarijske opreme (uključujući računare)",
+    "sektor": "N"
+  },
+  {
+    "sifra": "7734",
+    "naziv": "Iznajmljivanje i lizing opreme za vodeni transport",
+    "sektor": "N"
+  },
+  {
+    "sifra": "7735",
+    "naziv": "Iznajmljivanje i lizing opreme za vazdušni transport",
+    "sektor": "N"
+  },
+  {
+    "sifra": "7739",
+    "naziv": "Iznajmljivanje i lizing ostalih mašina, opreme i materijalnih dobara",
+    "sektor": "N"
+  },
+  {
+    "sifra": "7740",
+    "naziv": "Lizing intelektualne svojine i sličnih proizvoda, autorskih dela i predmeta srodnih prava",
+    "sektor": "N"
+  },
+  {
+    "sifra": "7810",
+    "naziv": "Delatnost agencija za zapošljavanje",
+    "sektor": "N"
+  },
+  {
+    "sifra": "7820",
+    "naziv": "Delatnost agencija za privremeno zapošljavanje",
+    "sektor": "N"
+  },
+  {
+    "sifra": "7830",
+    "naziv": "Ostalo ustupanje ljudskih resursa",
+    "sektor": "N"
+  },
+  {
+    "sifra": "7911",
+    "naziv": "Delatnost putničkih agencija",
+    "sektor": "N"
+  },
+  {
+    "sifra": "7912",
+    "naziv": "Delatnost tur-operatora",
+    "sektor": "N"
+  },
+  {
+    "sifra": "7990",
+    "naziv": "Ostale usluge rezervacije i delatnosti povezane s njima",
+    "sektor": "N"
+  },
+  {
+    "sifra": "8010",
+    "naziv": "Delatnost privatnog obezbeđenja",
+    "sektor": "N"
+  },
+  {
+    "sifra": "8020",
+    "naziv": "Usluge sistema obezbeđenja",
+    "sektor": "N"
+  },
+  {
+    "sifra": "8030",
+    "naziv": "Istražne delatnosti",
+    "sektor": "N"
+  },
+  {
+    "sifra": "8110",
+    "naziv": "Usluge održavanja objekata",
+    "sektor": "N"
+  },
+  {
+    "sifra": "8121",
+    "naziv": "Usluge redovnog čišćenja zgrada",
+    "sektor": "N"
+  },
+  {
+    "sifra": "8122",
+    "naziv": "Usluge ostalog čišćenja zgrada i opreme",
+    "sektor": "N"
+  },
+  {
+    "sifra": "8129",
+    "naziv": "Usluge ostalog čišćenja",
+    "sektor": "N"
+  },
+  {
+    "sifra": "8130",
+    "naziv": "Usluge uređenja i održavanja okoline",
+    "sektor": "N"
+  },
+  {
+    "sifra": "8211",
+    "naziv": "Kombinovane kancelarijsko-administrativne usluge",
+    "sektor": "N"
+  },
+  {
+    "sifra": "8219",
+    "naziv": "Fotokopiranje, pripremanje dokumenata i druga specijalizovana kancelarijska podrška",
+    "sektor": "N"
+  },
+  {
+    "sifra": "8220",
+    "naziv": "Delatnost pozivnih centara",
+    "sektor": "N"
+  },
+  {
+    "sifra": "8230",
+    "naziv": "Organizovanje sastanaka i sajmova",
+    "sektor": "N"
+  },
+  {
+    "sifra": "8291",
+    "naziv": "Delatnost agencija za naplatu potraživanja i kreditnih biroa",
+    "sektor": "N"
+  },
+  {
+    "sifra": "8292",
+    "naziv": "Usluge pakovanja",
+    "sektor": "N"
+  },
+  {
+    "sifra": "8299",
+    "naziv": "Ostale uslužne aktivnosti podrške poslovanju",
+    "sektor": "N"
+  },
+  {
+    "sifra": "8411",
+    "naziv": "Delatnost državnih organa",
+    "sektor": "O"
+  },
+  {
+    "sifra": "8412",
+    "naziv": "Uređivanje delatnosti subjekata koji pružaju zdravstvenu zaštitu, usluge u obrazovanju i kulturi i druge društvene usluge, osim obaveznog socijalnog osiguranja",
+    "sektor": "O"
+  },
+  {
+    "sifra": "8413",
+    "naziv": "Uređenje poslovanja i doprinos uspešnijem poslovanju u oblasti ekonomije",
+    "sektor": "O"
+  },
+  {
+    "sifra": "8421",
+    "naziv": "Spoljni poslovi",
+    "sektor": "O"
+  },
+  {
+    "sifra": "8422",
+    "naziv": "Poslovi odbrane",
+    "sektor": "O"
+  },
+  {
+    "sifra": "8423",
+    "naziv": "Sudske i pravosudne delatnosti",
+    "sektor": "O"
+  },
+  {
+    "sifra": "8424",
+    "naziv": "Obezbeđivanje javnog reda i bezbednosti",
+    "sektor": "O"
+  },
+  {
+    "sifra": "8425",
+    "naziv": "Delatnost vatrogasnih jedinica",
+    "sektor": "O"
+  },
+  {
+    "sifra": "8430",
+    "naziv": "Obavezno socijalno osiguranje",
+    "sektor": "O"
+  },
+  {
+    "sifra": "8510",
+    "naziv": "Predškolsko obrazovanje",
+    "sektor": "P"
+  },
+  {
+    "sifra": "8520",
+    "naziv": "Osnovno obrazovanje",
+    "sektor": "P"
+  },
+  {
+    "sifra": "8531",
+    "naziv": "Srednje opšte obrazovanje",
+    "sektor": "P"
+  },
+  {
+    "sifra": "8532",
+    "naziv": "Srednje stručno obrazovanje",
+    "sektor": "P"
+  },
+  {
+    "sifra": "8541",
+    "naziv": "Obrazovanje posle srednjeg koje nije visoko",
+    "sektor": "P"
+  },
+  {
+    "sifra": "8542",
+    "naziv": "Visoko obrazovanje",
+    "sektor": "P"
+  },
+  {
+    "sifra": "8551",
+    "naziv": "Sportsko i rekreativno obrazovanje",
+    "sektor": "P"
+  },
+  {
+    "sifra": "8552",
+    "naziv": "Umetničko obrazovanje",
+    "sektor": "P"
+  },
+  {
+    "sifra": "8553",
+    "naziv": "Delatnost škola za vozače",
+    "sektor": "P"
+  },
+  {
+    "sifra": "8559",
+    "naziv": "Ostalo obrazovanje",
+    "sektor": "P"
+  },
+  {
+    "sifra": "8560",
+    "naziv": "Pomoćne obrazovne delatnosti",
+    "sektor": "P"
+  },
+  {
+    "sifra": "8610",
+    "naziv": "Delatnost bolnica",
+    "sektor": "Q"
+  },
+  {
+    "sifra": "8621",
+    "naziv": "Opšta medicinska praksa",
+    "sektor": "Q"
+  },
+  {
+    "sifra": "8622",
+    "naziv": "Specijalistička medicinska praksa",
+    "sektor": "Q"
+  },
+  {
+    "sifra": "8623",
+    "naziv": "Stomatološka praksa",
+    "sektor": "Q"
+  },
+  {
+    "sifra": "8690",
+    "naziv": "Ostala zdravstvena zaštita",
+    "sektor": "Q"
+  },
+  {
+    "sifra": "8710",
+    "naziv": "Delatnosti smeštajnih ustanova s medicinskom negom",
+    "sektor": "Q"
+  },
+  {
+    "sifra": "8720",
+    "naziv": "Socijalno staranje u smeštajnim ustanovama za lica s teškoćama u razvoju, duševno obolele osobe i osobe s bolestima zavisnosti",
+    "sektor": "Q"
+  },
+  {
+    "sifra": "8730",
+    "naziv": "Rad ustanova za stara lica i lica s posebnim potrebama",
+    "sektor": "Q"
+  },
+  {
+    "sifra": "8790",
+    "naziv": "Ostali oblici socijalne zaštite sa smeštajem",
+    "sektor": "Q"
+  },
+  {
+    "sifra": "8810",
+    "naziv": "Socijalna zaštita bez smeštaja za stara lica i lica s posebnim potrebama",
+    "sektor": "Q"
+  },
+  {
+    "sifra": "8891",
+    "naziv": "Delatnost dnevne brige o deci",
+    "sektor": "Q"
+  },
+  {
+    "sifra": "8899",
+    "naziv": "Ostala nepomenuta socijalna zaštita bez smeštaja",
+    "sektor": "Q"
+  },
+  {
+    "sifra": "9001",
+    "naziv": "Izvođačka umetnost",
+    "sektor": "R"
+  },
+  {
+    "sifra": "9002",
+    "naziv": "Druge umetničke delatnosti u okviru izvođačke umetnosti",
+    "sektor": "R"
+  },
+  {
+    "sifra": "9003",
+    "naziv": "Umetničko stvaralaštvo",
+    "sektor": "R"
+  },
+  {
+    "sifra": "9004",
+    "naziv": "Rad umetničkih ustanova",
+    "sektor": "R"
+  },
+  {
+    "sifra": "9101",
+    "naziv": "Delatnosti biblioteka i arhiva",
+    "sektor": "R"
+  },
+  {
+    "sifra": "9102",
+    "naziv": "Delatnost muzeja galerija i zbirki",
+    "sektor": "R"
+  },
+  {
+    "sifra": "9103",
+    "naziv": "Zaštita i održavanje nepokretnih kulturnih dobara, kulturno-istorijskih lokacija, zgrada i sličnih turističkih spomenika",
+    "sektor": "R"
+  },
+  {
+    "sifra": "9104",
+    "naziv": "Delatnost botaničkih i zooloških vrtova i zaštita prirodnih vrednosti",
+    "sektor": "R"
+  },
+  {
+    "sifra": "9200",
+    "naziv": "Kockanje i klađenje",
+    "sektor": "R"
+  },
+  {
+    "sifra": "9311",
+    "naziv": "Delatnost sportskih objekata",
+    "sektor": "R"
+  },
+  {
+    "sifra": "9312",
+    "naziv": "Delatnost sportskih klubova",
+    "sektor": "R"
+  },
+  {
+    "sifra": "9313",
+    "naziv": "Delatnost fitnes klubova",
+    "sektor": "R"
+  },
+  {
+    "sifra": "9319",
+    "naziv": "Ostale sportske delatnosti",
+    "sektor": "R"
+  },
+  {
+    "sifra": "9321",
+    "naziv": "Delatnost zabavnih i tematskih parkova",
+    "sektor": "R"
+  },
+  {
+    "sifra": "9329",
+    "naziv": "Ostale zabavne i rekreativne delatnosti",
+    "sektor": "R"
+  },
+  {
+    "sifra": "9411",
+    "naziv": "Delatnosti poslovnih udruženja i udruženja poslodavaca",
+    "sektor": "S"
+  },
+  {
+    "sifra": "9412",
+    "naziv": "Delatnosti strukovnih udruženja",
+    "sektor": "S"
+  },
+  {
+    "sifra": "9420",
+    "naziv": "Delatnost sindikata",
+    "sektor": "S"
+  },
+  {
+    "sifra": "9491",
+    "naziv": "Delatnost verskih organizacija",
+    "sektor": "S"
+  },
+  {
+    "sifra": "9492",
+    "naziv": "Delatnost političkih organizacija",
+    "sektor": "S"
+  },
+  {
+    "sifra": "9499",
+    "naziv": "Delatnost ostalih organizacija na bazi učlanjenja",
+    "sektor": "S"
+  },
+  {
+    "sifra": "9511",
+    "naziv": "Popravka računara i periferne opreme",
+    "sektor": "S"
+  },
+  {
+    "sifra": "9512",
+    "naziv": "Popravka komunikacione opreme",
+    "sektor": "S"
+  },
+  {
+    "sifra": "9521",
+    "naziv": "Popravka elektronskih aparata za široku upotrebu",
+    "sektor": "S"
+  },
+  {
+    "sifra": "9522",
+    "naziv": "Popravka aparata za domaćinstvo i kućne i baštenske opreme",
+    "sektor": "S"
+  },
+  {
+    "sifra": "9523",
+    "naziv": "Popravka obuće i predmeta od kože",
+    "sektor": "S"
+  },
+  {
+    "sifra": "9524",
+    "naziv": "Održavanje i popravka nameštaja",
+    "sektor": "S"
+  },
+  {
+    "sifra": "9525",
+    "naziv": "Popravka satova i nakita",
+    "sektor": "S"
+  },
+  {
+    "sifra": "9529",
+    "naziv": "Popravka ostalih ličnih predmeta i predmeta za domaćinstvo",
+    "sektor": "S"
+  },
+  {
+    "sifra": "9601",
+    "naziv": "Pranje i hemijsko čišćenje tekstilnih i krznenih proizvoda",
+    "sektor": "S"
+  },
+  {
+    "sifra": "9602",
+    "naziv": "Delatnost frizerskih i kozmetičkih salona",
+    "sektor": "S"
+  },
+  {
+    "sifra": "9603",
+    "naziv": "Pogrebne i srodne delatnosti",
+    "sektor": "S"
+  },
+  {
+    "sifra": "9604",
+    "naziv": "Delatnost nege i održavanja tela",
+    "sektor": "S"
+  },
+  {
+    "sifra": "9609",
+    "naziv": "Ostale nepomenute lične uslužne delatnosti",
+    "sektor": "S"
+  },
+  {
+    "sifra": "9700",
+    "naziv": "Delatnost domaćinstava koja zapošljavaju poslugu",
+    "sektor": "T"
+  },
+  {
+    "sifra": "9810",
+    "naziv": "Delatnost domaćinstava koja proizvode robu za sopstvene potrebe",
+    "sektor": "T"
+  },
+  {
+    "sifra": "9820",
+    "naziv": "Delatnost domaćinstava koja obezbeđuju usluge za sopstvene potrebe",
+    "sektor": "T"
+  },
+  {
+    "sifra": "9900",
+    "naziv": "Delatnost eksteritorijalnih organizacija i tela",
+    "sektor": "U"
+  }
+]

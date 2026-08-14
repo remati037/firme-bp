@@ -1,0 +1,1154 @@
+[
+  {
+    "sifra": "70017",
+    "naziv_lat": "ALEKSANDROVAC",
+    "naziv_cir": "АЛЕКСАНДРОВАЦ",
+    "okrug": null
+  },
+  {
+    "sifra": "70025",
+    "naziv_lat": "ALEKSINAC",
+    "naziv_cir": "АЛЕКСИНАЦ",
+    "okrug": null
+  },
+  {
+    "sifra": "70033",
+    "naziv_lat": "ARANĐELOVAC",
+    "naziv_cir": "АРАНЂЕЛОВАЦ",
+    "okrug": null
+  },
+  {
+    "sifra": "70041",
+    "naziv_lat": "ARILJE",
+    "naziv_cir": "АРИЉЕ",
+    "okrug": null
+  },
+  {
+    "sifra": "70050",
+    "naziv_lat": "BABUŠNICA",
+    "naziv_cir": "БАБУШНИЦА",
+    "okrug": null
+  },
+  {
+    "sifra": "70068",
+    "naziv_lat": "BAJINA BAŠTA",
+    "naziv_cir": "БАЈИНА БАШТА",
+    "okrug": null
+  },
+  {
+    "sifra": "70076",
+    "naziv_lat": "BATOČINA",
+    "naziv_cir": "БАТОЧИНА",
+    "okrug": null
+  },
+  {
+    "sifra": "70084",
+    "naziv_lat": "BELA PALANKA",
+    "naziv_cir": "БЕЛА ПАЛАНКА",
+    "okrug": null
+  },
+  {
+    "sifra": "70092",
+    "naziv_lat": "BARAJEVO",
+    "naziv_cir": "БАРАЈЕВО",
+    "okrug": null
+  },
+  {
+    "sifra": "70106",
+    "naziv_lat": "VOŽDOVAC",
+    "naziv_cir": "ВОЖДОВАЦ",
+    "okrug": null
+  },
+  {
+    "sifra": "70114",
+    "naziv_lat": "VRAČAR",
+    "naziv_cir": "ВРАЧАР",
+    "okrug": null
+  },
+  {
+    "sifra": "70122",
+    "naziv_lat": "GROCKA",
+    "naziv_cir": "ГРОЦКА",
+    "okrug": null
+  },
+  {
+    "sifra": "70149",
+    "naziv_lat": "ZVEZDARA",
+    "naziv_cir": "ЗВЕЗДАРА",
+    "okrug": null
+  },
+  {
+    "sifra": "70157",
+    "naziv_lat": "ZEMUN",
+    "naziv_cir": "ЗЕМУН",
+    "okrug": null
+  },
+  {
+    "sifra": "70165",
+    "naziv_lat": "LAZAREVAC",
+    "naziv_cir": "ЛАЗАРЕВАЦ",
+    "okrug": null
+  },
+  {
+    "sifra": "70173",
+    "naziv_lat": "MLADENOVAC",
+    "naziv_cir": "МЛАДЕНОВАЦ",
+    "okrug": null
+  },
+  {
+    "sifra": "70181",
+    "naziv_lat": "NOVI BEOGRAD",
+    "naziv_cir": "НОВИ БЕОГРАД",
+    "okrug": null
+  },
+  {
+    "sifra": "70190",
+    "naziv_lat": "OBRENOVAC",
+    "naziv_cir": "ОБРЕНОВАЦ",
+    "okrug": null
+  },
+  {
+    "sifra": "70203",
+    "naziv_lat": "PALILULA (BEOGRAD)",
+    "naziv_cir": "ПАЛИЛУЛА (БЕОГРАД)",
+    "okrug": null
+  },
+  {
+    "sifra": "70211",
+    "naziv_lat": "RAKOVICA",
+    "naziv_cir": "РАКОВИЦА",
+    "okrug": null
+  },
+  {
+    "sifra": "70220",
+    "naziv_lat": "SAVSKI VENAC",
+    "naziv_cir": "САВСКИ ВЕНАЦ",
+    "okrug": null
+  },
+  {
+    "sifra": "70238",
+    "naziv_lat": "SOPOT",
+    "naziv_cir": "СОПОТ",
+    "okrug": null
+  },
+  {
+    "sifra": "70246",
+    "naziv_lat": "STARI GRAD",
+    "naziv_cir": "СТАРИ ГРАД",
+    "okrug": null
+  },
+  {
+    "sifra": "70254",
+    "naziv_lat": "ČUKARICA",
+    "naziv_cir": "ЧУКАРИЦА",
+    "okrug": null
+  },
+  {
+    "sifra": "70262",
+    "naziv_lat": "BLACE",
+    "naziv_cir": "БЛАЦЕ",
+    "okrug": null
+  },
+  {
+    "sifra": "70289",
+    "naziv_lat": "BOGATIĆ",
+    "naziv_cir": "БОГАТИЋ",
+    "okrug": null
+  },
+  {
+    "sifra": "70297",
+    "naziv_lat": "BOJNIK",
+    "naziv_cir": "БОЈНИК",
+    "okrug": null
+  },
+  {
+    "sifra": "70319",
+    "naziv_lat": "BOLJEVAC",
+    "naziv_cir": "БОЉЕВАЦ",
+    "okrug": null
+  },
+  {
+    "sifra": "70327",
+    "naziv_lat": "BOR",
+    "naziv_cir": "БОР",
+    "okrug": null
+  },
+  {
+    "sifra": "70335",
+    "naziv_lat": "BOSILEGRAD",
+    "naziv_cir": "БОСИЛЕГРАД",
+    "okrug": null
+  },
+  {
+    "sifra": "70343",
+    "naziv_lat": "BRUS",
+    "naziv_cir": "БРУС",
+    "okrug": null
+  },
+  {
+    "sifra": "70351",
+    "naziv_lat": "BUJANOVAC",
+    "naziv_cir": "БУЈАНОВАЦ",
+    "okrug": null
+  },
+  {
+    "sifra": "70360",
+    "naziv_lat": "VALJEVO",
+    "naziv_cir": "ВАЉЕВО",
+    "okrug": null
+  },
+  {
+    "sifra": "70378",
+    "naziv_lat": "VARVARIN",
+    "naziv_cir": "ВАРВАРИН",
+    "okrug": null
+  },
+  {
+    "sifra": "70386",
+    "naziv_lat": "VELIKA PLANA",
+    "naziv_cir": "ВЕЛИКА ПЛАНА",
+    "okrug": null
+  },
+  {
+    "sifra": "70394",
+    "naziv_lat": "VELIKO GRADIŠTE",
+    "naziv_cir": "ВЕЛИКО ГРАДИШТЕ",
+    "okrug": null
+  },
+  {
+    "sifra": "70408",
+    "naziv_lat": "VLADIMIRCI",
+    "naziv_cir": "ВЛАДИМИРЦИ",
+    "okrug": null
+  },
+  {
+    "sifra": "70416",
+    "naziv_lat": "VLADIČIN HAN",
+    "naziv_cir": "ВЛАДИЧИН ХАН",
+    "okrug": null
+  },
+  {
+    "sifra": "70424",
+    "naziv_lat": "VLASOTINCE",
+    "naziv_cir": "ВЛАСОТИНЦЕ",
+    "okrug": null
+  },
+  {
+    "sifra": "70432",
+    "naziv_lat": "VRANJE",
+    "naziv_cir": "ВРАЊЕ",
+    "okrug": null
+  },
+  {
+    "sifra": "70459",
+    "naziv_lat": "VRNJAČKA BANJA",
+    "naziv_cir": "ВРЊАЧКА БАЊА",
+    "okrug": null
+  },
+  {
+    "sifra": "70467",
+    "naziv_lat": "GADŽIN HAN",
+    "naziv_cir": "ГАЏИН ХАН",
+    "okrug": null
+  },
+  {
+    "sifra": "70475",
+    "naziv_lat": "GOLUBAC",
+    "naziv_cir": "ГОЛУБАЦ",
+    "okrug": null
+  },
+  {
+    "sifra": "70483",
+    "naziv_lat": "GORNJI MILANOVAC",
+    "naziv_cir": "ГОРЊИ МИЛАНОВАЦ",
+    "okrug": null
+  },
+  {
+    "sifra": "70491",
+    "naziv_lat": "DESPOTOVAC",
+    "naziv_cir": "ДЕСПОТОВАЦ",
+    "okrug": null
+  },
+  {
+    "sifra": "70505",
+    "naziv_lat": "DIMITROVGRAD",
+    "naziv_cir": "ДИМИТРОВГРАД",
+    "okrug": null
+  },
+  {
+    "sifra": "70513",
+    "naziv_lat": "DOLJEVAC",
+    "naziv_cir": "ДОЉЕВАЦ",
+    "okrug": null
+  },
+  {
+    "sifra": "70521",
+    "naziv_lat": "ŽABARI",
+    "naziv_cir": "ЖАБАРИ",
+    "okrug": null
+  },
+  {
+    "sifra": "70530",
+    "naziv_lat": "ŽAGUBICA",
+    "naziv_cir": "ЖАГУБИЦА",
+    "okrug": null
+  },
+  {
+    "sifra": "70548",
+    "naziv_lat": "ŽITORAĐA",
+    "naziv_cir": "ЖИТОРАЂА",
+    "okrug": null
+  },
+  {
+    "sifra": "70556",
+    "naziv_lat": "ZAJEČAR",
+    "naziv_cir": "ЗАЈЕЧАР",
+    "okrug": null
+  },
+  {
+    "sifra": "70564",
+    "naziv_lat": "IVANJICA",
+    "naziv_cir": "ИВАЊИЦА",
+    "okrug": null
+  },
+  {
+    "sifra": "70572",
+    "naziv_lat": "KLADOVO",
+    "naziv_cir": "КЛАДОВО",
+    "okrug": null
+  },
+  {
+    "sifra": "70599",
+    "naziv_lat": "KNIĆ",
+    "naziv_cir": "КНИЋ",
+    "okrug": null
+  },
+  {
+    "sifra": "70602",
+    "naziv_lat": "KNJAŽEVAC",
+    "naziv_cir": "КЊАЖЕВАЦ",
+    "okrug": null
+  },
+  {
+    "sifra": "70629",
+    "naziv_lat": "KOSJERIĆ",
+    "naziv_cir": "КОСЈЕРИЋ",
+    "okrug": null
+  },
+  {
+    "sifra": "70637",
+    "naziv_lat": "KOCELJEVA",
+    "naziv_cir": "КОЦЕЉЕВА",
+    "okrug": null
+  },
+  {
+    "sifra": "70645",
+    "naziv_lat": "KRAGUJEVAC",
+    "naziv_cir": "КРАГУЈЕВАЦ",
+    "okrug": null
+  },
+  {
+    "sifra": "70653",
+    "naziv_lat": "KRALJEVO",
+    "naziv_cir": "КРАЉЕВО",
+    "okrug": null
+  },
+  {
+    "sifra": "70661",
+    "naziv_lat": "KRUPANJ",
+    "naziv_cir": "КРУПАЊ",
+    "okrug": null
+  },
+  {
+    "sifra": "70670",
+    "naziv_lat": "KRUŠEVAC",
+    "naziv_cir": "КРУШЕВАЦ",
+    "okrug": null
+  },
+  {
+    "sifra": "70688",
+    "naziv_lat": "KURŠUMLIJA",
+    "naziv_cir": "КУРШУМЛИЈА",
+    "okrug": null
+  },
+  {
+    "sifra": "70696",
+    "naziv_lat": "KUČEVO",
+    "naziv_cir": "КУЧЕВО",
+    "okrug": null
+  },
+  {
+    "sifra": "70700",
+    "naziv_lat": "LAJKOVAC",
+    "naziv_cir": "ЛАЈКОВАЦ",
+    "okrug": null
+  },
+  {
+    "sifra": "70718",
+    "naziv_lat": "LEBANE",
+    "naziv_cir": "ЛЕБАНЕ",
+    "okrug": null
+  },
+  {
+    "sifra": "70726",
+    "naziv_lat": "LESKOVAC",
+    "naziv_cir": "ЛЕСКОВАЦ",
+    "okrug": null
+  },
+  {
+    "sifra": "70734",
+    "naziv_lat": "LOZNICA",
+    "naziv_cir": "ЛОЗНИЦА",
+    "okrug": null
+  },
+  {
+    "sifra": "70742",
+    "naziv_lat": "LUČANI",
+    "naziv_cir": "ЛУЧАНИ",
+    "okrug": null
+  },
+  {
+    "sifra": "70769",
+    "naziv_lat": "LJIG",
+    "naziv_cir": "ЉИГ",
+    "okrug": null
+  },
+  {
+    "sifra": "70777",
+    "naziv_lat": "LJUBOVIJA",
+    "naziv_cir": "ЉУБОВИЈА",
+    "okrug": null
+  },
+  {
+    "sifra": "70785",
+    "naziv_lat": "MAJDANPEK",
+    "naziv_cir": "МАЈДАНПЕК",
+    "okrug": null
+  },
+  {
+    "sifra": "70793",
+    "naziv_lat": "MALI ZVORNIK",
+    "naziv_cir": "МАЛИ ЗВОРНИК",
+    "okrug": null
+  },
+  {
+    "sifra": "70807",
+    "naziv_lat": "MALO CRNIĆE",
+    "naziv_cir": "МАЛО ЦРНИЋЕ",
+    "okrug": null
+  },
+  {
+    "sifra": "70815",
+    "naziv_lat": "MEDVEĐA",
+    "naziv_cir": "МЕДВЕЂА",
+    "okrug": null
+  },
+  {
+    "sifra": "70823",
+    "naziv_lat": "MEROŠINA",
+    "naziv_cir": "МЕРОШИНА",
+    "okrug": null
+  },
+  {
+    "sifra": "70831",
+    "naziv_lat": "MIONICA",
+    "naziv_cir": "МИОНИЦА",
+    "okrug": null
+  },
+  {
+    "sifra": "70840",
+    "naziv_lat": "NEGOTIN",
+    "naziv_cir": "НЕГОТИН",
+    "okrug": null
+  },
+  {
+    "sifra": "70858",
+    "naziv_lat": "Niš (grad)",
+    "naziv_cir": "Ниш (град)",
+    "okrug": null
+  },
+  {
+    "sifra": "70866",
+    "naziv_lat": "NOVA VAROŠ",
+    "naziv_cir": "НОВА ВАРОШ",
+    "okrug": null
+  },
+  {
+    "sifra": "70874",
+    "naziv_lat": "NOVI PAZAR",
+    "naziv_cir": "НОВИ ПАЗАР",
+    "okrug": null
+  },
+  {
+    "sifra": "70882",
+    "naziv_lat": "OSEČINA",
+    "naziv_cir": "ОСЕЧИНА",
+    "okrug": null
+  },
+  {
+    "sifra": "70904",
+    "naziv_lat": "PARAĆIN",
+    "naziv_cir": "ПАРАЋИН",
+    "okrug": null
+  },
+  {
+    "sifra": "70912",
+    "naziv_lat": "PETROVAC NA MLAVI",
+    "naziv_cir": "ПЕТРОВАЦ НА МЛАВИ",
+    "okrug": null
+  },
+  {
+    "sifra": "70939",
+    "naziv_lat": "PIROT",
+    "naziv_cir": "ПИРОТ",
+    "okrug": null
+  },
+  {
+    "sifra": "70947",
+    "naziv_lat": "POŽAREVAC",
+    "naziv_cir": "ПОЖАРЕВАЦ",
+    "okrug": null
+  },
+  {
+    "sifra": "70955",
+    "naziv_lat": "POŽEGA",
+    "naziv_cir": "ПОЖЕГА",
+    "okrug": null
+  },
+  {
+    "sifra": "70963",
+    "naziv_lat": "PREŠEVO",
+    "naziv_cir": "ПРЕШЕВО",
+    "okrug": null
+  },
+  {
+    "sifra": "70971",
+    "naziv_lat": "PRIBOJ",
+    "naziv_cir": "ПРИБОЈ",
+    "okrug": null
+  },
+  {
+    "sifra": "70980",
+    "naziv_lat": "PRIJEPOLJE",
+    "naziv_cir": "ПРИЈЕПОЉЕ",
+    "okrug": null
+  },
+  {
+    "sifra": "70998",
+    "naziv_lat": "PROKUPLJE",
+    "naziv_cir": "ПРОКУПЉЕ",
+    "okrug": null
+  },
+  {
+    "sifra": "71005",
+    "naziv_lat": "RAŽANJ",
+    "naziv_cir": "РАЖАЊ",
+    "okrug": null
+  },
+  {
+    "sifra": "71013",
+    "naziv_lat": "RAČA",
+    "naziv_cir": "РАЧА",
+    "okrug": null
+  },
+  {
+    "sifra": "71021",
+    "naziv_lat": "RAŠKA",
+    "naziv_cir": "РАШКА",
+    "okrug": null
+  },
+  {
+    "sifra": "71030",
+    "naziv_lat": "REKOVAC",
+    "naziv_cir": "РЕКОВАЦ",
+    "okrug": null
+  },
+  {
+    "sifra": "71048",
+    "naziv_lat": "JAGODINA",
+    "naziv_cir": "ЈАГОДИНА",
+    "okrug": null
+  },
+  {
+    "sifra": "71056",
+    "naziv_lat": "SVILAJNAC",
+    "naziv_cir": "СВИЛАЈНАЦ",
+    "okrug": null
+  },
+  {
+    "sifra": "71064",
+    "naziv_lat": "SVRLJIG",
+    "naziv_cir": "СВРЉИГ",
+    "okrug": null
+  },
+  {
+    "sifra": "71072",
+    "naziv_lat": "SJENICA",
+    "naziv_cir": "СЈЕНИЦА",
+    "okrug": null
+  },
+  {
+    "sifra": "71099",
+    "naziv_lat": "SMEDEREVO",
+    "naziv_cir": "СМЕДЕРЕВО",
+    "okrug": null
+  },
+  {
+    "sifra": "71102",
+    "naziv_lat": "SMEDEREVSKA PALANKA",
+    "naziv_cir": "СМЕДЕРЕВСКА ПАЛАНКА",
+    "okrug": null
+  },
+  {
+    "sifra": "71129",
+    "naziv_lat": "SOKOBANJA",
+    "naziv_cir": "СОКОБАЊА",
+    "okrug": null
+  },
+  {
+    "sifra": "71137",
+    "naziv_lat": "SURDULICA",
+    "naziv_cir": "СУРДУЛИЦА",
+    "okrug": null
+  },
+  {
+    "sifra": "71145",
+    "naziv_lat": "UŽICE",
+    "naziv_cir": "УЖИЦЕ",
+    "okrug": null
+  },
+  {
+    "sifra": "71153",
+    "naziv_lat": "TOPOLA",
+    "naziv_cir": "ТОПОЛА",
+    "okrug": null
+  },
+  {
+    "sifra": "71161",
+    "naziv_lat": "TRGOVIŠTE",
+    "naziv_cir": "ТРГОВИШТЕ",
+    "okrug": null
+  },
+  {
+    "sifra": "71170",
+    "naziv_lat": "TRSTENIK",
+    "naziv_cir": "ТРСТЕНИК",
+    "okrug": null
+  },
+  {
+    "sifra": "71188",
+    "naziv_lat": "TUTIN",
+    "naziv_cir": "ТУТИН",
+    "okrug": null
+  },
+  {
+    "sifra": "71196",
+    "naziv_lat": "ĆIĆEVAC",
+    "naziv_cir": "ЋИЋЕВАЦ",
+    "okrug": null
+  },
+  {
+    "sifra": "71200",
+    "naziv_lat": "ĆUPRIJA",
+    "naziv_cir": "ЋУПРИЈА",
+    "okrug": null
+  },
+  {
+    "sifra": "71218",
+    "naziv_lat": "UB",
+    "naziv_cir": "УБ",
+    "okrug": null
+  },
+  {
+    "sifra": "71226",
+    "naziv_lat": "CRNA TRAVA",
+    "naziv_cir": "ЦРНА ТРАВА",
+    "okrug": null
+  },
+  {
+    "sifra": "71234",
+    "naziv_lat": "ČAJETINA",
+    "naziv_cir": "ЧАЈЕТИНА",
+    "okrug": null
+  },
+  {
+    "sifra": "71242",
+    "naziv_lat": "ČAČAK",
+    "naziv_cir": "ЧАЧАК",
+    "okrug": null
+  },
+  {
+    "sifra": "71269",
+    "naziv_lat": "ŠABAC",
+    "naziv_cir": "ШАБАЦ",
+    "okrug": null
+  },
+  {
+    "sifra": "71277",
+    "naziv_lat": "LAPOVO",
+    "naziv_cir": "ЛАПОВО",
+    "okrug": null
+  },
+  {
+    "sifra": "71285",
+    "naziv_lat": "NIŠKA BANJA",
+    "naziv_cir": "НИШКА БАЊА",
+    "okrug": null
+  },
+  {
+    "sifra": "71293",
+    "naziv_lat": "SURČIN",
+    "naziv_cir": "СУРЧИН",
+    "okrug": null
+  },
+  {
+    "sifra": "71307",
+    "naziv_lat": "PANTELEJ",
+    "naziv_cir": "ПАНТЕЛЕЈ",
+    "okrug": null
+  },
+  {
+    "sifra": "71308",
+    "naziv_lat": "Beograd (grad)",
+    "naziv_cir": "Београд (град)",
+    "okrug": null
+  },
+  {
+    "sifra": "71315",
+    "naziv_lat": "CRVENI KRST",
+    "naziv_cir": "ЦРВЕНИ КРСТ",
+    "okrug": null
+  },
+  {
+    "sifra": "71323",
+    "naziv_lat": "PALILULA (NIŠ)",
+    "naziv_cir": "ПАЛИЛУЛА (НИШ)",
+    "okrug": null
+  },
+  {
+    "sifra": "71331",
+    "naziv_lat": "MEDIJANA",
+    "naziv_cir": "МЕДИЈАНА",
+    "okrug": null
+  },
+  {
+    "sifra": "71340",
+    "naziv_lat": "KOSTOLAC",
+    "naziv_cir": "КОСТОЛАЦ",
+    "okrug": null
+  },
+  {
+    "sifra": "71358",
+    "naziv_lat": "VRANJSKA BANJA",
+    "naziv_cir": "ВРАЊСКА БАЊА",
+    "okrug": null
+  },
+  {
+    "sifra": "71366",
+    "naziv_lat": "SEVOJNO",
+    "naziv_cir": "СЕВОЈНО",
+    "okrug": null
+  },
+  {
+    "sifra": "80012",
+    "naziv_lat": "ADA",
+    "naziv_cir": "АДА",
+    "okrug": null
+  },
+  {
+    "sifra": "80039",
+    "naziv_lat": "ALIBUNAR",
+    "naziv_cir": "АЛИБУНАР",
+    "okrug": null
+  },
+  {
+    "sifra": "80047",
+    "naziv_lat": "APATIN",
+    "naziv_cir": "АПАТИН",
+    "okrug": null
+  },
+  {
+    "sifra": "80055",
+    "naziv_lat": "BAČ",
+    "naziv_cir": "БАЧ",
+    "okrug": null
+  },
+  {
+    "sifra": "80063",
+    "naziv_lat": "BAČKA PALANKA",
+    "naziv_cir": "БАЧКА ПАЛАНКА",
+    "okrug": null
+  },
+  {
+    "sifra": "80071",
+    "naziv_lat": "BAČKA TOPOLA",
+    "naziv_cir": "БАЧКА ТОПОЛА",
+    "okrug": null
+  },
+  {
+    "sifra": "80080",
+    "naziv_lat": "BAČKI PETROVAC",
+    "naziv_cir": "БАЧКИ ПЕТРОВАЦ",
+    "okrug": null
+  },
+  {
+    "sifra": "80098",
+    "naziv_lat": "BELA CRKVA",
+    "naziv_cir": "БЕЛА ЦРКВА",
+    "okrug": null
+  },
+  {
+    "sifra": "80101",
+    "naziv_lat": "BEOČIN",
+    "naziv_cir": "БЕОЧИН",
+    "okrug": null
+  },
+  {
+    "sifra": "80110",
+    "naziv_lat": "BEČEJ",
+    "naziv_cir": "БЕЧЕЈ",
+    "okrug": null
+  },
+  {
+    "sifra": "80128",
+    "naziv_lat": "VRŠAC",
+    "naziv_cir": "ВРШАЦ",
+    "okrug": null
+  },
+  {
+    "sifra": "80136",
+    "naziv_lat": "ŽABALJ",
+    "naziv_cir": "ЖАБАЉ",
+    "okrug": null
+  },
+  {
+    "sifra": "80144",
+    "naziv_lat": "ŽITIŠTE",
+    "naziv_cir": "ЖИТИШТЕ",
+    "okrug": null
+  },
+  {
+    "sifra": "80152",
+    "naziv_lat": "ZRENJANIN",
+    "naziv_cir": "ЗРЕЊАНИН",
+    "okrug": null
+  },
+  {
+    "sifra": "80179",
+    "naziv_lat": "INĐIJA",
+    "naziv_cir": "ИНЂИЈА",
+    "okrug": null
+  },
+  {
+    "sifra": "80187",
+    "naziv_lat": "IRIG",
+    "naziv_cir": "ИРИГ",
+    "okrug": null
+  },
+  {
+    "sifra": "80195",
+    "naziv_lat": "KANJIŽA",
+    "naziv_cir": "КАЊИЖА",
+    "okrug": null
+  },
+  {
+    "sifra": "80209",
+    "naziv_lat": "KIKINDA",
+    "naziv_cir": "КИКИНДА",
+    "okrug": null
+  },
+  {
+    "sifra": "80217",
+    "naziv_lat": "KOVAČICA",
+    "naziv_cir": "КОВАЧИЦА",
+    "okrug": null
+  },
+  {
+    "sifra": "80225",
+    "naziv_lat": "KOVIN",
+    "naziv_cir": "КОВИН",
+    "okrug": null
+  },
+  {
+    "sifra": "80233",
+    "naziv_lat": "KULA",
+    "naziv_cir": "КУЛА",
+    "okrug": null
+  },
+  {
+    "sifra": "80241",
+    "naziv_lat": "MALI IĐOŠ",
+    "naziv_cir": "МАЛИ ИЂОШ",
+    "okrug": null
+  },
+  {
+    "sifra": "80250",
+    "naziv_lat": "NOVA CRNJA",
+    "naziv_cir": "НОВА ЦРЊА",
+    "okrug": null
+  },
+  {
+    "sifra": "80268",
+    "naziv_lat": "NOVI BEČEJ",
+    "naziv_cir": "НОВИ БЕЧЕЈ",
+    "okrug": null
+  },
+  {
+    "sifra": "80276",
+    "naziv_lat": "NOVI KNEŽEVAC",
+    "naziv_cir": "НОВИ КНЕЖЕВАЦ",
+    "okrug": null
+  },
+  {
+    "sifra": "80292",
+    "naziv_lat": "OPOVO",
+    "naziv_cir": "ОПОВО",
+    "okrug": null
+  },
+  {
+    "sifra": "80306",
+    "naziv_lat": "ODŽACI",
+    "naziv_cir": "ОЏАЦИ",
+    "okrug": null
+  },
+  {
+    "sifra": "80314",
+    "naziv_lat": "PANČEVO",
+    "naziv_cir": "ПАНЧЕВО",
+    "okrug": null
+  },
+  {
+    "sifra": "80322",
+    "naziv_lat": "PEĆINCI",
+    "naziv_cir": "ПЕЋИНЦИ",
+    "okrug": null
+  },
+  {
+    "sifra": "80349",
+    "naziv_lat": "PLANDIŠTE",
+    "naziv_cir": "ПЛАНДИШТЕ",
+    "okrug": null
+  },
+  {
+    "sifra": "80357",
+    "naziv_lat": "RUMA",
+    "naziv_cir": "РУМА",
+    "okrug": null
+  },
+  {
+    "sifra": "80365",
+    "naziv_lat": "SENTA",
+    "naziv_cir": "СЕНТА",
+    "okrug": null
+  },
+  {
+    "sifra": "80373",
+    "naziv_lat": "SEČANJ",
+    "naziv_cir": "СЕЧАЊ",
+    "okrug": null
+  },
+  {
+    "sifra": "80381",
+    "naziv_lat": "SOMBOR",
+    "naziv_cir": "СОМБОР",
+    "okrug": null
+  },
+  {
+    "sifra": "80390",
+    "naziv_lat": "SRBOBRAN",
+    "naziv_cir": "СРБОБРАН",
+    "okrug": null
+  },
+  {
+    "sifra": "80403",
+    "naziv_lat": "SREMSKA MITROVICA",
+    "naziv_cir": "СРЕМСКА МИТРОВИЦА",
+    "okrug": null
+  },
+  {
+    "sifra": "80411",
+    "naziv_lat": "SREMSKI KARLOVCI",
+    "naziv_cir": "СРЕМСКИ КАРЛОВЦИ",
+    "okrug": null
+  },
+  {
+    "sifra": "80420",
+    "naziv_lat": "STARA PAZOVA",
+    "naziv_cir": "СТАРА ПАЗОВА",
+    "okrug": null
+  },
+  {
+    "sifra": "80438",
+    "naziv_lat": "SUBOTICA",
+    "naziv_cir": "СУБОТИЦА",
+    "okrug": null
+  },
+  {
+    "sifra": "80446",
+    "naziv_lat": "TEMERIN",
+    "naziv_cir": "ТЕМЕРИН",
+    "okrug": null
+  },
+  {
+    "sifra": "80454",
+    "naziv_lat": "TITEL",
+    "naziv_cir": "ТИТЕЛ",
+    "okrug": null
+  },
+  {
+    "sifra": "80462",
+    "naziv_lat": "VRBAS",
+    "naziv_cir": "ВРБАС",
+    "okrug": null
+  },
+  {
+    "sifra": "80489",
+    "naziv_lat": "ČOKA",
+    "naziv_cir": "ЧОКА",
+    "okrug": null
+  },
+  {
+    "sifra": "80497",
+    "naziv_lat": "ŠID",
+    "naziv_cir": "ШИД",
+    "okrug": null
+  },
+  {
+    "sifra": "89010",
+    "naziv_lat": "NOVI SAD",
+    "naziv_cir": "НОВИ САД",
+    "okrug": null
+  },
+  {
+    "sifra": "90018",
+    "naziv_lat": "VITINA",
+    "naziv_cir": "ВИТИНА",
+    "okrug": null
+  },
+  {
+    "sifra": "90026",
+    "naziv_lat": "VUČITRN",
+    "naziv_cir": "ВУЧИТРН",
+    "okrug": null
+  },
+  {
+    "sifra": "90042",
+    "naziv_lat": "GNJILANE",
+    "naziv_cir": "ГЊИЛАНЕ",
+    "okrug": null
+  },
+  {
+    "sifra": "90093",
+    "naziv_lat": "ZUBIN POTOK",
+    "naziv_cir": "ЗУБИН ПОТОК",
+    "okrug": null
+  },
+  {
+    "sifra": "90107",
+    "naziv_lat": "ISTOK",
+    "naziv_cir": "ИСТОК",
+    "okrug": null
+  },
+  {
+    "sifra": "90115",
+    "naziv_lat": "KAČANIK",
+    "naziv_cir": "КАЧАНИК",
+    "okrug": null
+  },
+  {
+    "sifra": "90123",
+    "naziv_lat": "KLINA",
+    "naziv_cir": "КЛИНА",
+    "okrug": null
+  },
+  {
+    "sifra": "90131",
+    "naziv_lat": "KOSOVO POLJE",
+    "naziv_cir": "КОСОВО ПОЉЕ",
+    "okrug": null
+  },
+  {
+    "sifra": "90140",
+    "naziv_lat": "KOSOVSKA KAMENICA",
+    "naziv_cir": "КОСОВСКА КАМЕНИЦА",
+    "okrug": null
+  },
+  {
+    "sifra": "90158",
+    "naziv_lat": "LEPOSAVIĆ",
+    "naziv_cir": "ЛЕПОСАВИЋ",
+    "okrug": null
+  },
+  {
+    "sifra": "90166",
+    "naziv_lat": "LIPLJAN",
+    "naziv_cir": "ЛИПЉАН",
+    "okrug": null
+  },
+  {
+    "sifra": "90182",
+    "naziv_lat": "NOVO BRDO",
+    "naziv_cir": "НОВО БРДО",
+    "okrug": null
+  },
+  {
+    "sifra": "90204",
+    "naziv_lat": "OBILIĆ",
+    "naziv_cir": "ОБИЛИЋ",
+    "okrug": null
+  },
+  {
+    "sifra": "90212",
+    "naziv_lat": "ORAHOVAC",
+    "naziv_cir": "ОРАХОВАЦ",
+    "okrug": null
+  },
+  {
+    "sifra": "90239",
+    "naziv_lat": "PEĆ",
+    "naziv_cir": "ПЕЋ",
+    "okrug": null
+  },
+  {
+    "sifra": "90255",
+    "naziv_lat": "PRIZREN",
+    "naziv_cir": "ПРИЗРЕН",
+    "okrug": null
+  },
+  {
+    "sifra": "90263",
+    "naziv_lat": "PRIŠTINA",
+    "naziv_cir": "ПРИШТИНА",
+    "okrug": null
+  },
+  {
+    "sifra": "90298",
+    "naziv_lat": "KOSOVSKA MITROVICA",
+    "naziv_cir": "КОСОВСКА МИТРОВИЦА",
+    "okrug": null
+  },
+  {
+    "sifra": "90301",
+    "naziv_lat": "UROŠEVAC",
+    "naziv_cir": "УРОШЕВАЦ",
+    "okrug": null
+  },
+  {
+    "sifra": "90328",
+    "naziv_lat": "ŠTRPCE",
+    "naziv_cir": "ШТРПЦЕ",
+    "okrug": null
+  },
+  {
+    "sifra": "90336",
+    "naziv_lat": "GORA",
+    "naziv_cir": "ГОРА",
+    "okrug": null
+  },
+  {
+    "sifra": "90352",
+    "naziv_lat": "ZVEČAN",
+    "naziv_cir": "ЗВЕЧАН",
+    "okrug": null
+  }
+]
