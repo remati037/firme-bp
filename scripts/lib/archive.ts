@@ -15,12 +15,23 @@ export async function osigurajBucket(supabase: SupabaseClient): Promise<void> {
 
   const { error: greskaKreiranja } = await supabase.storage.createBucket(BUCKET, { public: false });
 
-  // Trka između dva pokretanja nije greška; bucket je tu, a to je jedino bitno.
-  if (greskaKreiranja && !/already exists/i.test(greskaKreiranja.message)) {
-    throw new Error(`Ne mogu da napravim bucket ${BUCKET}: ${greskaKreiranja.message}`);
+  if (!greskaKreiranja) {
+    console.log(`  Napravljen privatan bucket "${BUCKET}".`);
+    return;
   }
 
-  console.log(`  Napravljen privatan bucket "${BUCKET}".`);
+  // Trka između dva pokretanja nije greška; bucket je tu, a to je jedino bitno.
+  // Prepoznaje se po HTTP 409, ne po tekstu poruke: storage-js dokumentuje
+  // statusCode kao signal, a tekst se menja izmedju verzija i lokalizacija.
+  const konflikt =
+    (greskaKreiranja as { statusCode?: string | number }).statusCode === "409" ||
+    (greskaKreiranja as { statusCode?: string | number }).statusCode === 409 ||
+    (greskaKreiranja as { status?: number }).status === 409 ||
+    /already exists|duplicate/i.test(greskaKreiranja.message);
+
+  if (!konflikt) {
+    throw new Error(`Ne mogu da napravim bucket ${BUCKET}: ${greskaKreiranja.message}`);
+  }
 }
 
 /** Gzipuje lokalni fajl i uploaduje ga. Vraća veličinu gzipovanog sadržaja. */
