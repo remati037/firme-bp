@@ -1,4 +1,4 @@
-import { mkdtempSync, readFileSync, rmSync } from "node:fs";
+import { existsSync, mkdtempSync, readFileSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import type { SupabaseClient } from "@supabase/supabase-js";
@@ -133,6 +133,15 @@ async function glavna(): Promise<void> {
 
     await proveriOdstupanje(supabase, datumPreseka, unosiFirmi.length);
 
+    // Rucni spisak skracenih imena. Nije obavezan; ako ga nema, radi algoritam.
+    const putOverride = path.join(process.cwd(), "scripts/data/ime-override.json");
+    const overrides: Record<string, string> = existsSync(putOverride)
+      ? JSON.parse(readFileSync(putOverride, "utf8"))
+      : {};
+    if (Object.keys(overrides).length) {
+      console.log(`  rucnih imena: ${Object.keys(overrides).length}`);
+    }
+
     const postojeceFirme = await ucitajPostojeceFirme(supabase);
 
     // updated_at se stavlja na SVAKI red u ovom nizu, i nov i izmenjen. Niz i
@@ -164,7 +173,7 @@ async function glavna(): Promise<void> {
       // takvih bude mnogo.
       let novo: RedFirme;
       try {
-        novo = mapirajFirmu(mb, sirovo, staro?.slug ?? null);
+        novo = mapirajFirmu(mb, sirovo, staro?.slug ?? null, overrides);
       } catch (greska) {
         preskoceneFirme.push(`${mb}: ${greska instanceof Error ? greska.message : greska}`);
         continue;

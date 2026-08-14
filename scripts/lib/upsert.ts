@@ -41,7 +41,7 @@ export async function ucitajPostojeceFirme(
   const redovi = await ucitajSve<RedFirme>(
     supabase,
     "companies",
-    "maticni_broj, slug, poslovno_ime, poslovno_ime_norm, sifra_opstine, opstina, status, status_aktivan, datum_osnivanja, pravna_forma, sifra_delatnosti",
+    "maticni_broj, slug, poslovno_ime, poslovno_ime_norm, poslovno_ime_kratko, sifra_opstine, opstina, status, status_aktivan, datum_osnivanja, pravna_forma, sifra_delatnosti",
     ["maticni_broj"],
   );
 

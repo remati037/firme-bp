@@ -6,7 +6,9 @@ Projekat: `ypovucckebvxbianbvam` (region eu-central-1).
 ## Migracije
 
 ```
-supabase/migrations/001_initial_schema.sql   tabele, indeksi, MV-ovi, refresh_all_stats(), RLS
+supabase/migrations/001_initial_schema.sql       tabele, indeksi, MV-ovi, refresh_all_stats(), RLS
+supabase/migrations/002_refresh_timeout.sql      statement_timeout 15 min samo za refresh_all_stats()
+supabase/migrations/003_poslovno_ime_kratko.sql  kolona companies.poslovno_ime_kratko
 ```
 
 ## Kako se primenjuje
@@ -90,3 +92,27 @@ interpunkcijom. `financials` ima manje redova od `financials_history`
 (116.847 prema 123.360) jer 6.513 finansijskih zapisa nema odgovarajuću firmu
 u `companies` pa se upisuju samo u istoriju. `snapshots` ima tačno jedan red,
 za presek 2026-07-31, sa `broj_firmi` 133.634 i `broj_fi` 123.360.
+
+## Skraćeno poslovno ime i slug
+
+Migracija 003 dodaje `companies.poslovno_ime_kratko`. Kolona ide u title, H1,
+OG sliku i u slug. Pravila su u `lib/skrati-ime.ts`, ručni izuzeci u
+`scripts/data/ime-override.json`.
+
+Slugovi su jednokratno regenerisani 14.08.2026, pre nego što je ijedna stranica
+objavljena, skriptom `scripts/regenerisi-slugove.ts`. Promenjeno je 103.036 od
+133.634 sluga. Prosečna dužina sluga pala je sa 54 na 35 znakova.
+
+Od tada ingest slug samo zamrzava i nikad ga ne menja. Svaka nova promena
+traži tabelu starih slugova i 301 lanac, vidi SEO.md 1.2.
+
+Stanje posle regeneracije:
+
+```
+poslovno_ime_kratko:  0 praznih, najduže 45, prosek 26 znakova
+slug:                 0 duplikata, najduži 56, prosek 35 znakova
+grupa sa istim skraćenim imenom: 709, ukupno 2.151 firma
+```
+
+Kolizija skraćenog imena pogađa samo title i H1, ne i URL-ove, jer slug nosi
+matični broj. Popravlja se bez diranja adresa.

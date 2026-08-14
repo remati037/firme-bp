@@ -1,5 +1,6 @@
 import { cirilicaULatinicu } from "../../lib/transliterate";
 import { normalizeIme, parseDatum, slugify } from "../../lib/normalize";
+import { primeniOverride, skratiIme } from "../../lib/skrati-ime";
 
 export type SirovaFirma = {
   PoslovnoIme: string;
@@ -30,6 +31,7 @@ export type RedFirme = {
   slug: string;
   poslovno_ime: string;
   poslovno_ime_norm: string;
+  poslovno_ime_kratko: string;
   sifra_opstine: string | null;
   opstina: string | null;
   status: string | null;
@@ -104,6 +106,7 @@ export function mapirajFirmu(
   maticniBroj: string,
   sirovo: SirovaFirma,
   postojeciSlug: string | null,
+  overrides: Record<string, string> = {},
 ): RedFirme {
   // Nedostajuće ime postaje "", pa slugify(ime, mb) vraća samo matični broj -
   // namerno, ne previd; slug i dalje mora da bude jedinstven i definisan.
@@ -112,14 +115,25 @@ export function mapirajFirmu(
   const status = tekstIliNull(sirovo.NazivStatus);
   const pravnaForma = tekstIliNull(sirovo.NazivPravneForme);
 
+  const opstina = opstinaCir === null ? null : cirilicaULatinicu(opstinaCir);
+
+  // Skraćeno ime ide u title, H1, OG sliku i u slug. Ručni spisak ima prednost
+  // nad algoritmom, jer kod javnih preduzeća i sličnih naziv nije izvodiv.
+  const kratko = primeniOverride(
+    maticniBroj,
+    skratiIme(ime, opstina ?? "").kratko,
+    overrides,
+  );
+
   return {
     maticni_broj: maticniBroj,
     // Slug se zamrzava pri prvom upisu: 133k indeksiranih URL-ova ne sme da se menja.
-    slug: postojeciSlug ?? slugify(ime, maticniBroj),
+    slug: postojeciSlug ?? slugify(kratko || ime, maticniBroj),
     poslovno_ime: ime, // original, i kad je ćirilicom
     poslovno_ime_norm: normalizeIme(ime),
+    poslovno_ime_kratko: kratko,
     sifra_opstine: tekstIliNull(sirovo.SifraOpstine),
-    opstina: opstinaCir === null ? null : cirilicaULatinicu(opstinaCir),
+    opstina,
     status: status === null ? null : cirilicaULatinicu(status),
     status_aktivan: String(sirovo.NazivStatus ?? "").trim() === STATUS_AKTIVAN,
     datum_osnivanja: parseDatum(sirovo.DatumOsnivanja),
@@ -147,7 +161,7 @@ export function mapirajFinansije(maticniBroj: string, sirovo: SirovFi): RedFinan
 }
 
 const POLJA_FIRME: (keyof RedFirme)[] = [
-  "slug", "poslovno_ime", "poslovno_ime_norm", "sifra_opstine", "opstina",
+  "slug", "poslovno_ime", "poslovno_ime_norm", "poslovno_ime_kratko", "sifra_opstine", "opstina",
   "status", "status_aktivan", "datum_osnivanja", "pravna_forma", "sifra_delatnosti",
 ];
 

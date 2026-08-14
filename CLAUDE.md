@@ -89,6 +89,7 @@ companies
   slug                text unique not null
   poslovno_ime        text not null
   poslovno_ime_norm   text not null        -- za pretragu, bez interpunkcije, lowercase
+  poslovno_ime_kratko text                 -- migracija 003, za title, H1, OG i slug, max 45
   sifra_opstine       text
   opstina             text                 -- normalizovano na latinicu
   status              text
@@ -159,16 +160,24 @@ Materijalizovani view-ovi (osvežavaju se posle svakog ingesta):
 
 ## Normalizacija, pravila
 
-1. **Ćirilica u latinicu** za nazive opština. Koristi eksplicitnu mapu, ne biblioteku koja gađa.
-2. **Slug** = `slugify(poslovno_ime) + "-" + maticni_broj`. Uvek jedinstven jer sadrži MB.
+1. **Ćirilica u latinicu** za nazive opština, statusa, pravnih formi i imena.
+   Koristi eksplicitnu mapu, ne biblioteku koja gađa. Vidi `lib/transliterate.ts`.
+2. **Slug** = `slugify(poslovno_ime_kratko) + "-" + maticni_broj`. Uvek jedinstven jer sadrži MB.
    Slugify: lowercase, srpska slova u ASCII (č→c, ć→c, š→s, ž→z, đ→dj), sve nealfanumeričko u crticu,
    višestruke crtice u jednu, maksimum 80 karaktera pre matičnog broja.
-3. **Poslovno ime za prikaz** ostaje originalno. Za pretragu se koristi `poslovno_ime_norm`.
-4. **Novčane vrednosti su u hiljadama dinara.** U UI se prikazuju kao dinari, dakle množe se sa 1000.
+
+   **Slug se zamrzava pri prvom upisu i ingest ga nikad ne menja.** Jednokratna
+   regeneracija je urađena 14.08.2026, pre nego što je ijedna stranica objavljena.
+   Od tada je svaka promena sluga 301 lanac na 133k URL-ova, vidi SEO.md 1.2.
+3. **Skraćeno poslovno ime** (`poslovno_ime_kratko`) ide u title, H1, OG sliku i slug.
+   Pravila su u `lib/skrati-ime.ts`, ručni izuzeci u `scripts/data/ime-override.json`.
+   Puno ime ostaje u `poslovno_ime` i prikazuje se na stranici kao poseban red.
+4. **Poslovno ime za prikaz** ostaje originalno. Za pretragu se koristi `poslovno_ime_norm`.
+5. **Novčane vrednosti su u hiljadama dinara.** U UI se prikazuju kao dinari, dakle množe se sa 1000.
    Formatiranje: `Intl.NumberFormat('sr-RS')`, bez decimala, sa oznakom RSD.
-5. **Nula vrednosti** znače da firma nije predala izveštaj ili je neaktivna. Ne prikazuj ih kao "0 RSD",
+6. **Nula vrednosti** znače da firma nije predala izveštaj ili je neaktivna. Ne prikazuj ih kao "0 RSD",
    prikaži "Nema podataka".
-6. **Upsert, nikad delete pa insert.** Istorija se čuva. Jedini dozvoljen delete je nad
+7. **Upsert, nikad delete pa insert.** Istorija se čuva. Jedini dozvoljen delete je nad
    `financials_history`, i to samo za `datum_preseka` koji se upravo upisuje (vidi šemu).
 
 ---

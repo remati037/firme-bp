@@ -25,7 +25,9 @@ describe("mapirajFirmu", () => {
     expect(red.maticni_broj).toBe("17246771");
     expect(red.poslovno_ime).toBe(SIROVA.PoslovnoIme); // original, netaknut
     expect(red.poslovno_ime_norm).toBe("trgovinsko preduzece ljuba promet doo krusevac");
-    expect(red.slug).toBe("trgovinsko-preduzece-ljuba-promet-doo-krusevac-17246771");
+    // Slug se izvodi iz skraćenog imena, ne iz punog: kraći URL i title koji staje.
+    expect(red.poslovno_ime_kratko).toBe("Ljuba-Promet DOO Kruševac");
+    expect(red.slug).toBe("ljuba-promet-doo-krusevac-17246771");
     expect(red.sifra_opstine).toBe("70670");
     expect(red.opstina).toBe("KRUŠEVAC");
     expect(red.status).toBe("Aktivan");
