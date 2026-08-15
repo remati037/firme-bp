@@ -72,6 +72,9 @@ export type StatistikaDelatnosti = {
   broj_firmi: number;
   broj_aktivnih: number;
   broj_sa_izvestajem: number;
+  /** Zbirovi iz migracije 005; novac u hiljadama dinara. */
+  ukupan_prihod: number | null;
+  ukupno_zaposlenih: number | null;
   medijan_prihoda: number | null;
   medijan_marze: number | null;
   medijan_prihoda_po_zaposlenom: number | null;
@@ -219,7 +222,7 @@ export function upitAiSazetak(db: SupabaseClient, maticniBroj: string) {
 // =============================================================================
 
 const KOLONE_STAT =
-  "godina,broj_firmi,broj_aktivnih,broj_sa_izvestajem,medijan_prihoda,medijan_marze,medijan_prihoda_po_zaposlenom";
+  "godina,broj_firmi,broj_aktivnih,broj_sa_izvestajem,ukupan_prihod,ukupno_zaposlenih,medijan_prihoda,medijan_marze,medijan_prihoda_po_zaposlenom";
 
 export function upitStatistikaDelatnosti(db: SupabaseClient, sifraDelatnosti: string) {
   return db

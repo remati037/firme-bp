@@ -22,6 +22,8 @@ const STAT: StatistikaDelatnosti = {
   broj_firmi: 2847,
   broj_aktivnih: 2600,
   broj_sa_izvestajem: 2100,
+  ukupan_prihod: 412_000_000,
+  ukupno_zaposlenih: 38_400,
   medijan_prihoda: 15_450,
   medijan_marze: 3.2,
   medijan_prihoda_po_zaposlenom: 15_450,

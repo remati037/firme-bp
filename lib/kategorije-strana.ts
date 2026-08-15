@@ -98,12 +98,11 @@ export async function metaOpstina(slug: string, strana: number): Promise<Metadat
 
   const godina = podaci.stat?.godina ?? "";
 
-  // SEO.md §3 traži i ukupan prihod i broj zaposlenih, ali view ima samo
-  // medijane (vidi KOORDINACIJA.md, VAŽNO-VLASNIK: migracija 005).
+  // Šablon iz SEO.md §3, sada u celosti: zbirovi stižu iz migracije 005.
   const title = `Najveće firme u opštini ${podaci.naziv} ${godina} | ${BREND}`;
-  const description = `${formatBroj(podaci.stat?.broj_firmi, { nulaJePodatak: true })} firmi registrovanih u opštini ${podaci.naziv}. Medijan prihoda ${formatRSD(
-    podaci.stat?.medijan_prihoda,
-  )}, medijan marže ${formatProcenat(podaci.stat?.medijan_marze)}. Rang lista po prihodu iz APR podataka, presek ${formatDatum(datumPreseka)}`;
+  const description = `${formatBroj(podaci.stat?.broj_firmi, { nulaJePodatak: true })} firmi registrovanih u opštini ${podaci.naziv}. Ukupan prihod ${formatRSD(
+    podaci.stat?.ukupan_prihod,
+  )}, ${formatBroj(podaci.stat?.ukupno_zaposlenih, { praznoKao: "nepoznato" })} zaposlenih. Rang lista po prihodu iz APR podataka, presek ${formatDatum(datumPreseka)}`;
 
   const url = apsolutniUrl(putanjaStrane(`/grad/${slug}`, strana));
 

@@ -46,6 +46,8 @@ export async function PrikazOpstine({ slug, strana }: { slug: string; strana: nu
         brojFirmi={stat?.broj_firmi}
         brojAktivnih={stat?.broj_aktivnih}
         brojSaIzvestajem={stat?.broj_sa_izvestajem}
+        ukupanPrihod={stat?.ukupan_prihod}
+        ukupnoZaposlenih={stat?.ukupno_zaposlenih}
         medijanPrihoda={stat?.medijan_prihoda}
         medijanMarze={stat?.medijan_marze}
         medijanPrihodaPoZaposlenom={stat?.medijan_prihoda_po_zaposlenom}
