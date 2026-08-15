@@ -1,4 +1,5 @@
-import { formatBroj, formatRSD, NEMA_PODATAKA } from "@/lib/format";
+import { formatBroj, NEMA_PODATAKA } from "@/lib/format";
+import { Novac } from "@/components/ui/novac";
 import type { Finansije } from "@/lib/queries";
 
 /**
@@ -35,8 +36,11 @@ export function FinancialTable({ redovi }: { redovi: Finansije[] }) {
                 >
                   {red.godina}
                 </th>
-                <Td>{formatRSD(red.ukupni_prihodi)}</Td>
+                <Td prazno={!red.ukupni_prihodi}>
+                  <Novac hiljade={red.ukupni_prihodi} />
+                </Td>
                 <Td
+                  prazno={netoRezultat === 0}
                   className={
                     netoRezultat > 0
                       ? "font-semibold text-success"
@@ -45,11 +49,17 @@ export function FinancialTable({ redovi }: { redovi: Finansije[] }) {
                         : undefined
                   }
                 >
-                  {netoRezultat === 0 ? NEMA_PODATAKA : formatRSD(netoRezultat)}
+                  {netoRezultat === 0 ? NEMA_PODATAKA : <Novac hiljade={netoRezultat} />}
                 </Td>
-                <Td>{formatRSD(red.kapital)}</Td>
-                <Td>{formatRSD(red.poslovna_imovina)}</Td>
-                <Td>{formatBroj(red.prosecan_broj_zaposlenih)}</Td>
+                <Td prazno={!red.kapital}>
+                  <Novac hiljade={red.kapital} />
+                </Td>
+                <Td prazno={!red.poslovna_imovina}>
+                  <Novac hiljade={red.poslovna_imovina} />
+                </Td>
+                <Td prazno={!red.prosecan_broj_zaposlenih}>
+                  {formatBroj(red.prosecan_broj_zaposlenih)}
+                </Td>
               </tr>
             );
           })}
@@ -70,8 +80,16 @@ function Th({ children }: { children: React.ReactNode }) {
   );
 }
 
-function Td({ children, className }: { children: React.ReactNode; className?: string }) {
-  const jePrazno = children === NEMA_PODATAKA;
+function Td({
+  children,
+  className,
+  prazno,
+}: {
+  children: React.ReactNode;
+  className?: string;
+  prazno?: boolean;
+}) {
+  const jePrazno = prazno ?? children === NEMA_PODATAKA;
   return (
     <td
       className={`border-b border-border px-5 py-[11px] text-right tabular-nums ${

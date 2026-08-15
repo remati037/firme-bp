@@ -12,6 +12,11 @@
 
 export const NEMA_PODATAKA = "Nema podataka";
 
+/** Valuta prikaza. Server uvek renderuje RSD; EUR je klijentska zamena. */
+export type Valuta = "RSD" | "EUR";
+
+import { KURS_EUR_RSD } from "./site";
+
 const LOKALITET = "sr-RS";
 
 const grupisano = new Intl.NumberFormat(LOKALITET, { maximumFractionDigits: 0 });
@@ -68,6 +73,52 @@ export function formatRSDKompaktno(hiljadeDinara: Broj, opcije: NumOpcije = {}):
   if (apsolutno >= 1e9) return `${znak}${saJednomDecimalom.format(apsolutno / 1e9)} mrd RSD`;
   if (apsolutno >= 1e6) return `${znak}${saJednomDecimalom.format(apsolutno / 1e6)} mil RSD`;
   return `${grupisano.format(dinara)} RSD`;
+}
+
+/**
+ * Evro iznos iz DINARA (ne iz hiljada): 2.145.000 → "18.333,33 EUR".
+ * Dve decimale, jer je evro vrednost uvek manja pa zaokruživanje na ceo broj
+ * kod malih firmi guta razliku.
+ */
+export function formatEUR(dinara: Broj, opcije: NumOpcije = {}): string {
+  const { nulaJePodatak = false, praznoKao = NEMA_PODATAKA } = opcije;
+  if (jePrazno(dinara, nulaJePodatak)) return praznoKao;
+
+  const fmt = new Intl.NumberFormat(LOKALITET, {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
+  return `${fmt.format((dinara as number) / KURS_EUR_RSD)} EUR`;
+}
+
+/**
+ * Isti iznos u traženoj valuti. Ulaz je u DINARA, jer se ovo zove i sa
+ * servera (gde je vrednost već pomnožena) i sa klijenta (iz `data-dinara`).
+ */
+export function formatNovac(
+  dinara: Broj,
+  valuta: Valuta = "RSD",
+  opcije: NumOpcije & { kompaktno?: boolean } = {},
+): string {
+  const { kompaktno = false, nulaJePodatak = false, praznoKao = NEMA_PODATAKA } = opcije;
+  if (jePrazno(dinara, nulaJePodatak)) return praznoKao;
+
+  const iznos = dinara as number;
+  if (kompaktno) return kompaktnoIzDinara(iznos, valuta);
+  return valuta === "EUR"
+    ? formatEUR(iznos, { nulaJePodatak })
+    : `${grupisano.format(iznos)} RSD`;
+}
+
+/** "238,4 mrd RSD" / "2,0 mrd EUR". Ulaz je u dinarima. */
+export function kompaktnoIzDinara(dinara: number, valuta: Valuta = "RSD"): string {
+  const vrednost = valuta === "EUR" ? dinara / KURS_EUR_RSD : dinara;
+  const znak = vrednost < 0 ? "-" : "";
+  const apsolutno = Math.abs(vrednost);
+
+  if (apsolutno >= 1e9) return `${znak}${saJednomDecimalom.format(apsolutno / 1e9)} mrd ${valuta}`;
+  if (apsolutno >= 1e6) return `${znak}${saJednomDecimalom.format(apsolutno / 1e6)} mil ${valuta}`;
+  return valuta === "EUR" ? formatEUR(dinara) : `${grupisano.format(dinara)} RSD`;
 }
 
 /** Procenat sa jednom decimalom: 23.4 → "23,4%". */

@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { cache } from "react";
 
 import { ListaFirmi } from "@/components/category/lista-firmi";
+import { PoredjenjeProvider } from "@/components/category/poredjenje";
 import { Breadcrumbs } from "@/components/layout/breadcrumbs";
 import { JsonLd } from "@/components/seo/json-ld";
 import { formatDatum } from "@/lib/format";
@@ -98,7 +99,9 @@ export default async function TopLista({ params }: Props) {
         ))}
       </div>
 
-      <ListaFirmi firme={firme} />
+      <PoredjenjeProvider>
+        <ListaFirmi firme={firme} />
+      </PoredjenjeProvider>
 
       <div className="pb-10" />
 

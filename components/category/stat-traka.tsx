@@ -1,5 +1,6 @@
 import { Card } from "@/components/ui/card";
-import { formatBroj, formatProcenat, formatRSD, formatRSDKompaktno } from "@/lib/format";
+import { formatBroj, formatProcenat } from "@/lib/format";
+import { Novac } from "@/components/ui/novac";
 
 /**
  * Traka sa statistikom kategorije. Sve vrednosti dolaze iz materijalizovanih
@@ -32,11 +33,11 @@ export function StatTraka({
     { naziv: "Firmi ukupno", vrednost: formatBroj(brojFirmi, { nulaJePodatak: true }) },
     { naziv: "Aktivnih", vrednost: formatBroj(brojAktivnih, { nulaJePodatak: true }) },
     { naziv: "Sa izveštajem", vrednost: formatBroj(brojSaIzvestajem, { nulaJePodatak: true }) },
-    { naziv: "Ukupan prihod", vrednost: formatRSDKompaktno(ukupanPrihod) },
+    { naziv: "Ukupan prihod", vrednost: <Novac hiljade={ukupanPrihod} kompaktno /> },
     { naziv: "Ukupno zaposlenih", vrednost: formatBroj(ukupnoZaposlenih) },
-    { naziv: "Medijan prihoda", vrednost: formatRSD(medijanPrihoda) },
+    { naziv: "Medijan prihoda", vrednost: <Novac hiljade={medijanPrihoda} /> },
     { naziv: "Medijan marže", vrednost: formatProcenat(medijanMarze) },
-    { naziv: "Medijan po zaposlenom", vrednost: formatRSD(medijanPrihodaPoZaposlenom) },
+    { naziv: "Medijan po zaposlenom", vrednost: <Novac hiljade={medijanPrihodaPoZaposlenom} /> },
   ];
 
   return (

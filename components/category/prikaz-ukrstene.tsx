@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import { ListaFirmi } from "@/components/category/lista-firmi";
 import { Paginacija } from "@/components/category/paginacija";
+import { PoredjenjeProvider } from "@/components/category/poredjenje";
 import { Breadcrumbs } from "@/components/layout/breadcrumbs";
 import { formatBroj, formatDatum } from "@/lib/format";
 import { proveriStranu, ucitajUkrstenoIliNotFound } from "@/lib/kategorije-strana";
@@ -69,7 +70,9 @@ export async function PrikazUkrstene({
         </Link>
       </div>
 
-      <ListaFirmi firme={lista.firme} redniBrojOd={(strana - 1) * lista.stranicenje.poStrani + 1} />
+      <PoredjenjeProvider>
+        <ListaFirmi firme={lista.firme} redniBrojOd={(strana - 1) * lista.stranicenje.poStrani + 1} />
+      </PoredjenjeProvider>
 
       <Paginacija osnova={osnova} strana={strana} brojStrana={lista.stranicenje.brojStrana} />
 

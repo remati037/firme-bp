@@ -46,7 +46,14 @@ export function MetricBar({
 }
 
 /** Red pokazatelja bez trake: labela levo, vrednost desno. */
-export function MetricRow({ labela, vrednost }: { labela: string; vrednost: string }) {
+export function MetricRow({
+  labela,
+  vrednost,
+}: {
+  labela: string;
+  /** Može da bude i `<Novac>`, koji nosi `data-dinara` za prebacivanje u evre. */
+  vrednost: React.ReactNode;
+}) {
   return (
     <div className="flex items-baseline justify-between gap-4">
       <span className="text-[13.5px] text-muted-foreground">{labela}</span>

@@ -20,6 +20,8 @@
 
 import type { SupabaseClient } from "@supabase/supabase-js";
 
+import type { RedIstorije } from "./promena";
+
 // =============================================================================
 // Tipovi redova
 // =============================================================================
@@ -205,6 +207,23 @@ export function upitRangFirme(db: SupabaseClient, maticniBroj: string) {
     .eq("maticni_broj", maticniBroj)
     .returns<RangFirme[]>()
     .maybeSingle();
+}
+
+/**
+ * Arhiva mesečnih preseka za jednu firmu (D1).
+ *
+ * `financials_history` čuva svaki presek, pa se iz nje vidi da li se broj
+ * pomerio između dva preuzimanja — to je jedino mesto gde ta informacija
+ * postoji, APR objavljuje samo poslednje stanje.
+ */
+export function upitIstorijaFirme(db: SupabaseClient, maticniBroj: string, koliko = 24) {
+  return db
+    .from("financials_history")
+    .select("datum_preseka,godina,ukupni_prihodi,neto_dobitak,neto_gubitak,prosecan_broj_zaposlenih")
+    .eq("maticni_broj", maticniBroj)
+    .order("datum_preseka", { ascending: false })
+    .limit(koliko)
+    .returns<RedIstorije[]>();
 }
 
 /** AI pasus za sekciju "Analiza". Čita se serverski, nikad klijentski (SEO.md §1.6). */

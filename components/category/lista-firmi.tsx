@@ -1,4 +1,5 @@
 import { CompanyCard } from "@/components/company/company-card";
+import { CmpCheckbox } from "@/components/category/poredjenje";
 import { formatBroj } from "@/lib/format";
 import type { KarticaFirme } from "@/lib/queries";
 
@@ -21,7 +22,8 @@ export function ListaFirmi({ firme, redniBrojOd }: { firme: KarticaFirme[]; redn
   return (
     <ol className="list-none space-y-3">
       {firme.map((firma, i) => (
-        <li key={firma.maticni_broj} className="flex gap-4">
+        <li key={firma.maticni_broj} className="flex gap-3">
+          <CmpCheckbox firma={firma} />
           <span
             className="min-w-[30px] pt-1 text-right text-[15px] font-extrabold text-border-strong tabular-nums"
             aria-hidden

@@ -1,5 +1,7 @@
 import { ListaFirmi } from "@/components/category/lista-firmi";
 import { Paginacija } from "@/components/category/paginacija";
+import { MarginRing } from "@/components/category/margin-ring";
+import { PoredjenjeProvider } from "@/components/category/poredjenje";
 import { StatTraka } from "@/components/category/stat-traka";
 import { Breadcrumbs } from "@/components/layout/breadcrumbs";
 import { formatBroj, formatDatum } from "@/lib/format";
@@ -28,7 +30,8 @@ export async function PrikazOpstine({ slug, strana }: { slug: string; strana: nu
         ]}
       />
 
-      <header className="pt-7 pb-5">
+      <header className="flex flex-wrap items-start justify-between gap-4 pt-7 pb-5">
+        <div className="min-w-0">
         <h1 className="text-[clamp(26px,4vw,36px)] font-extrabold tracking-[-0.025em]">
           Najveće firme u opštini {naziv}
         </h1>
@@ -40,6 +43,9 @@ export async function PrikazOpstine({ slug, strana }: { slug: string; strana: nu
         <p className="mt-3.5 inline-block rounded-lg border border-dashed border-border-strong px-3 py-1.5 text-[12.5px] text-muted-foreground">
           Presek podataka: {formatDatum(datumPreseka)} · Izvor: Agencija za privredne registre
         </p>
+        </div>
+
+        <MarginRing marza={stat?.medijan_marze} />
       </header>
 
       <StatTraka
@@ -63,10 +69,12 @@ export async function PrikazOpstine({ slug, strana }: { slug: string; strana: nu
           ) : null}
         </h2>
 
-        <ListaFirmi
-          firme={lista.firme}
-          redniBrojOd={(strana - 1) * lista.stranicenje.poStrani + 1}
-        />
+        <PoredjenjeProvider>
+          <ListaFirmi
+            firme={lista.firme}
+            redniBrojOd={(strana - 1) * lista.stranicenje.poStrani + 1}
+          />
+        </PoredjenjeProvider>
 
         <Paginacija
           osnova={`/grad/${slug}`}

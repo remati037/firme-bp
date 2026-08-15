@@ -2,9 +2,11 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 import { CompanyBadge } from "@/components/company/company-badge";
+import { SacuvaneFirme } from "@/components/home/sacuvane-firme";
 import { SearchBox } from "@/components/search/search-box";
 import { Card } from "@/components/ui/card";
-import { formatBroj, formatDatum, formatRSDKompaktno } from "@/lib/format";
+import { Novac } from "@/components/ui/novac";
+import { formatBroj, formatDatum } from "@/lib/format";
 import { ucitajPocetnu, type Kategorija } from "@/lib/pocetna";
 import { imeOpstine, kratkoIme } from "@/lib/prikaz";
 import type { KarticaFirme } from "@/lib/queries";
@@ -67,6 +69,9 @@ export default async function Pocetna() {
           <span>ažurira se mesečno</span>
         </p>
       </section>
+
+      {/* ===== SAČUVANE FIRME (D2) — samo ako ih korisnik ima ===== */}
+      <SacuvaneFirme />
 
       {/* ===== TOP LISTE ===== */}
       <section className="pt-2 pb-10">
@@ -153,9 +158,11 @@ function TopLista({ naslov, firme }: { naslov: string; firme: KarticaFirme[] }) 
               </span>
             </span>
             <span className="shrink-0 text-right text-[13.5px] font-bold tabular-nums">
-              {firma.vrstaVrednosti === "broj"
-                ? formatBroj(firma.vrednost)
-                : formatRSDKompaktno(firma.vrednost ?? firma.ukupni_prihodi)}
+              {firma.vrstaVrednosti === "broj" ? (
+                formatBroj(firma.vrednost)
+              ) : (
+                <Novac hiljade={firma.vrednost ?? firma.ukupni_prihodi} kompaktno />
+              )}
             </span>
           </li>
         ))}

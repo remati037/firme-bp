@@ -1,6 +1,7 @@
 import Link from "next/link";
 
-import { formatBroj, formatRSDKompaktno, NEMA_PODATAKA } from "@/lib/format";
+import { formatBroj, NEMA_PODATAKA } from "@/lib/format";
+import { Novac } from "@/components/ui/novac";
 import { imeOpstine, kratkoIme } from "@/lib/prikaz";
 import type { KarticaFirme } from "@/lib/queries";
 
@@ -38,9 +39,11 @@ export function CompanyCard({ firma }: { firma: KarticaFirme }) {
         </div>
         <div className="shrink-0 text-right">
           <div className="text-[15.5px] font-bold tabular-nums">
-            {firma.vrednost !== undefined && firma.vrstaVrednosti === "broj"
-              ? formatBroj(firma.vrednost)
-              : formatRSDKompaktno(firma.vrednost ?? firma.ukupni_prihodi)}
+            {firma.vrednost !== undefined && firma.vrstaVrednosti === "broj" ? (
+              formatBroj(firma.vrednost)
+            ) : (
+              <Novac hiljade={firma.vrednost ?? firma.ukupni_prihodi} kompaktno />
+            )}
           </div>
         </div>
       </div>

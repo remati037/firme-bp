@@ -21,6 +21,15 @@ export const DATUM_PRESEKA = process.env.NEXT_PUBLIC_DATUM_PRESEKA ?? "2026-07-3
 export const BROJ_FIRMI = Number(process.env.NEXT_PUBLIC_BROJ_FIRMI ?? 133634);
 
 /**
+ * Kurs za prikaz u evrima (NBS srednji kurs).
+ *
+ * Statična vrednost, menja se jednom mesečno uz APR presek — isti trenutak kad
+ * i ingest (odluka 15.08.2026). Namerno nije živi kurs: stranice su keširane
+ * 30 dana, pa bi živi kurs značio da dve posete istog dana pokažu dva broja.
+ */
+export const KURS_EUR_RSD = Number(process.env.NEXT_PUBLIC_KURS_EUR_RSD ?? 117.0);
+
+/**
  * Disclaimer uz izvor podataka. Obavezan u futeru svake stranice
  * (CLAUDE.md, "Obavezno na svakoj stranici").
  */

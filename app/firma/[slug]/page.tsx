@@ -6,15 +6,18 @@ import { cache } from "react";
 import { CompanyBadge } from "@/components/company/company-badge";
 import { CompanyCard } from "@/components/company/company-card";
 import { CopyButton } from "@/components/company/copy-button";
+import { Delta } from "@/components/company/delta";
 import { FaqList } from "@/components/company/faq-list";
 import { FinancialTable } from "@/components/company/financial-table";
 import { MetricBar, MetricRow } from "@/components/company/metric-bar";
 import { RankChip } from "@/components/company/rank-chip";
+import { SaveButton } from "@/components/company/save-button";
 import { ShareButton } from "@/components/company/share-button";
 import { SignalList } from "@/components/company/signal-list";
 import { Breadcrumbs } from "@/components/layout/breadcrumbs";
 import { bezPraznih, JsonLd } from "@/components/seo/json-ld";
 import { Card } from "@/components/ui/card";
+import { Novac } from "@/components/ui/novac";
 import { cirilicniOblikIliNista, naslovnoCirilica } from "@/lib/cirilica";
 import { ucitajFirmu, type PodaciFirme } from "@/lib/firma-podaci";
 import {
@@ -24,6 +27,7 @@ import {
   formatRSD,
   formatStarost,
   NEMA_PODATAKA,
+  pluralSrpski,
 } from "@/lib/format";
 import { faqZaFirmu } from "@/lib/faq";
 import { narativ } from "@/lib/narrative";
@@ -115,6 +119,7 @@ export default async function StranicaFirme({ params }: Props) {
     opstinaRed,
     aiSazetak,
     datumPreseka,
+    promene,
     slicneDelatnost,
     slicneOpstina,
   } = podaci;
@@ -174,6 +179,7 @@ export default async function StranicaFirme({ params }: Props) {
             ukupno={rang.ukupnoDelatnost}
             gde="u delatnosti"
           />
+          <SaveButton slug={firma.slug} ime={ime} />
         </div>
 
         <div className="mt-2.5 flex flex-wrap items-center gap-4.5 text-[13.5px] text-muted-foreground">
@@ -223,6 +229,25 @@ export default async function StranicaFirme({ params }: Props) {
         <p className="mt-3.5 inline-block rounded-lg border border-dashed border-border-strong px-3 py-1.5 text-[12.5px] text-muted-foreground">
           Presek podataka: {formatDatum(datumPreseka)} · Izvor: Agencija za privredne registre
         </p>
+
+        {promene ? (
+          <p className="mt-2.5 ml-0 inline-block rounded-lg border border-dashed border-border-strong px-3 py-1.5 text-[12px] text-muted-foreground sm:ml-2">
+            Poređenje sa prethodnim presekom ({formatDatum(promene.prethodniPresek)}) — iz arhive
+            mesečnih APR preseka
+          </p>
+        ) : null}
+
+        {/* D4: jedna rečenica koja odgovara na "da li je sve u redu sa firmom". */}
+        <p
+          className={`mt-3.5 flex w-fit items-center gap-2 rounded-ui border px-3.5 py-2 text-sm font-semibold ${
+            signali.length
+              ? "border-[#fde68a] bg-[#fffbeb] text-[#92400e] dark:border-[#3d3113] dark:bg-[#1e180c] dark:text-[#fcd34d]"
+              : "border-[#a7f3d0] bg-[#ecfdf5] text-[#065f46] dark:border-[#123528] dark:bg-[#0c1f17] dark:text-[#6ee7b7]"
+          }`}
+        >
+          <span aria-hidden>{signali.length ? "!" : "✓"}</span>
+          {brzaOcena({ firma, fi, brojSignala: signali.length })}
+        </p>
       </section>
 
       {/* ===== 3. KLJUČNI BROJEVI ===== */}
@@ -230,8 +255,9 @@ export default async function StranicaFirme({ params }: Props) {
         <Card className="border-accent-ring bg-accent-soft">
           <KpiLabel>Prihod{fi?.godina ? ` · ${fi.godina}` : ""}</KpiLabel>
           <p className="mt-1 text-[clamp(22px,3.4vw,30px)] leading-[1.15] font-extrabold tracking-[-0.02em] text-accent-strong tabular-nums">
-            {formatRSD(fi?.ukupni_prihodi)}
+            <Novac hiljade={fi?.ukupni_prihodi} />
           </p>
+          {promene ? <Delta promena={promene.prihodi} prethodniPresek={promene.prethodniPresek} /> : null}
           <KpiOpis>Ukupan prihod iz finansijskog izveštaja</KpiOpis>
         </Card>
         <Card>
@@ -241,8 +267,11 @@ export default async function StranicaFirme({ params }: Props) {
               netoRezultat > 0 ? "text-success" : netoRezultat < 0 ? "text-danger" : ""
             }`}
           >
-            {netoRezultat === 0 ? NEMA_PODATAKA : formatRSD(Math.abs(netoRezultat))}
+            {netoRezultat === 0 ? NEMA_PODATAKA : <Novac hiljade={Math.abs(netoRezultat)} />}
           </p>
+          {promene ? (
+            <Delta promena={promene.netoRezultat} prethodniPresek={promene.prethodniPresek} />
+          ) : null}
           <KpiOpis>
             {netoRezultat > 0 ? "Neto dobitak" : netoRezultat < 0 ? "Neto gubitak" : "Izveštaj nije predat"}
           </KpiOpis>
@@ -252,6 +281,9 @@ export default async function StranicaFirme({ params }: Props) {
           <p className="mt-1 text-[clamp(22px,3.4vw,30px)] leading-[1.15] font-extrabold tracking-[-0.02em] tabular-nums">
             {formatBroj(fi?.prosecan_broj_zaposlenih)}
           </p>
+          {promene ? (
+            <Delta promena={promene.zaposleni} prethodniPresek={promene.prethodniPresek} />
+          ) : null}
           <KpiOpis>Prosečan broj u toku godine</KpiOpis>
         </Card>
       </section>
@@ -345,7 +377,7 @@ export default async function StranicaFirme({ params }: Props) {
             <div className="space-y-2.5">
               <MetricRow
                 labela="Prihod / zaposlenom"
-                vrednost={formatRSD(p.prihodPoZaposlenom)}
+                vrednost={<Novac hiljade={p.prihodPoZaposlenom} />}
               />
               <MetricRow labela="Neto marža" vrednost={formatProcenat(p.netoMarza)} />
               <MetricRow
@@ -475,6 +507,35 @@ export default async function StranicaFirme({ params }: Props) {
       />
     </main>
   );
+}
+
+/** D4: „Aktivna firma · predala izveštaj za 2025. · bez upozoravajućih signala". */
+function brzaOcena({
+  firma,
+  fi,
+  brojSignala,
+}: {
+  firma: { status: string | null; status_aktivan: boolean | null };
+  fi: { godina: number; ukupni_prihodi: number | null } | null | undefined;
+  brojSignala: number;
+}): string {
+  const delovi: string[] = [];
+
+  delovi.push(firma.status_aktivan ? "Aktivna firma" : (firma.status ?? "Status nepoznat"));
+
+  delovi.push(
+    fi && (fi.ukupni_prihodi ?? 0) > 0
+      ? `predala izveštaj za ${fi.godina}.`
+      : "nema predat finansijski izveštaj",
+  );
+
+  delovi.push(
+    brojSignala === 0
+      ? "bez upozoravajućih signala"
+      : `${formatBroj(brojSignala)} ${pluralSrpski(brojSignala, "upozoravajući signal", "upozoravajuća signala", "upozoravajućih signala")}`,
+  );
+
+  return delovi.join(" · ");
 }
 
 function opisOdstupanja(vrednost: number | null, jedinica: "odsto" | "p.p."): string {

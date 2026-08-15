@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { CurrencyToggle } from "./currency-toggle";
 import { ThemeToggle } from "./theme-toggle";
 
 /**
@@ -49,7 +50,10 @@ export function Header() {
           ))}
         </nav>
 
-        <ThemeToggle />
+        <div className="flex shrink-0 items-center gap-2">
+          <CurrencyToggle />
+          <ThemeToggle />
+        </div>
       </div>
     </header>
   );
