@@ -227,6 +227,15 @@ export function razdvojLead(telo: string): { lead: string | null; ostatak: strin
   return { lead: prvi, ostatak: blokovi.slice(1).join("\n\n") };
 }
 
+/** Sve interne adrese na koje članak upućuje, bez duplikata. */
+export function interneVezeIzClanka(clanak: Clanak): string[] {
+  return [
+    ...new Set(
+      [...clanak.telo.matchAll(LINK)].map(([, , adresa]) => adresa).filter((a) => a.startsWith("/")),
+    ),
+  ];
+}
+
 /** Sve firme na koje članak upućuje — koristi se za proveru internih linkova. */
 export function slugoviFirmiIzClanka(clanak: Clanak): string[] {
   return [...clanak.telo.matchAll(LINK)]

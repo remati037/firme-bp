@@ -1,9 +1,11 @@
 import { beforeAll, describe, expect, it } from "vitest";
 
 import { getSupabaseServerClient } from "../lib/supabase";
+import { slugOpstine } from "../lib/prikaz";
 import {
   parsirajClanak,
   razdvojLead,
+  interneVezeIzClanka,
   slugoviFirmiIzClanka,
   srodniClanci,
   sviClanci,
@@ -175,5 +177,44 @@ describe("interni linkovi ka firmama postoje u bazi", () => {
     const mrtvi = trazeni.filter((s) => !postojeci.has(s));
 
     expect(mrtvi, `mrtvi linkovi u clancima: ${mrtvi.join(", ")}`).toEqual([]);
+  });
+
+  /**
+   * Kategorijske rute postoje samo za sifre i opstine koje se stvarno koriste.
+   * Link na /delatnost/9999 bi bio 404 iz teksta koji tvrdi da je proverljiv,
+   * isto kao i mrtav link ka firmi.
+   */
+  it("kategorijski linkovi pokazuju na postojece sifre i opstine", async () => {
+    const veze = [...new Set(sviClanci().flatMap(interneVezeIzClanka))];
+    const db = getSupabaseServerClient();
+
+    const sifre = veze
+      .filter((v) => /^\/delatnost\/\d+$/.test(v))
+      .map((v) => v.split("/")[2]);
+
+    if (sifre.length) {
+      const { data } = await db
+        .from("mv_delatnost_stats")
+        .select("sifra_delatnosti")
+        .in("sifra_delatnosti", sifre);
+      const postoje = new Set(
+        (data ?? []).map((r) => (r as { sifra_delatnosti: string }).sifra_delatnosti),
+      );
+      const mrtve = sifre.filter((s) => !postoje.has(s));
+      expect(mrtve, `nepostojece delatnosti: ${mrtve.join(", ")}`).toEqual([]);
+    }
+
+    const gradovi = veze.filter((v) => /^\/grad\/[a-z0-9-]+$/.test(v)).map((v) => v.split("/")[2]);
+
+    if (gradovi.length) {
+      const { data } = await db.from("municipalities").select("naziv_lat");
+      const slugovi = new Set(
+        (data ?? [])
+          .map((r) => slugOpstine((r as { naziv_lat: string | null }).naziv_lat))
+          .filter(Boolean),
+      );
+      const mrtvi = gradovi.filter((g) => !slugovi.has(g));
+      expect(mrtvi, `nepostojece opstine: ${mrtvi.join(", ")}`).toEqual([]);
+    }
   });
 });
