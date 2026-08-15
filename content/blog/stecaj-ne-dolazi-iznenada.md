@@ -32,13 +32,15 @@ Drugim rečima: kod skoro tri četvrtine firmi koje su danas u stečaju, posledn
 
 ## Tri signala koja se vide bez računovođe
 
-**Gubitak veći od kapitala.** Kapital je ono što su vlasnici uložili i ostavili u firmi. Kada akumulirani gubitak pređe tu vrednost, firma je potrošila više nego što je ikada imala. Nastavlja da radi samo dok je neko finansira.
+**Akumulirani gubitak veći od kapitala.** Kapital je ono što su vlasnici uložili i ostavili u firmi. Kada nagomilani gubitak iz svih prethodnih godina pređe tu vrednost, firma je potrošila više nego što je ikada imala. Nastavlja da radi samo dok je neko finansira.
+
+Ovo je posebna stavka u izveštaju i razlikuje se od gubitka u jednoj godini. Firma može da ima lošu godinu bez ikakve opasnosti; problem je kada se loše godine saberu.
 
 **Nula prihoda uz prijavljene zaposlene.** Firma koja ima ljude na platnom spisku, a nula dinara prihoda, plaća troškove bez ijednog priliva. To stanje ima rok trajanja.
 
 **Nema izveštaja uopšte.** Predaja finansijskog izveštaja je zakonska obaveza. Izostanak nije dokaz problema, ali jeste odsustvo informacije — a odsustvo informacije o firmi sa kojom treba da posluješ jeste razlog za oprez.
 
-Sva tri signala se na ovom sajtu prikazuju automatski, na stranici svake firme, izračunata iz istih brojeva iz kojih je izračunat i ovaj tekst.
+Sva tri podatka stoje na stranici svake firme, u tabeli finansija — kapital, akumulirani gubitak, prihod i broj zaposlenih. Odnos između njih možeš da pročitaš direktno iz te tabele, isto kao što je pročitan za ovaj tekst.
 
 ## Šta ovo NIJE
 
