@@ -31,14 +31,16 @@ const AI_PRETRAGA = [
 const AI_TRENIRANJE = ["GPTBot", "ClaudeBot", "Google-Extended", "CCBot"];
 
 /**
- * PRIVREMENO. Stranice firmi se ne puštaju u crawl dok kontrolna lista iz
- * SEO.md 11 ne prođe. Razlog je SEO.md 5.5: "Crawled - currently not indexed"
- * je signal kvaliteta koji se tehnikom ne popravlja kasnije, pa 133.634
- * poluzavršene stranice puštene odjednom rade protiv nas.
+ * Zabrana crawl-a nad `/firma/` je SKINUTA 15.08.2026, odlukom vlasnika.
  *
- * Skida se jednom linijom pri lansiranju, zajedno sa slanjem prvog sitemapa.
+ * Stajala je dok stranice firmi nisu bile gotove, jer je "Crawled - currently
+ * not indexed" (SEO.md 5.5) signal kvaliteta koji se tehnikom ne popravlja
+ * kasnije. Skinuta je zajedno sa uvođenjem `firme-1` u sitemap indeks — to
+ * dvoje mora da se menja u istom potezu, jer je sitemap sa adresama koje su
+ * botu zabranjene kontradiktoran signal.
+ *
+ * Ako ikada zatreba vraćanje, vraća se i `U_INDEKSU` u `lib/sitemap.ts`.
  */
-const JOS_NIJE_SPREMNO = ["/firma/"];
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -49,7 +51,7 @@ export default function robots(): MetadataRoute.Robots {
         userAgent: "*",
         allow: "/",
         // Parametri za sortiranje prave duplikate, a oni najviše troše crawl budžet.
-        disallow: ["/api/", "/*?sort=", "/*?order=", ...JOS_NIJE_SPREMNO],
+        disallow: ["/api/", "/*?sort=", "/*?order="],
       },
     ],
     sitemap: `${SITE_URL}/sitemap.xml`,

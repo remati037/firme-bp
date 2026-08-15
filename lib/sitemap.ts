@@ -42,15 +42,25 @@ export const SEGMENTI = [
 export type Segment = (typeof SEGMENTI)[number];
 
 /**
- * `firme-bez-fi` se generiše, ali se NE šalje u prvoj fazi (SEO.md §1.4):
- * 39.406 stranica bez finansija je tanak sadržaj i troši crawl budžet.
- * Fajl postoji da bi mogao da se pošalje kad prvi sloj pređe 60% indeksiranosti.
+ * Šta indeks stvarno nabraja. Slanje ide u talasima (SEO.md §5.3), ne odjednom:
  *
- * Isto važi i za slojeve firmi dok `robots.txt` drži `Disallow: /firma/` —
- * slati Google-u sitemap sa adresama koje mu je crawl zabranjen je
- * kontradiktoran signal. Zato indeks nabraja samo ono što je stvarno spremno.
+ *   Dan 0   staticne + kategorije + firme-1 (top 45.000 po prihodu)   ← ovde smo
+ *   Dan 14  firme-2
+ *   Dan 30  firme-3
+ *   kad prvi sloj pređe 60% indeksiranosti   firme-bez-fi
+ *
+ * `firme-1` je uvedena 15.08.2026, u istom potezu kojim je iz `app/robots.ts`
+ * skinuta zabrana `Disallow: /firma/`. To dvoje ide zajedno: sitemap sa
+ * adresama koje su botu zabranjene je kontradiktoran signal, a zabrana bez
+ * sitemapa znači da 133.634 stranice niko ne otkriva.
+ *
+ * `firme-bez-fi` se generiše, ali se NE šalje (SEO.md §1.4): 39.406 stranica
+ * bez finansija je tanak sadržaj i trošio bi crawl budžet pre nego što se
+ * vredniji sloj indeksira.
+ *
+ * Sledeći talas je jedna reč u ovom nizu — ništa drugo se ne dira.
  */
-export const U_INDEKSU: Segment[] = ["staticne", "kategorije"];
+export const U_INDEKSU: Segment[] = ["staticne", "kategorije", "firme-1"];
 
 function apsolutno(putanja: string): string {
   return `${SITE_URL}${putanja}`;
