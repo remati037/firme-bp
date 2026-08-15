@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import Script from "next/script";
 
 import { Footer } from "@/components/layout/footer";
 import { Header } from "@/components/layout/header";
@@ -71,6 +72,18 @@ export default function RootLayout({
         <script dangerouslySetInnerHTML={{ __html: TEMA_SKRIPTA }} />
       </head>
       <body className="flex min-h-screen flex-col antialiased">
+        {/* Google Analytics (vlasnik, 15.08.2026). afterInteractive = učitava se
+            posle hidratacije, ne usporava prvi crtež. */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-DXXKVQEJ7C"
+          strategy="afterInteractive"
+        />
+        <Script id="gtag-config" strategy="afterInteractive">
+          {`window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-DXXKVQEJ7C');`}
+        </Script>
         <Header />
         <div className="flex-1">{children}</div>
         <Footer />
