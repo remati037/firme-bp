@@ -2,6 +2,7 @@ import type { SupabaseClient } from "@supabase/supabase-js";
 
 import { SITE_URL } from "@/lib/site";
 import { slugOpstine } from "@/lib/prikaz";
+import { sviClanci } from "@/lib/blog";
 import { MIN_ZA_UKRSTENU } from "@/lib/kategorije";
 
 /**
@@ -94,9 +95,10 @@ async function sve<T>(
 async function staticne(): Promise<Unos[]> {
   // Samo rute koje stvarno postoje. URL u sitemapu koji vraća 404 je gori od
   // izostavljenog.
-  return [
+  const rute = [
     "/",
     "/o-podacima",
+    "/blog",
     "/delatnost",
     "/grad",
     "/najvece",
@@ -104,6 +106,15 @@ async function staticne(): Promise<Unos[]> {
     "/najvece/dobit",
     "/najvece/zaposleni",
   ].map((putanja) => ({ url: apsolutno(putanja) }));
+
+  // Članci idu u isti segment: ima ih desetak, a `lastmod` im je datum objave,
+  // koji je stvaran i proverljiv — tačno ono što lastmod traži.
+  const clanci = sviClanci().map((c) => ({
+    url: apsolutno(`/blog/${c.slug}`),
+    lastmod: c.datum,
+  }));
+
+  return [...rute, ...clanci];
 }
 
 async function kategorije(db: SupabaseClient): Promise<Unos[]> {

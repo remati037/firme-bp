@@ -226,3 +226,123 @@
     }
   }
 }
+
+/*
+ * Telo članka na blogu.
+ *
+ * Ovo je jedino mesto u aplikaciji gde se stilizuje HTML koji nije napisan u
+ * JSX-u, nego nastaje iz Markdown-a u `lib/blog.ts`. Zato klase stoje ovde, a
+ * ne kao Tailwind uz element: na `<p>` iz Markdown-a se ne može zakačiti klasa.
+ *
+ * Sve boje idu kroz tokene, pa tamna tema radi bez ijedne posebne definicije.
+ */
+.article-body {
+  font-size: 17px;
+  line-height: 1.75;
+  color: var(--foreground);
+}
+
+.article-body > * + * {
+  margin-top: 1.15em;
+}
+
+.article-body h2 {
+  margin-top: 2em;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.article-body a {
+  color: var(--primary);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.article-body a:hover {
+  color: var(--primary-hover);
+}
+
+.article-body strong {
+  font-weight: 650;
+}
+
+.article-body ul,
+.article-body ol {
+  padding-left: 1.35em;
+}
+
+.article-body li + li {
+  margin-top: 0.4em;
+}
+
+/* Istaknuta brojka: labela, vrednost, detalj. */
+.stat-box {
+  margin-top: 1.6em;
+  border: 1px solid var(--accent-ring);
+  background: var(--accent-soft);
+  border-radius: var(--radius-card);
+  padding: 18px 20px;
+}
+
+.stat-box .l {
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--accent-strong);
+}
+
+.stat-box .v {
+  margin-top: 6px;
+  font-size: clamp(24px, 3.4vw, 32px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+}
+
+.stat-box .d {
+  margin-top: 4px;
+  font-size: 14px;
+  color: var(--muted-foreground);
+}
+
+/*
+ * "Proveri sam" — nosivi deo internog linkovanja (SEO.md §4). Svaki članak
+ * odavde vodi na stranice firmi o kojima govori.
+ */
+.data-callout {
+  margin-top: 1.6em;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  padding: 16px 18px;
+  background: var(--card);
+  box-shadow: var(--shadow-card);
+}
+
+.data-callout .h {
+  font-size: 13px;
+  font-weight: 650;
+  color: var(--muted-foreground);
+  margin-bottom: 10px;
+}
+
+.data-callout a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 9px 0;
+  border-top: 1px solid var(--border);
+  color: var(--foreground);
+  text-decoration: none;
+  font-weight: 550;
+}
+
+.data-callout a:hover {
+  color: var(--primary);
+}
+
+.data-callout .go {
+  color: var(--primary);
+}
