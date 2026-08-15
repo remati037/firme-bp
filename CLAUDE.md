@@ -33,7 +33,12 @@ interno linkovanje ili šemu.
 - Supabase (Postgres) preko `@supabase/supabase-js`
 - Vercel hosting, ISR
 - Pretraga: Postgres `pg_trgm`, NE uvoditi Algoliju, Typesense ni Elasticsearch
-- AI: Claude API, najjeftiniji dostupan model, isključivo za tekstualni sažetak
+- AI: **DeepSeek ILI Claude API**, najjeftiniji dostupan model, isključivo za tekstualni sažetak.
+  Odluka vlasnika 15.08.2026: DeepSeek je podrazumevan jer je oko 3x jeftiniji, ali oba
+  provajdera moraju ostati upotrebljiva i biraju se **pri pokretanju, ne u kodu**
+  (`--provajder` / `--model`, ili `AI_PROVAJDER` / `AI_MODEL`). Vidi `scripts/lib/ai/`.
+  Ključevi: `DEEPSEEK_API_KEY`, `ANTHROPIC_API_KEY` — nijedan nije potreban Vercelu,
+  jer se sažetci generišu skriptom i čitaju iz baze
 - Cron: GitHub Actions
 
 ---
@@ -270,6 +275,17 @@ Model dobija samo strukturisane podatke iz baze. Prompt mora da sadrži:
 Keširanje: jedan sažetak po firmi po `datum_preseka`. Ako se presek promeni, regeneriši.
 Rate limit: 30 zahteva po IP na sat.
 Fallback: ako API padne, vrati `{ summary: null }` sa statusom 200, nikad 500.
+
+**Generisanje: `npm run sazetci` (`scripts/generisi-sazetke.ts`).**
+- Bez `--potvrdi` je suvi prolaz — ne šalje nijedan zahtev i ne troši ništa. To je
+  podrazumevano stanje namerno; pun set je trošak reda hiljada dinara.
+- `--limit=N` uzima top N firmi po prihodu, pa je objavljivanje u talasima
+  (prvo 5.000 firmi koje realno hvataju saobraćaj) samo jedan argument.
+- Firme bez upotrebljivih finansija (39.406) se **ne šalju na API** — za njih ovaj fajl
+  propisuje fiksnu rečenicu, a to je deterministički tekst iz `lib/narrative.ts`.
+- Skripta je nastavljiva: preskače firme koje već imaju sažetak za tekući presek.
+- DeepSeek naplaćuje duplo u peak prozoru (01–04h i 06–10h UTC). Skripta odbija da radi
+  u tom prozoru bez `--svejedno`.
 
 ---
 
