@@ -55,3 +55,6 @@ scripts/data/nbs-blokade.json
 
 # runtime stanje NBS obogaćivanja (enrich-pib-rir.ts)
 scripts/data/nbs-rir-zavrseno.json
+
+# runtime stanje NBS/CRP obogaćivanja (enrich-zabrane.ts)
+scripts/data/nbs-zabrane-zavrseno.json

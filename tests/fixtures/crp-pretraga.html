@@ -1,0 +1,126 @@
+
+
+
+        <script type="text/javascript">
+        (function($) {
+            $.fn.swhgLoad = function(url, containerId, callback) {
+                url = url + (url.indexOf('?') == -1 ? '?' : '&') + '__swhg=' + new Date().getTime();
+
+                $('<div/>').load(url + ' ' + containerId, function(data, status, xhr) {
+                    $(containerId).replaceWith($(this).html());
+                    if (typeof(callback) === 'function') {
+                        callback.apply(this, arguments);
+                    }
+                });
+                return this;
+            }
+
+            $(function() {
+                $('table[data-swhgajax="true"],span[data-swhgajax="true"]').each(function() {
+                    var self = $(this);
+                    var containerId = '#' + self.data('swhgcontainer');
+                    var callback = getFunction(self.data('swhgcallback'));
+
+                    $(containerId).parent().delegate(containerId + ' a[data-swhglnk="true"]', 'click', function() {
+                        $(containerId).swhgLoad($(this).attr('href'), containerId, callback);
+                        return false;
+                    });
+                })
+            });
+
+            function getFunction(code, argNames) {
+                argNames = argNames || [];
+                var fn = window, parts = (code || "").split(".");
+                while (fn && parts.length) {
+                    fn = fn[parts.shift()];
+                }
+                if (typeof (fn) === "function") {
+                    return fn;
+                }
+                argNames.push(code);
+                return Function.constructor.apply(null, argNames);
+            }
+        })(jQuery);
+        </script>
+    <table class="regrid" id="grdActiveRestrictions" data-swhgajax="true" data-swhgcontainer="grdActiveRestrictions" data-swhgcallback="">
+    <thead>
+        <tr class="regrid-header">
+            <th scope="col">
+            </th>
+            <th scope="col">
+<a data-swhglnk="true" href="/eregistrationportal/Public/Manage/ActiveRestrictionsResultPartial?RestrictedEntityIdentificationNumber=17246771&amp;RestrictedEntityName=&amp;RestrictionClasificationCode=&amp;RestrictionIsActive=&amp;sort=RestrictedEntityIdentificationNumber&amp;sortdir=ASC">Матични / идентификациони број</a>            </th>
+            <th scope="col">
+<a data-swhglnk="true" href="/eregistrationportal/Public/Manage/ActiveRestrictionsResultPartial?RestrictedEntityIdentificationNumber=17246771&amp;RestrictedEntityName=&amp;RestrictionClasificationCode=&amp;RestrictionIsActive=&amp;sort=RestrictedEntityName&amp;sortdir=ASC">Назив</a>            </th>
+            <th scope="col">
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr class="regrid-row">
+            <td class="regrid-column-key"><input type="hidden" value="5621922" /></td>
+            <td class="regrid-column-fixed-150">17246771</td>
+            <td class="regrid-column-fixed-550">BELI SLON PREDUZEĆE ZA PROIZVODNJU  PROMET I USLUGE DOO BEOGRAD (NOVI BEOGRAD) </td>
+            <td><span>
+                                                           <a class="grid-action-link info tooltip-control float-left glyphicon glyphicon-list-alt" data-placement="bottom" title="Детаљи о мери CEPOP-APR-6697-TRINTD-2/2026" onclick="details('d6303849-10c8-49ef-81c6-15e1258d229b')" aria-hidden="true"></a>
+
+                                                   </span></td>
+        </tr>
+    </tbody>
+    </table>
+
+
+<input type="hidden" id='grdActiveRestrictions_SelectedDataKey' value="" />
+<input type="hidden" id='grdActiveRestrictions_SelectedSecureDataKey' value="" />
+
+
+
+
+    <script type="text/javascript">
+        var initialized = false;
+
+        $(function () {
+            if ('grdActiveRestrictions') {
+                initializeGrid('grdActiveRestrictions');
+                initialized = true;
+            }
+        });
+
+        $(document).ajaxStart(function () {
+            initialized = false;
+        });
+
+        $(document).ajaxComplete(function () {
+            if ('grdActiveRestrictions' && !initialized) {
+                initializeGrid('grdActiveRestrictions');
+                initialized = true;
+            }
+        });
+    </script>
+
+
+
+
+
+    <script type="text/javascript">
+        function details(submissionId) {
+            var url = "/eregistrationportal/Public/Manage/Details\\" + submissionId;
+            redirectOpen(url);
+        }
+
+        function getActiveRestrictions(entityTypeId, entityIdentificationNumber, entityCountryId) {
+            $.ajax({
+                type: 'GET',
+                url: '/eregistrationportal/Public/Manage/GetActiveRestrictionsDetails',
+                cache: false,
+                async: true,
+                data: { 'EntityTypeId': entityTypeId, 'EntityIdentificationNumber': entityIdentificationNumber, 'EntityCountryId': entityCountryId },
+                success: function (content) {
+                    crp_modal.showServerModal(content, true);
+                },
+                error: function () {
+                    crp_modal.showError('Десила се грешка приликом обраде Вашег захтева.');
+                }
+            });           
+        }
+    </script>
+

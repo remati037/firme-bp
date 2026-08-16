@@ -1,0 +1,810 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+
+
+
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-6906308-13"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+
+            function gtag() { dataLayer.push(arguments); }
+
+            gtag('js', new Date());
+
+            gtag('config', 'UA-6906308-13');
+        </script>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Портал за е-регистрацију</title>
+        <link href="/eregistrationportal/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+      
+        <link href="/eregistrationportal/content/styles/css?v=ETD3Cact3kzJll4JCJ6Kp8vW3CV-8DJtrJhZa1uOAac1" rel="stylesheet"/>
+
+
+        <script src="/eregistrationportal/bundles/modernizr?v=wBEWDufH_8Md-Pbioxomt90vm6tJN2Pyy9u9zHtWsPo1"></script>
+
+        <script src="/eregistrationportal/bundles/jquery?v=ne-1QdZsPb2qJ6kn2XAtKWekTBllzPZZJb67ScPukIY1"></script>
+
+        <script src="/eregistrationportal/bundles/crp?v=_Vu-yG4zHO1vRENMNqWMikk1uVnX0fcmg1JqMrPj5Sg1"></script>
+
+
+        <script type="text/javascript">
+            $(document)
+                .ajaxStart(function () {
+                    showLoadingIndicator();
+                })
+                .ajaxStop(function () {
+                    hideLoadingIndicator();
+                })
+                .ajaxComplete(function (event, request) {
+                    if (request.status === '401') {
+                        redirectAsync('/eregistrationportal/Public/Home');
+                    }
+                    else if (request.status === '500' && !request.isErrorHandled) {
+                        redirectAsync('/eregistrationportal/Public/Common/Error');
+                    }
+                });
+        </script>
+		<script>
+			(function(s,t,a,n){s[t]||(s[t]=a,n=s[a]=function(){n.q.push(arguments)},
+			n.q=[],n.v=2,n.l=1*new Date)})(window,"InstanaEumObject","ineum");
+
+			ineum('reportingUrl', 'https://instana.apr.gov.rs/eum/');
+			ineum('key', 'O_wC6YxBTQe6cO5SxnVqjg');
+			ineum('trackSessions');
+		</script>
+		<script defer crossorigin="anonymous" src="https://instana.apr.gov.rs/eum/eum.min.js"></script>	
+    </head>
+    <body>
+        <div id="bodyWrapper">
+            
+
+
+<div class="navbar navbar-blue navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <img class="logo" src="/eregistrationportal/Content/Images/system-logo.png" onclick="location.href='/eregistrationportal/Public/Home'" alt="АПР" title="Агенција за привредне регистре" />
+            <span>Систем за електронско подношење пријава</span>
+        </div>
+        <div class="navbar-collapse collapse">
+            <div class='menu-public'>
+                <ul id="menu" class="nav navbar-nav">
+                        <li><a href="/eregistrationportal/Public/Home">Почетна</a></li>
+                        <li><a href="/eregistrationportal/Public/Manage/ActiveRestrictions">Активне мере</a></li>
+                    <li><a href="/eregistrationportal/Public/Home/About">О нама</a></li>
+                    <li><a href="/eregistrationportal/Public/Home/Help">Помоћ</a></li>
+                    <li><a href="/eregistrationportal/Public/Home/Contact">Контакт</a></li>
+                </ul>
+                <div id="languageSelectorWrapper">
+                    <div class="languageSelector-sr language-selector" id="languageSelector" onclick="toggleLanguageOptions(&#39;languageSelectorOptions&#39;);">SR</div><div id="languageSelectorOptions" style="display: none;"><div id="languageSelectorOptionsLinks"><a href="/eregistrationportal/Public/Common/ChangeCulture?culture=sr-cyrl-rs&amp;returnUrl=%2feregistrationportal%2fPublic%2fManage%2fDetails%2fd6303849-10c8-49ef-81c6-15e1258d229b" onclick="showLoadingIndicator();">SR Cyrilic<span class="fa fa-check selected-language"></span></a></div></div>
+                </div>
+            </div>
+            
+
+
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <a href="/eregistrationportal/Protected/Home" id="loginLink">Пријави се</a>
+            </li>
+        </ul>
+
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var $profileDetails = $('#profileDetails');
+            $('#profileLink, #profileDetails').mouseenter(function(e) {
+                if (!$profileDetails.is(':visible')) {
+                    $profileDetails.show();
+                    if (!$profileDetails.hasClass('loaded')) {
+                        $profileDetails.html("Садржај се учитава...");
+                        $.ajax({
+                            type: 'GET',
+                            url: "/eregistrationportal/Protected/Home/ProfileDetails",
+                            cache: false,
+                            async: true,
+                            global: false,
+                            dataType: 'html',
+                            success: function(content) {
+                                $profileDetails.html(content).addClass('loaded');
+                            }
+                        });
+                    }
+                }
+                e.stopPropagation();
+                return false;
+            }).mouseleave(function(e) {
+                $profileDetails.hide();
+                e.stopPropagation();
+                return false;
+            });
+        });
+    </script>
+
+
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+            
+            
+
+
+<link href="/eregistrationportal/content/jqueryui?v=dEEbaiIWzsBKNTkeIeAlAJx58Dmne6GKKLRDw1YYlIA1" rel="stylesheet"/>
+
+
+<script src="/eregistrationportal/bundles/jqueryui?v=mm3v2PpGUkDUriE6bzJuTlqb_tVjmWEGj4i4gSJ7ipU1"></script>
+
+<script src="/eregistrationportal/bundles/crpexec?v=dXdfeSJ4cl8R3X-kPkm_6WNXUTO9yHm-x4seTKgxr-g1"></script>
+
+<script src="/eregistrationportal/bundles/crpsigning?v=J1GDtAhBmE6EnutEgDGkYbf0Isow1YTI4BpGc0Bhobc1"></script>
+
+<script src="/eregistrationportal/bundles/crpmap?v=Az7ILug7Kxz_VLDjskuI9fzUnzn5SsorU6d4i8X-tjI1"></script>
+
+<script src="/eregistrationportal/bundles/crpdebug?v=X_xe2DbBKvY5jKA5xblqiKJMJNkI20anIMtEeva8fxA1"></script>
+
+
+<script>CKEDITOR_BASEPATH = "/eregistrationportal/Scripts/Libraries/ckeditor/";</script>
+<script src="/eregistrationportal/bundles/ckeditor?v=dvAoTs7P6CAW2FsttDXzteGDnpD_CjB6Fe-sS4MKFEs1"></script>
+
+
+<div id="contentContainer" class="container body-content">
+    
+
+
+<div class="page-head">
+    <p>Подаци о предмету <i>CEPOP-APR-6697-TRINTD-2/2026</i></p>
+</div>
+
+
+
+<div id="totalView">
+<div class='preview-entity-container' ><div class='preview-header-collapsable' ><label title='' ></label></div><div class='entity-property-container' ><div class='preview-header-collapsable-child' ><label title='' >Предмет на основу којег сe повезује захтев</label></div><div class='preview-entity-relationship-container' ><div class='entity-property-container preview-primitive-property-container' ><label class='preview-entity-property-name' title='' >Број предмета:</label><label class='preview-entity-property-value' title='' >CEPOP-APR-6697-TRINT-1/2026</label></div><div class='entity-property-container' ><div class='preview-header-collapsable-child' ><label title='' >Акт - основ привременог ограничења </label></div><div class='preview-entity-relationship-container' ><div class='preview-entity-property-static' ><div class='entity-property-container preview-primitive-property-container' ><label class='preview-entity-property-name' title='' >Надлежни орган који је уписао/доставио меру</label><label class='preview-entity-property-value' title='' >МИНИСТАРСТВО ФИНАНСИЈА, ПОРЕСКА УПРАВА - ЦЕНТРАЛА</label></div></div><div class='preview-entity-property-static' ><div class='entity-property-container preview-primitive-property-container' ><label class='preview-entity-property-name' title='' >Тип акта</label><label class='preview-entity-property-value' title='' >Решење</label></div></div><div class='entity-property-container preview-primitive-property-container' ><label class='preview-entity-property-name' title='' >Број акта</label><label class='preview-entity-property-value' title='' >2026002510013</label></div><div class='entity-property-container preview-primitive-property-container' ><label class='preview-entity-property-name' title='' >Датум доношења</label><label class='preview-entity-property-value' title='' >28.04.2026 00:00:00</label></div></div></div></div></div><div class='entity-property-container' ><div class='preview-header-collapsable-child' ><label title='' >Подаци о привременом ограничењу права лица</label></div><div class='preview-entity-relationship-container' ><div class='entity-property-container' ><div class='preview-header-collapsable-child' ><label title='' >Акт - основ привременог ограничења права</label></div><div class='preview-entity-relationship-container' ><div class='preview-entity-property-static' ><div class='entity-property-container preview-primitive-property-container' ><label class='preview-entity-property-name' title='' >Надлежни орган који је уписао/доставио меру</label><label class='preview-entity-property-value' title='' >МИНИСТАРСТВО ФИНАНСИЈА, ПОРЕСКА УПРАВА - ЦЕНТРАЛА</label></div></div><div class='preview-entity-property-static' ><div class='entity-property-container preview-primitive-property-container' ><label class='preview-entity-property-name' title='' >Тип акта</label><label class='preview-entity-property-value' title='' >Решење</label></div></div><div class='entity-property-container preview-primitive-property-container' ><label class='preview-entity-property-name' title='' >Број акта</label><label class='preview-entity-property-value' title='' >2026002510013</label></div><div class='entity-property-container preview-primitive-property-container' ><label class='preview-entity-property-name' title='' >Датум доношења</label><label class='preview-entity-property-value' title='' >28.04.2026 22:08:23</label></div></div></div><div class='entity-property-container' ><div class='preview-header-collapsable-child' ><label title='' >Подаци о лицу са привременим ограничењем права</label></div><div class='preview-entity-relationship-container' ><div class='preview-entity-property-static' ><div class='entity-property-container preview-primitive-property-container' ><label class='preview-entity-property-name' title='' >Тип лица</label><label class='preview-entity-property-value' title='' >Домаће правно лице</label></div></div><div class='entity-property-container' ><div class='preview-header-collapsable-child' ><label title='' >Подаци о правном лицу</label></div><div class='preview-entity-relationship-container' ><div class='entity-property-container preview-primitive-property-container' ><label class='preview-entity-property-name' title='' >Назив правног лица</label><label class='preview-entity-property-value' title='' >BELI SLON PREDUZEĆE ZA PROIZVODNJU  PROMET I USLUGE DOO BEOGRAD (NOVI BEOGRAD)</label></div><div class='entity-property-container preview-primitive-property-container' ><label class='preview-entity-property-name' title='' >Матични број правног лица</label><label class='preview-entity-property-value' title='' >17246771</label></div></div></div><div class='preview-entity-relationship-property-holder' ><div class='preview-header-collapsable-children' ><label title='' >Мере привременог ограничења права</label></div><div class='entity-relationship-child-container' ><div class='preview-header-collapsable-children-child' ><label title='' >Мерa привременог ограничења број 1</label></div><div class='preview-entity-container' ><div class='entity-property-container preview-primitive-property-container' ><label class='preview-entity-property-name' title='' >Идентификатор постојеће мере</label><label class='preview-entity-property-value' title='' >1e5d2a39-6a51-4929-827b-6e0c0ab7c565</label></div><div class='entity-property-container preview-primitive-property-container' ><label class='preview-entity-property-name' title='' >Идентификатор мере у органу који је доставио меру</label><label class='preview-entity-property-value' title='' >718473</label></div><div class='preview-entity-property-static' ><div class='entity-property-container preview-primitive-property-container' ><label class='preview-entity-property-name' title='' >Мера је избрисана</label><label class='preview-entity-property-value' title='' >Да</label></div></div><div class='entity-property-container preview-primitive-property-container' ><label class='preview-entity-property-name' title='' >Почетак важења мере</label><label class='preview-entity-property-value' title='' >28.04.2026 00:00:00</label></div><div class='preview-entity-property-static' ><div class='entity-property-container preview-primitive-property-container' ><label class='preview-entity-property-name' title='' >Врста мере</label><label class='preview-entity-property-value' title='' >[5] Мера изречена на основу прописа којима се уређује порески поступак и пореска администрација</label></div></div><div class='preview-entity-property-static' ><div class='entity-property-container preview-primitive-property-container' ><label class='preview-entity-property-name' title='' >Шифра</label><label class='preview-entity-property-value' title='' >[5UPA1] Порески акт из члана 29. ЗППА</label></div></div><div class='preview-entity-property-static' ><div class='entity-property-container preview-primitive-property-container' ><label class='preview-entity-property-name' title='' >Предмет казнене евиденције</label><label class='preview-entity-property-value' title='' >Не</label></div></div><div class='entity-property-container' ><div class='preview-header-collapsable-child' ><label title='' >Правно лице</label></div><div class='preview-entity-relationship-container' ><div class='entity-property-container preview-primitive-property-container' ><label class='preview-entity-property-name' title='' >Назив правног лица</label><label class='preview-entity-property-value' title='' >BELI SLON PREDUZEĆE ZA PROIZVODNJU  PROMET I USLUGE DOO BEOGRAD (NOVI BEOGRAD)</label></div><div class='entity-property-container preview-primitive-property-container' ><label class='preview-entity-property-name' title='' >Матични број правног лица</label><label class='preview-entity-property-value' title='' >17246771</label></div></div></div><div class='entity-property-container preview-primitive-property-container' ><label class='preview-entity-property-name' title='' >Опис</label><label class='preview-entity-property-value' title='' >Пореска контрола</label></div></div></div></div></div></div></div></div><div class='entity-property-container preview-primitive-property-container' ><label class='preview-entity-property-name' title='' >Идентификатор уписа у органу који је доставио меру</label><label class='preview-entity-property-value' title='' >718473</label></div><div class='entity-property-container preview-primitive-property-container' ><label class='preview-entity-property-name' title='' >Интерни идентификатор захтева</label><label class='preview-entity-property-value' title='' >957fa42e-0e29-407a-8a2e-b8959fc9ed35</label></div></div>        <div id="totalViewPanel" class="panel panel-default">
+        </div>
+</div>
+
+<br />
+
+<button class="button-right-margined button-icon icon-back-blue" onclick="window.close()">
+    Назад
+</button>
+<button class="button-right-margined button-icon icon-prepare-print-blue" onclick="printPreview()">
+    Преглед за штампу
+</button>
+
+
+
+</div>
+
+
+
+
+            
+
+
+<footer>
+    <ul id="footerMenu" class="list-inline text-center">
+        <li><a href="/eregistrationportal/Public/Home">Почетна</a></li>
+        <li class="vertical-separator">|</li>
+        <li><a href="/eregistrationportal/Public/Home/About">О нама</a></li>
+        <li class="vertical-separator">|</li>
+        <li><a href="/eregistrationportal/Public/Home/Contact">Контакт</a></li>
+    </ul>
+    <div id="footerLogo">
+        <div id="footerLogoWrap">
+            <img src="/eregistrationportal/Content/Images/sponsorship.png">
+        </div>
+    </div>
+    <p class="text-center">&copy; 2026 - Систем за подношење електронских пријава</p>
+</footer>
+
+
+
+
+            
+
+<div id="helpVideos" class="help-box closed">
+    <a id="helpVideosIcon" class="help-icon">
+        <i class="fa fa-video-camera"></i>
+    </a>
+    <div id="helpVideosContent" class="help-content">
+        <div>
+            <input type="text" id="helpVideosFilter" class="form-control" placeholder="Претражи видео"/>
+            <button id="btnCollapseVideos" type="button" class="btn btn-info tooltip-control" data-title="Максимизуј/минимизуј" onclick="collapseVideosScreen()">
+                <span class="fa fa-expand"> </span>
+            </button>
+            <div class="clear-fix"></div>
+        </div>
+        <div class="help-video">
+            <div class="help-video-content">
+                <h4 class="video-title">Преглед видео упутства  1</h4>
+                <p class="video-name">Пријављивање на систем Централне евиденције привремених ограничења права</p>
+                <span class="fa fa-play-circle icon-play" style="display: none;"></span>
+            </div>
+            <div class="video-container" data-video-url="https://www.youtube.com/embed/1kVjGsrDgBY">
+                <iframe width="560" height="190" frameborder="0" allowfullscreen=""></iframe>
+            </div>
+        </div>
+        <div class="help-video">
+            <div class="help-video-content">
+                <h4 class="video-title">Преглед видео упутства  2</h4>
+                <p class="video-name">Насловни екран Централне евиденције привремених ограничења права</p>
+                <span class="fa fa-play-circle icon-play" style="display: none;"></span>
+            </div>
+            <div class="video-container" data-video-url="https://www.youtube.com/embed/QzxDEEhCVic">
+                <iframe width="560" height="190" frameborder="0" allowfullscreen=""></iframe>
+            </div>
+        </div>
+        <div class="help-video">
+            <div class="help-video-content">
+                <h4 class="video-title">Преглед видео упутства  3</h4>
+                <p class="video-name">Објаве и активне мере у оквиру Централне евиденције привремених ограничења права</p>
+                <span class="fa fa-play-circle icon-play" style="display: none;"></span>
+            </div>
+            <div class="video-container" data-video-url="https://www.youtube.com/embed/nnFIkRq2-9A">
+                <iframe width="560" height="190" frameborder="0" allowfullscreen=""></iframe>
+            </div>
+        </div>
+        <div class="help-video">
+            <div class="help-video-content">
+                <h4 class="video-title">Преглед видео упутства  4</h4>
+                <p class="video-name">Електронско подношење захтева за потврдом у оквиру Централне евиденције привремених ограничења права</p>
+                <span class="fa fa-play-circle icon-play" style="display: none;"></span>
+            </div>
+            <div class="video-container" data-video-url="https://www.youtube.com/embed/_VI5YxvVbeY">
+                <iframe width="560" height="190" frameborder="0" allowfullscreen=""></iframe>
+            </div>
+        </div>
+        <div class="help-video">
+            <div class="help-video-content">
+                <h4 class="video-title">Преглед видео упутства  5</h4>
+                <p class="video-name">Упис привременог ограничења права лица од стране обвезника уписа података</p>
+                <span class="fa fa-play-circle icon-play" style="display: none;"></span>
+            </div>
+            <div class="video-container" data-video-url="https://www.youtube.com/embed/Y5cXxu25-dc">
+                <iframe width="560" height="190" frameborder="0" allowfullscreen=""></iframe>
+            </div>
+        </div>        
+    </div>
+</div>
+
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#helpVideosFilter").keyup(function() {
+                var filterValue = this.value.toLowerCase();
+
+                $(".help-video").each(function () {
+                    var videoTitle = $(this).find('.video-name').text();
+                    if (videoTitle) {
+                        videoTitle = videoTitle.toLowerCase();
+                    }
+
+                    videoTitle.indexOf(filterValue) > -1 ? $(this).show() : $(this).hide();
+                });
+            });
+
+            $("#helpBoxIcon").click(function() {
+                $("#helpVideos #helpBoxOptions").toggle();
+                $("#helpVideos").toggleClass("show");
+            });
+
+            $(".help-video").mouseover(function() {
+                $(this).find('.icon-play').show();
+            }).mouseout(function() {
+                $(this).find('.icon-play').hide();
+            });
+
+            $(".icon-play").click(function () {
+                var $videoContainer = $(this).parent().next();
+                var $video = $videoContainer.find('iframe');
+
+                if (!$(this).hasClass('play')) {
+                    var iframeSrc = $video.attr('src');
+                    if (iframeSrc === undefined) {
+                        iframeSrc = $videoContainer.attr('data-video-url');
+                    }
+                    iframeSrc = iframeSrc.indexOf('autoplay=1') == -1 ? (iframeSrc + "?autoplay=1") : iframeSrc;
+
+                    $video.attr('src', null);
+                    if ($("#helpVideos").hasClass('videos-open')) {
+                        $videoContainer.css('height', '300px');
+                        $video.css('height', '300px');
+                    } else {
+                        $videoContainer.css('height', '200px');
+                        $video.css('height', '200px');
+                    }
+                    $video.attr('src', iframeSrc);
+                }
+                else {
+                    $video.attr('src', null);
+                }
+
+                $(this).toggleClass('fa-play-circle');
+                $(this).toggleClass('fa-times-circle');
+                $(this).toggleClass('play');
+                $videoContainer.slideToggle("fast");
+            });
+        });
+
+        function collapseVideosScreen() {
+            $("#helpVideos").toggleClass('videos-open');
+            if ($("#helpVideos").hasClass('videos-open')) {
+                $("#btnCollapseVideos").find('span:nth-child(1)').attr('class', 'fa fa-compress');
+            } else {
+                $("#btnCollapseVideos").find('span:nth-child(1)').attr('class', 'fa fa-expand');
+            }
+        }
+    </script>
+
+
+            
+
+
+<div id="helpBox" class="help-box closed">
+    <a id="helpBoxIcon" class="help-icon">
+        <i class="fa fa-question-circle"></i>
+    </a>
+    <div id="helpBoxOptions" class="help-content">
+        <h4>Скраћенице</h4>
+        <ul id="shortcutsList">
+            <li>
+                <div class="shortcut">
+                    <span class="shortcut-key" data-shortcut="h">ctrl + h</span>
+                    <span class="shortcut-value">Отвори/затвори помоћни прозор</span>
+                </div>
+            </li>
+            <li>
+                <div class="shortcut">
+                    <span class="shortcut-key" data-shortcut="i" data-shortcut-action='/eregistrationportal/Protected/Register/Domains'>ctrl + i</span>
+                    <span class="shortcut-value">Започни нови процес</span>
+                </div>
+            </li>
+            <li>
+                <div class="shortcut">
+                    <span class="shortcut-key" data-shortcut="e">ctrl + e</span>
+                    <span class="shortcut-value">Напусти унос података</span>
+                </div>
+            </li>
+            <li>
+                <div class="shortcut">
+                    <span class="shortcut-key" data-shortcut="u">ctrl + u</span>
+                    <span class="shortcut-value">Иди на врх стране</span>
+                </div>
+            </li>
+        </ul>
+        <br>
+    </div>
+</div>
+
+
+
+
+    <script type="text/javascript">
+        function showVariables() {
+            var processInstanceId = getProcessInstanceIdentifier();
+            var processId = getProcessIdentifier();
+            var activityId = getActivityIdentifier();
+
+            crp_debugger.showVariables('/eregistrationportal/Protected/Debug/Variables', processInstanceId, processId, activityId);
+        }
+
+        function showActivityDetails() {
+            var processInstanceId = getProcessInstanceIdentifier();
+            var processId = getProcessIdentifier();
+            var activityId = getActivityIdentifier();
+
+            crp_debugger.showActivityDetails('/eregistrationportal/Protected/Debug/ActivityDetails', processInstanceId, processId, activityId);
+        }
+
+        function showDispatcherNotification() {
+            crp_debugger.showDispatcherNotification('/eregistrationportal/Protected/Debug/DispatcherNotification', '');
+        }
+    </script>
+
+
+            
+
+
+<div id="systemSettings">
+        <input type="hidden" id="hdnDateFormat" value="dd.MM.yyyy" />
+        <input type="hidden" id="hdnDateTimeFormat" value="dd.MM.yyyy HH:mm:ss" />
+        <input type="hidden" id="hdnDigitGroupSymbol" value="."/>
+        <input type="hidden" id="hdnDecimalSymbol" value=","/>
+        <input type="hidden" id="hdnCurrencySymbol" value="RSD"/>
+        <input type="hidden" id="hdnDirection" />
+</div>
+
+
+
+
+
+            <a href="#" id="scrollToTop"><span class="fa fa-chevron-circle-up"></span></a>
+        </div>
+
+        <div id="printWrapper"></div>
+
+        <div id="loadingIndicator" style="display: none;">
+    <div class="loading-indicator-backdrop"></div>
+    <div class="loading-indicator-content-container">
+        <div class="loading-indicator-content">
+            <img src="/eregistrationportal/Content/Images/loading-indicator.gif" alt="loading" />
+            <div class="float-left">
+                <label class="loading-indicator-title">
+                    Платформа за регистрацију
+                </label>
+                <div class="float-clear"></div>
+                <label>
+                    Ваш захтев се обрађује... Сачекајте...
+                </label>
+            </div>
+            <div class="float-clear"></div>
+        </div>
+    </div>
+</div>
+
+
+        
+
+
+
+
+
+<div id="alertHeader" class="alert alert-header" 
+    style="display:none;" role="alert">
+    <button type="button" class="close" aria-label="Close" onclick="$('#alertHeader').fadeOut(500);"><span aria-hidden="true">&times;</span></button>
+    <label id="alertHeaderTitle" class="alert-title"></label>
+    <label id="alertHeaderContent" class="alert-content"></label>
+</div>
+
+
+
+
+
+
+<div id="alertDialog" class="modal modal-alert fade in" tabindex='-1' role="dialog" style="z-index: 1050;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id="alertDialogHeader" class="modal-header modal-header-">
+                <button id="alertDialogClose" type="button" class="close" aria-hidden="true" onclick="invokeAlertEvent(null, '')">&times;</button>
+                <h4 id="alertDialogTitle" class="modal-title">
+                    
+                </h4>
+            </div>
+            <div class="modal-body">
+                <img id="alertDialogIcon" class="modal-icon" alt="icon" />
+                <p id="alertDialogContent" class="modal-message">
+                    
+                </p>
+                <div class="float-clear"></div>
+            </div>
+            <div class="modal-footer">
+                <button id="alertDialogCancel" type="button" class="btn btn-default" onclick="invokeAlertEvent(null, '')"
+                        style="display:none;">
+                    Откажи
+                </button>
+                <button id="alertDialogConfirm" type="button" class="btn btn-info" onclick="invokeAlertEvent(null, '')"
+                        style="display:none;">
+                    Потврди
+                </button>
+                <button id="alertDialogOk" type="button" class="btn btn-default" onclick="invokeAlertEvent(null, '')"
+                        style="display:visible;">
+                    Ок
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+    <script type="text/javascript">
+        function closeAlert() {
+            $('#alertDialog').modal('hide');
+        }
+
+        function invokeAlertEvent(onEvent, parameter) {
+            closeAlert();
+
+            if (onEvent && typeof (onEvent) == "function") {
+                if (parameter != null) {
+                    onEvent(parameter);
+                } else {
+                    onEvent();
+                }
+            } 
+        }
+    </script>
+
+
+
+
+
+<div id="alertFooter" class="alert-footer" style="display:none;">
+    <label id="alertFooterContent" class="alert-content"></label>
+    <img src="/eregistrationportal/Content/Images/close-white-16.png" alt="close" class="alert-footer-close" onclick="$('#alertFooter').fadeOut(500);" />
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <script type="text/javascript">
+        function getMessageTitle(messageType) {
+            switch (messageType) {
+                case '1':
+                case 1:
+                    return 'Упозорење';
+                case '2':
+                case 2:
+                    return 'Грешка';
+                case '3':
+                case 3:
+                    return 'Успешно';
+                case '4':
+                case 4:
+                    return 'Информација';
+                case '5':
+                case 5:
+                    return 'Питање';
+                default:
+                    return 'Информација';
+            }
+        }
+
+        function getMessageStyle(messageType) {
+            switch (messageType) {
+                case '1':
+                case 1:
+                    return 'warning';
+                case '2':
+                case 2:
+                    return 'danger';
+                case '3':
+                case 3:
+                    return 'success';
+                case '4':
+                case 4:
+                    return 'info';
+                case '5':
+                case 5:
+                    return 'question';
+                default:
+                    return 'info';
+            }
+        }
+
+        function getMessageIcon(messageType) {
+            switch (messageType) {
+                case '1':
+                case 1:
+                    return '/eregistrationportal/Content/Images/alert_warning.png';
+                case '2':
+                case 2:
+                    return '/eregistrationportal/Content/Images/alert_error.png';
+                case '3':
+                case 3:
+                    return '/eregistrationportal/Content/Images/alert_success.png';
+                case '4':
+                case 4:
+                    return '/eregistrationportal/Content/Images/alert_info.png';
+                case '5':
+                case 5:
+                    return '/eregistrationportal/Content/Images/alert_question.png';
+                default:
+                    return '/eregistrationportal/Content/Images/alert_info.png';
+            }
+        }
+
+        function getMessageButton(button) {
+            switch (button.toLowerCase()) {
+                case 'ok':
+                    return 'Ок';
+                case 'confirm':
+                    return 'Потврди';
+                case 'cancel':
+                    return 'Откажи';
+                case 'save':
+                    return 'Сними';
+                default:
+                    return button;
+            }
+        }
+
+        function getErrorLocalized(errorCode) {
+            switch (errorCode) {
+                case 'Bad Request':
+                    return 'Ваш захтев за веб ресурсом је невалидан.';
+                case 'Not Found':
+                    return 'Тражени ресурс није пронађен.';
+                case 'Unauthorized':
+                    return 'Нисте овлашћени да извршите захтев за веб ресурс, или је Ваша сесија истекла.';
+                case 'Forbidden':
+                    return 'Приступ ресурсу је забрањен.';
+                case 'Request Timeout':
+                    return 'Захтев за веб ресурс је трајао предуго, због чега је био прекинут.';
+                case 'Internal Server Error':
+                    return 'Десила се серверска грешка.';
+                default:
+                    return 'Десила се грешка приликом обраде Вашег захтева.';
+            }
+        }
+    </script>
+
+
+        
+
+
+<div id="modalDialog" class="modal fade" style="display: none" tabindex="-1" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header modal-header-question">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 id="modalTitle" class="modal-title">
+                    
+                </h4>
+            </div>
+            <div id="modalContent" class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="modalDialogClose" class="btn btn-default" data-dismiss="modal">Затвори</button>
+                <button type="button" id="modalDialogSave" class="btn btn-info" style="display: inline-block" onclick="invokeSave(onSave)">Сними</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-backdrop fade in"></div>
+
+
+
+
+    <script type="text/javascript">
+        function invokeSave(onSave) {
+            if (onSave()) {
+                $('#modalDialog').modal('hide');
+            }
+            else {
+                crp_modal.showHeaderError('Десила се грешка приликом снимања података.');
+            }
+        }
+</script>
+
+
+        
+
+
+<div id="printPreviewDialog" class="modal modal-print fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" style="width:880px !important;">
+        <div class="modal-content">
+            <div class="modal-header modal-header-question">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Преглед за штампу</h4>
+            </div>
+            <div class="modal-body print-content">
+            </div>
+            <div class="modal-footer" style="background: #fafafa;">
+                <button type="button" id="btnCancelPrint" class="btn btn-default" data-dismiss="modal">Затвори</button>
+                <button type="button" id="btnPrint" class="btn btn-info" onclick="window.print();">Штампај</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-backdrop fade in"></div>
+
+
+
+
+        <script src="/eregistrationportal/bundles/bootstrap?v=7AivWxZSGKLL8dn50xVX2jkVpYPmy-viyTcqnTTT6jk1"></script>
+
+        <script src="/eregistrationportal/bundles/jqueryval?v=nsOwUc2j3GMqgidS30eLgZVJeHn83Wqmm2vMD4cUlKA1"></script>
+
+
+        
+    <script type="text/javascript">
+        $(document).ready(function() {
+            initDatePickerBehavior();
+            crp_ui.initScroller();
+            crp_ui.routing.staticData = '/eregistrationportal/Public/Register/GetStaticData';
+        });
+    </script>
+
+    
+    <script type="text/javascript">
+        $(document).ready(function() {
+            initializeCollapsables();
+            initializeUpload();
+            approveDate();
+        });
+
+        function initializeUpload() {
+            crp_upload.routing.downloadLocalFile = '/eregistrationportal/Public/Document/LoadLocalDocument';
+            crp_upload.routing.downloadRepositoryFile = '/eregistrationportal/Public/Document/LoadRepositoryDocument';
+        }
+
+        function printPreview() {
+            var content = $("#totalView").html();
+            crp_modal.openPrintPreview(content);
+            $("#printPreviewDialog, #printWrapper").find('.collapse-icon').remove();
+        }
+		
+        function approveDate() {
+            var dss = '29.04.2026 19:08:10';
+            if (dss && dss.length !== 0) {
+                var predmetKazneneEvidencijeArray = getElementsByText('Предмет казнене евиденције', 'label');
+                if (predmetKazneneEvidencijeArray != null) {
+                    //console.info('found Предмет казнене евиденције: ' + predmetKazneneEvidencijeArray.length);
+                    for (var i = 0; i < predmetKazneneEvidencijeArray.length; i++) {
+                        //console.info(predmetKazneneEvidencijeArray[i].tagName + ' ' + predmetKazneneEvidencijeArray[i].className);
+                        var container = predmetKazneneEvidencijeArray[i].parentElement;
+                        if (container.className == 'preview-entity-container') {
+                            var entity = genPreviewEntityPropertyStatic('Време уноса у евиденцију', dss);
+                            container.appendChild(entity);
+                            //console.info(entity.outerHTML);
+                        }
+                    }
+                }
+            }
+        }
+
+        function getElementsByText(searchText, tagName) {
+            var aTags = document.getElementsByTagName(tagName);
+            var found;
+            var predmetKazneneEvidencijeArray = [];
+            for (var i = 0; i < aTags.length; i++) {
+                if (aTags[i].textContent == searchText) {
+                    predmetKazneneEvidencijeArray.push(aTags[i].parentElement.parentElement)
+                    //return aTags[i].parentElement.parentElement;
+                }
+            }
+            return predmetKazneneEvidencijeArray;
+        }
+		
+        function genPreviewEntityPropertyStatic(labelText, valueText) {
+            var divOuter = document.createElement('div');
+            divOuter.className = 'preview-entity-property-static';
+
+            var divInner = document.createElement('div');
+            divInner.classList.add('entity-property-container', 'preview-primitive-property-container');
+            divOuter.appendChild(divInner);
+
+            var label1 = document.createElement('label');
+            label1.className = 'preview-entity-property-name';
+            label1.innerText = labelText;
+            divInner.appendChild(label1);
+
+            var label2 = document.createElement('label');
+            label2.className = 'preview-entity-property-value';
+            label2.innerText = valueText;
+            divInner.appendChild(label2);
+
+            return divOuter;
+        }
+    </script>
+
+
+    </body>
+</html>
