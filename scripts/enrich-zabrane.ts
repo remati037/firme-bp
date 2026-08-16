@@ -27,6 +27,8 @@ try {
 const KONKURENTNOST = brojArgumenta("--konkurentnost", 8);
 /** --dopuna: cilj su samo firme koje već imaju barem jednu meru (nakon popravke parsera). */
 const DOPUNA = process.argv.includes("--dopuna");
+/** --sve-ponovo: ignoriše progress fajl i ponovo obrađuje SVE ciljne firme (idempotentno). */
+const SVE_PONOVO = process.argv.includes("--sve-ponovo");
 const PUT_PROGRESA = DOPUNA
   ? "scripts/data/nbs-zabrane-dopuna-zavrseno.json"
   : "scripts/data/nbs-zabrane-zavrseno.json";
@@ -116,7 +118,9 @@ async function glavna(): Promise<void> {
     `Firmi: ${ciljni.length} (${DOPUNA ? "dopuna — samo sa merama" : "sve"}), konkurentnost ${KONKURENTNOST}.`,
   );
 
-  const zavrseno = new Set<string>(ucitajJson<string[]>(PUT_PROGRESA, []));
+  const zavrseno = SVE_PONOVO
+    ? new Set<string>()
+    : new Set<string>(ucitajJson<string[]>(PUT_PROGRESA, []));
   let indeks = 0;
   let obradjeno = 0;
   let saMerama = 0;
