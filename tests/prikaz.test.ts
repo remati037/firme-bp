@@ -3,7 +3,7 @@ import { describe, expect, it } from "vitest";
 import { cirilicniOblik, latinicaUCirilicu } from "../lib/cirilica";
 import { imeOpstine, kratkoIme, nazivDelatnosti, skratiUKodu, slugOpstine, vrstaStatusa } from "../lib/prikaz";
 import { izracunajSignale, porukaBezSignala } from "../lib/signali";
-import type { Finansije, Firma } from "../lib/queries";
+import type { Finansije, Firma, Zabrana } from "../lib/queries";
 
 const FIRMA: Firma = {
   maticni_broj: "20012345",
@@ -197,5 +197,40 @@ describe("izracunajSignale", () => {
     expect(istorija?.tezina).toBe("warn");
     expect(istorija?.tekst).toContain("5.135");
     expect(signali.some((s) => s.naslov === "Aktivna blokada računa")).toBe(false);
+  });
+
+  const MERA = (del: Partial<Zabrana>): Zabrana => ({
+    id: 1,
+    maticni_broj: FIRMA.maticni_broj,
+    izvor_id: "abc",
+    referenca: "CEPOP-APR-1-TRINTD-2/2026",
+    vrsta: "[5] Мера изречена на основу прописа којима се уређује порески поступак и пореска администрација",
+    sifra: "[5UPA1] Порески акт из člana 29. ZPPA",
+    pocetak_vazenja: "2026-04-28",
+    izbrisana: true,
+    opis: null,
+    provereno_at: null,
+    ...del,
+  });
+
+  it("aktivna mera (izbrisana nije true) je kritični signal", () => {
+    const signali = izracunajSignale(FIRMA, FI, "2026-07-31", null, [MERA({ izbrisana: null })]);
+    const aktivna = signali.find((s) => s.naslov === "Aktivno privremeno ograničenje prava");
+    expect(aktivna?.tezina).toBe("crit");
+    expect(aktivna?.tekst).toContain("poreska mera");
+    expect(aktivna?.tekst).toContain("28.04.2026.");
+  });
+
+  it("samo istorijske (izbrisane) mere daju upozorenje", () => {
+    const signali = izracunajSignale(FIRMA, FI, "2026-07-31", null, [MERA({}), MERA({ id: 2, izvor_id: "def" })]);
+    const istorija = signali.find((s) => s.naslov === "Privremena ograničenja u evidenciji");
+    expect(istorija?.tezina).toBe("warn");
+    expect(istorija?.tekst).toContain("2");
+    expect(signali.some((s) => s.naslov === "Aktivno privremeno ograničenje prava")).toBe(false);
+  });
+
+  it("bez mera nema zabrana signala", () => {
+    expect(izracunajSignale(FIRMA, FI, "2026-07-31", null, [])).toHaveLength(0);
+    expect(izracunajSignale(FIRMA, FI, "2026-07-31", null, undefined)).toHaveLength(0);
   });
 });

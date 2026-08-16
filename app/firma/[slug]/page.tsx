@@ -147,7 +147,7 @@ export default async function StranicaFirme({ params }: Props) {
     opstina,
   });
 
-  const signali = izracunajSignale(firma, fi, datumPreseka, podaci.blokada);
+  const signali = izracunajSignale(firma, fi, datumPreseka, podaci.blokada, podaci.zabrane);
   const pitanja = faqZaFirmu({ firma, ime, fi, datumPreseka });
   const cirilica = cirilicniOblikIliNista(firma.poslovno_ime);
   const netoRezultat = p.netoRezultat ?? 0;

@@ -260,6 +260,34 @@ export function upitBlokada(db: SupabaseClient, maticniBroj: string) {
 }
 
 // =============================================================================
+// Privremena ograničenja prava (APR Centralna evidencija, migracija 007)
+// =============================================================================
+
+export type Zabrana = {
+  id: number;
+  maticni_broj: string;
+  izvor_id: string;
+  referenca: string | null;
+  vrsta: string | null;
+  sifra: string | null;
+  pocetak_vazenja: string | null;
+  izbrisana: boolean | null;
+  opis: string | null;
+  provereno_at: string | null;
+};
+
+export function upitZabrane(db: SupabaseClient, maticniBroj: string) {
+  return db
+    .from("zabrane")
+    .select(
+      "id,maticni_broj,izvor_id,referenca,vrsta,sifra,pocetak_vazenja,izbrisana,opis,provereno_at",
+    )
+    .eq("maticni_broj", maticniBroj)
+    .order("pocetak_vazenja", { ascending: false, nullsFirst: false })
+    .returns<Zabrana[]>();
+}
+
+// =============================================================================
 // Statistika kategorija (materijalizovani view-ovi)
 // =============================================================================
 

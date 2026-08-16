@@ -9,7 +9,7 @@
  */
 
 import { formatBroj, formatDatum, formatRSD, starostUGodinama } from "./format";
-import type { Blokada, Finansije, Firma } from "./queries";
+import type { Blokada, Finansije, Firma, Zabrana } from "./queries";
 
 export type TezinaSignala = "crit" | "warn" | "ok";
 
@@ -24,6 +24,7 @@ export function izracunajSignale(
   fi: Finansije | null | undefined,
   datumPreseka: string,
   blokada?: Blokada | null,
+  zabrane?: Zabrana[],
 ): Signal[] {
   const signali: Signal[] = [];
   const godina = fi?.godina;
@@ -105,6 +106,36 @@ export function izracunajSignale(
     });
   }
 
+  // 8. Aktivno privremeno ograničenje prava (APR evidencija; izbrisana !== true)
+  const aktivne = (zabrane ?? []).filter((z) => z.izbrisana !== true);
+  const prvaAktivna = aktivne[0];
+  if (prvaAktivna) {
+    signali.push({
+      tezina: "crit",
+      naslov: "Aktivno privremeno ograničenje prava",
+      tekst: `Prema APR evidenciji privremenih ograničenja, na snazi je mera: ${kratkaVrsta(
+        prvaAktivna.vrsta,
+      )}${
+        prvaAktivna.pocetak_vazenja ? `, od ${formatDatum(prvaAktivna.pocetak_vazenja)}` : ""
+      }${aktivne.length > 1 ? ` (ukupno ${formatBroj(aktivne.length)} aktivnih mera)` : ""}.`,
+    });
+  }
+
+  // 9. Istorija privremenih ograničenja (sve mere, uključujući skinute)
+  const ukupnoZabrana = zabrane?.length ?? 0;
+  if (ukupnoZabrana > 0 && !prvaAktivna) {
+    const poslednja = zabrane![0];
+    signali.push({
+      tezina: "warn",
+      naslov: "Privremena ograničenja u evidenciji",
+      tekst: `Firma ima ${formatBroj(ukupnoZabrana)} ${pluralMera(
+        ukupnoZabrana,
+      )} u APR evidenciji privremenih ograničenja prava${
+        poslednja?.pocetak_vazenja ? ` (poslednja od ${formatDatum(poslednja.pocetak_vazenja)})` : ""
+      }.`,
+    });
+  }
+
   return signali;
 }
 
@@ -116,8 +147,28 @@ function formatDinarski(iznos: number): string {
 function pluralDana(n: number): string {
   if (n % 100 >= 11 && n % 100 <= 14) return "dana";
   if (n % 10 === 1) return "dan";
-  if (n % 10 >= 2 && n % 10 <= 4) return "dana";
   return "dana";
+}
+
+/** Kratak naziv vrste mere iz punog teksta (npr. "[5] Мера изречена..." → "poreska mera"). */
+export function kratkaVrsta(vrsta: string | null | undefined): string {
+  const m = vrsta?.match(/^\[(\d)\]/);
+  const kratko: Record<string, string> = {
+    "1": "zabrana obavljanja delatnosti",
+    "2": "zabrana raspolaganja novčanim sredstvima",
+    "3": "zabrana vršenja dužnosti odgovornom licu",
+    "4": "zabrana raspolaganja udelima",
+    "5": "poreska mera",
+  };
+  if (m && kratko[m[1]]) return kratko[m[1]];
+  const cist = vrsta?.replace(/^\[\d+\]\s*/, "").trim();
+  return cist && cist.length > 0 ? cist : "privremeno ograničenje";
+}
+
+function pluralMera(n: number): string {
+  if (n % 100 >= 11 && n % 100 <= 14) return "mera";
+  if (n % 10 === 1) return "meru";
+  return "mere";
 }
 
 /**
