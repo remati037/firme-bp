@@ -207,6 +207,8 @@ Redosled sekcija je fiksan:
    - nula prihoda uz prijavljene zaposlene
    - status nije aktivan
    - firma mlađa od 12 meseci
+   - aktivna blokada računa (iz NBS, tabela `blokade`): zabrana prenosa → crit, sa datumom i iznosom
+   - blokada u poslednjih 5 godina (iz NBS, tabela `blokade`): dani + iznos → warn
 7. **Slične firme** — 6 firmi, ista delatnost, najbliži prihod. Interni linkovi, kritično za SEO.
 8. **Futer sa izvorom i disclaimerom**
 

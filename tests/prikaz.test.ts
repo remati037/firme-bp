@@ -163,4 +163,39 @@ describe("izracunajSignale", () => {
     const stara = izracunajSignale({ ...FIRMA, datum_osnivanja: "2026-03-01" }, FI, "2028-07-31");
     expect(stara.some((s) => s.naslov.includes("mlađa od godinu dana"))).toBe(false);
   });
+
+  it("bez blokade nema blokada signala", () => {
+    expect(izracunajSignale(FIRMA, FI, "2026-07-31", null)).toHaveLength(0);
+    expect(izracunajSignale(FIRMA, FI, "2026-07-31", undefined)).toHaveLength(0);
+  });
+
+  it("aktivna blokada (zabrana prenosa) je kriticni signal sa iznosom", () => {
+    const signali = izracunajSignale(FIRMA, FI, "2026-07-31", {
+      maticni_broj: FIRMA.maticni_broj,
+      iznos: 4_002_853_969.26,
+      ukupno_dana: 1503,
+      zabrana_prenosa: "2026-05-19",
+      periodi: null,
+      provereno_at: null,
+    });
+    const aktivna = signali.find((s) => s.naslov === "Aktivna blokada računa");
+    expect(aktivna?.tezina).toBe("crit");
+    expect(aktivna?.tekst).toContain("19.05.2026.");
+    expect(aktivna?.tekst).toContain("4.002.853.969 RSD");
+  });
+
+  it("istorija blokade bez tekuće zabrane je upozorenje", () => {
+    const signali = izracunajSignale(FIRMA, FI, "2026-07-31", {
+      maticni_broj: FIRMA.maticni_broj,
+      iznos: 2_328_096_299.99,
+      ukupno_dana: 5135,
+      zabrana_prenosa: null,
+      periodi: null,
+      provereno_at: null,
+    });
+    const istorija = signali.find((s) => s.naslov === "Blokada u poslednjih pet godina");
+    expect(istorija?.tezina).toBe("warn");
+    expect(istorija?.tekst).toContain("5.135");
+    expect(signali.some((s) => s.naslov === "Aktivna blokada računa")).toBe(false);
+  });
 });

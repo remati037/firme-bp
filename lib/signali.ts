@@ -8,9 +8,8 @@
  * negativan"), bez preporuke da li poslovati sa firmom.
  */
 
-import { formatBroj, formatRSD } from "./format";
-import type { Finansije, Firma } from "./queries";
-import { starostUGodinama } from "./format";
+import { formatBroj, formatDatum, formatRSD, starostUGodinama } from "./format";
+import type { Blokada, Finansije, Firma } from "./queries";
 
 export type TezinaSignala = "crit" | "warn" | "ok";
 
@@ -24,6 +23,7 @@ export function izracunajSignale(
   firma: Firma,
   fi: Finansije | null | undefined,
   datumPreseka: string,
+  blokada?: Blokada | null,
 ): Signal[] {
   const signali: Signal[] = [];
   const godina = fi?.godina;
@@ -78,7 +78,46 @@ export function izracunajSignale(
     });
   }
 
+  // 6. Aktivna blokada: zabrana raspolaganja sredstvima (NBS, prinudna naplata)
+  if (blokada?.zabrana_prenosa) {
+    signali.push({
+      tezina: "crit",
+      naslov: "Aktivna blokada računa",
+      tekst: `Prema NBS registru dužnika u prinudnoj naplati, od ${formatDatum(
+        blokada.zabrana_prenosa,
+      )} firma ne može da raspolaže sredstvima na računima kod banaka.${
+        blokada.iznos ? ` Ukupan iznos blokade je ${formatDinarski(blokada.iznos)}.` : ""
+      }`,
+    });
+  }
+
+  // 7. Istorija blokade u poslednjih 5 godina (bez tekuće zabrane ili uz nju)
+  const ukupnoDana = blokada?.ukupno_dana ?? 0;
+  if (ukupnoDana > 0) {
+    signali.push({
+      tezina: "warn",
+      naslov: "Blokada u poslednjih pet godina",
+      tekst: `Firma je bila u blokadi ${formatBroj(ukupnoDana)} ${pluralDana(
+        ukupnoDana,
+      )} u poslednjih pet godina${
+        blokada?.iznos ? `, sa ukupnim iznosom blokade od ${formatDinarski(blokada.iznos)}` : ""
+      } (NBS, registar dužnika u prinudnoj naplati).`,
+    });
+  }
+
   return signali;
+}
+
+/** Iznos blokade je u DINARIMA (NBS), za razliku od APR finansija u hiljadama. */
+function formatDinarski(iznos: number): string {
+  return `${formatBroj(iznos)} RSD`;
+}
+
+function pluralDana(n: number): string {
+  if (n % 100 >= 11 && n % 100 <= 14) return "dana";
+  if (n % 10 === 1) return "dan";
+  if (n % 10 >= 2 && n % 10 <= 4) return "dana";
+  return "dana";
 }
 
 /**

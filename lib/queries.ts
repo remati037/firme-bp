@@ -237,6 +237,29 @@ export function upitAiSazetak(db: SupabaseClient, maticniBroj: string) {
 }
 
 // =============================================================================
+// Blokade (NBS registar dužnika u prinudnoj naplati, migracija 006)
+// =============================================================================
+
+/** `iznos` je u RSD (NBS ga daje u dinarima, za razliku od APR FI u hiljadama). */
+export type Blokada = {
+  maticni_broj: string;
+  iznos: number | null;
+  ukupno_dana: number | null;
+  zabrana_prenosa: string | null;
+  periodi: unknown[] | null;
+  provereno_at: string | null;
+};
+
+export function upitBlokada(db: SupabaseClient, maticniBroj: string) {
+  return db
+    .from("blokade")
+    .select("maticni_broj,iznos,ukupno_dana,zabrana_prenosa,periodi,provereno_at")
+    .eq("maticni_broj", maticniBroj)
+    .returns<Blokada[]>()
+    .maybeSingle();
+}
+
+// =============================================================================
 // Statistika kategorija (materijalizovani view-ovi)
 // =============================================================================
 

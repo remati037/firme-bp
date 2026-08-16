@@ -147,7 +147,7 @@ export default async function StranicaFirme({ params }: Props) {
     opstina,
   });
 
-  const signali = izracunajSignale(firma, fi, datumPreseka);
+  const signali = izracunajSignale(firma, fi, datumPreseka, podaci.blokada);
   const pitanja = faqZaFirmu({ firma, ime, fi, datumPreseka });
   const cirilica = cirilicniOblikIliNista(firma.poslovno_ime);
   const netoRezultat = p.netoRezultat ?? 0;
@@ -200,7 +200,7 @@ export default async function StranicaFirme({ params }: Props) {
                 <CopyButton vrednost={firma.pib} naziv="PIB" />
               </>
             ) : (
-              <span className="text-neutral italic">nije u APR open data setu</span>
+              <span className="text-neutral italic">nije u NBS registru računa</span>
             )}
           </span>
           <ShareButton naslov={ime} url={apsolutniUrl(`/firma/${firma.slug}`)} />

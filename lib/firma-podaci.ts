@@ -20,6 +20,7 @@ import { izracunajPromene, type Promene } from "./promena";
 import { getSupabaseServerClient } from "./supabase";
 import {
   upitAiSazetak,
+  upitBlokada,
   upitFinansije,
   upitFirmePoMaticnimBrojevima,
   upitIstorijaFirme,
@@ -30,6 +31,7 @@ import {
   upitStatistikaDelatnosti,
   upitStatistikaOpstine,
   type AiSazetak,
+  type Blokada,
   type Finansije,
   type Firma,
   type KarticaFirme,
@@ -70,6 +72,8 @@ export type PodaciFirme = {
   opstinaRed: Opstina | null;
   aiSazetak: AiSazetak | null;
   datumPreseka: string;
+  /** Blokada računa iz NBS registra dužnika (migracija 006); null ako je nema. */
+  blokada: Blokada | null;
   /** Promena u odnosu na prethodni mesečni presek; null dok postoji samo jedan. */
   promene: Promene | null;
   slicneDelatnost: SlicnaFirma[];
@@ -115,6 +119,7 @@ export async function ucitajFirmu(slug: string): Promise<PodaciFirme | null> {
     statDelatnosti,
     statOpstine,
     istorija,
+    blokada,
   ] = await Promise.all([
       upitFinansije(db, maticniBroj),
       upitRangFirme(db, maticniBroj),
@@ -127,6 +132,7 @@ export async function ucitajFirmu(slug: string): Promise<PodaciFirme | null> {
         : Promise.resolve(null),
       firma.sifra_opstine ? upitStatistikaOpstine(db, firma.sifra_opstine) : Promise.resolve(null),
       upitIstorijaFirme(db, maticniBroj),
+      upitBlokada(db, maticniBroj),
     ]);
 
   const redovi = finansije.data ?? [];
@@ -164,6 +170,7 @@ export async function ucitajFirmu(slug: string): Promise<PodaciFirme | null> {
     opstinaRed: opstinaRed?.data ?? null,
     aiSazetak: aiSazetak.data ?? null,
     datumPreseka,
+    blokada: blokada.data ?? null,
     promene: izracunajPromene(istorija.data ?? []),
     slicneDelatnost: slicne.delatnost,
     slicneOpstina: slicne.opstina,
