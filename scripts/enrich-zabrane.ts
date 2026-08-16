@@ -146,9 +146,13 @@ async function glavna(): Promise<void> {
 
     const flush = async (): Promise<void> => {
       if (redovi.length === 0) return;
-      const { error } = await supabase.from("zabrane").upsert(redovi, { onConflict: "izvor_id" });
-      if (error) console.warn(`  upsert zabrane: ${error.message}`);
+      // Ista mera (izvor_id) može da se pojavi dva puta u odgovoru za jednu
+      // firmu — bez dedupa upsert u istom batch-u puca sa
+      // "ON CONFLICT DO UPDATE command cannot affect row a second time".
+      const bezDuplikata = [...new Map(redovi.map((r) => [r.izvor_id, r])).values()];
       redovi = [];
+      const { error } = await supabase.from("zabrane").upsert(bezDuplikata, { onConflict: "izvor_id" });
+      if (error) console.warn(`  upsert zabrane: ${error.message}`);
     };
 
     try {
