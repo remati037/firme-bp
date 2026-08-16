@@ -29,3 +29,12 @@ describe("crp-client", () => {
     expect(d.opis).toBeTruthy();
   });
 });
+
+describe("crp-client — više mera u jednom redu", () => {
+  it("izvlači SVE mere, ne samo prvu", () => {
+    const mere = ekstrahujMereIzPretrage(FIKSTURA("crp-pretraga-vise-mera.html"));
+    expect(mere.length).toBe(9);
+    expect(new Set(mere.map((m) => m.izvorId)).size).toBe(9);
+    expect(mere[0].referenca).toMatch(/^CEPOP-APR-/);
+  });
+});

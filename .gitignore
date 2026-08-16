@@ -58,3 +58,4 @@ scripts/data/nbs-rir-zavrseno.json
 
 # runtime stanje NBS/CRP obogaćivanja (enrich-zabrane.ts)
 scripts/data/nbs-zabrane-zavrseno.json
+scripts/data/nbs-zabrane-dopuna-zavrseno.json

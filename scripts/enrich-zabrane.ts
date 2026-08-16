@@ -25,7 +25,11 @@ try {
 }
 
 const KONKURENTNOST = brojArgumenta("--konkurentnost", 8);
-const PUT_PROGRESA = "scripts/data/nbs-zabrane-zavrseno.json";
+/** --dopuna: cilj su samo firme koje već imaju barem jednu meru (nakon popravke parsera). */
+const DOPUNA = process.argv.includes("--dopuna");
+const PUT_PROGRESA = DOPUNA
+  ? "scripts/data/nbs-zabrane-dopuna-zavrseno.json"
+  : "scripts/data/nbs-zabrane-zavrseno.json";
 
 function brojArgumenta(ime: string, podrazumevano: number): number {
   const saJednako = process.argv.find((a) => a.startsWith(`${ime}=`));
@@ -70,6 +74,29 @@ async function sviMaticniBrojevi(supabase: SupabaseClient): Promise<string[]> {
   return svi;
 }
 
+/**
+ * Dopuna: firme koje već imaju barem jednu meru u tabeli. Nakon popravke
+ * parsera (više mera po redu), ponovni prolaz dodaje preskočene mere.
+ */
+async function firmeSaMerama(supabase: SupabaseClient): Promise<string[]> {
+  const svi: string[] = [];
+  let pocetak = 0;
+  const korak = 1000;
+  while (true) {
+    const { data, error } = await supabase
+      .from("zabrane")
+      .select("maticni_broj")
+      .order("maticni_broj")
+      .range(pocetak, pocetak + korak - 1);
+    if (error) throw new Error(`Čitanje zabrane: ${error.message}`);
+    if (!data || data.length === 0) break;
+    svi.push(...data.map((r) => r.maticni_broj));
+    if (data.length < korak) break;
+    pocetak += korak;
+  }
+  return [...new Set(svi)];
+}
+
 type ZabranaRed = {
   maticni_broj: string;
   izvor_id: string;
@@ -84,8 +111,10 @@ type ZabranaRed = {
 
 async function glavna(): Promise<void> {
   const supabase = getSupabaseServerClient();
-  const ciljni = await sviMaticniBrojevi(supabase);
-  console.log(`Firmi: ${ciljni.length}, konkurentnost ${KONKURENTNOST}.`);
+  const ciljni = DOPUNA ? await firmeSaMerama(supabase) : await sviMaticniBrojevi(supabase);
+  console.log(
+    `Firmi: ${ciljni.length} (${DOPUNA ? "dopuna — samo sa merama" : "sve"}), konkurentnost ${KONKURENTNOST}.`,
+  );
 
   const zavrseno = new Set<string>(ucitajJson<string[]>(PUT_PROGRESA, []));
   let indeks = 0;

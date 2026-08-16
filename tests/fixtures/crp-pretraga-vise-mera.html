@@ -1,0 +1,134 @@
+
+
+
+        <script type="text/javascript">
+        (function($) {
+            $.fn.swhgLoad = function(url, containerId, callback) {
+                url = url + (url.indexOf('?') == -1 ? '?' : '&') + '__swhg=' + new Date().getTime();
+
+                $('<div/>').load(url + ' ' + containerId, function(data, status, xhr) {
+                    $(containerId).replaceWith($(this).html());
+                    if (typeof(callback) === 'function') {
+                        callback.apply(this, arguments);
+                    }
+                });
+                return this;
+            }
+
+            $(function() {
+                $('table[data-swhgajax="true"],span[data-swhgajax="true"]').each(function() {
+                    var self = $(this);
+                    var containerId = '#' + self.data('swhgcontainer');
+                    var callback = getFunction(self.data('swhgcallback'));
+
+                    $(containerId).parent().delegate(containerId + ' a[data-swhglnk="true"]', 'click', function() {
+                        $(containerId).swhgLoad($(this).attr('href'), containerId, callback);
+                        return false;
+                    });
+                })
+            });
+
+            function getFunction(code, argNames) {
+                argNames = argNames || [];
+                var fn = window, parts = (code || "").split(".");
+                while (fn && parts.length) {
+                    fn = fn[parts.shift()];
+                }
+                if (typeof (fn) === "function") {
+                    return fn;
+                }
+                argNames.push(code);
+                return Function.constructor.apply(null, argNames);
+            }
+        })(jQuery);
+        </script>
+    <table class="regrid" id="grdActiveRestrictions" data-swhgajax="true" data-swhgcontainer="grdActiveRestrictions" data-swhgcallback="">
+    <thead>
+        <tr class="regrid-header">
+            <th scope="col">
+            </th>
+            <th scope="col">
+<a data-swhglnk="true" href="/eregistrationportal/Public/Manage/ActiveRestrictionsResultPartial?RestrictedEntityIdentificationNumber=07130562&amp;RestrictedEntityName=&amp;RestrictionClasificationCode=&amp;RestrictionIsActive=&amp;sort=RestrictedEntityIdentificationNumber&amp;sortdir=ASC">Матични / идентификациони број</a>            </th>
+            <th scope="col">
+<a data-swhglnk="true" href="/eregistrationportal/Public/Manage/ActiveRestrictionsResultPartial?RestrictedEntityIdentificationNumber=07130562&amp;RestrictedEntityName=&amp;RestrictionClasificationCode=&amp;RestrictionIsActive=&amp;sort=RestrictedEntityName&amp;sortdir=ASC">Назив</a>            </th>
+            <th scope="col">
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr class="regrid-row">
+            <td class="regrid-column-key"><input type="hidden" value="1515110" /></td>
+            <td class="regrid-column-fixed-150">07130562</td>
+            <td class="regrid-column-fixed-550">SERBIA ZIJIN BOR COPPER DOO BOR </td>
+            <td><span>
+                                                           <a class="grid-action-link info tooltip-control float-left glyphicon glyphicon-list-alt" data-placement="bottom" title="Детаљи о мери CEPOP-APR-129196-TRINTD-2/2018" onclick="details('80f90788-d318-4e23-965e-a29af725a357')" aria-hidden="true"></a>
+                                                           <a class="grid-action-link info tooltip-control float-left glyphicon glyphicon-list-alt" data-placement="bottom" title="Детаљи о мери CEPOP-APR-129196-TRINTD-3/2018" onclick="details('65584373-65ae-49e0-bdb4-f066f97e206c')" aria-hidden="true"></a>
+                                                           <a class="grid-action-link info tooltip-control float-left glyphicon glyphicon-list-alt" data-placement="bottom" title="Детаљи о мери CEPOP-APR-162577-TRINTD-3/2018" onclick="details('b39f5855-d224-4ec2-81b4-d121d8fba93b')" aria-hidden="true"></a>
+                                                           <a class="grid-action-link info tooltip-control float-left glyphicon glyphicon-list-alt" data-placement="bottom" title="Детаљи о мери CEPOP-APR-162577-TRINTD-4/2018" onclick="details('540dc8a5-0043-4dac-b0f7-679412e24a2a')" aria-hidden="true"></a>
+                                                           <a class="grid-action-link info tooltip-control float-left glyphicon glyphicon-list-alt" data-placement="bottom" title="Детаљи о мери CEPOP-APR-94883-TRINTD-2/2019" onclick="details('08a1b5b7-cc5f-4cee-bf48-e1b1c0c180a5')" aria-hidden="true"></a>
+                                                           <a class="grid-action-link info tooltip-control float-left glyphicon glyphicon-list-alt" data-placement="bottom" title="Детаљи о мери CEPOP-APR-76733-TRINTD-2/2020" onclick="details('7d237e6b-221e-44cc-83a6-0005ef31b049')" aria-hidden="true"></a>
+                                                           <a class="grid-action-link info tooltip-control float-left glyphicon glyphicon-list-alt" data-placement="bottom" title="Детаљи о мери CEPOP-APR-83850-TRINTD-2/2021" onclick="details('130649d9-7d3b-45e3-93d3-2e53a7b3dcf5')" aria-hidden="true"></a>
+                                                           <a class="grid-action-link info tooltip-control float-left glyphicon glyphicon-list-alt" data-placement="bottom" title="Детаљи о мери CEPOP-APR-97531-TRINTD-2/2022" onclick="details('cc84948b-2656-422e-9a05-f662c251062b')" aria-hidden="true"></a>
+                                                           <a class="grid-action-link info tooltip-control float-left glyphicon glyphicon-list-alt" data-placement="bottom" title="Детаљи о мери CEPOP-APR-129332-TRINTD-2/2024" onclick="details('ba185688-28b4-4acb-994a-1223e1671768')" aria-hidden="true"></a>
+
+                                                   </span></td>
+        </tr>
+    </tbody>
+    </table>
+
+
+<input type="hidden" id='grdActiveRestrictions_SelectedDataKey' value="" />
+<input type="hidden" id='grdActiveRestrictions_SelectedSecureDataKey' value="" />
+
+
+
+
+    <script type="text/javascript">
+        var initialized = false;
+
+        $(function () {
+            if ('grdActiveRestrictions') {
+                initializeGrid('grdActiveRestrictions');
+                initialized = true;
+            }
+        });
+
+        $(document).ajaxStart(function () {
+            initialized = false;
+        });
+
+        $(document).ajaxComplete(function () {
+            if ('grdActiveRestrictions' && !initialized) {
+                initializeGrid('grdActiveRestrictions');
+                initialized = true;
+            }
+        });
+    </script>
+
+
+
+
+
+    <script type="text/javascript">
+        function details(submissionId) {
+            var url = "/eregistrationportal/Public/Manage/Details\\" + submissionId;
+            redirectOpen(url);
+        }
+
+        function getActiveRestrictions(entityTypeId, entityIdentificationNumber, entityCountryId) {
+            $.ajax({
+                type: 'GET',
+                url: '/eregistrationportal/Public/Manage/GetActiveRestrictionsDetails',
+                cache: false,
+                async: true,
+                data: { 'EntityTypeId': entityTypeId, 'EntityIdentificationNumber': entityIdentificationNumber, 'EntityCountryId': entityCountryId },
+                success: function (content) {
+                    crp_modal.showServerModal(content, true);
+                },
+                error: function () {
+                    crp_modal.showError('Десила се грешка приликом обраде Вашег захтева.');
+                }
+            });           
+        }
+    </script>
+

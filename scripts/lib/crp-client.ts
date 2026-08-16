@@ -74,10 +74,10 @@ export function ekstrahujMereIzPretrage(html: string): { izvorId: string; refere
   if (!tabela) return mere;
 
   for (const red of tabela[1].matchAll(/<tr class="regrid-row">([\s\S]*?)<\/tr>/g)) {
-    const det = red[1].match(/details\('([^']+)'\)/);
-    if (!det) continue;
-    const ref = red[1].match(/Детаљи о мери\s+([^"<]+)/);
-    mere.push({ izvorId: det[1], referenca: ref ? ref[1].trim() : null });
+    // Jedan red može imati VIŠE mera (više linkova ka detaljima) — uzimamo sve.
+    const ids = [...red[1].matchAll(/details\('([^']+)'\)/g)].map((m) => m[1]);
+    const refs = [...red[1].matchAll(/Детаљи о мери\s+([^"<]+)/g)].map((m) => m[1].trim());
+    ids.forEach((izvorId, i) => mere.push({ izvorId, referenca: refs[i] ?? null }));
   }
   return mere;
 }
