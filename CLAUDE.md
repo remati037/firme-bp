@@ -70,9 +70,9 @@ Ako se koristi `rejectUnauthorized: false`, mora imati komentar zašto.
 `ProsecanBrojZaposlenih`. **Sve novčane vrednosti su u hiljadama dinara.**
 
 **Poznata ograničenja:**
-- Nema PIB-a. Mapiranje matičnog broja na PIB dolazi iz NBS registra imalaca računa (besplatan veb servis).
+- Nema PIB-a. Mapiranje matičnog broja na PIB dolazi iz NBS registra imalaca računa (besplatan veb servis) ili iz NBS javne pretrage dužnika (skripta `enrich-pib-blokade.ts`).
 - Nema preduzetnika, samo privredna društva.
-- Nema vlasnika, zastupnika ni blokada.
+- Nema vlasnika ni zastupnika. Blokade NISU deo APR open data — stižu iz NBS registra dužnika u prinudnoj naplati (tabela `blokade`, migracija 006).
 - Samo poslednja godina, bez istorije. Zato arhiviramo snapshotove.
 
 ### Obavezno na svakoj stranici
@@ -307,8 +307,7 @@ Fallback: ako API padne, vrati `{ summary: null }` sa statusom 200, nikad 500.
 
 - Nema registracije, naloga ni logina
 - Nema naplate
-- Nema NBS blokada računa (faza 2)
-- Nema podataka o vlasnicima i zastupnicima
+- Nema podataka o vlasnicima i zastupnicima (blokade računa jesu u v1 — tabela `blokade`, odluka vlasnika 16.08.2026)
 - Nema preduzetnika
 - Nema grafikona i vizuelizacija
 - Nema mobilne aplikacije

@@ -62,7 +62,16 @@ firme.
 npm run ingest                                   # mesečni APR presek
 npm run seed                                     # šifarnici delatnosti i opština
 npx tsx scripts/primeni-override-imena.ts        # ručni izuzeci za skraćeno ime
+npm run enrich-nbs                               # PIB + blokade iz NBS (top 5000 po prihodu)
+npm run enrich-nbs -- --limit=0                  # sve firme (133.634)
+npm run enrich-nbs-rir                           # drugi prolaz: PIB za firme bez njega (JRR)
 ```
+
+NBS obogaćivanje (migracija 006, tabela `blokade`): puni `companies.pib` i upisuje
+blokade računa iz NBS javne pretrage dužnika u prinudnoj naplati. Skripte su
+nastavljive (progress u `scripts/data/nbs-zavrseno.json`, `nbs-rir-zavrseno.json`).
+`enrich-nbs-rir` se pokreće posle `enrich-nbs` i popunjava PIB i za firme koje
+prinudna naplata ne pokriva (Jedinstveni registar računa).
 
 Migracije su u `supabase/migrations/`. Šema je zaključana — nove kolone i tabele
 samo uz odobrenje vlasnika projekta.

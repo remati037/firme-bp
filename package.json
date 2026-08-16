@@ -10,7 +10,9 @@
     "test": "vitest run",
     "ingest": "node --max-old-space-size=4096 --import tsx scripts/ingest.ts",
     "seed": "tsx scripts/seed-sifarnici.ts",
-    "sazetci": "tsx scripts/generisi-sazetke.ts"
+    "sazetci": "tsx scripts/generisi-sazetke.ts",
+    "enrich-nbs": "tsx scripts/enrich-pib-blokade.ts",
+    "enrich-nbs-rir": "tsx scripts/enrich-pib-rir.ts"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.112.3",

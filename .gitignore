@@ -48,3 +48,10 @@ fallback-lista.md
 kolizije.md
 fallback-491.md
 scripts/tmp-probe.ts
+
+# runtime stanje NBS obogaćivanja (enrich-pib-blokade.ts)
+scripts/data/nbs-zavrseno.json
+scripts/data/nbs-blokade.json
+
+# runtime stanje NBS obogaćivanja (enrich-pib-rir.ts)
+scripts/data/nbs-rir-zavrseno.json
