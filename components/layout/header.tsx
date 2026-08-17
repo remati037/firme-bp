@@ -1,5 +1,7 @@
 import Link from "next/link";
+import { Search } from "lucide-react";
 
+import { SearchBox } from "@/components/search/search-box";
 import { CurrencyToggle } from "./currency-toggle";
 import { ThemeToggle } from "./theme-toggle";
 
@@ -51,6 +53,17 @@ export function Header() {
         </nav>
 
         <div className="flex shrink-0 items-center gap-2">
+          {/* Pretraga u meniju: polje na desktopu, ikonica vodi na početnu pretragu na mobilnom. */}
+          <div className="hidden md:block">
+            <SearchBox kompaktno />
+          </div>
+          <Link
+            href="/"
+            aria-label="Pretraga firmi"
+            className="rounded-lg p-2 text-muted-foreground transition-colors duration-150 hover:bg-muted hover:text-foreground md:hidden"
+          >
+            <Search size={18} strokeWidth={2} aria-hidden />
+          </Link>
           <CurrencyToggle />
           <ThemeToggle />
         </div>

@@ -32,10 +32,13 @@ const MIN_ZNAKOVA = 2;
 export function SearchBox({
   predlozi = [],
   autoFokus = false,
+  kompaktno = false,
 }: {
   /** Firme koje se nude dok polje još nije kucano. */
   predlozi?: { slug: string; ime: string }[];
   autoFokus?: boolean;
+  /** Kompaktna varijanta za meni/zaglavlje. */
+  kompaktno?: boolean;
 }) {
   const router = useRouter();
   const id = useId();
@@ -139,8 +142,19 @@ export function SearchBox({
 
   return (
     <div className="relative" ref={omotacRef}>
-      <div className="flex items-center gap-3 rounded-[14px] border-[1.5px] border-border-strong bg-card px-4 py-3.5 text-base focus-within:border-primary focus-within:shadow-[0_0_0_4px_var(--accent-ring)]">
-        <Search size={19} strokeWidth={2} className="shrink-0 text-muted-foreground" aria-hidden />
+      <div
+        className={
+          kompaktno
+            ? "flex w-56 items-center gap-2 rounded-lg border-[1.5px] border-border-strong bg-card px-2.5 py-1.5 text-sm focus-within:border-primary"
+            : "flex items-center gap-3 rounded-[14px] border-[1.5px] border-border-strong bg-card px-4 py-3.5 text-base focus-within:border-primary focus-within:shadow-[0_0_0_4px_var(--accent-ring)]"
+        }
+      >
+        <Search
+          size={kompaktno ? 15 : 19}
+          strokeWidth={2}
+          className="shrink-0 text-muted-foreground"
+          aria-hidden
+        />
         <input
           ref={poljeRef}
           type="text"
@@ -152,7 +166,7 @@ export function SearchBox({
           aria-autocomplete="list"
           aria-activedescendant={izabrani >= 0 ? `${id}-stavka-${izabrani}` : undefined}
           aria-label="Pretraga firmi po nazivu ili matičnom broju"
-          placeholder="Naziv firme, matični broj ili PIB…"
+          placeholder={kompaktno ? "Pretraži firme…" : "Naziv firme, matični broj ili PIB…"}
           value={upit}
           onChange={(e) => {
             setUpit(e.target.value);
@@ -161,11 +175,15 @@ export function SearchBox({
           }}
           onFocus={() => setOtvoreno(true)}
           onKeyDown={naTasteru}
-          className="w-full flex-1 border-none bg-transparent text-base text-foreground outline-none placeholder:text-muted-foreground"
+          className={`w-full flex-1 border-none bg-transparent outline-none placeholder:text-muted-foreground ${
+            kompaktno ? "text-sm" : "text-base text-foreground"
+          }`}
         />
         {ucitava ? (
-          <span className="text-[12px] text-muted-foreground">tražim…</span>
-        ) : (
+          <span className={kompaktno ? "text-[11px] text-muted-foreground" : "text-[12px] text-muted-foreground"}>
+            tražim…
+          </span>
+        ) : kompaktno ? null : (
           <kbd className="rounded-md border border-border bg-muted px-[7px] py-0.5 text-[11.5px] text-muted-foreground max-sm:hidden">
             /
           </kbd>
@@ -173,7 +191,11 @@ export function SearchBox({
       </div>
 
       {prikaziListu ? (
-        <div className="absolute top-[calc(100%+8px)] right-0 left-0 z-60 overflow-hidden rounded-card border border-border bg-card text-left shadow-pop">
+        <div
+          className={`absolute top-[calc(100%+8px)] right-0 left-0 z-60 overflow-hidden rounded-card border border-border bg-card text-left shadow-pop ${
+            kompaktno ? "w-72" : ""
+          }`}
+        >
           {kratak ? (
             <p className="px-4 py-4 text-sm text-muted-foreground">
               Ukucaj bar dva znaka.
