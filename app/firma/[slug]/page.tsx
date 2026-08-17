@@ -232,8 +232,8 @@ export default async function StranicaFirme({ params }: Props) {
 
         {promene ? (
           <p className="mt-2.5 ml-0 inline-block rounded-lg border border-dashed border-border-strong px-3 py-1.5 text-[12px] text-muted-foreground sm:ml-2">
-            Poređenje sa prethodnim presekom ({formatDatum(promene.prethodniPresek)}) — iz arhive
-            mesečnih APR preseka
+            Brojevi se porede sa presekom od {formatDatum(promene.prethodniPresek)} iz naše arhive
+            mesečnih APR preuzimanja
           </p>
         ) : null}
 
@@ -258,7 +258,7 @@ export default async function StranicaFirme({ params }: Props) {
             <Novac hiljade={fi?.ukupni_prihodi} />
           </p>
           {promene ? <Delta promena={promene.prihodi} prethodniPresek={promene.prethodniPresek} /> : null}
-          <KpiOpis>Ukupan prihod iz finansijskog izveštaja</KpiOpis>
+          <KpiOpis>Ukupan prihod iz poslednjeg izveštaja</KpiOpis>
         </Card>
         <Card>
           <KpiLabel>Neto rezultat{fi?.godina ? ` · ${fi.godina}` : ""}</KpiLabel>
@@ -273,7 +273,11 @@ export default async function StranicaFirme({ params }: Props) {
             <Delta promena={promene.netoRezultat} prethodniPresek={promene.prethodniPresek} />
           ) : null}
           <KpiOpis>
-            {netoRezultat > 0 ? "Neto dobitak" : netoRezultat < 0 ? "Neto gubitak" : "Izveštaj nije predat"}
+            {netoRezultat > 0
+              ? "Neto dobitak"
+              : netoRezultat < 0
+                ? "Neto gubitak"
+                : "Izveštaj nije predat"}
           </KpiOpis>
         </Card>
         <Card>
@@ -284,7 +288,7 @@ export default async function StranicaFirme({ params }: Props) {
           {promene ? (
             <Delta promena={promene.zaposleni} prethodniPresek={promene.prethodniPresek} />
           ) : null}
-          <KpiOpis>Prosečan broj u toku godine</KpiOpis>
+          <KpiOpis>Prosek u toku poslovne godine</KpiOpis>
         </Card>
       </section>
 
@@ -333,15 +337,16 @@ export default async function StranicaFirme({ params }: Props) {
           // Tanak sadržaj: bez praznih tabela, sa kontekstom (SEO.md §1.4).
           <Card>
             <p className="text-[15px]">
-              Firma {ime} nije predala finansijski izveštaj
-              {fi?.godina ? ` za ${fi.godina}. godinu` : ""} u poslednjem APR preseku.
+              {ime} nije predala finansijski izveštaj
+              {fi?.godina ? ` za ${fi.godina}. godinu` : ""}, pa za nju nema podataka o prihodu,
+              rezultatu ni broju zaposlenih.
             </p>
             <p className="mt-2 text-sm text-muted-foreground">
               {statDelatnosti?.broj_firmi
-                ? `U delatnosti ${delatnost} ima ${formatBroj(statDelatnosti.broj_firmi)} registrovanih firmi, od kojih je ${formatBroj(
+                ? `Za poređenje: u delatnosti ${delatnost} registrovano je ${formatBroj(statDelatnosti.broj_firmi)} firmi, izveštaj je predalo ${formatBroj(
                     statDelatnosti.broj_sa_izvestajem,
-                  )} predalo izveštaj. Medijan prihoda u delatnosti je ${formatRSD(statDelatnosti.medijan_prihoda)}.`
-                : "Za ovu firmu u APR open data setu ne postoje finansijski podaci."}
+                  )}, a medijan prihoda iznosi ${formatRSD(statDelatnosti.medijan_prihoda)}.`
+                : "U APR otvorenim podacima za ovu firmu ne postoji finansijski izveštaj."}
             </p>
           </Card>
         )}
@@ -351,8 +356,8 @@ export default async function StranicaFirme({ params }: Props) {
       <section className="pt-8">
         <h2 className="text-[19px] font-bold tracking-[-0.01em]">Analiza</h2>
         <p className="mt-1.5 mb-3.5 text-[13px] text-muted-foreground">
-          Izračunato iz javnih podataka APR-a
-          {firma.sifra_delatnosti ? ` · poređenje sa medijanom delatnosti ${firma.sifra_delatnosti}` : ""}
+          Sve vrednosti su izračunate iz APR izveštaja
+          {firma.sifra_delatnosti ? `, uz poređenje sa medijanom delatnosti ${firma.sifra_delatnosti}` : ""}
         </p>
 
         <div className="grid gap-4 lg:grid-cols-2">
@@ -436,7 +441,7 @@ export default async function StranicaFirme({ params }: Props) {
         <section className="pt-8">
           <h2 className="text-[19px] font-bold tracking-[-0.01em]">Slične firme</h2>
           <p className="mt-1 mb-3.5 text-[13px] text-muted-foreground">
-            3 iz iste delatnosti i 3 iz iste opštine, po najbližem prihodu
+            Po tri firme iz iste delatnosti i iste opštine, sa najbližim prihodom
           </p>
 
           {slicneDelatnost.length ? (

@@ -20,9 +20,9 @@ import { apsolutniUrl, BREND } from "@/lib/site";
 
 export const revalidate = 2592000;
 
-const NASLOV = `Blog — priče iz APR podataka | ${BREND}`;
+const NASLOV = `Blog: analize iz APR podataka | ${BREND}`;
 const OPIS =
-  "Analize i priče o srpskim firmama, pisane isključivo iz zvaničnih podataka Agencije za privredne registre. Svaki tekst vodi ka stranicama firmi, gde brojke možeš sam da proveriš.";
+  "Analize srpskih firmi, pisane isključivo iz zvaničnih podataka Agencije za privredne registre. Svaki tekst vodi na stranice firmi, gde se brojevi mogu proveriti.";
 
 export const metadata: Metadata = {
   title: NASLOV,
@@ -182,7 +182,7 @@ export default async function Blog({
       {/* Prijava je statična u v1; slanje se uvodi kad postoji lista. */}
       <section className="py-8">
         <div className="rounded-[var(--radius-card)] border border-border bg-muted/40 p-6">
-          <h2 className="text-[19px] font-bold">Jednom mesečno — najbolje priče iz podataka</h2>
+          <h2 className="text-[19px] font-bold">Jednom mesečno, najvažnije iz novih podataka</h2>
           <p className="mt-2 max-w-[520px] text-[14.5px] leading-relaxed text-muted-foreground">
             Novi APR presek, najzanimljivije analize i firme koje vredi pratiti. Prijava stiže uz
             sledeći presek.
@@ -194,7 +194,7 @@ export default async function Blog({
         podaci={{
           "@context": "https://schema.org",
           "@type": "Blog",
-          name: `Blog — ${BREND}`,
+          name: `Blog, ${BREND}`,
           description: OPIS,
           url: apsolutniUrl("/blog"),
           blogPost: svi.slice(0, 10).map((c) => ({

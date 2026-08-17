@@ -10,7 +10,7 @@ import { apsolutniUrl, BREND, DISCLAIMER } from "@/lib/site";
 
 export const revalidate = 2592000;
 
-const NASLOV = `O podacima — odakle dolaze i kako se koriste | ${BREND}`;
+const NASLOV = `O podacima: odakle dolaze i kako se koriste | ${BREND}`;
 const OPIS =
   "Podaci dolaze iz otvorenih podataka Agencije za privredne registre. Šta set sadrži, šta ne sadrži, kako se računaju pokazatelji i kako prijaviti grešku.";
 
@@ -44,7 +44,7 @@ export default async function OPodacima() {
   const dataset = {
     "@context": "https://schema.org",
     "@type": "Dataset",
-    name: "Privredna društva u Srbiji — APR otvoreni podaci",
+    name: "Privredna društva u Srbiji, APR otvoreni podaci",
     description:
       "Registrovana privredna društva u Republici Srbiji sa osnovnim podacima i godišnjim finansijskim izveštajima, iz otvorenih podataka Agencije za privredne registre.",
     creator: {
@@ -146,7 +146,7 @@ export default async function OPodacima() {
                 {formatBroj(IZMERENO.bezUpotrebljivih)} firmi nema upotrebljive finansije.
               </strong>{" "}
               Ili nisu predale izveštaj, ili su ga predale sa nulom prihoda. Kod njih stoji
-              „Nema podataka”, ne nula dinara — to nije isto.
+              „Nema podataka”, a ne nula dinara, jer to nije isto.
             </li>
           </ul>
         </Card>
@@ -180,13 +180,13 @@ export default async function OPodacima() {
             Razlikuju se dve vrste grešaka, i ne rešavaju se na istom mestu.
           </p>
           <p className="mt-3 text-[15px] leading-relaxed text-muted-foreground">
-            <strong className="text-foreground">Netačan podatak o firmi</strong> — ime, status,
+            <strong className="text-foreground">Netačan podatak o firmi</strong> (ime, status,
             delatnost, iznosi. Te podatke ne unosimo i ne možemo da ih menjamo; oni dolaze iz
             registra. Ispravka ide kroz Agenciju za privredne registre, a ovde se vidi pri
             sledećem mesečnom preseku.
           </p>
           <p className="mt-3 text-[15px] leading-relaxed text-muted-foreground">
-            <strong className="text-foreground">Greška u prikazu</strong> — pogrešno skraćeno ime,
+            <strong className="text-foreground">Greška u prikazu</strong> (pogrešno skraćeno ime,
             pokvarena stranica, pogrešan izračun. To je naša greška i nju popravljamo. Javite se
             preko{" "}
             <Link

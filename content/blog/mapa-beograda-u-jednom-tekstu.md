@@ -18,7 +18,7 @@ Beograd, presek 31.07.2026
 
 ## Polovina zemlje u jednom gradu
 
-U celom registru ima 133.634 firme. Beograd drži **49,3 odsto** njih — skoro tačno svaka druga firma u Srbiji ima beogradsku adresu.
+U celom registru ima 133.634 firme. Beograd drži **49,3 odsto** njih, dakle skoro tačno svaka druga firma u Srbiji ima beogradsku adresu.
 
 Po novcu je koncentracija još jača. Ukupan prihod svih firmi u zemlji je 21.548 milijardi dinara; beogradske firme nose 11.224 milijarde, dakle **52,1 odsto**.
 
@@ -28,7 +28,7 @@ To znači da je Beograd po prihodu veći od cele ostale Srbije zajedno.
 
 Unutar tih osamnaest opština razlike su ogromne.
 
-Novi Beograd sam ima 12.785 firmi i 3.763 milijarde dinara prihoda. To je **trećina celog beogradskog prihoda** iz jedne opštine — i više nego što ostvaruje Novi Sad, drugi grad u zemlji, sa svojih 2.145 milijardi.
+Novi Beograd sam ima 12.785 firmi i 3.763 milijarde dinara prihoda. To je **trećina celog beogradskog prihoda** iz jedne opštine, i više nego što ostvaruje Novi Sad, drugi grad u zemlji, sa svojih 2.145 milijardi.
 
 Za poređenje unutar istog grada: Rakovica ima 2.235 firmi i 170 milijardi prihoda. Razlika između Novog Beograda i Rakovice je veća nego između većine gradova u Srbiji.
 
@@ -36,19 +36,19 @@ Za poređenje unutar istog grada: Rakovica ima 2.235 firmi i 170 milijardi priho
 
 Novi Beograd je i najveći poslodavac među opštinama, sa 189.285 zaposlenih. Slede Stari Grad sa 69.804 i Zemun sa 62.855.
 
-Zanimljiv je Savski Venac: sa 5.200 firmi ima 974 milijarde prihoda — više od Zvezdare i Vračara zajedno, iako obe imaju više registrovanih firmi. Razlog je struktura: tamo su sedišta velikih sistema, a ne veliki broj malih firmi.
+Zanimljiv je Savski Venac: sa 5.200 firmi ima 974 milijarde prihoda, više od Zvezdare i Vračara zajedno, iako obe imaju više registrovanih firmi. Razlog je struktura: tamo su sedišta velikih sistema, a ne veliki broj malih firmi.
 
 ## Marža je svuda tanka
 
 Medijana neto marže po beogradskim opštinama kreće se uglavnom između 1,3 i 2,2 odsto. Novi Beograd je na 2,19, Stari Grad na 1,27, Vračar na 1,65.
 
-Nijedna opština nije izuzetak. Bez obzira na to koliko je koncentrisan kapital, tipična firma u Beogradu zadrži manje od dva dinara na sto dinara prihoda — isto kao i tipična firma u Novom Sadu ili Nišu.
+Nijedna opština nije izuzetak. Bez obzira na to koliko je koncentrisan kapital, tipična firma u Beogradu zadrži manje od dva dinara na sto dinara prihoda, isto kao i tipična firma u Novom Sadu ili Nišu.
 
 Koncentracija menja veličinu, ne profitabilnost.
 
 ## Ko je na vrhu
 
-Najveća firma sa novobeogradskom adresom je [Delhaize Serbia](/firma/delhaize-serbia-doo-beograd-17569171) sa 172,1 milijardu dinara prihoda i 11.994 zaposlena — ujedno i najveći poslodavac među njima. Slede [Elektrodistribucija Srbije](/firma/elektrodistribucija-srbije-doo-beograd-07005466) sa 118,8 milijardi i [HBIS Group Serbia](/firma/hbis-group-serbia-iron-steel-doo-beograd-21203980) sa 93,1 milijardom.
+Najveća firma sa novobeogradskom adresom je [Delhaize Serbia](/firma/delhaize-serbia-doo-beograd-17569171) sa 172,1 milijardu dinara prihoda i 11.994 zaposlena, ujedno i najveći poslodavac među njima. Slede [Elektrodistribucija Srbije](/firma/elektrodistribucija-srbije-doo-beograd-07005466) sa 118,8 milijardi i [HBIS Group Serbia](/firma/hbis-group-serbia-iron-steel-doo-beograd-21203980) sa 93,1 milijardom.
 
 :::proveri
 [Delhaize Serbia DOO Beograd](/firma/delhaize-serbia-doo-beograd-17569171)
@@ -59,6 +59,6 @@ Najveća firma sa novobeogradskom adresom je [Delhaize Serbia](/firma/delhaize-s
 
 ## Šta ovo znači u praksi
 
-Ako proveravaš firmu sa beogradskom adresom, sama adresa ti ne govori ništa — polovina zemlje je tu. Ono što govori jeste kako firma stoji u odnosu na medijanu svoje delatnosti i svoje opštine.
+Ako proveravaš firmu sa beogradskom adresom, sama adresa ne govori ništa, jer je tu polovina zemlje. Ono što govori jeste kako firma stoji u odnosu na medijanu svoje delatnosti i svoje opštine.
 
 Obe brojke stoje na svakoj stranici firme, uz rang i uz signale ako ih ima.

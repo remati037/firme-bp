@@ -2,7 +2,7 @@
 naslov: "Ko najviše zarađuje po zaposlenom? Ovo je top 10"
 datum: "2026-08-12"
 kategorija: "analize"
-excerpt: "Na vrhu liste nema nijedne IT firme ni fabrike. Devet od deset mesta drže gorivo, gas, nekretnine i veletrgovina — delatnosti u kojima mali broj ljudi pokreće ogromnu vrednost."
+excerpt: "Na vrhu liste nema nijedne IT firme ni fabrike. Devet od deset mesta drže gorivo, gas, nekretnine i veletrgovina, delatnosti u kojima mali broj ljudi pokreće ogromnu vrednost."
 autor: "Biznis priče"
 glif: "10"
 boja: "c-teal"
@@ -14,7 +14,7 @@ Ukupan prihod je najgrublje merilo veličine firme. Prihod po zaposlenom kaže n
 
 Bez praga bi lista bila besmislena. Firma sa jednim zaposlenim i milijardu prihoda ima milijardu po zaposlenom, a to o njoj ne govori ništa osim da je vlasnik jedini prijavljeni radnik.
 
-Sa pragom od 100 zaposlenih ostaje **1.867 firmi** — od ukupno 133.634 u registru. To je jedan i po odsto privrede, i to je onaj deo u kome brojka po zaposlenom nešto znači.
+Sa pragom od 100 zaposlenih ostaje **1.867 firmi**, od ukupno 133.634 u registru. To je jedan i po odsto privrede, i to je onaj deo u kome brojka po zaposlenom nešto znači.
 
 :::stat
 Presek 31.07.2026
@@ -41,7 +41,7 @@ ima 100 ili više zaposlenih, od 133.634 u registru
 
 Nema nijedne IT firme. Nema nijedne fabrike u klasičnom smislu. Devet od deset mesta drže delatnosti u kojima se vrednost ne stvara radom nego protokom.
 
-[MOL Serbia](/firma/mol-serbia-doo-beograd-17518518) i [Lukoil Srbija](/firma/lukoil-srbija-doo-beograd-07524951) su obe u istoj delatnosti — trgovina gorivom na malo, šifra 4730. Kroz njihove pumpe prođe ogroman promet, a broj zaposlenih raste mnogo sporije od prometa.
+[MOL Serbia](/firma/mol-serbia-doo-beograd-17518518) i [Lukoil Srbija](/firma/lukoil-srbija-doo-beograd-07524951) su obe u istoj delatnosti, trgovina gorivom na malo pod šifrom 4730. Kroz njihove pumpe prođe ogroman promet, a broj zaposlenih raste mnogo sporije od prometa.
 
 [Gastrans](/firma/gastrans-doo-novi-sad-20785683) je gasovod. Vrednost stvara izgrađena cev, ne broj ljudi koji je nadgleda. Isto važi i za [JP Srbijagas](/firma/jp-srbijagas-novi-sad-20084600), jedinu firmu na listi sa preko 900 zaposlenih.
 
@@ -64,6 +64,6 @@ Zato ovaj pokazatelj ima smisla **samo unutar iste delatnosti**. Na svakoj stran
 
 ## Zaključak
 
-Vrh liste po prihodu po zaposlenom nije mesto gde se najbolje radi — nego mesto gde kroz malo ljudi prolazi mnogo novca. To su gorivo, gas, nekretnine i veleprodaja.
+Vrh liste po prihodu po zaposlenom nije mesto gde se najbolje radi, nego mesto gde kroz malo ljudi prolazi mnogo novca. To su gorivo, gas, nekretnine i veleprodaja.
 
 Kada sledeći put vidiš da neka firma ima "visok prihod po zaposlenom", prvo pogledaj čime se bavi. Bez toga je brojka samo brojka.

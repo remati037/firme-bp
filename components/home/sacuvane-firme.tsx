@@ -21,7 +21,7 @@ export function SacuvaneFirme() {
       <div className="mb-[18px] flex items-baseline justify-between gap-4">
         <h2 className="text-[21px] font-bold tracking-[-0.02em]">Sačuvane firme</h2>
         <span className="text-[12.5px] text-muted-foreground">
-          čuvaju se na ovom uređaju, bez naloga
+          lista se čuva na ovom uređaju
         </span>
       </div>
 

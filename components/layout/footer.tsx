@@ -50,8 +50,8 @@ export async function Footer() {
               Firme
             </Link>
             <p className="mt-2.5 max-w-[360px] text-[13.5px] text-muted-foreground">
-              Besplatna provera srpskih firmi. Podaci iz Agencije za privredne registre,
-              ažurirani mesečno. Deo brenda Biznis priče.
+              Provera privrednih društava u Srbiji, iz zvaničnih podataka Agencije za privredne
+              registre. Podaci se osvežavaju svakog meseca. Deo brenda Biznis priče.
             </p>
           </div>
 

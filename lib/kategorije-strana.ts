@@ -62,7 +62,7 @@ export function putanjaStrane(osnova: string, strana: number): string {
 }
 
 function sufiksStrane(strana: number): string {
-  return strana > 1 ? ` — strana ${strana}` : "";
+  return strana > 1 ? `, strana ${strana}` : "";
 }
 
 export async function metaDelatnost(sifra: string, strana: number): Promise<Metadata> {

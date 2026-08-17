@@ -181,7 +181,7 @@ export function SearchBox({
         />
         {ucitava ? (
           <span className={kompaktno ? "text-[11px] text-muted-foreground" : "text-[12px] text-muted-foreground"}>
-            tražim…
+            tražim
           </span>
         ) : kompaktno ? null : (
           <kbd className="rounded-md border border-border bg-muted px-[7px] py-0.5 text-[11.5px] text-muted-foreground max-sm:hidden">
@@ -198,16 +198,16 @@ export function SearchBox({
         >
           {kratak ? (
             <p className="px-4 py-4 text-sm text-muted-foreground">
-              Ukucaj bar dva znaka.
+              Unesite najmanje dva znaka.
             </p>
           ) : nemaPogodaka ? (
             <div className="px-4 py-4 text-sm text-muted-foreground">
               <p>
-                Nema firme koja odgovara upitu <b className="text-foreground">{upit.trim()}</b>.
+                Nijedna firma ne odgovara upitu <b className="text-foreground">{upit.trim()}</b>.
               </p>
               <p className="mt-1.5">
-                Probaj kraći deo naziva, ili matični broj. Set sadrži samo privredna društva,
-                ne i preduzetnike.
+                Pokušajte sa kraćim delom naziva ili sa matičnim brojem. Registar sadrži samo
+                privredna društva, ne i preduzetnike.
               </p>
             </div>
           ) : (
@@ -242,7 +242,7 @@ export function SearchBox({
                         : "border border-border-strong text-neutral"
                     }`}
                   >
-                    {r.status ?? "—"}
+                    {r.status ?? "Status nepoznat"}
                   </span>
                 </li>
               ))}
@@ -253,7 +253,7 @@ export function SearchBox({
 
       {predlozi.length && !upit ? (
         <p className="mt-2.5 flex flex-wrap items-center gap-x-2 gap-y-1 text-[12.5px] text-muted-foreground">
-          <span>Najtraženije:</span>
+          <span>Najčešće pretraživano:</span>
           {predlozi.map((p) => (
             <button
               key={p.slug}

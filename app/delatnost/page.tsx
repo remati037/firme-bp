@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 import { Breadcrumbs } from "@/components/layout/breadcrumbs";
-import { formatBroj, formatRSD } from "@/lib/format";
+import { formatBroj, formatDatum, formatRSD } from "@/lib/format";
 import { ucitajDatumPreseka } from "@/lib/presek";
 import { upitNaceKodovi, type StatistikaDelatnosti } from "@/lib/queries";
 import { apsolutniUrl, BREND } from "@/lib/site";
@@ -10,9 +10,9 @@ import { getSupabaseServerClient } from "@/lib/supabase";
 
 export const revalidate = 2592000;
 
-const NASLOV = `Delatnosti u Srbiji — spisak sa brojem firmi | ${BREND}`;
+const NASLOV = `Delatnosti u Srbiji: spisak sa brojem firmi | ${BREND}`;
 const OPIS =
-  "Sve delatnosti privrednih društava u Srbiji, sa brojem registrovanih firmi i medijanom prihoda. Podaci iz Agencije za privredne registre.";
+  "Sve delatnosti u kojima su registrovana privredna društva u Srbiji, sa brojem firmi i medijanom prihoda po delatnosti. Podaci iz Agencije za privredne registre.";
 
 export const metadata: Metadata = {
   title: NASLOV,
@@ -51,8 +51,8 @@ export default async function SpisakDelatnosti() {
           Delatnosti u Srbiji
         </h1>
         <p className="mt-2 max-w-[720px] text-[15px] text-muted-foreground">
-          {formatBroj(redovi.length)} delatnosti po šifarniku APR-a, poređanih po broju
-          registrovanih firmi. Presek podataka: {datumPreseka}.
+          {formatBroj(redovi.length)} delatnosti iz APR šifarnika, poređanih po broju registrovanih
+          firmi. Presek podataka: {formatDatum(datumPreseka)}
         </p>
       </header>
 

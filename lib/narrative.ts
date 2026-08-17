@@ -105,7 +105,7 @@ export function narativ(ulaz: NarativUlaz): string[] {
         ? `, što je neto marža od ${formatBroj(Math.round(Math.abs(p.netoMarza)), { nulaJePodatak: true })} odsto`
         : "";
     recenice.push(
-      `U istoj godini firma je prijavila ${dobitak ? "neto dobitak" : "neto gubitak"} od ${formatRSD(
+      `Za istu godinu firma ${ulaz.ime} prijavila je ${dobitak ? "neto dobitak" : "neto gubitak"} od ${formatRSD(
         Math.abs(p.netoRezultat),
       )}${marza}.`,
     );

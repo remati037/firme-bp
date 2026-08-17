@@ -13,7 +13,7 @@ export function FinancialTable({ redovi }: { redovi: Finansije[] }) {
     <div className="overflow-x-auto rounded-card border border-border bg-card">
       <table className="w-full border-collapse text-sm">
         <caption className="px-5 pt-3.5 pb-1.5 text-left text-[13px] text-muted-foreground">
-          Finansijski izveštaji, vrednosti u dinarima. Izvor: Agencija za privredne registre.
+          Vrednosti su u dinarima, iz izveštaja predatih Agenciji za privredne registre.
         </caption>
         <thead>
           <tr>

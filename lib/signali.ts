@@ -34,7 +34,7 @@ export function izracunajSignale(
     signali.push({
       tezina: "crit",
       naslov: "Negativan kapital",
-      tekst: `U poslednjem izveštaju (${godina}) kapital je ${formatRSD(fi.kapital)}.`,
+      tekst: `U izveštaju za ${godina}. godinu kapital iznosi ${formatRSD(fi.kapital)}.`,
     });
   }
 
@@ -44,7 +44,7 @@ export function izracunajSignale(
     signali.push({
       tezina: "warn",
       naslov: "Gubitak veći od kapitala",
-      tekst: `Neto gubitak u ${godina}. iznosi ${formatRSD(netoGubitak)}, uz kapital od ${formatRSD(fi.kapital)}.`,
+      tekst: `Neto gubitak za ${godina}. godinu iznosi ${formatRSD(netoGubitak)}, a kapital ${formatRSD(fi.kapital)}.`,
     });
   }
 
@@ -54,7 +54,7 @@ export function izracunajSignale(
     signali.push({
       tezina: "warn",
       naslov: "Nula prihoda uz prijavljene zaposlene",
-      tekst: `Za ${godina}. firma je prijavila ${formatBroj(zaposleni)} zaposlenih, a ukupan prihod je nula.`,
+      tekst: `Za ${godina}. godinu prijavljeno je ${formatBroj(zaposleni)} zaposlenih, a ukupan prihod je nula.`,
     });
   }
 
@@ -65,7 +65,7 @@ export function izracunajSignale(
     signali.push({
       tezina: uStecaju ? "crit" : "warn",
       naslov: `Status: ${firma.status ?? "nije aktivan"}`,
-      tekst: `Prema APR presek podataka firma nije u statusu „Aktivan".`,
+      tekst: `Prema poslednjem APR preseku firma nije u statusu „Aktivan".`,
     });
   }
 
@@ -75,7 +75,7 @@ export function izracunajSignale(
     signali.push({
       tezina: "warn",
       naslov: "Firma je mlađa od godinu dana",
-      tekst: `Registrovana je manje od 12 meseci pre preseka podataka, pa istorija poslovanja još ne postoji.`,
+      tekst: `Registrovana je manje od dvanaest meseci pre preseka podataka, pa poslovna istorija još ne postoji.`,
     });
   }
 
@@ -187,6 +187,6 @@ export function porukaBezSignala(fi: Finansije | null | undefined): Signal {
     naslov: "Bez upozoravajućih signala",
     tekst: imaPrihod
       ? "Firma je aktivna, kapital nije negativan i prihodi su prijavljeni."
-      : "Firma je aktivna i nema upozoravajućih podataka u poslednjem preseku.",
+      : "Firma je aktivna i u poslednjem preseku nema podataka koji traže dodatnu proveru.",
   };
 }

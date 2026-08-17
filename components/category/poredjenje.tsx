@@ -102,7 +102,7 @@ function TrakaPoredjenja({ ocisti }: { ocisti: () => void }) {
           Izabrano: <b className="text-accent-strong">{izabrane.length}</b>{" "}
           {izabrane.length === 1 ? "firma" : "firme"} ·{" "}
           <span className="font-normal text-muted-foreground">
-            {dovoljno ? "možeš da uporediš" : "označi bar dve firme"}
+            {dovoljno ? "spremno za poređenje" : "izaberite još jednu firmu"}
           </span>
         </span>
         <span className="flex gap-2">
@@ -132,7 +132,7 @@ function TrakaPoredjenja({ ocisti }: { ocisti: () => void }) {
         <div className="mt-3 overflow-x-auto rounded-card border border-border bg-card">
           <table className="w-full border-collapse text-[13.5px]">
             <caption className="px-4 pt-3 pb-1 text-left text-[12.5px] text-muted-foreground">
-              Poređenje izabranih firmi, iz poslednjeg predatog izveštaja.
+              Izabrane firme, po poslednjem predatom finansijskom izveštaju.
             </caption>
             <thead>
               <tr>

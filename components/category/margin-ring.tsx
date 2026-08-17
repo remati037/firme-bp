@@ -24,7 +24,7 @@ export function MarginRing({ marza }: { marza: number | null | undefined }) {
     <div className="ml-4 inline-flex shrink-0 flex-col items-center gap-0.5">
       <div
         className="relative h-16 w-16"
-        title="Medijana marže u kategoriji, iz APR izveštaja"
+        title="Medijana neto marže u ovoj kategoriji, iz APR izveštaja"
       >
         <svg width="64" height="64" viewBox="0 0 64 64" className="block -rotate-90" aria-hidden>
           <circle cx="32" cy="32" r={R} fill="none" stroke="var(--border)" strokeWidth="7" />

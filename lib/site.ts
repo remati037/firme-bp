@@ -34,7 +34,7 @@ export const KURS_EUR_RSD = Number(process.env.NEXT_PUBLIC_KURS_EUR_RSD ?? 117.0
  * (CLAUDE.md, "Obavezno na svakoj stranici").
  */
 export const DISCLAIMER =
-  "Podaci na ovom sajtu nisu bonitetna ocena i ne predstavljaju savet. Prikazani podaci su isključivo informativnog karaktera.";
+  "Podaci na ovom sajtu nemaju karakter bonitetne ocene niti poslovnog saveta i služe isključivo za informisanje.";
 
 /** Apsolutni URL za canonical i og:url. */
 export function apsolutniUrl(putanja: string): string {

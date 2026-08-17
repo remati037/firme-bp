@@ -17,26 +17,26 @@ export const METRIKE = [
   {
     kljuc: "prihod" as const,
     naziv: "Po prihodu",
-    opis: "100 firmi sa najvećim ukupnim prihodom",
+    opis: "Sto firmi sa najvećim ukupnim prihodom",
     upit: "prihodu",
   },
   {
     kljuc: "dobit" as const,
     naziv: "Po neto dobitku",
-    opis: "100 najprofitabilnijih po neto dobitku",
+    opis: "Sto firmi sa najvećim neto dobitkom",
     upit: "neto dobitku",
   },
   {
     kljuc: "zaposleni" as const,
     naziv: "Po broju zaposlenih",
-    opis: "100 najvećih poslodavaca",
+    opis: "Sto najvećih poslodavaca po broju zaposlenih",
     upit: "broju zaposlenih",
   },
 ];
 
-const NASLOV = `Najveće firme u Srbiji — top liste po prihodu, dobitku i zaposlenima | ${BREND}`;
+const NASLOV = `Najveće firme u Srbiji po prihodu, dobitku i broju zaposlenih | ${BREND}`;
 const OPIS =
-  "Rang liste najvećih firmi u Srbiji po ukupnom prihodu, neto dobitku i broju zaposlenih. Podaci iz poslednjeg preseka Agencije za privredne registre, ažurirani mesečno.";
+  "Rang liste najvećih firmi u Srbiji po ukupnom prihodu, neto dobitku i broju zaposlenih. Iz poslednjeg preseka Agencije za privredne registre, sa novim podacima svakog meseca.";
 
 export const metadata: Metadata = {
   title: NASLOV,
@@ -57,8 +57,8 @@ export default async function NajveceHub() {
           Najveće firme u Srbiji
         </h1>
         <p className="mt-2 max-w-[720px] text-[15px] text-muted-foreground">
-          Rang liste iz poslednjeg APR preseka. Za razliku od novinskih tabela, ove se osvežavaju
-          svakog meseca sa novim podacima.
+          Liste se prave iz poslednjeg APR preseka i osvežavaju svakog meseca. Novinske tabele
+          po pravilu ostaju na podacima iz godine u kojoj su objavljene.
         </p>
         <p className="mt-3.5 inline-block rounded-lg border border-dashed border-border-strong px-3 py-1.5 text-[12.5px] text-muted-foreground">
           Presek podataka: {formatDatum(datumPreseka)} · Izvor: Agencija za privredne registre

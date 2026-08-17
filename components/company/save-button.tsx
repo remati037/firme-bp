@@ -17,7 +17,7 @@ export function SaveButton({ slug, ime }: SacuvanaFirma) {
       type="button"
       onClick={() => prebaciSacuvanu({ slug, ime })}
       aria-pressed={sacuvana}
-      title="Sačuvaj firmu u svoju listu (bez naloga)"
+      title="Dodajte firmu na svoju listu, bez naloga i registracije"
       className={`inline-flex items-center gap-[7px] rounded-ui border px-3.5 py-2 text-[13.5px] font-semibold transition-colors ${
         sacuvana
           ? "border-primary bg-primary text-primary-foreground"

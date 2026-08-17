@@ -76,7 +76,7 @@ describe("imeOpstine, nazivDelatnosti, slugOpstine", () => {
   });
 
   it("delatnost spaja sifru i naziv", () => {
-    expect(nazivDelatnosti("4690", "Trgovina na veliko")).toBe("4690 — Trgovina na veliko");
+    expect(nazivDelatnosti("4690", "Trgovina na veliko")).toBe("4690 · Trgovina na veliko");
     expect(nazivDelatnosti("4690", null)).toBe("4690");
   });
 

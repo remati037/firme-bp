@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 import { Breadcrumbs } from "@/components/layout/breadcrumbs";
-import { formatBroj, formatRSD } from "@/lib/format";
+import { formatBroj, formatDatum, formatRSD } from "@/lib/format";
 import { imeOpstine, slugOpstine } from "@/lib/prikaz";
 import { ucitajDatumPreseka } from "@/lib/presek";
 import type { StatistikaOpstine } from "@/lib/queries";
@@ -11,9 +11,9 @@ import { getSupabaseServerClient } from "@/lib/supabase";
 
 export const revalidate = 2592000;
 
-const NASLOV = `Opštine u Srbiji — firme po opštinama | ${BREND}`;
+const NASLOV = `Firme po opštinama u Srbiji | ${BREND}`;
 const OPIS =
-  "Sve opštine u Srbiji sa brojem registrovanih privrednih društava i medijanom prihoda. Podaci iz Agencije za privredne registre.";
+  "Broj registrovanih privrednih društava i medijan prihoda za svaku opštinu u Srbiji. Podaci iz Agencije za privredne registre.";
 
 export const metadata: Metadata = {
   title: NASLOV,
@@ -47,8 +47,8 @@ export default async function SpisakOpstina() {
           Firme po opštinama
         </h1>
         <p className="mt-2 max-w-[720px] text-[15px] text-muted-foreground">
-          {formatBroj(redovi.length)} opština, poređanih po broju registrovanih privrednih
-          društava. Presek podataka: {datumPreseka}.
+          {formatBroj(redovi.length)} opština, poređanih po broju registrovanih privrednih društava.
+          Presek podataka: {formatDatum(datumPreseka)}
         </p>
       </header>
 

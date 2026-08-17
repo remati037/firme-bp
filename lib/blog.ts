@@ -196,7 +196,7 @@ function proveriBoks(telo: string): string {
 
   return [
     '<div class="data-callout">',
-    '<div class="h">Proveri sam — podaci iz članka</div>',
+    '<div class="h">Podaci iz ovog teksta, na stranicama firmi</div>',
     ...veze,
     "</div>",
   ].join("");

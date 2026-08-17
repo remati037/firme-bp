@@ -2,7 +2,7 @@
 naslov: "Koliko je IT stvarno velik? Brojke imaju odgovor"
 datum: "2026-07-28"
 kategorija: "delatnosti"
-excerpt: "IT ima 7.336 firmi i skoro 70.000 zaposlenih, ali samo 3,3 odsto ukupnog prihoda privrede. To nije protivrečnost — to je razlika između delatnosti koja prodaje rad i delatnosti koja preprodaje robu."
+excerpt: "IT ima 7.336 firmi i skoro 70.000 zaposlenih, ali samo 3,3 odsto ukupnog prihoda privrede. To nije protivrečnost, već razlika između delatnosti koja prodaje rad i delatnosti koja preprodaje robu."
 autor: "Biznis priče"
 glif: "IT"
 boja: "c-indigo"
@@ -18,13 +18,13 @@ Sektor 62 i 63, presek 31.07.2026
 
 ## Tri brojke koje deluju protivrečno
 
-IT ima **7.336 firmi** — više nego trgovina na malo, koja ih ima 7.840, i skoro polovinu broja firmi u građevini.
+IT ima **7.336 firmi**, više nego trgovina na malo, koja ih ima 7.840, i skoro polovinu broja firmi u građevini.
 
 Zapošljava **69.560 ljudi**, što je više od polovine onoga što zapošljava cela trgovina na veliko sa svojih 25.177 firmi.
 
 A nosi **3,3 odsto** ukupnog prihoda privrede. Trgovina na veliko nosi 20,1 odsto.
 
-Na prvi pogled to izgleda kao da IT „podbacuje". Nije tako — brojke mere različite stvari.
+Na prvi pogled to izgleda kao da IT „podbacuje". Nije tako, jer te dve brojke mere različite stvari.
 
 ## Zašto prihod nije dobra mera za IT
 
@@ -36,7 +36,7 @@ Zato IT ima 10,1 milion dinara prihoda po zaposlenom, a trgovina na veliko 34,9 
 
 ## Unutrašnja struktura
 
-Sektor nije ujednačen. Od 7.336 firmi, njih **5.135 je u šifri 6201** — računarsko programiranje. To je sedamdeset odsto celog IT-a i 528 milijardi dinara prihoda sa 53.189 zaposlenih.
+Sektor nije ujednačen. Od 7.336 firmi, njih **5.135 je u šifri 6201**, računarsko programiranje. To je sedamdeset odsto celog IT-a i 528 milijardi dinara prihoda sa 53.189 zaposlenih.
 
 Ostalo je znatno manje:
 
@@ -45,7 +45,7 @@ Ostalo je znatno manje:
 - 6311, obrada podataka i hosting: 221 firma, 20,9 milijardi, 3.287 zaposlenih
 - 6203, upravljanje računarskom opremom: 54 firme
 
-Kada neko kaže „srpski IT", gotovo uvek misli na šifru 6201 — u njoj je sedam od deset IT firmi i tri četvrtine prihoda sektora.
+Kada neko kaže „srpski IT", gotovo uvek misli na šifru 6201: u njoj je sedam od deset IT firmi i tri četvrtine prihoda sektora.
 
 ## Medijana govori više od zbira
 
@@ -53,18 +53,18 @@ Medijana prihoda po zaposlenom u programiranju (6201) je **6,3 miliona dinara**.
 
 Ove brojke su znatno niže od proseka sektora, i to je važno: prosek diže nekoliko velikih firmi, dok medijana pokazuje kako izgleda tipična IT firma. A tipična IT firma u Srbiji je mala.
 
-Od 4.592 firme u programiranju koje imaju predat izveštaj, njih **3.794 ima manje od deset zaposlenih** — 82,6 odsto. Slika o IT-u kao industriji velikih kompanija ne stoji: to je industrija vrlo mnogo vrlo malih firmi i nekolicine velikih.
+Od 4.592 firme u programiranju koje imaju predat izveštaj, njih **3.794 ima manje od deset zaposlenih**, tačnije 82,6 odsto. Slika o IT-u kao industriji velikih kompanija ne stoji: to je industrija vrlo mnogo vrlo malih firmi i nekolicine velikih.
 
 Na vrhu su [Smart Business Technologies](/firma/smart-business-technologies-doo-beograd-21802646) sa 30,0 milijardi dinara i 1.426 zaposlenih, [High Tech Engineering Center](/firma/high-tech-engineering-center-doo-beograd-20457759) sa 18,2 milijarde i [Comtrade System Integration](/firma/comtrade-system-integration-doo-beograd-17335847) sa 14,7 milijardi.
 
 :::proveri
 [Smart Business Technologies DOO Beograd](/firma/smart-business-technologies-doo-beograd-21802646)
 [Comtrade System Integration DOO Beograd](/firma/comtrade-system-integration-doo-beograd-17335847)
-[Sve firme u delatnosti 6201 — programiranje](/delatnost/6201)
+[Sve firme u delatnosti 6201, računarsko programiranje](/delatnost/6201)
 :::
 
 ## Zaključak
 
-IT u Srbiji je velik po broju firmi i po broju ljudi, a mali po udelu u prihodu — i sve tri stvari su tačne istovremeno.
+IT u Srbiji je velik po broju firmi i po broju ljudi, a mali po udelu u prihodu, i sve tri stvari su tačne istovremeno.
 
 Ako porediš IT firmu sa firmom iz druge delatnosti po prihodu, porediš nešto što nije uporedivo. Zato na svakoj stranici firme stoji poređenje sa medijanom **njene** delatnosti, a ne sa privredom u celini.

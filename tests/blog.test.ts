@@ -92,7 +92,7 @@ describe("custom direktive", () => {
   it("proveri pravi listu linkova sa fiksnim zaglavljem", () => {
     const html = uHtml(":::proveri\n[NIS](/firma/nis-ad-novi-sad-20084693)\n:::");
     expect(html).toContain('class="data-callout"');
-    expect(html).toContain("Proveri sam");
+    expect(html).toContain("Podaci iz ovog teksta");
     expect(html).toContain('href="/firma/nis-ad-novi-sad-20084693"');
   });
 

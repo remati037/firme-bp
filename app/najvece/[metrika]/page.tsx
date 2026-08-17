@@ -43,7 +43,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   // Šablon iz SEO.md §3.
   const title = `100 najvećih firmi u Srbiji po ${opis?.upit ?? metrika} ${godina} | ${BREND}`;
-  const description = `Rang lista 100 najvećih firmi u Srbiji po ${opis?.upit ?? metrika}, iz podataka Agencije za privredne registre. Presek ${formatDatum(datumPreseka)} Ažurira se svakog meseca.`;
+  const description = `Rang lista sto najvećih firmi u Srbiji po ${opis?.upit ?? metrika}, iz podataka Agencije za privredne registre. Presek ${formatDatum(datumPreseka)} Lista se osvežava svakog meseca.`;
 
   return {
     title,
@@ -80,7 +80,7 @@ export default async function TopLista({ params }: Props) {
           100 najvećih firmi u Srbiji po {opis?.upit ?? metrika}
         </h1>
         <p className="mt-2 text-[15px] text-muted-foreground">
-          {opis?.opis} · poslednji predati finansijski izveštaj svake firme
+          {opis?.opis}, po poslednjem predatom finansijskom izveštaju
         </p>
         <p className="mt-3.5 inline-block rounded-lg border border-dashed border-border-strong px-3 py-1.5 text-[12.5px] text-muted-foreground">
           Presek podataka: {formatDatum(datumPreseka)} · Izvor: Agencija za privredne registre

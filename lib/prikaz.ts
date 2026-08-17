@@ -57,7 +57,7 @@ export function nazivDelatnosti(
 ): string {
   if (!sifra) return naziv?.trim() ?? "";
   const ocisceno = naziv?.trim();
-  return ocisceno ? `${sifra} — ${ocisceno}` : sifra;
+  return ocisceno ? `${sifra} · ${ocisceno}` : sifra;
 }
 
 /** Slug opštine za rutu `/grad/[opstina]`: "NOVI SAD" → "novi-sad". */

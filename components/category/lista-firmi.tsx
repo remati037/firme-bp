@@ -28,7 +28,7 @@ export function ListaFirmi({ firme, redniBrojOd }: { firme: KarticaFirme[]; redn
             className="min-w-[30px] pt-1 text-right text-[15px] font-extrabold text-border-strong tabular-nums"
             aria-hidden
           >
-            {firma.rang ? formatBroj(firma.rang) : redniBrojOd ? formatBroj(redniBrojOd + i) : "—"}
+            {firma.rang ? formatBroj(firma.rang) : redniBrojOd ? formatBroj(redniBrojOd + i) : ""}
           </span>
           <div className="min-w-0 flex-1">
             <CompanyCard firma={firma} />

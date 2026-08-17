@@ -38,7 +38,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: "Proveri firmu pre nego što posluješ s njom | " + BREND,
   description:
-    "Besplatna provera srpskih firmi: finansijski izveštaji, broj zaposlenih, status i pokazatelji. Podaci iz Agencije za privredne registre.",
+    "Finansijski izveštaji, broj zaposlenih, status i pokazatelji za privredna društva u Srbiji, iz zvaničnih podataka Agencije za privredne registre.",
   applicationName: BREND,
   openGraph: {
     type: "website",

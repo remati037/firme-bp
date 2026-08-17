@@ -16,7 +16,7 @@ export const revalidate = 2592000;
 
 const NASLOV = `Proveri firmu pre nego što posluješ s njom | ${BREND}`;
 const OPIS =
-  "Besplatna provera privrednih društava u Srbiji: prihod, broj zaposlenih, status i pokazatelji iz podataka Agencije za privredne registre. Bez naloga i registracije.";
+  "Prihod, broj zaposlenih, status i finansijski pokazatelji za svako privredno društvo u Srbiji. Podaci su iz Agencije za privredne registre, pretraga je besplatna i ne traži nalog.";
 
 export const metadata: Metadata = {
   title: NASLOV,
@@ -49,8 +49,8 @@ export default async function Pocetna() {
           <em className="text-accent-strong not-italic">posluješ s njom</em>.
         </h1>
         <p className="mx-auto mt-4 max-w-[620px] text-[17px] text-muted-foreground">
-          Podaci iz Agencije za privredne registre za sve registrovane firme u Srbiji — besplatno,
-          bez naloga, bez registracije.
+          Zvanični podaci Agencije za privredne registre, za svako registrovano privredno društvo u
+          Srbiji. Bez naloga i bez naplate.
         </p>
 
         <div className="mx-auto mt-8 max-w-[640px] text-left">
@@ -97,16 +97,16 @@ export default async function Pocetna() {
       {/* ===== SEO BLOK ===== */}
       <section className="py-10">
         <Card>
-          <h2 className="mb-2.5 text-lg font-bold tracking-[-0.01em]">Šta je ovo?</h2>
+          <h2 className="mb-2.5 text-lg font-bold tracking-[-0.01em]">O čemu je ovaj sajt</h2>
           <p className="max-w-[760px] text-[14.5px] text-muted-foreground">
-            Besplatna provera podataka o privrednim društvima registrovanim u Srbiji: finansijski
-            izveštaji, broj zaposlenih, datum osnivanja, pravna forma i status — iz zvaničnih
-            podataka Agencije za privredne registre (APR). Svaka stranica odgovara na pitanje{" "}
+            Za svako privredno društvo registrovano u Srbiji ovde stoje finansijski izveštaj, broj
+            zaposlenih, datum osnivanja, pravna forma i status, sve iz zvaničnih podataka Agencije
+            za privredne registre. Uz to i ono što se iz sirovog registra ne vidi:{" "}
             <b className="font-semibold text-foreground">
-              „šta znam o ovoj firmi pre nego što poslujem s njom”
+              rang firme u svojoj delatnosti i opštini, poređenje sa medijanom i upozoravajući
+              signali u brojevima
             </b>
-            : rang u delatnosti i opštini, poređenje sa medijanom, upozoravajući signali i slične
-            firme. Podaci se ažuriraju mesečno, sa svakim novim APR presekom.
+            . Podaci se osvežavaju sa svakim novim mesečnim presekom.
           </p>
           <Link
             href="/o-podacima"
