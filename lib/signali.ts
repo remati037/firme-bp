@@ -115,9 +115,9 @@ export function izracunajSignale(
       naslov: "Aktivno privremeno ograničenje prava",
       tekst: `Prema APR evidenciji privremenih ograničenja, na snazi je mera: ${kratkaVrsta(
         prvaAktivna.vrsta,
-      )}${
-        prvaAktivna.pocetak_vazenja ? `, od ${formatDatum(prvaAktivna.pocetak_vazenja)}` : ""
-      }${aktivne.length > 1 ? ` (ukupno ${formatBroj(aktivne.length)} aktivnih mera)` : ""}.`,
+      )}${prvaAktivna.pocetak_vazenja ? `, od ${formatDatumBezTačke(prvaAktivna.pocetak_vazenja)}` : ""}${
+        aktivne.length > 1 ? ` (ukupno ${formatBroj(aktivne.length)} aktivnih mera)` : ""
+      }.`,
     });
   }
 
@@ -150,6 +150,11 @@ function pluralDana(n: number): string {
   return "dana";
 }
 
+/** formatDatum bez završne tačke ("03.06.2026." → "03.06.2026") za sredinu rečenice. */
+function formatDatumBezTačke(datum: string): string {
+  return formatDatum(datum).replace(/\.$/, "");
+}
+
 /** Kratak naziv vrste mere iz punog teksta (npr. "[5] Мера изречена..." → "poreska mera"). */
 export function kratkaVrsta(vrsta: string | null | undefined): string {
   const m = vrsta?.match(/^\[(\d)\]/);
@@ -166,9 +171,9 @@ export function kratkaVrsta(vrsta: string | null | undefined): string {
 }
 
 function pluralMera(n: number): string {
-  if (n % 100 >= 11 && n % 100 <= 14) return "mera";
-  if (n % 10 === 1) return "meru";
-  return "mere";
+  if (n % 10 === 1 && n % 100 !== 11) return "meru";
+  if (n % 10 >= 2 && n % 10 <= 4 && !(n % 100 >= 12 && n % 100 <= 14)) return "mere";
+  return "mera";
 }
 
 /**
