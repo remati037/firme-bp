@@ -29,9 +29,17 @@ const KONKURENTNOST = brojArgumenta("--konkurentnost", 8);
 const DOPUNA = process.argv.includes("--dopuna");
 /** --sve-ponovo: ignoriše progress fajl i ponovo obrađuje SVE ciljne firme (idempotentno). */
 const SVE_PONOVO = process.argv.includes("--sve-ponovo");
-const PUT_PROGRESA = DOPUNA
-  ? "scripts/data/nbs-zabrane-dopuna-zavrseno.json"
-  : "scripts/data/nbs-zabrane-zavrseno.json";
+/**
+ * --aktivne: RestrictionIsActive=1 — samo mere NA SNAZI. Prazan filter (bez
+ * ovog flag-a) vraća u praksi samo neaktivne/izbrisane mere, pa je ovaj prolaz
+ * neophodan za aktuelna ograničenja. Cilja sve firme.
+ */
+const AKTIVNE = process.argv.includes("--aktivne");
+const PUT_PROGRESA = AKTIVNE
+  ? "scripts/data/nbs-zabrane-aktivne-zavrseno.json"
+  : DOPUNA
+    ? "scripts/data/nbs-zabrane-dopuna-zavrseno.json"
+    : "scripts/data/nbs-zabrane-zavrseno.json";
 
 function brojArgumenta(ime: string, podrazumevano: number): number {
   const saJednako = process.argv.find((a) => a.startsWith(`${ime}=`));
@@ -113,9 +121,15 @@ type ZabranaRed = {
 
 async function glavna(): Promise<void> {
   const supabase = getSupabaseServerClient();
-  const ciljni = DOPUNA ? await firmeSaMerama(supabase) : await sviMaticniBrojevi(supabase);
+  const ciljni = AKTIVNE
+    ? await sviMaticniBrojevi(supabase)
+    : DOPUNA
+      ? await firmeSaMerama(supabase)
+      : await sviMaticniBrojevi(supabase);
   console.log(
-    `Firmi: ${ciljni.length} (${DOPUNA ? "dopuna — samo sa merama" : "sve"}), konkurentnost ${KONKURENTNOST}.`,
+    `Firmi: ${ciljni.length} (${
+      AKTIVNE ? "aktivne mere — sve firme" : DOPUNA ? "dopuna — samo sa merama" : "sve"
+    }), konkurentnost ${KONKURENTNOST}.`,
   );
 
   const zavrseno = SVE_PONOVO
@@ -167,7 +181,7 @@ async function glavna(): Promise<void> {
         if (zavrseno.has(mb)) continue;
 
         try {
-          const mere = await klijent.mereZaMaticniBroj(mb);
+          const mere = await klijent.mereZaMaticniBroj(mb, AKTIVNE);
           if (mere.length > 0) {
             saMerama++;
             for (const m of mere) {

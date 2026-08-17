@@ -144,8 +144,17 @@ export class CrpKlijent {
     await res.arrayBuffer(); // isprazni telo
   }
 
-  /** Pretraga aktivnih mera po matičnom broju. Vraća mere (možda prazan niz). */
-  async mereZaMaticniBroj(maticniBroj: string): Promise<{ izvorId: string; referenca: string | null }[]> {
+  /**
+   * Pretraga mera po matičnom broju.
+   * `aktivne=true` → RestrictionIsActive=1 (samo mere na snazi; detalji takvih
+   * mera nemaju polje "Мера је избрисана", pa je izbrisana=null).
+   * `aktivne=false` (podrazumevano) → prazan filter, koji u praksi vraća SAMO
+   * neaktivne/izbrisane mere (otkriveno poređenjem ID-eva).
+   */
+  async mereZaMaticniBroj(
+    maticniBroj: string,
+    aktivne = false,
+  ): Promise<{ izvorId: string; referenca: string | null }[]> {
     let poslednjaGreska: unknown = null;
 
     for (let pokusaj = 1; pokusaj <= POKUSAJA; pokusaj++) {
@@ -155,9 +164,7 @@ export class CrpKlijent {
         url.searchParams.set("RestrictedEntityIdentificationNumber", maticniBroj);
         url.searchParams.set("RestrictedEntityName", "");
         url.searchParams.set("RestrictionClasificationCode", "");
-        // Prazan filter vraća SVE mere za MB (aktivne i nedavno izbrisane);
-        // status aktivnosti čuvamo kroz polje "Мера је избрисана" u detaljima.
-        url.searchParams.set("RestrictionIsActive", "");
+        url.searchParams.set("RestrictionIsActive", aktivne ? "1" : "");
         const res = await fetch(url, {
           headers: {
             "User-Agent": KORISNIK,
