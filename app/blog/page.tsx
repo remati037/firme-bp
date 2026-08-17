@@ -70,7 +70,7 @@ export default async function Blog({
   };
 
   return (
-    <>
+    <main className="mx-auto w-full max-w-[1120px] px-6">
       <Breadcrumbs mrvice={[{ tekst: "Početna", href: "/" }, { tekst: "Blog" }]} />
 
       <section className="max-w-[720px] pb-2 pt-8">
@@ -205,6 +205,6 @@ export default async function Blog({
           })),
         }}
       />
-    </>
+    </main>
   );
 }
