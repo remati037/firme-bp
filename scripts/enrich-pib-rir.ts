@@ -145,8 +145,14 @@ async function glavna(): Promise<void> {
           if (ADRESA_REZIM) {
             const poslovi: unknown[] = [];
             if (r.adresa) {
+              // updated_at se diže jer se sadržaj stranice stvarno menja —
+              // lastmod u sitemapu mora ostati "consistently and verifiably
+              // accurate" (SEO.md §5.2).
               poslovi.push(
-                supabase.from("companies").update({ adresa: r.adresa }).eq("maticni_broj", r.mb),
+                supabase
+                  .from("companies")
+                  .update({ adresa: r.adresa, updated_at: new Date().toISOString() })
+                  .eq("maticni_broj", r.mb),
               );
             }
             if (r.racuni.length > 0) {

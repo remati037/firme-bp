@@ -11,6 +11,7 @@ import { FaqList } from "@/components/company/faq-list";
 import { FinancialTable } from "@/components/company/financial-table";
 import { MetricBar, MetricRow } from "@/components/company/metric-bar";
 import { RankChip } from "@/components/company/rank-chip";
+import { RacuniLista } from "@/components/company/racuni-lista";
 import { SaveButton } from "@/components/company/save-button";
 import { ShareButton } from "@/components/company/share-button";
 import { SignalList } from "@/components/company/signal-list";
@@ -327,19 +328,9 @@ export default async function StranicaFirme({ params }: Props) {
             )}
           </InfoCelija>
           <InfoCelija naziv="Status">{firma.status ?? NEMA_PODATAKA}</InfoCelija>
-          {racuni.length > 0 ? (
-            <InfoCelija naziv={`Bankovni računi · ${racuni.length}`} sirok>
-              <ul className="flex flex-wrap gap-x-4 gap-y-1">
-                {racuni.map((r) => (
-                  <li key={r.broj_racuna ?? r.banka ?? ""} className="font-mono text-[13px] font-normal">
-                    {r.banka}
-                    {r.broj_racuna ? ` · ${r.broj_racuna}` : ""}
-                  </li>
-                ))}
-              </ul>
-            </InfoCelija>
-          ) : null}
         </div>
+
+        <RacuniLista racuni={racuni} />
       </section>
 
       {/* ===== 5. FINANSIJE ===== */}
