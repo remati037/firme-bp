@@ -1,23 +1,31 @@
 /**
- * enrich-pib-rir.ts — drugi prolaz za PIB preko NBS Jedinstvenog registra računa.
+ * enrich-pib-rir.ts — NBS Jedinstveni registar računa (JRR) obogaćivanje.
  *
- * Zašto: evidencija prinudne naplate (enrich-pib-blokade.ts) vraća PIB samo za
- * firme koje su bile u prinudnoj naplati u poslednjih 5 godina (~80%). JRR
- * (registar računa) pokriva SVE firme sa računom, pa ovaj prolaz popunjava
- * companies.pib za preostale.
+ * Dva režima:
+ *
+ *   1. PIB (podrazumevano): popunjava companies.pib za firme koje još nemaju
+ *      PIB. Zašto: evidencija prinudne naplate (enrich-pib-blokade.ts) vraća
+ *      PIB samo za firme koje su bile u prinudnoj naplati u poslednjih 5 godina
+ *      (~80%). JRR pokriva SVE firme sa računom.
+ *
+ *   2. --adresa: popunjava companies.adresa i tabelu racuni (banka, broj
+ *      računa, status, podleže blokadi, datum otvaranja) za firme koje još
+ *      nemaju adresu. Isti NBS izvor koji koristi kompanije.co.rs za svoja
+ *      polja "Adresa" i "Računi" (migracija 008, odobreno 17.08.2026).
  *
  * Upotreba:
  *   npx tsx scripts/enrich-pib-rir.ts [--konkurentnost=8]
+ *   npx tsx scripts/enrich-pib-rir.ts --adresa [--konkurentnost=8] [--limit=1000]
  *
- * Pokreće se POSLE enrich-pib-blokade.ts — cilja samo firme koje još nemaju PIB.
- * Nastavljiv: završeni matični brojevi idu u scripts/data/nbs-rir-zavrseno.json.
+ * Nastavljiv: završeni matični brojevi idu u scripts/data/nbs-rir-zavrseno.json
+ * (PIB režim) ili scripts/data/nbs-rir-adresa-zavrseno.json (--adresa režim).
  */
 
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import type { SupabaseClient } from "@supabase/supabase-js";
 
 import { getSupabaseServerClient } from "../lib/supabase";
-import { NbsRirKlijent } from "./lib/nbs-client";
+import { NbsRirKlijent, type RirRacun } from "./lib/nbs-client";
 
 try {
   process.loadEnvFile(".env.local");
@@ -25,8 +33,12 @@ try {
   // Env može biti već postavljen u okolini; .env.local nije obavezan.
 }
 
+const ADRESA_REZIM = process.argv.includes("--adresa");
 const KONKURENTNOST = brojArgumenta("--konkurentnost", 8);
-const PUT_PROGRESA = "scripts/data/nbs-rir-zavrseno.json";
+const LIMIT = brojArgumenta("--limit", 0);
+const PUT_PROGRESA = ADRESA_REZIM
+  ? "scripts/data/nbs-rir-adresa-zavrseno.json"
+  : "scripts/data/nbs-rir-zavrseno.json";
 
 function brojArgumenta(ime: string, podrazumevano: number): number {
   const saJednako = process.argv.find((a) => a.startsWith(`${ime}=`));
@@ -51,8 +63,24 @@ function ucitajJson<T>(put: string, prazno: T): T {
   }
 }
 
-/** Čita firme bez PIB-a (straničeno, po 1000). */
-async function firmeBezPiba(supabase: SupabaseClient): Promise<string[]> {
+/**
+ * Čita matične brojeve gde je kolona NULL (straničeno, po 1000).
+ * maticni_broj je jedinstven tiebreaker: bez ORDER BY paginacija vraća
+ * duplikate i preskače firme (otkriveno na RIR prolazu: ~19.5k preskočeno).
+ */
+async function firmeBezVrednosti(supabase: SupabaseClient, kolona: "pib" | "adresa"): Promise<string[]> {
+  // --limit=N: jedna stranica, bez paginacije.
+  if (LIMIT > 0) {
+    const { data, error } = await supabase
+      .from("companies")
+      .select("maticni_broj")
+      .is(kolona, null)
+      .order("maticni_broj")
+      .limit(LIMIT);
+    if (error) throw new Error(`Čitanje companies: ${error.message}`);
+    return (data ?? []).map((r) => r.maticni_broj);
+  }
+
   const svi: string[] = [];
   let pocetak = 0;
   const korak = 1000;
@@ -61,9 +89,7 @@ async function firmeBezPiba(supabase: SupabaseClient): Promise<string[]> {
     const { data, error } = await supabase
       .from("companies")
       .select("maticni_broj")
-      .is("pib", null)
-      // maticni_broj je jedinstven tiebreaker: bez ORDER BY paginacija vraća
-      // duplikate i preskače firme (otkriveno na RIR prolazu: ~19.5k preskočeno).
+      .is(kolona, null)
       .order("maticni_broj")
       .range(pocetak, pocetak + korak - 1);
     if (error) throw new Error(`Čitanje companies: ${error.message}`);
@@ -77,8 +103,12 @@ async function firmeBezPiba(supabase: SupabaseClient): Promise<string[]> {
 
 async function glavna(): Promise<void> {
   const supabase = getSupabaseServerClient();
-  const ciljni = await firmeBezPiba(supabase);
-  console.log(`Firmi bez PIB-a: ${ciljni.length}, konkurentnost ${KONKURENTNOST}.`);
+  const kolona: "pib" | "adresa" = ADRESA_REZIM ? "adresa" : "pib";
+  const ciljni = await firmeBezVrednosti(supabase, kolona);
+  console.log(
+    `Režim: ${ADRESA_REZIM ? "adresa+računi" : "PIB"}. Firmi bez ${kolona}: ${ciljni.length}, ` +
+      `konkurentnost ${KONKURENTNOST}.`,
+  );
 
   const zavrseno = new Set<string>(ucitajJson<string[]>(PUT_PROGRESA, []));
   let indeks = 0;
@@ -99,21 +129,49 @@ async function glavna(): Promise<void> {
     const poSekundi = obradjeno / Math.max(proteklo, 0.001);
     const preostalo = poSekundi > 0 ? (ciljni.length - obradjeno) / poSekundi : 0;
     console.log(
-      `[${obradjeno}/${ciljni.length}] ${procenat}% | PIB: ${popunjeno} | van JRR: ${bezRegistra} | ` +
+      `[${obradjeno}/${ciljni.length}] ${procenat}% | popunjeno: ${popunjeno} | van JRR: ${bezRegistra} | ` +
         `greške: ${greske} | ETA ~${Math.round(preostalo / 60)} min`,
     );
   }
 
   async function radnik(): Promise<void> {
     const klijent = new NbsRirKlijent();
-    let redovi: { mb: string; pib: string }[] = [];
+    let redovi: { mb: string; pib: string | null; adresa: string | null; racuni: RirRacun[] }[] = [];
 
     const flush = async (): Promise<void> => {
       if (redovi.length === 0) return;
       await Promise.all(
-        redovi.map((r) =>
-          supabase.from("companies").update({ pib: r.pib }).eq("maticni_broj", r.mb),
-        ),
+        redovi.map((r) => {
+          if (ADRESA_REZIM) {
+            const poslovi: unknown[] = [];
+            if (r.adresa) {
+              poslovi.push(
+                supabase.from("companies").update({ adresa: r.adresa }).eq("maticni_broj", r.mb),
+              );
+            }
+            if (r.racuni.length > 0) {
+              poslovi.push(
+                supabase
+                  .from("racuni")
+                  .upsert(
+                    r.racuni.map((rk) => ({
+                      maticni_broj: r.mb,
+                      banka: rk.banka,
+                      broj_racuna: rk.broj_racuna,
+                      status: rk.status,
+                      podleze_blokadi: rk.podleze_blokadi,
+                      datum_otvaranja: rk.datum_otvaranja,
+                    })),
+                    { onConflict: "maticni_broj,broj_racuna" },
+                  ),
+              );
+            }
+            return Promise.all(poslovi);
+          }
+          return r.pib
+            ? supabase.from("companies").update({ pib: r.pib }).eq("maticni_broj", r.mb)
+            : Promise.resolve();
+        }),
       );
       redovi = [];
     };
@@ -126,9 +184,16 @@ async function glavna(): Promise<void> {
         if (zavrseno.has(mb)) continue;
 
         try {
-          const pib = await klijent.pibZaMaticniBroj(mb);
-          if (pib) {
-            redovi.push({ mb, pib });
+          const podaci = await klijent.podaciZaMaticniBroj(mb);
+          if (ADRESA_REZIM) {
+            if (podaci.adresa || podaci.racuni.length > 0) {
+              redovi.push({ mb, pib: null, adresa: podaci.adresa, racuni: podaci.racuni });
+              popunjeno++;
+            } else {
+              bezRegistra++;
+            }
+          } else if (podaci.pib) {
+            redovi.push({ mb, pib: podaci.pib, adresa: null, racuni: [] });
             popunjeno++;
           } else {
             bezRegistra++;
@@ -163,7 +228,7 @@ async function glavna(): Promise<void> {
 
   sacuvajProgres();
   prikaziProgres();
-  console.log(`Gotovo. PIB popunjen: ${popunjeno}, van JRR: ${bezRegistra}, greške: ${greske}.`);
+  console.log(`Gotovo. Popunjeno: ${popunjeno}, van JRR: ${bezRegistra}, greške: ${greske}.`);
 }
 
 glavna().catch((greska) => {

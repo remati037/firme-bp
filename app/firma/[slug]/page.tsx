@@ -120,6 +120,7 @@ export default async function StranicaFirme({ params }: Props) {
     aiSazetak,
     datumPreseka,
     promene,
+    racuni,
     slicneDelatnost,
     slicneOpstina,
   } = podaci;
@@ -315,6 +316,7 @@ export default async function StranicaFirme({ params }: Props) {
               NEMA_PODATAKA
             )}
           </InfoCelija>
+          <InfoCelija naziv="Adresa">{firma.adresa ?? NEMA_PODATAKA}</InfoCelija>
           <InfoCelija naziv="Delatnost">
             {firma.sifra_delatnosti ? (
               <Link href={`/delatnost/${firma.sifra_delatnosti}`} className="text-accent-strong">
@@ -325,6 +327,18 @@ export default async function StranicaFirme({ params }: Props) {
             )}
           </InfoCelija>
           <InfoCelija naziv="Status">{firma.status ?? NEMA_PODATAKA}</InfoCelija>
+          {racuni.length > 0 ? (
+            <InfoCelija naziv={`Bankovni računi · ${racuni.length}`} sirok>
+              <ul className="flex flex-wrap gap-x-4 gap-y-1">
+                {racuni.map((r) => (
+                  <li key={r.broj_racuna ?? r.banka ?? ""} className="font-mono text-[13px] font-normal">
+                    {r.banka}
+                    {r.broj_racuna ? ` · ${r.broj_racuna}` : ""}
+                  </li>
+                ))}
+              </ul>
+            </InfoCelija>
+          ) : null}
         </div>
       </section>
 
@@ -490,9 +504,15 @@ export default async function StranicaFirme({ params }: Props) {
           foundingDate: firma.datum_osnivanja ?? undefined,
           url: apsolutniUrl(`/firma/${firma.slug}`),
           naics: firma.sifra_delatnosti ?? undefined,
-          address: opstina
-            ? { "@type": "PostalAddress", addressLocality: opstina, addressCountry: "RS" }
-            : undefined,
+          address:
+            opstina || firma.adresa
+              ? {
+                  "@type": "PostalAddress",
+                  addressLocality: opstina ?? undefined,
+                  streetAddress: firma.adresa ?? undefined,
+                  addressCountry: "RS",
+                }
+              : undefined,
           numberOfEmployees: fi?.prosecan_broj_zaposlenih
             ? { "@type": "QuantitativeValue", value: fi.prosecan_broj_zaposlenih }
             : undefined,

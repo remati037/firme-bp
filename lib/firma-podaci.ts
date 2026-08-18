@@ -26,6 +26,7 @@ import {
   upitIstorijaFirme,
   upitNaceKod,
   upitOpstina,
+  upitRacuni,
   upitRangFirme,
   upitSlicneFirmePoPrihodu,
   upitStatistikaDelatnosti,
@@ -38,6 +39,7 @@ import {
   type KarticaFirme,
   type NaceKod,
   type Opstina,
+  type RacunRed,
   type RangFirme,
   type StatistikaDelatnosti,
   type StatistikaOpstine,
@@ -76,6 +78,8 @@ export type PodaciFirme = {
   datumPreseka: string;
   /** Blokada računa iz NBS registra dužnika (migracija 006); null ako je nema. */
   blokada: Blokada | null;
+  /** Bankovni računi iz NBS JRR (migracija 008); prazno ako ih nema. */
+  racuni: RacunRed[];
   /** Privremena ograničenja prava iz APR evidencije (migracija 007); prazno ako ih nema. */
   zabrane: Zabrana[];
   /** Promena u odnosu na prethodni mesečni presek; null dok postoji samo jedan. */
@@ -85,7 +89,7 @@ export type PodaciFirme = {
 };
 
 const KOLONE_SA_KRATKIM =
-  "maticni_broj,slug,poslovno_ime,poslovno_ime_kratko,sifra_opstine,opstina,status,status_aktivan,datum_osnivanja,pravna_forma,sifra_delatnosti,pib";
+  "maticni_broj,slug,poslovno_ime,poslovno_ime_kratko,sifra_opstine,opstina,status,status_aktivan,datum_osnivanja,pravna_forma,sifra_delatnosti,pib,adresa";
 
 /**
  * Matični broj je poslednji segment sluga (SEO.md §1.3).
@@ -125,6 +129,7 @@ export async function ucitajFirmu(slug: string): Promise<PodaciFirme | null> {
     istorija,
     blokada,
     zabrane,
+    racuni,
   ] = await Promise.all([
       upitFinansije(db, maticniBroj),
       upitRangFirme(db, maticniBroj),
@@ -139,6 +144,7 @@ export async function ucitajFirmu(slug: string): Promise<PodaciFirme | null> {
       upitIstorijaFirme(db, maticniBroj),
       upitBlokada(db, maticniBroj),
       upitZabrane(db, maticniBroj),
+      upitRacuni(db, maticniBroj),
     ]);
 
   const redovi = finansije.data ?? [];
@@ -177,6 +183,7 @@ export async function ucitajFirmu(slug: string): Promise<PodaciFirme | null> {
     aiSazetak: aiSazetak.data ?? null,
     datumPreseka,
     blokada: blokada.data ?? null,
+    racuni: racuni.data ?? [],
     zabrane: zabrane.data ?? [],
     promene: izracunajPromene(istorija.data ?? []),
     slicneDelatnost: slicne.delatnost,

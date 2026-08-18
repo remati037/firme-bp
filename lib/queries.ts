@@ -40,6 +40,16 @@ export type Firma = {
   pravna_forma: string | null;
   sifra_delatnosti: string | null;
   pib: string | null;
+  /** Adresa sedišta iz NBS JRR (migracija 008); null dok se ne popuni. */
+  adresa: string | null;
+};
+
+/** Red iz tabele racuni (NBS JRR, migracija 008) — jedan red po računu. */
+export type RacunRed = {
+  banka: string | null;
+  broj_racuna: string | null;
+  podleze_blokadi: boolean | null;
+  datum_otvaranja: string | null;
 };
 
 /** Sve novčane kolone su u hiljadama dinara. */
@@ -285,6 +295,19 @@ export function upitZabrane(db: SupabaseClient, maticniBroj: string) {
     .eq("maticni_broj", maticniBroj)
     .order("pocetak_vazenja", { ascending: false, nullsFirst: false })
     .returns<Zabrana[]>();
+}
+
+// =============================================================================
+// Bankovni računi (NBS Jedinstveni registar računa, migracija 008)
+// =============================================================================
+
+export function upitRacuni(db: SupabaseClient, maticniBroj: string) {
+  return db
+    .from("racuni")
+    .select("banka,broj_racuna,podleze_blokadi,datum_otvaranja")
+    .eq("maticni_broj", maticniBroj)
+    .order("banka")
+    .returns<RacunRed[]>();
 }
 
 // =============================================================================

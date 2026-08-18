@@ -17,6 +17,7 @@ const FIRMA: Firma = {
   pravna_forma: "Društvo s ograničenom odgovornošću",
   sifra_delatnosti: "4690",
   pib: null,
+  adresa: null,
 };
 
 const FI: Finansije = {

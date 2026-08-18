@@ -174,14 +174,73 @@ const RIR_INDEKS = `${RIR_OSNOVA}/Index?isSearchExecuted=false`;
  * Vraća null ako nema rezultata.
  */
 export function ekstrahujPibIzRir(html: string): string | null {
+  return ekstrahujRirPodatke(html).pib;
+}
+
+export type RirRacun = {
+  banka: string | null;
+  broj_racuna: string | null;
+  status: string | null; // "Укључен" / "Искључен"
+  podleze_blokadi: boolean | null;
+  datum_otvaranja: string | null; // yyyy-mm-dd
+};
+
+export type RirPodaci = {
+  pib: string | null;
+  /** Adresa sedišta iz RIR kolone "Адреса". */
+  adresa: string | null;
+  /** Red po računu (ista firma se ponavlja — jedan red po računu). */
+  racuni: RirRacun[];
+};
+
+/** Najčešća vrednost u listi; pri izjednačenom broju — prva. */
+function najcesca(vrednosti: string[]): string | null {
+  if (vrednosti.length === 0) return null;
+  const broj = new Map<string, number>();
+  for (const v of vrednosti) broj.set(v, (broj.get(v) ?? 0) + 1);
+  let najbolja = vrednosti[0];
+  let najvise = 0;
+  for (const [v, n] of broj) {
+    if (n > najvise) {
+      najbolja = v;
+      najvise = n;
+    }
+  }
+  return najbolja;
+}
+
+/**
+ * Vadi PIB, adresu i račune (banku, broj računa) iz RIR odgovora.
+ *
+ * Kolone tabele: naziv(0), matični broj(1), PIB(2), adresa(3), mesto(4),
+ * opština(5), delatnost(6), banka(7), "....."(8), račun(9), "....."(10),
+ * status(11), podleže/ne podleže blokadi(12), datum otvaranja(13).
+ * Jedan red po računu — ista firma se ponavlja.
+ */
+export function ekstrahujRirPodatke(html: string): RirPodaci {
   const dek = dekodujEntitete(html);
   const tabela = dek.match(/<table class="responsive-table">([\s\S]*?)<\/table>/);
-  if (!tabela) return null;
+  if (!tabela) return { pib: null, adresa: null, racuni: [] };
+
+  const racuni: RirRacun[] = [];
+  const adrese: string[] = [];
+  let pib: string | null = null;
+
   for (const red of tabela[1].matchAll(/<tr[^>]*>([\s\S]*?)<\/tr>/g)) {
     const celije = [...red[1].matchAll(/<td[^>]*>([\s\S]*?)<\/td>/g)].map((m) => ocisti(m[1]));
-    if (celije.length >= 3 && /^\d{9}$/.test(celije[2])) return celije[2];
+    if (celije.length < 14 || !/^\d{9}$/.test(celije[2] ?? "")) continue; // zaglavlje ili nepotpun red
+    pib = celije[2];
+    if (celije[3]) adrese.push(celije[3]);
+    racuni.push({
+      banka: celije[7] || null,
+      broj_racuna: celije[9] || null,
+      status: celije[11] || null,
+      podleze_blokadi: celije[12] ? celije[12].includes("Подлеже") : null,
+      datum_otvaranja: parsirajDatum(celije[13] ?? ""),
+    });
   }
-  return null;
+
+  return { pib, adresa: najcesca(adrese), racuni };
 }
 
 /** Jedna sesija ka RIR pretrazi (anti-forgery token + kolačići). */
@@ -201,6 +260,14 @@ export class NbsRirKlijent {
 
   /** Vraća PIB za matični broj ili null ako firma nije u JRR. */
   async pibZaMaticniBroj(maticniBroj: string): Promise<string | null> {
+    return (await this.podaciZaMaticniBroj(maticniBroj)).pib;
+  }
+
+  /**
+   * Vraća PIB, adresu i račune za matični broj (ili prazne vrednosti ako firma
+   * nije u JRR). Isti upit kao `pibZaMaticniBroj` — razlika je samo u parsiranju.
+   */
+  async podaciZaMaticniBroj(maticniBroj: string): Promise<RirPodaci> {
     let poslednjaGreska: unknown = null;
 
     for (let pokusaj = 1; pokusaj <= POKUSAJA; pokusaj++) {
@@ -247,7 +314,7 @@ export class NbsRirKlijent {
             continue;
           }
         }
-        return ekstrahujPibIzRir(html);
+        return ekstrahujRirPodatke(html);
       } catch (greska) {
         poslednjaGreska = greska;
         if (pokusaj < POKUSAJA) await pauza(700 * 2 ** (pokusaj - 1));

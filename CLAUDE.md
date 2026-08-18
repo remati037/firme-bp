@@ -103,6 +103,7 @@ companies
   pravna_forma        text
   sifra_delatnosti    text
   pib                 text                 -- popunjava se iz NBS, može biti null
+  adresa              text                 -- migracija 008: adresa sedišta iz NBS JRR (kolona "Адреса"), NULL dok se ne popuni
   created_at          timestamptz
   updated_at          timestamptz
 
@@ -129,6 +130,24 @@ financials_history                          -- svaki mesečni presek, arhiva se 
   datum_preseka       date
   godina              int
   ... ista polja kao financials
+
+blokade                                     -- migracija 006
+  maticni_broj        text primary key references companies
+  iznos               numeric                -- ukupan iznos blokade u RSD (bez kamate)
+  ukupno_dana         int
+  zabrana_prenosa     date
+  periodi             jsonb
+  provereno_at        timestamptz
+
+racuni                                      -- migracija 008: NBS JRR, red po računu
+  id                  bigserial primary key
+  maticni_broj        text references companies
+  banka               text
+  broj_racuna         text                   -- unique (maticni_broj, broj_racuna), upsert
+  status              text                   -- "Укључен" / "Искључен"
+  podleze_blokadi     boolean
+  datum_otvaranja     date
+  provereno_at        timestamptz
 
 nace_codes
   sifra               text primary key

@@ -5,6 +5,7 @@ import { describe, expect, it } from "vitest";
 import {
   ekstrahujPodatke,
   ekstrahujPibIzRir,
+  ekstrahujRirPodatke,
   imaBlokadu,
   parsirajDatum,
   parsirajIznos,
@@ -94,5 +95,34 @@ describe("ekstrahujPibIzRir", () => {
 
   it("vraća null za odgovor bez tabele računa", () => {
     expect(ekstrahujPibIzRir("<html><body>nema podataka</body></html>")).toBeNull();
+  });
+});
+
+describe("ekstrahujRirPodatke — adresa i računi (8.MART, stvarni NBS odgovor)", () => {
+  const podaci = ekstrahujRirPodatke(FIKSTURA("nbs-rir-racuni.html"));
+
+  it("čita PIB", () => {
+    expect(podaci.pib).toBe("100000024");
+  });
+
+  it("čita adresu (najčešća vrednost među redovima)", () => {
+    expect(podaci.adresa).toBe("SENĆANSKI PUT 85");
+  });
+
+  it("čita sve račune sa bankama", () => {
+    expect(podaci.racuni.length).toBeGreaterThanOrEqual(3);
+    const prvi = podaci.racuni[0];
+    expect(prvi.banka).toBe("Banca Intesa A.D.- Beograd");
+    expect(prvi.broj_racuna).toBe("160-0000000390197-81");
+    expect(prvi.status).toBe("Укључен");
+    expect(prvi.podleze_blokadi).toBe(true);
+    expect(prvi.datum_otvaranja).toBe("2013-06-04");
+  });
+
+  it("vraća prazne vrednosti za odgovor bez tabele", () => {
+    const prazno = ekstrahujRirPodatke("<html><body>nema</body></html>");
+    expect(prazno.pib).toBeNull();
+    expect(prazno.adresa).toBeNull();
+    expect(prazno.racuni).toEqual([]);
   });
 });

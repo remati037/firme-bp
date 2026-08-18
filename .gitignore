@@ -60,3 +60,10 @@ scripts/data/nbs-rir-zavrseno.json
 scripts/data/nbs-zabrane-zavrseno.json
 scripts/data/nbs-zabrane-dopuna-zavrseno.json
 scripts/data/nbs-zabrane-aktivne-zavrseno.json
+
+# runtime stanje NBS obogaćivanja (enrich-pib-rir.ts --adresa)
+scripts/data/nbs-rir-adresa-zavrseno.json
+scripts/data/enrich-adresa-log.txt
+
+# preuzeti podaci sa kompanije.co.rs (regenerabilno preko tools/preuzmi-*.py)
+tools/data/
