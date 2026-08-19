@@ -346,3 +346,39 @@
 .data-callout .go {
   color: var(--primary);
 }
+
+/* =============================================================================
+   Choropleth mapa Srbije (PoC, /mapa/[metrika])
+   Indigo sekvencijalna skala, 5 koraka + "nema podataka" + ivica okruga.
+   Dark mode: niske vrednosti tamne, visoke svetle (isti smer kao svetla tema).
+   ============================================================================= */
+
+:root {
+  --map-nula: #f4f4f5;
+  --map-0: #eef2ff;
+  --map-1: #c7d2fe;
+  --map-2: #818cf8;
+  --map-3: #4f46e5;
+  --map-4: #312e81;
+  --map-stroke: #ffffff;
+}
+
+.dark {
+  --map-nula: #18181f;
+  --map-0: #1e1b4b;
+  --map-1: #312e81;
+  --map-2: #4338ca;
+  --map-3: #6366f1;
+  --map-4: #a5b4fc;
+  --map-stroke: #0b0b10;
+}
+
+.mapa-srbije path {
+  transition: fill-opacity 0.12s ease;
+}
+
+.mapa-srbije path:hover,
+.mapa-srbije path:focus-visible {
+  fill-opacity: 0.72;
+  outline: none;
+}
