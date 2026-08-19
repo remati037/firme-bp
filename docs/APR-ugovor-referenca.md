@@ -56,16 +56,57 @@ angažovati advokata.
 | Stvarni vlasnici UBO (aktuelni) | 6.000.000 | ≈ 51.300 |
 | Preduzetnici (~386k, aktuelni) | 11.600.000 | ≈ 99.100 |
 
-Cena je proporcionalna broju podataka (1 RSD/podatak; vrednost „0" se naplaćuje).
-2025. već imamo besplatno iz open data — istorija treba samo 2021–2024.
+**Jednokratno:** 1 RSD po podatku, **vrednost „0" se NAPLAĆUJE** kao podatak.
+Plaća se po predračunu; istorijski podaci vlasnika/UBO/preduzetnika — dodatna analiza.
 
-## Cilj pregovora
+## Alternativa: redovno preuzimanje po povoljnijim naknadama (KLJUČNO)
 
-- **Godišnji ugovor po modelu CompanyWall-a**, ali sa smanjenim skupom polja
-  (prihodi, neto rezultat, kapital, imovina, zaposleni) i **samo za društva koja
-  su predala izveštaj** → procena reda **600–800k RSD godišnje (≈ 5–7k EUR)**.
-- Tražiti **istoriju 2021–2024** po istom modelu (ne duplo plaćati 2025).
-- Pismeno potvrditi klauzulu člana 8 (sopstveni proizvod + APR kao izvor).
+### a) Prepis baze finansijskih izveštaja — 0,60 RSD po podatku
+
+- **„Podatak" = popunjeno polje različito od nule** — „0" se NE naplaćuje.
+- Obuhvata najmanje sve redovne godišnje FI (društva, zadruge, ustanove,
+  preduzetnici), bilans stanja + bilans uspeha.
+- Ilustracija APR: svi podaci BS+BU za sve obveznike **2024. ≈ 4,8M RSD**
+  (to je za CELI obrazac sa ~100+ polja; naša 4–5 polja → srazmerno manje).
+
+**Naša procena za 4–5 polja × 123k društava sa izveštajem:**
+~123k × 5 × 0,60 ≈ **370k RSD/god**; za istoriju 2021–2024 ≈ **1,5M RSD**
+(umesto 3,2M po jednokratnom modelu). Za 3 polja još manje (~0,9M).
+
+### b) PLWS veb-servis (statusni registri / poslovni podaci)
+
+- **Inicijalni set: 7 RSD po subjektu** (nezavisno od broja grupa podataka!)
+- **Mesečni set promena: 32 RSD po subjektu** koji je imao promenu
+- Fiksna mesečna naknada: **7.500 RSD**
+- Ilustracija APR: svi aktivni subjekti (133k + 386k) → inicijalno ~3,6M RSD;
+  mesečno ~600–900k RSD (jer se naplaćuju samo subjekti sa promenama).
+
+**Za nas (samo privredna društva, 133k):**
+- Inicijalni set ≈ **133k × 7 = 931k RSD** — ako PLWS uključuje grupe
+  „vlasnici/zastupnici/stvarni vlasnici", to je daleko jeftinije od
+  jednokratnih 4,7M + 6,0M! **Vredi pitati koje grupe podataka nudi.**
+- Mesečno: ~32 RSD × broj društava sa promenama (procena 10–20k/mes)
+  ≈ 320–640k RSD/mes — za v1 preskupo, ali inicijalni set je jednokratan.
+
+### c) Redistribucija — POTVRĐENO (odgovor APR, 16.08.2026)
+
+> „Корисник преузете податке може користити за сопствене потребе, али их не
+> може даље умножавати нити **комерцијално** дистрибуирати. Ако их користи за
+> израду **сопственог производа**, дужан је да Агенцију означи као извор."
+
+- **Naš slučaj odgovara**: sopstveni proizvod (sajt), bez komercijalne
+  distribucije, APR kao izvor u futeru ✅ — isto kao CompanyWall (čl. 8).
+- Ugovor se zaključuje **samo sa pravnim licima sa sedištem u RS**,
+  uz obezbeđenje plaćanja (menica ili avans).
+
+## Cilj pregovora (revidirano)
+
+1. **Istorija FI 2021–2024** po modelu „prepis baze" (0,60 RSD, bez nula),
+   samo naša polja, samo društva sa izveštajem → cilj ≈ 1–1,5M RSD.
+2. **PLWS**: pitati koje su grupe podataka dostupne (da li vlasnici/zastupnici/
+   stvarni vlasnici); ako jesu → inicijalni set za društva ≈ 931k RSD
+   (umesto 10,7M jednokratno za oba seta). Mesečno ažuriranje preskočiti u v1.
+3. Redistribucija: već potvrđena — samo potvrditi ugovornu klauzulu.
 
 ## Alternativa bez kupovine
 
