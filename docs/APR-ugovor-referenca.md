@@ -117,6 +117,16 @@ Jedina opcija za **smanjen skup polja** (naša 4–6 polja × 133k × godine):
    ili samo 2023–2024 ≈ 0,8M. Odluka kad sajt pokaže potencijal.
 3. Redistribucija: potvrđena — sopstveni proizvod + APR kao izvor.
 
+## Poređenje sa CompanyWall-om (pojašnjenje)
+
+- CompanyWall plaća **5,25M RSD godišnje** (2024) za **celu bazu BS+BU** svih
+  obveznika, sa nedeljnim presecima — isti proizvod koji APR procenjuje na
+  ~4,6M/god; razlika ~14% je inicijalni set + nedeljne isporuke i tarifa.
+- Naših „4M za 5 godina" (jednokratno, 6 polja) je **jeftinije od JEDNE godine**
+  CompanyWall-a — jer uzimamo samo 6 polja, ne celu bilansnu šemu.
+- Nema posebnog popusta: CompanyWall plaća svake godine za sve; isti model
+  važi i za nas (puna baza ≈ 4,6M/god).
+
 ## Strategija „top N firmi" (analitika → ciljana kupovina)
 
 Umesto scrapovanja konkurenata ili APR pretrage (ToS, eID, blokada) za
