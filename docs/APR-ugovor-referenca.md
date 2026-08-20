@@ -108,6 +108,21 @@ Plaća se po predračunu; istorijski podaci vlasnika/UBO/preduzetnika — dodatn
    (umesto 10,7M jednokratno za oba seta). Mesečno ažuriranje preskočiti u v1.
 3. Redistribucija: već potvrđena — samo potvrditi ugovornu klauzulu.
 
+## Strategija „top N firmi" (analitika → ciljana kupovina)
+
+Umesto scrapovanja konkurenata ili APR pretrage (ToS, eID, blokada) za
+najposećenije firme:
+
+- GA4 već meri posete po stranici; **GA4 Data API** (besplatno) daje top
+  `/firma/*` stranice → lista najtraženijih.
+- PLWS po subjektu (7 RSD, nezavisno od broja grupa) → ako se može ograničiti
+  na odabrane subjekte:
+  - top 1.000 ≈ 7.000 RSD (€60)
+  - top 5.000 ≈ 35.000 RSD (€300)
+  - top 50.000 ≈ 350.000 RSD
+- Pitanje APR-u: da li PLWS podržava preuzimanje za **manji broj odabranih
+  subjekata** po istoj ceni 7 RSD/subjekt.
+
 ## Alternativa bez kupovine
 
 - Istoriju gradimo unapred kroz postojeću mesečnu arhivu (`financials_history`).
