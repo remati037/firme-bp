@@ -21,11 +21,11 @@ export function MetricBar({
 
   return (
     <div className="flex items-center gap-3.5">
-      <span className="min-w-[92px] text-[13.5px] text-muted-foreground">{labela}</span>
+      <span className="min-w-[92px] max-sm:min-w-0 text-[13.5px] text-muted-foreground">{labela}</span>
       <svg
         viewBox="0 0 200 16"
         preserveAspectRatio="none"
-        className="h-4 flex-1"
+        className="h-4 min-w-0 flex-1"
         role="img"
         aria-label={`${labela}: ${opis}`}
       >
@@ -40,7 +40,7 @@ export function MetricBar({
           strokeWidth="2.5"
         />
       </svg>
-      <span className="min-w-[150px] text-right text-[13.5px] font-semibold">{opis}</span>
+      <span className="min-w-[150px] max-sm:min-w-0 text-right text-[13.5px] font-semibold">{opis}</span>
     </div>
   );
 }
@@ -56,8 +56,8 @@ export function MetricRow({
 }) {
   return (
     <div className="flex items-baseline justify-between gap-4">
-      <span className="text-[13.5px] text-muted-foreground">{labela}</span>
-      <span className="text-[13.5px] font-semibold tabular-nums">{vrednost}</span>
+      <span className="min-w-0 text-[13.5px] text-muted-foreground">{labela}</span>
+      <span className="min-w-0 text-right text-[13.5px] font-semibold tabular-nums">{vrednost}</span>
     </div>
   );
 }

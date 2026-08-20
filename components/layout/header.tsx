@@ -25,7 +25,7 @@ const NAVIGACIJA = [
 export function Header() {
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background/85 backdrop-blur-xl">
-      <div className="mx-auto flex h-[60px] w-full max-w-[1120px] items-center gap-6 px-6">
+      <div className="mx-auto flex h-[60px] w-full max-w-[1120px] items-center gap-2 px-4 sm:gap-6 sm:px-6">
         <Link
           href="/"
           className="flex shrink-0 items-center text-[19px] font-extrabold tracking-[-0.02em] text-foreground no-underline"

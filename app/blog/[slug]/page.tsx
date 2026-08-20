@@ -70,7 +70,7 @@ export default async function StranaClanka({ params }: { params: Promise<{ slug:
   const url = apsolutniUrl(`/blog/${clanak.slug}`);
 
   return (
-    <>
+    <main className="mx-auto w-full max-w-[1120px] px-6">
       <Breadcrumbs
         mrvice={[
           { tekst: "Početna", href: "/" },
@@ -145,6 +145,6 @@ export default async function StranaClanka({ params }: { params: Promise<{ slug:
           publisher: { "@type": "Organization", name: BREND, url: apsolutniUrl("/") },
         }}
       />
-    </>
+    </main>
   );
 }

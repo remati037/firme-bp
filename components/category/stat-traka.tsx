@@ -35,20 +35,20 @@ export function StatTraka({
     { naziv: "Sa izveštajem", vrednost: formatBroj(brojSaIzvestajem, { nulaJePodatak: true }) },
     { naziv: "Ukupan prihod", vrednost: <Novac hiljade={ukupanPrihod} kompaktno /> },
     { naziv: "Ukupno zaposlenih", vrednost: formatBroj(ukupnoZaposlenih) },
-    { naziv: "Medijan prihoda", vrednost: <Novac hiljade={medijanPrihoda} /> },
+    { naziv: "Medijan prihoda", vrednost: <Novac hiljade={medijanPrihoda} kompaktno /> },
     { naziv: "Medijan marže", vrednost: formatProcenat(medijanMarze) },
-    { naziv: "Medijan po zaposlenom", vrednost: <Novac hiljade={medijanPrihodaPoZaposlenom} /> },
+    { naziv: "Medijan po zaposlenom", vrednost: <Novac hiljade={medijanPrihodaPoZaposlenom} kompaktno /> },
   ];
 
   return (
     <Card className="p-0">
       <dl className="grid grid-cols-2 gap-px bg-border sm:grid-cols-4">
         {stavke.map((s) => (
-          <div key={s.naziv} className="bg-card px-4 py-3.5">
+          <div key={s.naziv} className="min-w-0 bg-card px-4 py-3.5">
             <dt className="text-[11.5px] font-semibold tracking-[0.05em] text-muted-foreground uppercase">
               {s.naziv}
             </dt>
-            <dd className="mt-1 text-[15px] font-bold tabular-nums">{s.vrednost}</dd>
+            <dd className="mt-1 min-w-0 break-words text-[15px] font-bold tabular-nums">{s.vrednost}</dd>
           </div>
         ))}
       </dl>

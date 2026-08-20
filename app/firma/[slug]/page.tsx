@@ -256,7 +256,7 @@ export default async function StranicaFirme({ params }: Props) {
       <section className="mt-5 mb-2 grid gap-4 sm:grid-cols-3">
         <Card className="border-accent-ring bg-accent-soft">
           <KpiLabel>Prihod{fi?.godina ? ` · ${fi.godina}` : ""}</KpiLabel>
-          <p className="mt-1 text-[clamp(22px,3.4vw,30px)] leading-[1.15] font-extrabold tracking-[-0.02em] text-accent-strong tabular-nums">
+          <p className="mt-1 text-[clamp(22px,3.4vw,30px)] leading-[1.15] font-extrabold tracking-[-0.02em] break-words text-accent-strong tabular-nums">
             <Novac hiljade={fi?.ukupni_prihodi} />
           </p>
           {promene ? <Delta promena={promene.prihodi} prethodniPresek={promene.prethodniPresek} /> : null}
@@ -265,7 +265,7 @@ export default async function StranicaFirme({ params }: Props) {
         <Card>
           <KpiLabel>Neto rezultat{fi?.godina ? ` · ${fi.godina}` : ""}</KpiLabel>
           <p
-            className={`mt-1 text-[clamp(22px,3.4vw,30px)] leading-[1.15] font-extrabold tracking-[-0.02em] tabular-nums ${
+            className={`mt-1 text-[clamp(22px,3.4vw,30px)] leading-[1.15] font-extrabold tracking-[-0.02em] break-words tabular-nums ${
               netoRezultat > 0 ? "text-success" : netoRezultat < 0 ? "text-danger" : ""
             }`}
           >
@@ -284,7 +284,7 @@ export default async function StranicaFirme({ params }: Props) {
         </Card>
         <Card>
           <KpiLabel>Zaposleni{fi?.godina ? ` · ${fi.godina}` : ""}</KpiLabel>
-          <p className="mt-1 text-[clamp(22px,3.4vw,30px)] leading-[1.15] font-extrabold tracking-[-0.02em] tabular-nums">
+          <p className="mt-1 text-[clamp(22px,3.4vw,30px)] leading-[1.15] font-extrabold tracking-[-0.02em] break-words tabular-nums">
             {formatBroj(fi?.prosecan_broj_zaposlenih)}
           </p>
           {promene ? (

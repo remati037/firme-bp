@@ -61,34 +61,42 @@ Plaća se po predračunu; istorijski podaci vlasnika/UBO/preduzetnika — dodatn
 
 ## Alternativa: redovno preuzimanje po povoljnijim naknadama (KLJUČNO)
 
-### a) Prepis baze finansijskih izveštaja — 0,60 RSD po podatku
+### a) Prepis baze finansijskih izveštaja — 0,60 RSD po podatku (ISPRAVKA 17.08.2026)
 
-- **„Podatak" = popunjeno polje različito od nule** — „0" se NE naplaćuje.
-- Obuhvata najmanje sve redovne godišnje FI (društva, zadruge, ustanove,
-  preduzetnici), bilans stanja + bilans uspeha.
-- Ilustracija APR: svi podaci BS+BU za sve obveznike **2024. ≈ 4,8M RSD**
-  (to je za CELI obrazac sa ~100+ polja; naša 4–5 polja → srazmerno manje).
+- **„Podatak" = popunjeno polje različito od nule** („0" se ne naplaćuje).
+- ⚠️ **Model važi SAMO za minimalni obim: SVI podaci iz Bilansa stanja i
+  Bilansa uspeha, za SVE obveznike** (društva, zadruge, ustanove, preduzetnici).
+  **Ne može se smanjiti na naša 4–5 polja.**
+- Okvirne naknade po godini (cela baza BS+BU, svi obveznici):
 
-**Naša procena za 4–5 polja × 123k društava sa izveštajem:**
-~123k × 5 × 0,60 ≈ **370k RSD/god**; za istoriju 2021–2024 ≈ **1,5M RSD**
-(umesto 3,2M po jednokratnom modelu). Za 3 polja još manje (~0,9M).
+| Godina | RSD |
+|---|---|
+| 2024 | ~4,6M |
+| 2023 | ~4,5M |
+| 2022 | ~4,4M |
+| 2021 | ~4,3M |
 
-### b) PLWS veb-servis (statusni registri / poslovni podaci)
+→ **2021–2024 ≈ 17,8M RSD (≈ €152k) — NIJE za nas.**
 
-- **Inicijalni set: 7 RSD po subjektu** (nezavisno od broja grupa podataka!)
-- **Mesečni set promena: 32 RSD po subjektu** koji je imao promenu
-- Fiksna mesečna naknada: **7.500 RSD**
-- Ilustracija APR: svi aktivni subjekti (133k + 386k) → inicijalno ~3,6M RSD;
-  mesečno ~600–900k RSD (jer se naplaćuju samo subjekti sa promenama).
+### b) Jednokratno preuzimanje (1 RSD/podatak, „0" se naplaćuje)
 
-**Za nas (samo privredna društva, 133k):**
-- Inicijalni set ≈ **133k × 7 = 931k RSD** — ako PLWS uključuje grupe
-  „vlasnici/zastupnici/stvarni vlasnici", to je daleko jeftinije od
-  jednokratnih 4,7M + 6,0M! **Vredi pitati koje grupe podataka nudi.**
-- Mesečno: ~32 RSD × broj društava sa promenama (procena 10–20k/mes)
-  ≈ 320–640k RSD/mes — za v1 preskupo, ali inicijalni set je jednokratan.
+Jedina opcija za **smanjen skup polja** (naša 4–6 polja × 133k × godine):
 
-### c) Redistribucija — POTVRĐENO (odgovor APR, 16.08.2026)
+- 6 polja × 4 god (2021–2024) ≈ **3,2M RSD** (€27k)
+- 3 polja × 4 god ≈ **1,6M RSD** (€14k)
+- 3 polja × 2 god (2023–2024) ≈ **0,8M RSD** (€7k)
+
+### c) PLWS veb-servis — POTVRĐENO obuhvata vlasnike i zastupnike
+
+- ✅ Obuhvata **sve podatke za koje smo pitali OSIM stvarnih vlasnika (UBO)**
+  (osnivači/članovi sa udelima + zastupnici/ovlašćena lica JESU uključeni).
+- **7 RSD po matičnom broju**, bez obzira da li se uzima samo osnivači+zastupnici
+  ili svi registrovani podaci subjekta → **sve 133k ≈ 931k RSD** (€8k).
+- Pretpostavka (treba potvrditi): moguće preuzeti samo ODABRANE subjekte
+  (per MB) → top 1.000 ≈ 7k RSD, top 5.000 ≈ 35k RSD (€300).
+- UBO (stvarni vlasnici): NIJE u PLWS → jedino jednokratno ~6,0M RSD. Preskočiti.
+
+### d) Redistribucija — POTVRĐENO (odgovor APR, 16.08.2026)
 
 > „Корисник преузете податке може користити за сопствене потребе, али их не
 > може даље умножавати нити **комерцијално** дистрибуирати. Ако их користи за
@@ -99,14 +107,15 @@ Plaća se po predračunu; istorijski podaci vlasnika/UBO/preduzetnika — dodatn
 - Ugovor se zaključuje **samo sa pravnim licima sa sedištem u RS**,
   uz obezbeđenje plaćanja (menica ili avans).
 
-## Cilj pregovora (revidirano)
+## Cilj pregovora (revidirano 17.08.2026)
 
-1. **Istorija FI 2021–2024** po modelu „prepis baze" (0,60 RSD, bez nula),
-   samo naša polja, samo društva sa izveštajem → cilj ≈ 1–1,5M RSD.
-2. **PLWS**: pitati koje su grupe podataka dostupne (da li vlasnici/zastupnici/
-   stvarni vlasnici); ako jesu → inicijalni set za društva ≈ 931k RSD
-   (umesto 10,7M jednokratno za oba seta). Mesečno ažuriranje preskočiti u v1.
-3. Redistribucija: već potvrđena — samo potvrditi ugovornu klauzulu.
+1. **Vlasnici/zastupnici (PLWS)** — najbolja vrednost: inicijalni set
+   **931k RSD za svih 133k**, ili **top-N po 7 RSD/MB** (top 5.000 ≈ 35k RSD)
+   čim analitika (GA4) pokaže najtraženije firme. UBO nije u PLWS → preskočiti.
+2. **Istorija FI** — 0,60 model ne važi za smanjen skup polja; jedino
+   jednokratno (1 RSD): 3 polja × 2021–2024 ≈ **1,6M RSD** (€14k),
+   ili samo 2023–2024 ≈ 0,8M. Odluka kad sajt pokaže potencijal.
+3. Redistribucija: potvrđena — sopstveni proizvod + APR kao izvor.
 
 ## Strategija „top N firmi" (analitika → ciljana kupovina)
 

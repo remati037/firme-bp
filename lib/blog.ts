@@ -208,7 +208,11 @@ export function uHtml(markdown: string): string {
     vrsta === "stat" ? statBoks(telo) : proveriBoks(telo),
   );
 
-  return marked.parse(saDirektivama, { async: false });
+  const html = marked.parse(saDirektivama, { async: false });
+
+  // Tabele iz Markdown-a se umotaju u scroll kontejner, da na telefonu ne
+  // razvuku stranicu u širinu (stil: `.article-table` u app/globals.css).
+  return html.replace(/<table>/g, '<div class="article-table"><table>').replace(/<\/table>/g, "</table></div>");
 }
 
 /**

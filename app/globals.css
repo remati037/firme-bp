@@ -195,6 +195,14 @@
     -webkit-font-smoothing: antialiased;
   }
 
+  /* Telefon: stranica se nikad ne pomera levo-desno. `clip` (ne `hidden`)
+     ne pravi scroll kontejner, pa sticky zaglavlje i dalje radi. Samostalne
+     scroll oblasti (tabele, navigacija) ostaju scrollabilne. */
+  html,
+  body {
+    overflow-x: clip;
+  }
+
   /* Fokus ring mora da bude vidljiv u obe teme (a11y). */
   :focus-visible {
     outline: 2px solid var(--accent-ring);
@@ -274,6 +282,49 @@
 
 .article-body li + li {
   margin-top: 0.4em;
+}
+
+/* Tabele u člancima (marked → <table>). Na telefonu idu u sopstveni
+   horizontalni scroll umesto da razvuku stranicu. Umotavanje radi
+   lib/blog.ts (`uHtml`), stil je ovde. */
+.article-table {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.article-body table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.article-body th,
+.article-body td {
+  border: 1px solid var(--border);
+  padding: 8px 12px;
+  text-align: left;
+  vertical-align: top;
+}
+
+.article-body th {
+  background: var(--muted);
+  font-weight: 650;
+  white-space: nowrap;
+}
+
+.article-body img,
+.article-body pre {
+  max-width: 100%;
+}
+
+.article-body pre {
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-ui);
+  background: var(--muted);
+  padding: 14px 16px;
+  font-size: 13.5px;
 }
 
 /* Istaknuta brojka: labela, vrednost, detalj. */
