@@ -1,0 +1,84 @@
+name: Build image
+
+# Slika se gradi ovde, ne na produkcionom serveru.
+#
+# Zašto: prerender 795 stranica traži SUPABASE_SERVICE_ROLE_KEY u BUILD fazi, a
+# repo je public. Ovde ključ ostaje GitHub secret i ulazi kroz BuildKit
+# `--secret`, pa ga nema ni u sloju ni u `docker history`. Uz to, build (41 s,
+# peak RSS 1,11 GB) ne otima CPU produkciji.
+
+on:
+  push:
+    branches: [main]
+    # Izmene same dokumentacije ne traže nov image. Svaki nov BUILD_ID briše
+    # ISR keš na serveru (docker-entrypoint.sh), pa deploy nije besplatan.
+    paths-ignore:
+      - "**.md"
+      - "docs/**"
+  workflow_dispatch:
+
+concurrency:
+  group: build-image
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: docker/setup-buildx-action@v3
+
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Proveri da su tajne postavljene
+        env:
+          URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          ANON: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+          TAJNI: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: |
+          nedostaje=""
+          [ -z "$URL" ]   && nedostaje="$nedostaje NEXT_PUBLIC_SUPABASE_URL"
+          [ -z "$ANON" ]  && nedostaje="$nedostaje NEXT_PUBLIC_SUPABASE_ANON_KEY"
+          [ -z "$TAJNI" ] && nedostaje="$nedostaje SUPABASE_SERVICE_ROLE_KEY"
+          if [ -n "$nedostaje" ]; then
+            echo "Nedostaju secrets:$nedostaje"
+            echo "Postavi ih u Settings > Secrets and variables > Actions."
+            exit 1
+          fi
+
+      - name: Build i push
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository }}:latest
+            ghcr.io/${{ github.repository }}:${{ github.sha }}
+          build-args: |
+            NEXT_PUBLIC_SUPABASE_URL=${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+            NEXT_PUBLIC_SUPABASE_ANON_KEY=${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+            NEXT_PUBLIC_SITE_URL=${{ vars.NEXT_PUBLIC_SITE_URL || 'https://firme.biznisprice.com' }}
+          secrets: |
+            supabase_service_role=${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      # Bez hook-a se image samo objavi; Coolify se onda povlači ručno.
+      - name: Coolify deploy
+        run: |
+          if [ -z "${{ secrets.COOLIFY_DEPLOY_HOOK }}" ]; then
+            echo "COOLIFY_DEPLOY_HOOK nije postavljen — image je objavljen, deploy nije okinut."
+            exit 0
+          fi
+          curl --fail --silent --show-error -X POST "${{ secrets.COOLIFY_DEPLOY_HOOK }}"
+          echo "Coolify deploy okinut."
