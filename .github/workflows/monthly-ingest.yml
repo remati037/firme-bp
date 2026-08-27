@@ -16,22 +16,27 @@ concurrency:
 jobs:
   ingest:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    # 30 min je bilo dovoljno dok se NBS korak tiho preskakao. Sada stvarno
+    # radi (5000 firmi, konkurentnost 6), pa je prag podignut. Repo je public,
+    # GitHub minuti su neograničeni. Posle prvog pravog prolaza podesiti po meri.
+    timeout-minutes: 120
 
     env:
       NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
       SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
-      NBS_USERNAME: ${{ secrets.NBS_USERNAME }}
-      NBS_PASSWORD: ${{ secrets.NBS_PASSWORD }}
+      # NBS javna pretraga dužnika nema registraciju ni captchu, pa nema ni
+      # kredencijala — traži se samo pristojan User-Agent (scripts/lib/nbs-client.ts:19).
+      # Raniji NBS_USERNAME/NBS_PASSWORD nisu postojali nigde u kodu.
+      NBS_UA: ${{ secrets.NBS_UA }}
 
     steps:
       - uses: actions/checkout@v4
 
-      # Node 20 je van podrške od aprila 2026. process.loadEnvFile, koji skripte
-      # koriste, traži bar 20.12.
+      # Produkcija radi na Node 24 (Dockerfile, package.json engines). Ingest je
+      # do 27.08.2026. radio na 22 — dve različite major verzije nad istom bazom.
       - uses: actions/setup-node@v4
         with:
-          node-version: "22"
+          node-version: "24"
           cache: npm
 
       - name: Instaliraj zavisnosti
@@ -59,20 +64,6 @@ jobs:
             echo "nov_presek=da" >> "$GITHUB_OUTPUT"
           fi
 
-      # Sesija 4. Korak se preskače dok skripta ne postoji i dok NBS pristupni
-      # podaci nisu postavljeni, da workflow ne bude crven zbog nečega što
-      # još nije napravljeno.
-      - name: PIB iz NBS
-        if: steps.ingest.outputs.nov_presek == 'da'
-        run: |
-          if [ ! -f scripts/enrich-pib.ts ]; then
-            echo "scripts/enrich-pib.ts još ne postoji, preskačem."
-          elif [ -z "$NBS_USERNAME" ] || [ -z "$NBS_PASSWORD" ]; then
-            echo "NBS pristupni podaci nisu postavljeni, preskačem."
-          else
-            npx tsx scripts/enrich-pib.ts
-          fi
-
       - name: Testovi
         run: npm test
 
@@ -83,16 +74,54 @@ jobs:
       - name: Orphan provera
         run: npx tsx scripts/proveri-orphan.ts
 
-      # Statičke stranice se regenerišu samo ako je stvarno stigao nov presek.
-      - name: Vercel deploy hook
+      # Rebuild se NAMERNO ne radi (odluka 27.08.2026).
+      #
+      # Stranice šalju `s-maxage=2592000, stale-while-revalidate=28944000`, dakle
+      # ISR od 30 dana već poklapa ritam APR preseka, a SWR znači da korisnik
+      # nikad ne čeka regeneraciju. Prisilan rebuild bi umesto toga obrisao ceo
+      # ISR keš (~31 GB, ~239 KB po firmi) i naterao 133.634 stranice da se
+      # regenerišu u isto vreme.
+      #
+      # Purge-uju se samo hub stranice i sitemapi, koji MORAJU odmah da pokažu
+      # nov presek. Stranice firmi ističu same, raspoređeno kroz mesec.
+      - name: Cloudflare purge (hub stranice i sitemapi)
         if: steps.ingest.outputs.nov_presek == 'da'
+        env:
+          CF_ZONE_ID: ${{ secrets.CF_ZONE_ID }}
+          CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+          SAJT: ${{ vars.NEXT_PUBLIC_SITE_URL || 'https://firme.biznisprice.com' }}
         run: |
-          if [ -z "${{ secrets.VERCEL_DEPLOY_HOOK }}" ]; then
-            echo "VERCEL_DEPLOY_HOOK nije postavljen, preskačem regeneraciju."
+          if [ -z "$CF_ZONE_ID" ] || [ -z "$CF_API_TOKEN" ]; then
+            echo "CF_ZONE_ID ili CF_API_TOKEN nisu postavljeni, preskačem purge."
             exit 0
           fi
-          curl --fail --silent --show-error -X POST "${{ secrets.VERCEL_DEPLOY_HOOK }}"
-          echo "Deploy hook pozvan."
+          putanje="/ /najvece /najvece/prihod /najvece/dobit /najvece/zaposleni \
+                   /delatnost /grad /mapa/firme /mapa/prihod /mapa/zaposleni \
+                   /sitemap.xml /sitemaps/staticne.xml /sitemaps/kategorije.xml \
+                   /sitemaps/firme-1.xml"
+          spisak=$(for p in $putanje; do printf '"%s%s",' "$SAJT" "$p"; done | sed 's/,$//')
+          curl --fail --silent --show-error -X POST \
+            "https://api.cloudflare.com/client/v4/zones/$CF_ZONE_ID/purge_cache" \
+            -H "Authorization: Bearer $CF_API_TOKEN" \
+            -H "Content-Type: application/json" \
+            --data "{\"files\":[$spisak]}" > /dev/null
+          echo "Cloudflare purge urađen za hub stranice i sitemape."
+
+      # Do 27.08.2026. je ovaj korak tražio scripts/enrich-pib.ts, koji nikad
+      # nije postojao (prave skripte su enrich-pib-blokade.ts i enrich-pib-rir.ts),
+      # pa se svakog meseca tiho preskakao. Guard je uz to gledao NBS_USERNAME i
+      # NBS_PASSWORD, koje nijedna skripta ne čita.
+      #
+      # Podrazumevano ide top 5000 firmi po prihodu (scripts/enrich-pib-blokade.ts:36).
+      # Ceo set je --limit=0 i traje satima — to se pokreće ručno, ne u cron-u.
+      #
+      # Ide POSLEDNJI, posle purge-a: NBS je javni sajt koji se skrejpuje i ume
+      # da padne. Njegov ispad ne sme da spreči da hub stranice pokažu nov presek.
+      - name: PIB i blokade iz NBS
+        if: steps.ingest.outputs.nov_presek == 'da'
+        run: |
+          npm run enrich-nbs
+          npm run enrich-nbs-rir
 
       - name: Izveštaj
         if: always()

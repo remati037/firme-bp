@@ -67,3 +67,6 @@ scripts/data/enrich-adresa-log.txt
 
 # preuzeti podaci sa kompanije.co.rs (regenerabilno preko tools/preuzmi-*.py)
 tools/data/
+
+
+docs/migration/PROJECT-AUDIT.md

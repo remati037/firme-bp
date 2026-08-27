@@ -1,0 +1,22 @@
+.git
+.github
+node_modules
+.next
+.env*
+.vercel
+
+# dokumentacija i alati ne ulaze u image.
+# PAŽNJA: content/ se NE isključuje — lib/blog.ts ga čita i u runtime-u.
+docs
+tests
+tools
+supabase
+*.md
+!content/**/*.md
+
+# runtime stanje NBS obogaćivanja (regenerabilno, veliko)
+scripts/data/nbs-*.json
+scripts/data/enrich-adresa-log.txt
+
+.DS_Store
+*.tsbuildinfo
