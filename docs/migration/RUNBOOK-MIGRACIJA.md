@@ -33,7 +33,22 @@ Ništa nije commit-ovano ni push-ovano. Prvi push okida prvi image build.
 
 ## RUČNO — 1. GitHub
 
-### 1.1 Secrets (Settings → Secrets and variables → Actions → Secrets)
+> **Ključevi NISU na nivou repoa — u okruženju su.** Provereno 27.08.2026:
+> `gh api repos/remati037/firme-bp/actions/secrets` vraća `total_count: 0`, dok
+> okruženje `Production` (koje je napravila Vercel integracija) drži svih pet:
+> `NEXT_PUBLIC_SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`,
+> `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `CF_ZONE_ID`, `CF_API_TOKEN`, plus variable
+> `NEXT_PUBLIC_SITE_URL`.
+>
+> Zato oba workflow-a imaju `environment: Production` na job-u. Bez te linije
+> `secrets.*` je prazan string i build puca u koraku "Proveri da su tajne
+> postavljene" — što se i desilo dva puta.
+>
+> **Dug koji treba vratiti:** pre isključivanja Vercela preseliti ključeve na nivo
+> repoa i obrisati `environment: Production`, da CI ne zavisi od platforme sa koje
+> se selimo. Zapisano u sekciji 5 kao korak cutover-a.
+
+### 1.1 Secrets (Settings → Environments → Production)
 
 | ime | odakle |
 |---|---|
@@ -43,7 +58,9 @@ Ništa nije commit-ovano ni push-ovano. Prvi push okida prvi image build.
 | `CF_API_TOKEN` | Cloudflare → My Profile → API Tokens → Create Token → Custom: **Zone → Cache Purge → Purge**, ograničeno na zonu `biznisprice.com` |
 | `NBS_UA` | opciono; string tipa `BiznisPrice/1.0 (+https://firme.biznisprice.com)` |
 
-Već postoje: `NEXT_PUBLIC_SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`.
+Već postoje u okruženju `Production`: `NEXT_PUBLIC_SUPABASE_URL`,
+`SUPABASE_SERVICE_ROLE_KEY`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `CF_ZONE_ID`,
+`CF_API_TOKEN`, `NEXT_PUBLIC_SITE_URL` (variable) — sekcija 4.1 se time preskače.
 Mogu da se obrišu: `NBS_USERNAME`, `NBS_PASSWORD` (nijedna skripta ih ne čita),
 i `VERCEL_DEPLOY_HOOK` — **ali tek posle isteka rollback prozora**.
 
@@ -290,6 +307,9 @@ Security → WAF → Rate limiting rules → Create
    dodeljen (Vercel će prikazati "invalid configuration" — to je očekivano).
    Rollback = vrati DNS zapis na Vercel CNAME. Bez ponovnog build-a, u minutu.
 5. Rollback prozor drži **najmanje 48 h**, po zahtevu iz [`MIGRATION-BRIEF.md`](MIGRATION-BRIEF.md).
+6. Pre nego što isključiš Vercel: preseli pet ključeva iz okruženja `Production` na
+   nivo repoa (Settings → Secrets and variables → Actions) i obriši
+   `environment: Production` iz oba workflow-a.
 
 ### Šta ne dirati
 

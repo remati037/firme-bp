@@ -16,6 +16,14 @@ concurrency:
 jobs:
   ingest:
     runs-on: ubuntu-latest
+    # Ključevi žive u GitHub okruženju "Production" (Settings > Environments),
+    # a ne na nivou repoa. Bez ove linije job ih ne vidi i `secrets.*` je prazno.
+    #
+    # Okruženja Production/Preview je napravila Vercel integracija. Pre nego što
+    # se Vercel isključi, ključeve preseliti na nivo repoa i ovu liniju obrisati —
+    # inače CI zavisi od platforme sa koje se selimo.
+    environment: Production
+
     # 30 min je bilo dovoljno dok se NBS korak tiho preskakao. Sada stvarno
     # radi (5000 firmi, konkurentnost 6), pa je prag podignut. Repo je public,
     # GitHub minuti su neograničeni. Posle prvog pravog prolaza podesiti po meri.

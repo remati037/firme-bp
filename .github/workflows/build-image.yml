@@ -25,6 +25,14 @@ jobs:
   build:
     runs-on: ubuntu-latest
     timeout-minutes: 30
+    # Ključevi žive u GitHub okruženju "Production" (Settings > Environments),
+    # a ne na nivou repoa. Bez ove linije job ih ne vidi i `secrets.*` je prazno.
+    #
+    # Okruženja Production/Preview je napravila Vercel integracija. Pre nego što
+    # se Vercel isključi, ključeve preseliti na nivo repoa i ovu liniju obrisati —
+    # inače CI zavisi od platforme sa koje se selimo.
+    environment: Production
+
     permissions:
       contents: read
       packages: write
