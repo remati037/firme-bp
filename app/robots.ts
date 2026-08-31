@@ -51,7 +51,15 @@ export default function robots(): MetadataRoute.Robots {
         userAgent: "*",
         allow: "/",
         // Parametri za sortiranje prave duplikate, a oni najviše troše crawl budžet.
-        disallow: ["/api/", "/*?sort=", "/*?order="],
+        //
+        // `/uporedi/` je zatvoren jer parova ima 133.634² — svaki bi bio nova
+        // adresa za krauler, a stranice firmi se još indeksiraju. Sama
+        // `/uporedi` (bez kose crte) ostaje otvorena: pravilo hvata samo
+        // adrese ispod nje. Kad se pusti kurirani skup parova iz
+        // `smeUIndeks` (lib/uporedi.ts), ovo pravilo se skida u istom potezu
+        // kad i njihov ulazak u sitemap — sitemap sa zabranjenim adresama je
+        // kontradiktoran signal, ista logika kao kod `/firma/` iznad.
+        disallow: ["/api/", "/uporedi/", "/*?sort=", "/*?order="],
       },
     ],
     sitemap: `${SITE_URL}/sitemap.xml`,
