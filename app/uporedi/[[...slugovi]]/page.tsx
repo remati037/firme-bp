@@ -7,6 +7,7 @@ import { Breadcrumbs } from "@/components/layout/breadcrumbs";
 import { Card } from "@/components/ui/card";
 import { Novac } from "@/components/ui/novac";
 import { IzborFirme } from "@/components/uporedi/izbor-firme";
+import { LinkSaMerenjem } from "@/components/uporedi/link-sa-merenjem";
 import { MerenjePrikaza } from "@/components/uporedi/merenje-prikaza";
 import { TabelaPoredjenja } from "@/components/uporedi/tabela-poredjenja";
 import { formatBroj, formatDatum } from "@/lib/format";
@@ -278,8 +279,10 @@ function PredlogKartica({ osnova, firma }: { osnova: string; firma: KarticaFirme
   });
 
   return (
-    <Link
+    <LinkSaMerenjem
       href={`/uporedi/${osnova}/${firma.slug}`}
+      dogadjajIme="poredjenje_dodata_firma"
+      parametri={{ ukupno_firmi: 2, izvor: "predlog" }}
       className="block h-full rounded-card border border-border bg-card px-4 py-3.5 no-underline shadow-card transition duration-150 hover:-translate-y-px hover:border-accent-ring hover:shadow-pop"
     >
       <span className="block text-[14.5px] leading-[1.35] font-bold text-foreground">{ime}</span>
@@ -294,7 +297,7 @@ function PredlogKartica({ osnova, firma }: { osnova: string; firma: KarticaFirme
       <span className="mt-1.5 block text-[13px] font-semibold text-accent-strong">
         <Novac hiljade={firma.ukupni_prihodi} kompaktno /> prihoda →
       </span>
-    </Link>
+    </LinkSaMerenjem>
   );
 }
 

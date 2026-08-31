@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 
 import { useSacuvane } from "@/components/company/sacuvane-store";
 import { SearchBox } from "@/components/search/search-box";
+import { dogadjaj } from "@/lib/analitika";
 
 /**
  * Biranje firme za poređenje.
@@ -26,8 +27,13 @@ export function IzborFirme({
   // Firma koja je već u poređenju ne nudi se ponovo.
   const sacuvane = useSacuvane().filter((f) => !osnova.includes(f.slug));
 
-  function izaberi(slug: string) {
+  /**
+   * `izvor` odgovara na pitanje koje odlučuje da li sačuvane firme uopšte
+   * nešto znače: bira li korisnik iz svoje liste ili svaki put traži iznova.
+   */
+  function izaberi(slug: string, izvor: "pretraga" | "sacuvane") {
     if (osnova.includes(slug)) return;
+    dogadjaj("poredjenje_dodata_firma", { ukupno_firmi: osnova.length + 1, izvor });
     router.push(`/uporedi/${[...osnova, slug].join("/")}`);
   }
 
@@ -35,7 +41,7 @@ export function IzborFirme({
     <div>
       <SearchBox
         autoFokus={autoFokus}
-        naIzbor={(firma) => izaberi(firma.slug)}
+        naIzbor={(firma) => izaberi(firma.slug, "pretraga")}
         placeholderTekst={
           osnova.length ? "Naziv sledeće firme, matični broj ili PIB…" : "Naziv firme, matični broj ili PIB…"
         }
@@ -49,7 +55,7 @@ export function IzborFirme({
               <li key={firma.slug}>
                 <button
                   type="button"
-                  onClick={() => izaberi(firma.slug)}
+                  onClick={() => izaberi(firma.slug, "sacuvane")}
                   className="rounded-ui border border-border bg-card px-3 py-1.5 text-[13px] font-semibold transition-colors hover:border-primary hover:text-primary"
                 >
                   {firma.ime}
