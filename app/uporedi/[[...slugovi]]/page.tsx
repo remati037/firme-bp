@@ -100,6 +100,20 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
+/**
+ * Bez prerendera, ali SA ISR-om.
+ *
+ * Prazan niz je isti obrazac kao na stranici firme: ništa se ne gradi unapred
+ * (kombinacija ima previše da bi se biralo koje), ali ruta ulazi u statički
+ * keš, pa se svako poređenje izračuna jednom i posle se servira iz keša
+ * `revalidate` sekundi. Bez ove funkcije Next rutu proglašava dinamičnom i
+ * svaki pregled ide na Supabase — što je bio i glavni razlog da poređenje
+ * stoji u putanji, a ne u query parametrima.
+ */
+export async function generateStaticParams() {
+  return [];
+}
+
 export default async function StranicaPoredjenja({ params }: Props) {
   const { slugovi = [] } = await params;
   if (slugovi.length > MAX_FIRMI) notFound();
