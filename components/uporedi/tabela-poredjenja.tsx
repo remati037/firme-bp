@@ -5,6 +5,8 @@ import { Novac } from "@/components/ui/novac";
 import { formatBroj, formatProcenat, NEMA_PODATAKA } from "@/lib/format";
 import { imeOpstine, nazivDelatnosti } from "@/lib/prikaz";
 import { MIN_FIRMI, type RedPoredjenja } from "@/lib/uporedi";
+
+import { LinkSaMerenjem } from "./link-sa-merenjem";
 import type { StranaSaKontekstom } from "@/lib/uporedi-podaci";
 
 /**
@@ -55,6 +57,7 @@ export function TabelaPoredjenja({
                     ? `/uporedi/${slugovi.filter((_, j) => j !== i).join("/")}`
                     : null
                 }
+                ostajeFirmi={strane.length - 1}
               />
             ))}
           </tr>
@@ -82,10 +85,12 @@ export function TabelaPoredjenja({
 function ZaglavljeFirme({
   strana,
   putanjaBez,
+  ostajeFirmi,
 }: {
   strana: StranaSaKontekstom;
   /** Poređenje bez ove firme; null kad bi uklanjanje spustilo broj ispod dva. */
   putanjaBez: string | null;
+  ostajeFirmi: number;
 }) {
   const { firma, ime } = strana.strana;
 
@@ -96,14 +101,16 @@ function ZaglavljeFirme({
           {ime}
         </Link>
         {putanjaBez ? (
-          <Link
+          <LinkSaMerenjem
             href={putanjaBez}
+            dogadjajIme="poredjenje_izbacena_firma"
+            parametri={{ ukupno_firmi: ostajeFirmi }}
             title={`Izbaci ${ime} iz poređenja`}
-            aria-label={`Izbaci ${ime} iz poređenja`}
+            ariaLabel={`Izbaci ${ime} iz poređenja`}
             className="shrink-0 rounded-full border border-border px-1.5 text-[13px] leading-[1.5] font-normal text-muted-foreground no-underline hover:border-danger hover:text-danger"
           >
             ×
-          </Link>
+          </LinkSaMerenjem>
         ) : null}
       </span>
       <span className="mt-1.5 block">
