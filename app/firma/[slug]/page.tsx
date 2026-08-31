@@ -15,6 +15,7 @@ import { RacuniLista } from "@/components/company/racuni-lista";
 import { SaveButton } from "@/components/company/save-button";
 import { ShareButton } from "@/components/company/share-button";
 import { SignalList } from "@/components/company/signal-list";
+import { UporediDugme } from "@/components/company/uporedi-dugme";
 import { Breadcrumbs } from "@/components/layout/breadcrumbs";
 import { bezPraznih, JsonLd } from "@/components/seo/json-ld";
 import { Card } from "@/components/ui/card";
@@ -182,6 +183,7 @@ export default async function StranicaFirme({ params }: Props) {
             gde="u delatnosti"
           />
           <SaveButton slug={firma.slug} ime={ime} />
+          <UporediDugme slug={firma.slug} />
         </div>
 
         <div className="mt-2.5 flex flex-wrap items-center gap-4.5 text-[13.5px] text-muted-foreground">

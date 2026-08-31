@@ -33,12 +33,21 @@ export function SearchBox({
   predlozi = [],
   autoFokus = false,
   kompaktno = false,
+  naIzbor,
+  placeholderTekst,
 }: {
   /** Firme koje se nude dok polje još nije kucano. */
   predlozi?: { slug: string; ime: string }[];
   autoFokus?: boolean;
   /** Kompaktna varijanta za meni/zaglavlje. */
   kompaktno?: boolean;
+  /**
+   * Kad je zadato, izbor NE vodi na stranicu firme nego se prosleđuje pozivaocu
+   * (poređenje bira drugu firmu, ne otvara je). Bez ovoga ponašanje je isto
+   * kao i pre: navigacija na `/firma/[slug]`.
+   */
+  naIzbor?: (firma: { slug: string; ime: string }) => void;
+  placeholderTekst?: string;
 }) {
   const router = useRouter();
   const id = useId();
@@ -105,8 +114,12 @@ export function SearchBox({
     };
   }, [upit]);
 
-  function otvori(slug: string) {
+  function otvori(slug: string, ime = "") {
     setOtvoreno(false);
+    if (naIzbor) {
+      naIzbor({ slug, ime });
+      return;
+    }
     router.push(`/firma/${slug}`);
   }
 
@@ -129,7 +142,7 @@ export function SearchBox({
       dogadjaj.preventDefault();
       // Enter bez izbora vodi na prvi rezultat.
       const meta = lista[izabrani >= 0 ? izabrani : 0];
-      if (meta) otvori(meta.slug);
+      if (meta) otvori(meta.slug, meta.ime);
     }
   }
 
@@ -166,7 +179,7 @@ export function SearchBox({
           aria-autocomplete="list"
           aria-activedescendant={izabrani >= 0 ? `${id}-stavka-${izabrani}` : undefined}
           aria-label="Pretraga firmi po nazivu ili matičnom broju"
-          placeholder={kompaktno ? "Pretraži firme…" : "Naziv firme, matični broj ili PIB…"}
+          placeholder={placeholderTekst ?? (kompaktno ? "Pretraži firme…" : "Naziv firme, matični broj ili PIB…")}
           value={upit}
           onChange={(e) => {
             setUpit(e.target.value);
@@ -221,7 +234,7 @@ export function SearchBox({
                   onMouseEnter={() => setIzabrani(i)}
                   onMouseDown={(e) => {
                     e.preventDefault();
-                    otvori(r.slug);
+                    otvori(r.slug, r.ime);
                   }}
                   className={`flex cursor-pointer items-center justify-between gap-3 px-4 py-2.5 ${
                     i === izabrani ? "bg-accent-soft" : ""
@@ -258,7 +271,7 @@ export function SearchBox({
             <button
               key={p.slug}
               type="button"
-              onClick={() => otvori(p.slug)}
+              onClick={() => otvori(p.slug, p.ime)}
               className="text-accent-strong underline-offset-2 hover:underline"
             >
               {p.ime}
